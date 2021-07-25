@@ -28,10 +28,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0 " href="../views/view_Home.php">
+        <a class="navbar-brand mt-2 mt-lg-0" href="../views/view_Home.php">
           <img
-            src="../images/logoTemporaire.png"
-            height="50"
+            src="../images/logo3.png"
+            height="70"
             alt=""
             loading="lazy"
           />
