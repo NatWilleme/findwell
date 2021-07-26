@@ -37,13 +37,26 @@
         ?>
     </div>
 
-    <div class="row d-flex justify-content-around mb-4 ms-5">
+    <div class="row mb-4 ms-5">
+        <h2><?php echo count($comments); ?> avis concernant cette entreprise:</h2>
         <?php 
+            $cpt = 0;
             foreach ($comments as $comment) {
-                
+        ?>
+        <div class="row ms-5">
+            <img src="<?php echo $users[$cpt]->image; ?>" class="ps-0 pe-0 rounded-circle" style="height:40px;width:40px" alt="">
+            <p>
+                <?php echo $users[$cpt]->username ?><br>
+                <?php echo $comment->rating; ?><br>
+                <?php echo $comment->date; ?>
+                <?php echo $comment->comment; ?>
+                <?php echo $comment->image; $cpt++; ?>
+            </p>s
+        </div>
+        <?php
             }
         ?>
-    </div>
+
 
 </div>
 

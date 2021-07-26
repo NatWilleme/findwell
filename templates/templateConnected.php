@@ -30,7 +30,7 @@
         <!-- Navbar brand -->
         <a class="navbar-brand mt-2 mt-lg-0" href="../views/view_Home.php">
           <img
-            src="../images/logo3.png"
+            src="../images/logo1.png"
             height="70"
             alt=""
             loading="lazy"
