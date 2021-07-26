@@ -5,6 +5,7 @@ class User{
     private $username;
     private $password;
     private $mail;
+    private $image;
 
     // Magic method get
     public function __get($value){   

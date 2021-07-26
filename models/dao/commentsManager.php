@@ -48,7 +48,7 @@ abstract class CommentsManager extends DBManager{
 
     static public function getCommentsForACompany($idCompany){
         $result = array();
-        $sql = "SELECT * FROM comments WHERE id_comp = :id_comp AND deleted_com = 0";
+        $sql = "SELECT * FROM comments WHERE id_comp = :id_comp AND deleted_com = 0 ORDER BY date_com";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
