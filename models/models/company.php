@@ -10,8 +10,10 @@ class Company{
     private $number;
     private $postalCode;
     private $phone;
+    private $mail;
     private $image;
     private $deleted;
+    private $certified;
     private $rating;
     private $domaines;
 

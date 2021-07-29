@@ -5,19 +5,20 @@ require_once('../models/dao/DBManager.php');
 abstract class UsersManager extends DBManager{
     
     static public function addUser($user){
-        $sql = "INSERT INTO users (username_user, password_user, mail_user, image_user)
-                VALUES (:username_user, :password_user, :mail_user, :image_user)";
+        $sql = "INSERT INTO users (password_user, mail_user)
+                VALUES (:password_user, :mail_user)";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
-            $pdo_statement->execute(array(':username_user' => $company->__get('username'), ':password_user' => $company->__get('password'),
-                                ':mail_user' => $company->__get('mail'), ':image_user' => $company->__get('image')));
+            $state = $pdo_statement->execute(array(':password_user' => password_hash($user->password, PASSWORD_DEFAULT),
+                                ':mail_user' => $user->mail));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
             $pdo_statement->closeCursor();
             $pdo_statement = null;
         }
+        return $state;
     }
 
     static public function updateUser($user){
@@ -26,8 +27,8 @@ abstract class UsersManager extends DBManager{
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
-            $pdo_statement->execute(array(':username_user' => $company->__get('username'), ':password_user' => $company->__get('password'), ':mail_user' => $company->__get('mail'),
-                                ':image_user' => $company->__get('image')));
+            $pdo_statement->execute(array(':username_user' => $user->username, ':password_user' => $user->password, ':mail_user' => $user->mail,
+                                ':image_user' => $user->image));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
@@ -36,12 +37,12 @@ abstract class UsersManager extends DBManager{
         }
     }
 
-    static public function getOneUser($idUser){
-        $sql = "SELECT * FROM users WHERE id_user=:id_user";
+    static public function getUser($mail){
+        $sql = "SELECT * FROM users WHERE mail_user=:mail_user";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
-            $pdo_statement->execute(array(':id_user' => $idUser));
+            $pdo_statement->execute(array(':mail_user' => $mail));
             $elem = $pdo_statement->fetch(PDO::FETCH_ASSOC);
             $values=array(
                 "id" => $elem["id_user"],  
@@ -59,6 +60,22 @@ abstract class UsersManager extends DBManager{
             $pdo_statement = null;
         }
         return $user;
+    }
+
+    static public function checkIfExist($mail){
+        $sql = "SELECT COUNT(*) AS count FROM users WHERE mail_user=:mail_user";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':mail_user' => $mail));
+            $result = $pdo_statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+        return $result;
     }
 
 }
