@@ -32,9 +32,17 @@
             if ($rating['rate'] == 0) {
                 echo "<h2>Pas encore de note !</h2>";
             } else {
-                echo "<h2>Note globale: ". number_format($rating['rate'],1) ." <i class='bi bi-star-fill text-warning'></i></h2>";
+                echo "<h2>Note globale: ". number_format($rating['rate'],1) ." <i class='bi bi-star-fill text-warning'></i>/5</h2>";
             }
         ?>
+    </div>
+
+    <div class="row d-flex justify-content-around mb-4 ms-5">
+        <h2>Contacts:</h2>
+        <p>
+            <b>Mail</b>: <a href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
+            <b>Téléphone</b>: <?php echo $company->phone; ?>
+        </p>
     </div>
 
     <div class="row mb-4 ms-5">
@@ -43,15 +51,23 @@
             $cpt = 0;
             foreach ($comments as $comment) {
         ?>
-        <div class="row ms-5">
-            <img src="<?php echo $users[$cpt]->image; ?>" class="ps-0 pe-0 rounded-circle" style="height:40px;width:40px" alt="">
-            <p>
-                <?php echo $users[$cpt]->username ?><br>
-                <?php echo $comment->rating; ?><br>
-                <?php echo $comment->date; ?>
-                <?php echo $comment->comment; ?>
-                <?php echo $comment->image; $cpt++; ?>
-            </p>s
+        <div class="row">
+            <div class="col-5">
+                <p>
+                    <img src="<?php echo $users[$cpt]->image; ?>" class="ps-0 pe-0 rounded-circle" style="height:40px;width:40px" alt="">
+                    <?php echo $users[$cpt]->username ?><br>
+                    <?php 
+                        for ($i=0; $i < 5; $i++) { 
+                            if($i < $comment->rating){
+                                echo "<i class='bi bi-star-fill text-warning'></i>";
+                            } else echo "<i class='bi bi-star text-warning'></i>";
+                        }
+                        ?>
+                    <?php $date = new DateTime($comment->date); echo $date->format('d-m-Y'); ?><br>
+                    <?php echo $comment->comment; ?><br>
+                    <img width="500px" src="<?php echo $comment->image; $cpt++; ?>" alt="">
+                </p>
+            </div>
         </div>
         <?php
             }

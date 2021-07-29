@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Findwell</title>
     <style>
       body{
@@ -41,21 +42,26 @@
       <!-- Right elements -->
       <div class="d-flex align-items-center">
         <!-- Mes favoris -->
-        <a class="me-3 text-decoration-none" href="#" style="color: black;">
-        <i class="bi bi-suit-heart" style="font-size: 1.3rem; color: black;"></i>
+        <a
+          class="d-flex align-items-center text-decoration-none me-4"
+          href="#"
+          style="color: black;"
+        >
+          <i class="bi bi-suit-heart pe-1" style="font-size: 1.5rem; color: black;"></i>
           Mes favoris
         </a>
 
         <!-- Mon profil -->
         <a
-          class="d-flex align-items-center text-decoration-none"
-          href="#"
+          class="d-flex align-items-center text-decoration-none me-4"
+          href="../controllers/controller_editProfil.php"
           style="color: black;"
         >
-          <i class="bi bi-person-circle pe-1" style="font-size: 2rem; color: black;"></i>
+          <i class="bi bi-person-circle pe-1" style="font-size: 1.5rem; color: black;"></i>
           Mon profil
         </a>
 
+        
       </div>
       <!-- Right elements -->
     </div>

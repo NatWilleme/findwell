@@ -70,9 +70,11 @@ abstract class CompaniesManager extends DBManager{
                 "street" => $elem["street_comp"],
                 "number" => $elem["number_comp"],
                 "postalCode" => $elem["postalcode_comp"],
+                "mail" => $elem["mail_comp"],
                 "phone" => $elem["phone_comp"],
                 "image" => $elem["image_comp"],
-                "deleted" => $elem["deleted_comp"]
+                "deleted" => $elem["deleted_comp"],
+                "certified" => $elem["certified_comp"]
             );
             $company = new Company();
             $company->hydrate($values);

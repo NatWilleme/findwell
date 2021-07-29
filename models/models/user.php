@@ -5,6 +5,11 @@ class User{
     private $username;
     private $password;
     private $mail;
+    private $phone;
+    private $street;
+    private $city;
+    private $zip;
+    private $state;
     private $image;
 
     // Magic method get
