@@ -9,7 +9,7 @@
 
     <main class="form-signin">
     <form method="post" action="../controllers/controller_login.php">
-        <img class="mb-4" src="../images/logo1.png" alt="" width="72" height="57">
+        <img class="mb-4" src="../images/logo1.png" alt="" width="120">
         <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 
         <div class="form-floating">

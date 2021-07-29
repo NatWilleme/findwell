@@ -156,6 +156,74 @@ abstract class CompaniesManager extends DBManager{
         return $result;
     }
 
+    static public function editFavorite($idCompany, $idUser){
+        if(companiesManager::favoriteExist($idCompany, $idUser))
+            $sql = "DELETE FROM favoris WHERE favoris.id_comp = :id_comp AND favoris.id_user = :id_user";
+        else
+            $sql = "INSERT INTO favoris (id_user, id_comp) VALUES (:id_user, :id_comp)";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_user' => $idUser, ':id_comp' => $idCompany));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+    }
+
+    static public function favoriteExist($idCompany, $idUser){
+        $sql = "SELECT COUNT(*) AS count FROM favoris WHERE favoris.id_comp = :id_comp AND favoris.id_user = :id_user ";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_user' => $idUser, ':id_comp' => $idCompany));
+            $result = $pdo_statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+        if($result['count'] > 0) return true;
+        else return false;
+    }
+
+    static public function getAllFavoriteCompaniesFor($idUser){
+        $result = array();
+        $sql = "SELECT * FROM companies INNER JOIN favoris ON favoris.id_comp = companies.id_comp WHERE favoris.id_user = :id_user";
+        try{
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_user' => $idUser));
+            $resultQuery = $pdo_statement->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($resultQuery as $elem){
+                $values=array(
+                    "id" => $elem["id_comp"],  
+                    "name" => $elem["name_comp"],  
+                    "description" => $elem["description_comp"],  
+                    "hours" => $elem["hours_comp"], 
+                    "city" => $elem["city_comp"],
+                    "street" => $elem["street_comp"],
+                    "number" => $elem["number_comp"],
+                    "postalCode" => $elem["postalcode_comp"],
+                    "phone" => $elem["phone_comp"],
+                    "image" => $elem["image_comp"],
+                    "deleted" => $elem["deleted_comp"]
+                );
+                $company = new Company();
+                $company->hydrate($values);
+                array_push($result,$company);
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+        return $result;
+    }
 
 }
 

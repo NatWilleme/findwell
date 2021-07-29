@@ -13,12 +13,15 @@
             <li class="breadcrumb-item active" aria-current="page"><?php echo $company->name; ?></li>
         </ol>
     </nav>
-    <div class="row ms-5"><h1><?php echo $company->name; ?></h1></div>
+    <div class="row ps-5 pb-4 d-flex">
+        <h1 class="col-9"><?php echo $company->name; ?></h1> 
+        <button onclick="location.href='../controllers/controller_companyDetails.php?favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-2" type="button" ><?php echo $messageBtn; ?></button>
+    </div>
     <div class="row d-flex justify-content-around mb-4">
 
         <img class="col-3"  src="<?php echo $company->image; ?>">
         <p class="col-3 fs-5"><?php echo $company->hours; ?></p>
-
+        
 
     </div>
     
@@ -46,7 +49,7 @@
     </div>
 
     <div class="row mb-4 ms-5">
-        <h2><?php echo count($comments); ?> avis concernant cette entreprise:</h2>
+        <h2> Avis (<?php echo count($comments); ?>)</h2>
         <?php 
             $cpt = 0;
             foreach ($comments as $comment) {

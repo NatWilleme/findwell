@@ -44,7 +44,7 @@
         <!-- Mes favoris -->
         <a
           class="d-flex align-items-center text-decoration-none me-4"
-          href="#"
+          href="../controllers/controller_favorites.php"
           style="color: black;"
         >
           <i class="bi bi-suit-heart pe-1" style="font-size: 1.5rem; color: black;"></i>
