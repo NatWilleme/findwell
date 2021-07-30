@@ -12,13 +12,13 @@
         </ol>
     </nav>
 
-    <div class="row d-flex justify-content-around mb-4">
+    <div class="row d-flex justify-content-around mb-4 m-0">
     <?php
         $cpt = 0;
         foreach ($categories as $category) {
             $cpt++;
             if ($cpt > 5) {
-                echo "</div><div class='row d-flex justify-content-around mb-4'>";
+                echo "</div><div class='row d-flex justify-content-around mb-4 m-0'>";
                 $cpt = 1;
             }
             ?>
