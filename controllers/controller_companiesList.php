@@ -4,10 +4,22 @@ require_once('../models/models/company.php');
 require_once('../models/dao/companiesManager.php');
 require_once('../models/dao/commentsManager.php');
 require_once('../models/dao/categoriesManager.php');
+require_once('../models/geolocation.php');
 
 $subcategory = $_GET['subcategory'];
 $_SESSION['subcategory'] = $subcategory;
 displayCompaniesAccordingTo($_SESSION['category'], $subcategory);
+
+// TEST DE GEOLOCALISATION
+
+// $addressFrom = "92, rue du butia, 6183 Trazegnies";
+// $addressTo = "60, rue de gosselies, 6183 Trazegnies";
+// echo getDistance($addressFrom, $addressTo, $unit = 'K');
+
+//FIN DU TEST DE GEOLOCALISATION
+
+
+
 
 function displayCompaniesAccordingTo($category, $subcategory){
     $companies = CompaniesManager::getAllCompaniesAccordingTo($category, $subcategory);

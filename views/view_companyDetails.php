@@ -15,7 +15,7 @@
     </nav>
     <div class="row ps-5 pb-4 d-flex">
         <h1 class="col-9"><?php echo $company->name; ?></h1> 
-        <button onclick="location.href='../controllers/controller_companyDetails.php?favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-2" type="button" ><?php echo $messageBtn; ?></button>
+        <?php if($messageBtn != "") {?><button onclick="location.href='../controllers/controller_companyDetails.php?favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-2" type="button" ><?php echo $messageBtn; ?></button><?php } ?>
     </div>
     <div class="row d-flex justify-content-around mb-4">
 
@@ -30,12 +30,28 @@
         <p class="col-5"><?php echo $company->description; ?></p>
     </div>
 
+    <div class="row col-5 mb-4 ms-5">
+        <h2>Donnez votre avis sur cette entreprise :</h2>
+        <form action="../controllers/controller_companyDetails.php" method="post">
+            <textarea class="mb-2" name="newComment" id="newComment" rows="10" style="width: 100%;"></textarea><br>
+            <input class="mb-2" type="file" id="img" name="img" accept="image/*"><br>
+            
+            <input class="btn btn-primary" type="submit" value="Publier">
+        </form>
+    </div>
+
     <div class="row d-flex justify-content-around mb-4 ms-5">
         <?php 
             if ($rating['rate'] == 0) {
                 echo "<h2>Pas encore de note !</h2>";
             } else {
-                echo "<h2>Note globale: ". number_format($rating['rate'],1) ." <i class='bi bi-star-fill text-warning'></i>/5</h2>";
+                echo "<h2>Note globale: ";
+ 
+                for ($i=0; $i < 5; $i++) { 
+                    if($i < $rating['rate']){
+                        echo "<i class='bi bi-star-fill text-warning'></i>";
+                    } else echo "<i class='bi bi-star text-warning'></i>";
+                }
             }
         ?>
     </div>
@@ -57,7 +73,7 @@
         <div class="row">
             <div class="col-5">
                 <p>
-                    <img src="<?php echo $users[$cpt]->image; ?>" class="ps-0 pe-0 rounded-circle" style="height:40px;width:40px" alt="">
+                    <img src="<?php if($users[$cpt]->image == "") echo "../images/default-profil.jpg"; else echo $users[$cpt]->image; ?>" class="ps-0 pe-0 rounded-circle" style="height:40px;width:40px" alt="">
                     <?php echo $users[$cpt]->username ?><br>
                     <?php 
                         for ($i=0; $i < 5; $i++) { 
@@ -65,7 +81,7 @@
                                 echo "<i class='bi bi-star-fill text-warning'></i>";
                             } else echo "<i class='bi bi-star text-warning'></i>";
                         }
-                        ?>
+                    ?>
                     <?php $date = new DateTime($comment->date); echo $date->format('d-m-Y'); ?><br>
                     <?php echo $comment->comment; ?><br>
                     <img width="500px" src="<?php echo $comment->image; $cpt++; ?>" alt="">
@@ -81,5 +97,6 @@
 
 <?php
     $content = ob_get_clean();
-    require_once("../templates/templateConnected.php");
+    if(isset($_COOKIE["userConnected"])) require_once("../templates/templateConnected.php");
+    else require_once("../templates/templateNotConnected.php");
 ?>
