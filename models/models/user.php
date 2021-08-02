@@ -7,10 +7,12 @@ class User{
     private $mail;
     private $phone;
     private $street;
+    private $number;
     private $city;
     private $zip;
     private $state;
     private $image;
+    private $type;
 
     // Magic method get
     public function __get($value){   

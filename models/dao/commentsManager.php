@@ -3,13 +3,13 @@
 abstract class CommentsManager extends DBManager{
     
     static public function addComment(Comment $comment){
-        $sql = "INSERT INTO comments (comment_com, image_com, id_comp, id_user)
-                VALUES (:comment_com, :image_com, :id_comp, :id_user)";
+        $sql = "INSERT INTO comments (comment_com, image_com, rate_com, date_com, id_comp, id_user)
+                VALUES (:comment_com, :image_com, :rate_com, :date_com, :id_comp, :id_user)";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
-            $pdo_statement->execute(array(':comment_com' => $comment->__get('comment'), ':image_com' => $comment->__get('image'),
-                                ':id_comp' => $comment->__get('id_comp'), ':id_user' => $comment->__get('id_user')));
+            $pdo_statement->execute(array(':comment_com' => $comment->comment, ':image_com' => $comment->image,
+                                ':rate_com' => $comment->rating, ':date_com' => $comment->date,':id_comp' => $comment->id_comp, ':id_user' => $comment->id_user));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
@@ -48,7 +48,7 @@ abstract class CommentsManager extends DBManager{
 
     static public function getCommentsForACompany($idCompany){
         $result = array();
-        $sql = "SELECT * FROM comments WHERE id_comp = :id_comp AND deleted_com = 0 ORDER BY date_com";
+        $sql = "SELECT * FROM comments WHERE id_comp = :id_comp AND deleted_com = 0 ORDER BY date_com DESC";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
