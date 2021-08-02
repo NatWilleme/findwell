@@ -1,5 +1,10 @@
 <?php
     $title = "Contact";
+    $scripts = "<script src=\"../js/checkEntriesComment.js\"></script><script>
+    if ( window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+    }
+    </script>";
     ob_start();	
 ?>
 
@@ -19,24 +24,47 @@
     </div>
     <div class="row d-flex justify-content-around mb-4">
 
-        <img class="col-3"  src="<?php echo $company->image; ?>">
-        <p class="col-3 fs-5"><?php echo $company->hours; ?></p>
+        <img class="col-5"  src="<?php echo $company->image; ?>">
+        <p class="col-5 fs-5"><?php echo $company->hours; ?></p>
         
 
     </div>
     
-    <div class="row mb-4 ms-5">
-        <h2>Description de l'entreprise:</h2>
-        <p class="col-5"><?php echo $company->description; ?></p>
+    <div class="row d-flex justify-content-around mb-4">
+        <div class="col-5">
+            <h2>Description de l'entreprise:</h2>
+            <p><?php echo $company->description; ?></p>
+        </div>
+
+        <div class="col-5">
+            <h2>Contacts:</h2>
+            <p>
+                <b>Mail</b>: <a href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
+                <b>Téléphone</b>: <?php echo $company->phone; ?>
+            </p>
+        </div>
     </div>
 
     <div class="row col-5 mb-4 ms-5">
-        <h2>Donnez votre avis sur cette entreprise :</h2>
-        <form action="../controllers/controller_companyDetails.php" method="post">
-            <textarea class="mb-2" name="newComment" id="newComment" rows="10" style="width: 100%;"></textarea><br>
+        <h2>Qu'avez-vous pensez de <?php echo $company->name; ?> ?</h2>
+        <form id="commentForm" action="../controllers/controller_companyDetails.php?idCompany=<?php echo $company->id; ?>" method="post" enctype='multipart/form-data'>
+            <textarea class="mb-2" name="newComment" id="newComment" rows="6" style="width: 100%;" ></textarea><br>
+            <label for="newComment" id="newCommentError"></label><br>
             <input class="mb-2" type="file" id="img" name="img" accept="image/*"><br>
-            
-            <input class="btn btn-primary" type="submit" value="Publier">
+            <div class="rating" id="starRating" required> 
+                <input type="radio" name="rating" value="5" id="5">
+                <label for="5">☆</label> 
+                <input type="radio" name="rating" value="4" id="4">
+                <label for="4">☆</label> 
+                <input type="radio" name="rating" value="3" id="3">
+                <label for="3">☆</label> 
+                <input type="radio" name="rating" value="2" id="2">
+                <label for="2">☆</label> 
+                <input type="radio" name="rating" value="1" id="1">
+                <label for="1">☆</label>
+            </div>
+            <label for="starRating" id="ratingError"></label><br>
+            <input class="btn btn-primary" type="submit" name="submit" id="submit" value="Publier">
         </form>
     </div>
 
@@ -84,7 +112,10 @@
                     ?>
                     <?php $date = new DateTime($comment->date); echo $date->format('d-m-Y'); ?><br>
                     <?php echo $comment->comment; ?><br>
+                    <?php if ($comment->image != "") {
+                         ?>
                     <img width="500px" src="<?php echo $comment->image; $cpt++; ?>" alt="">
+                    <?php } ?>
                 </p>
             </div>
         </div>

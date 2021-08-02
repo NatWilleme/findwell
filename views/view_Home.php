@@ -28,7 +28,7 @@
       <div class="col-2 position-relative" style="border: none;  bottom: 100px;">
         <div class="containerPerso">
             <a href="../controllers/controller_categoriesList.php?category=Gros Travaux">  
-                <img src="../images/HomePage/card1.jpg" alt="Avatar" class="img-thumbnail card-img-top border border-dark rounded border-2 image">
+                <img src="../images/HomePage/card1.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
                 <div class="overlay">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
             </a>
             
@@ -41,7 +41,7 @@
       <div class="col-2 position-relative" style="border: none; bottom: 100px;">
         <div class="containerPerso">
             <a href="../controllers/controller_categoriesList.php?category=Petits travaux">  
-                <img src="../images/HomePage/card2.jpg" alt="Avatar" class="img-thumbnail card-img-top border border-dark rounded border-2 image">
+                <img src="../images/HomePage/card2.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
                 <div class="overlay">Effectuez vos petits travaux d'un simple clic.</div>
             </a>
         </div>
@@ -53,7 +53,7 @@
       <div class="col-2 position-relative" style="border: none; bottom: 100px;">
         <div class="containerPerso">
             <a href="../controllers/controller_categoriesList.php?category=Dépannage d'urgence">  
-                <img src="../images/HomePage/card3.jpg" alt="Avatar" class="img-thumbnail card-img-top border border-dark rounded border-2 image">
+                <img src="../images/HomePage/card3.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
                 <div class="overlay">Accédez aux entreprises disponible 24h/24h.</div>
             </a>
         </div>

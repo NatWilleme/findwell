@@ -1,6 +1,7 @@
 <?php
 require_once('../models/models/user.php');
 require_once('../models/dao/usersManager.php');
+session_start();
 
 if(isset($_POST['submitRegister'])){
     $mail = $_POST['mail'];
@@ -10,6 +11,10 @@ if(isset($_POST['submitRegister'])){
     $mail = $_POST['mail'];
     $password = $_POST['password'];
     connectUser($mail, $password);
+} else if(isset($_GET['disconnect'])){
+    unset($_COOKIE['userConnected']);
+    setcookie('userConnected', '', time() - 3600, '/');
+    require_once('../views/view_Home.php');
 }
 
 function registerNewUser($mail, $password){
@@ -38,9 +43,13 @@ function connectUser($mail, $password){
     if($user['count'] == 1){
         $user = UsersManager::getUser($mail);
         if($user->mail == $mail && password_verify($password, $user->password)){
-            setcookie("userConnected", serialize($user),time()+1*24*60*60,"/",$_SERVER['SERVER_NAME']);
+            $_SESSION['user'] = $user;
+            setcookie("userConnected", "1",time()+1*24*60*60,"/",$_SERVER['SERVER_NAME']);
+            $_COOKIE['userConnected'] = "1";
             require_once('../views/view_Home.php');
         } else {
+            $alert['color'] = "danger";
+            $alert['message'] = "Échec de connexion. Vérifiez vos identifiants";
             require_once('../views/view_connexion.php');
         }
     } else {

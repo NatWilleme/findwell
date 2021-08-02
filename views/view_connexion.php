@@ -5,7 +5,16 @@
 
 <div class="container text-center">
     
-
+    <?php if(isset($alert)){ ?>
+    <div class="mt-4 alert alert-<?php echo $alert['color']; ?> alert-dismissible fade show" role="alert">
+        <?php
+            if($alert['color'] == "danger"){echo "<i class=\"bi bi-exclamation-triangle me-2 fs-4\"></i>";}
+            else echo "<i class=\"bi bi-check-square me-2 fs-4\"></i>";
+            echo $alert['message']; 
+        ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php } ?>
 
     <main class="form-signin">
     <form method="post" action="../controllers/controller_login.php">

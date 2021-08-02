@@ -21,49 +21,25 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark" style="background-color: #FFD338">
     <div class="container-fluid">
-      <button
-        class="navbar-toggler"
-        type="button"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
+      <button class="navbar-toggler" type="button"> <i class="fas fa-bars"></i></button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Navbar brand -->
+        <!-- Logo -->
         <a class="navbar-brand mt-2 mt-lg-0" href="../views/view_Home.php">
-          <img
-            src="../images/logo1.png"
-            height="70"
-            alt=""
-            loading="lazy"
-          />
+          <img src="../images/logo1.png" height="70" alt="" loading="lazy">
         </a>
       </div>
-
-      <!-- Right elements -->
-      <div class="d-flex align-items-center">
-        <!-- Mes favoris -->
-        <a
-          class="d-flex align-items-center text-decoration-none me-4"
-          href="../controllers/controller_favorites.php"
-          style="color: black;"
-        >
-          <i class="bi bi-suit-heart pe-1" style="font-size: 1.5rem; color: black;"></i>
-          Mes favoris
-        </a>
-
-        <!-- Mon profil -->
-        <a
-          class="d-flex align-items-center text-decoration-none me-4"
-          href="../controllers/controller_editProfil.php"
-          style="color: black;"
-        >
-          <i class="bi bi-person-circle pe-1" style="font-size: 1.5rem; color: black;"></i>
-          Mon profil
-        </a>
-
-        
+        <div class="dropdown pe-3">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-circle pe-1" style="font-size: 1.5rem; color: black;"></i>Mon profil
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="../controllers/controller_editProfil.php">Mes informations</a></li>
+          <li><a class="dropdown-item" href="../controllers/controller_favorites.php">Mes favoris</a></li>
+          <li><a class="dropdown-item" href="../controllers/controller_login.php?disconnect=true">Se déconnecter</a></li>
+          <?php 
+          if(isset($_SESSION['user']) && $_SESSION['user']->type == "admin") { ?><li><a class="dropdown-item" href="../controllers/controller_adminPanel.php">Gestion du site</a></li> <?php } ?>
+        </ul>
       </div>
-      <!-- Right elements -->
     </div>
   </nav>
   <!-- Navbar -->
@@ -82,6 +58,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <?php if(isset($scripts)) echo $scripts; ?>
 
 </body>
 </html>

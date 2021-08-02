@@ -93,6 +93,7 @@ abstract class CompaniesManager extends DBManager{
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute();
             $resultQuery = $pdo_statement->fetchAll(PDO::FETCH_ASSOC);
             foreach ($resultQuery as $elem){
                 $values=array(
@@ -106,6 +107,7 @@ abstract class CompaniesManager extends DBManager{
                     "postalCode" => $elem["postalcode_comp"],
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
+                    "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"]
                 );
                 $company = new Company();

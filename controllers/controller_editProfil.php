@@ -2,9 +2,10 @@
 require_once('../models/models/user.php');
 require_once('../models/dao/usersManager.php');
 
+if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
 
-
-$user = UsersManager::getUser(unserialize($_COOKIE['userConnected'])->mail);
+$user = UsersManager::getUser($_SESSION['user']->mail);
 if(isset($_POST['submit'])){
     if($_POST['submit'] == "update"){
         $userToEdit = new User();
