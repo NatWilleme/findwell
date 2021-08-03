@@ -111,6 +111,7 @@
 
 <?php
     $content = ob_get_clean();
-    if(isset($_COOKIE["userConnected"])) require_once("../templates/templateConnected.php");
+    if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) require_once("../templates/templateConnected.php");
     else require_once("../templates/templateNotConnected.php");
+    
 ?>

@@ -1,7 +1,8 @@
 <?php
-session_start();
 require_once('../models/models/category.php');
 require_once('../models/dao/categoriesManager.php');
+if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
 
 $category = $_GET['category'];
 $_SESSION['category'] = $category;

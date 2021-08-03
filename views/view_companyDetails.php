@@ -18,9 +18,14 @@
             <li class="breadcrumb-item active" aria-current="page"><?php echo $company->name; ?></li>
         </ol>
     </nav>
-    <div class="row ps-5 pb-4 d-flex">
-        <h1 class="col-9"><?php echo $company->name; ?></h1> 
-        <?php if($messageBtn != "") {?><button onclick="location.href='../controllers/controller_companyDetails.php?favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-2" type="button" ><?php echo $messageBtn; ?></button><?php } ?>
+    <div class="row d-flex justify-content-around">
+        <h1 class="col-5"><?php echo $company->name; ?></h1> 
+        <?php if($messageBtn != "") {?>
+        <span class="col-2"></span>
+        <button onclick="location.href='../controllers/controller_companyDetails.php?favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-2" type="button" ><?php echo $messageBtn; ?></button>
+        <?php } else { ?>
+        <span class="col-5"></span>
+        <?php } ?>
     </div>
     <div class="row d-flex justify-content-around mb-4">
 
@@ -45,6 +50,7 @@
         </div>
     </div>
 
+    <?php if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) { ?>
     <div class="row col-5 mb-4 ms-5">
         <h2>Qu'avez-vous pensez de <?php echo $company->name; ?> ?</h2>
         <form id="commentForm" action="../controllers/controller_companyDetails.php?idCompany=<?php echo $company->id; ?>" method="post" enctype='multipart/form-data'>
@@ -67,7 +73,12 @@
             <input class="btn btn-primary" type="submit" name="submit" id="submit" value="Publier">
         </form>
     </div>
-
+    <?php } else {?>
+    <div class="row d-flex justify-content-around">
+        <h2 class="col-5 mb-4" style="padding: 12px;">Connectez-vous pour laisser un avis !</h2>
+        <span class="col-5 mb-4"></span>
+    </div>
+    <?php } ?>
     <div class="row d-flex justify-content-around mb-4 ms-5">
         <?php 
             if ($rating['rate'] == 0) {
@@ -128,6 +139,6 @@
 
 <?php
     $content = ob_get_clean();
-    if(isset($_COOKIE["userConnected"])) require_once("../templates/templateConnected.php");
+    if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) require_once("../templates/templateConnected.php");
     else require_once("../templates/templateNotConnected.php");
 ?>
