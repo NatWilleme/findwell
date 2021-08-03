@@ -99,6 +99,15 @@
                                 </div>
                             </div>
                         </div>
+                        <?php if($user->type == "admin") { ?>
+                        <div class="row gutters mt-2 mb-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="text-right">
+                                    <a class="btn btn-warning" href="../controllers/controller_adminPanel.php">Gestion du site</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

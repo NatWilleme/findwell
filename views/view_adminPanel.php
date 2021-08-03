@@ -6,13 +6,23 @@
 <div class="container mt-2 mb-5">
 
     <?php if(!isset($_GET['view'])) { ?>
-    <a class="btn btn-primary" href="../controllers/controller_adminPanel.php?view=companies">Gérer les entreprises</a>
-    <a class="btn btn-primary" href="../controllers/controller_adminPanel.php?view=ads">Gérer les publicités</a>
-    <a class="btn btn-primary" href="../controllers/controller_adminPanel.php?view=users">Gérer les utilisateurs</a>
+    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=companies">Gérer les entreprises</a><br>
+    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=ads">Gérer les publicités</a><br>
+    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=users">Gérer les utilisateurs</a><br>
+    <a class="btn btn-primary" href="../controllers/controller_adminPanel.php?view=stats">Accéder aux statistiques</a>
     <?php } else { ?>
-    <a class="btn btn-secondary" href="../controllers/controller_adminPanel.php">Retour</a>
+    <a class="btn btn-secondary" href="../controllers/controller_adminPanel.php?
+        <?php if($_GET['view'] == "companies" && isset($_GET['edit'])) echo "view=companies"; 
+        else if($_GET['view'] == "ads" && isset($_GET['edit'])) echo 'view=ads'; 
+        else if($_GET['view'] == "users" && isset($_GET['edit'])) echo 'view=users'; ?>
+    ">Retour</a>
     <?php } ?>
-    <?php if(isset($companies)){ ?>
+
+    <?php if(isset($ads) && !isset($action)){ ?>
+        <a class="btn btn-primary" href="../controllers/controller_adminPanel.php?view=ads&action=add">Ajouter une nouvelle publicité</a>
+    <?php } ?>
+
+    <?php if(isset($companies) && !isset($action)){ ?>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -20,7 +30,8 @@
                 <th scope="col">Nom</th>
                 <th scope="col">Mail</th>
                 <th scope="col">Téléphone</th>
-                <th scope="col">Note</th>
+                <th scope="col">Note globale</th>
+                <th scope="col">Nombre d'avis</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -32,7 +43,12 @@
             <td><?php echo $company->name; ?></td>
             <td><?php echo $company->mail; ?></td>
             <td><?php echo $company->phone; ?></td>
-            <td><?php echo $company->rating; ?>/5</td>
+            <td><?php for ($i=0; $i < 5; $i++) { 
+                            if($i < $company->rating){
+                                echo "<i class='bi bi-star-fill text-warning'></i>";
+                            } else echo "<i class='bi bi-star text-warning'></i>";
+                        } ?></td>
+            <td><?php echo $company->countComment; ?></td>
             <td>
                 <a class="btn btn-danger" href="../controllers/controller_adminPanel.php?view=companies&delete=<?php echo $company->id; ?>"><i class="bi bi-trash-fill"></i></a> 
                 <a class="btn btn-warning" href="../controllers/controller_adminPanel.php?view=companies&edit=<?php echo $company->id; ?>"><i class="bi bi-pencil-fill"></i></a>
@@ -163,7 +179,7 @@
     <?php } ?>
 
     <?php if(isset($userToEdit)){ ?>
-        <form class="mt-3" action="../controllers/controller_adminPanel.php" method="post">
+        <form class="mt-3" action="../controllers/controller_adminPanel.php?view=users" method="post">
             <div class="row gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <h6 class="mb-2 text-primary">Informations</h6>
@@ -229,13 +245,95 @@
                 </div>
             </div>
             <div class="row gutters">
+            <input style="display: none;" type="text" name="action" id="action" value="editUser">
+            <input style="display: none;" type="text" name="idToEdit" id="idToEdit" value="<?php echo $userToEdit->id;?>">
             <button class="btn btn-primary mt-4 col-2" type="submit">Modifier</button>
             </div>
         </form>
     <?php } ?>
 
 
+    <?php if(isset($ads) && !isset($action)){ ?>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Entreprise</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+                <th scope="col">Affichée ?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($ads as $ad) { ?>
+            <tr>
+            <th scope="row"><?php echo $ad->id; ?></th>
+            <td><?php echo $ad->name_comp; ?></td>
+            <td><img src="<?php echo $ad->image; ?>" width="300" alt=""></td>
+            <td>
+                <a class="btn btn-danger" href="../controllers/controller_adminPanel.php?view=ads&delete=<?php echo $ad->id; ?>"><i class="bi bi-trash-fill"></i></a> 
+                <a class="btn btn-warning" href="../controllers/controller_adminPanel.php?view=ads&edit=<?php echo $ad->id; ?>"><i class="bi bi-pencil-fill"></i></a>
+            </td>
+            <td><?php if($ad->display == 1) echo "Oui"; else echo "Non"; ?></td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <?php } ?>
 
+    <?php
+    if(isset($action)){ 
+    ?>
+
+    <form class="mt-3" action="../controllers/controller_adminPanel.php?view=ads" method="post" enctype='multipart/form-data'>
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h6 class="mb-2 text-primary"><?php if(isset($adToEdit)) echo 'Modification de la publicité'; else echo 'Nouvelle publicité';?></h6>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                    <label for="company">Entreprise concernée</label>
+                    <select class="form-control" name="company" id="company">
+                        <option value="">--Sélectionnez une entreprise--</option>
+                        <?php foreach ($companies as $company) { ?>
+                        <option value="<?php echo $company->id; ?>" <?php if(isset($adToEdit) && $adToEdit->id_comp == $company->id) echo 'selected';?>><?php echo $company->name; ?></option>    
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                    <label for="image">Publicité <?php if(isset($adToEdit)) echo 'actuelle';?></label><br>
+                    <?php if(isset($adToEdit)) { ?>
+                        <img src="<?php echo $adToEdit->image; ?>" class="mb-3" width="300" alt="">
+                    <?php } ?>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*" >
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                    <label for="display">Afficher ?</label>
+                    <div id ="display" class="form-control">
+                        <input type="radio" name="display" id="yes" value="1" <?php if(isset($adToEdit) && $adToEdit->display == 1) echo 'checked'; ?>>
+                        <label for="yes">Oui</label><br>
+                        <input type="radio" name="display" id="no" value="0" <?php if(isset($adToEdit) && $adToEdit->display == 0) echo 'checked'; ?>>
+                        <label for="no">Non</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row gutters">
+            <input style="display: none;" type="text" name="action" id="action" value="<?php if(isset($adToEdit)) echo 'editAd'; else echo 'addAd';?>">
+            <?php if(isset($adToEdit)) { ?>
+                <input style="display: none;" type="text" name="idToEdit" id="idToEdit" value="<?php echo $adToEdit->id;?>">
+                <input style="display: none;" type="text" name="imageOld" id="imageOld" value="<?php echo $adToEdit->image;?>">
+            <?php } ?>
+            <button class="btn btn-primary mt-4 col-2" id="submit" type="submit"><?php if(isset($adToEdit)) echo 'Modifier'; else echo 'Ajouter';?></button>
+        </div>
+    </form>
+
+    <?php } ?>
 
 
 

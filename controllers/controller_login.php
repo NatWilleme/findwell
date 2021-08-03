@@ -1,7 +1,8 @@
 <?php
 require_once('../models/models/user.php');
 require_once('../models/dao/usersManager.php');
-session_start();
+if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
 
 if(isset($_POST['submitRegister'])){
     $mail = $_POST['mail'];

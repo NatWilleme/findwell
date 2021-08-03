@@ -4,7 +4,8 @@ require_once('../models/models/company.php');
 require_once('../models/dao/companiesManager.php');
 require_once('../models/dao/commentsManager.php');
 require_once('../models/dao/categoriesManager.php');
-session_start();
+if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
 
 $companies = CompaniesManager::getAllFavoriteCompaniesFor($_SESSION['user']->id);
 foreach ($companies as $company) {

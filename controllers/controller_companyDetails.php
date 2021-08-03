@@ -6,7 +6,8 @@ require_once('../models/dao/companiesManager.php');
 require_once('../models/dao/commentsManager.php');
 require_once('../models/dao/categoriesManager.php');
 require_once('../models/dao/usersManager.php');
-session_start();
+if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
 
 if(isset($_GET['favorite'])){
     $idCompany = $_GET['favorite'];

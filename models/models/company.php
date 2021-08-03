@@ -14,6 +14,7 @@ class Company{
     private $image;
     private $deleted;
     private $certified;
+    private $countComment;
     private $rating;
     private $domaines;
 

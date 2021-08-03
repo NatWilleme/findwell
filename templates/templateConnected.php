@@ -24,7 +24,7 @@
       <button class="navbar-toggler" type="button"> <i class="fas fa-bars"></i></button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Logo -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="../views/view_Home.php">
+        <a class="navbar-brand mt-2 mt-lg-0" href="../controllers/controller_home.php">
           <img src="../images/logo1.png" height="70" alt="" loading="lazy">
         </a>
       </div>
@@ -36,8 +36,6 @@
           <li><a class="dropdown-item" href="../controllers/controller_editProfil.php">Mes informations</a></li>
           <li><a class="dropdown-item" href="../controllers/controller_favorites.php">Mes favoris</a></li>
           <li><a class="dropdown-item" href="../controllers/controller_login.php?disconnect=true">Se déconnecter</a></li>
-          <?php 
-          if(isset($_SESSION['user']) && $_SESSION['user']->type == "admin") { ?><li><a class="dropdown-item" href="../controllers/controller_adminPanel.php">Gestion du site</a></li> <?php } ?>
         </ul>
       </div>
     </div>
