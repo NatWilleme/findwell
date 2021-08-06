@@ -5,13 +5,13 @@ require_once('../models/dao/DBManager.php');
 abstract class UsersManager extends DBManager{
     
     static public function addUser($user){
-        $sql = "INSERT INTO users (password_user, mail_user)
-                VALUES (:password_user, :mail_user)";
+        $sql = "INSERT INTO users (password_user, mail_user, type_user)
+                VALUES (:password_user, :mail_user, :type_user)";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $state = $pdo_statement->execute(array(':password_user' => password_hash($user->password, PASSWORD_DEFAULT),
-                                ':mail_user' => $user->mail));
+                                ':mail_user' => $user->mail, ':type_user' => $user->type));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{

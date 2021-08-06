@@ -92,7 +92,9 @@ if(isset($_GET['view'])){
     }
 }
 
-
-require_once('../views/view_adminPanel.php');
+if($_SESSION['user']->type == "admin")
+    require_once('../views/view_adminPanel.php');
+else
+    require_once('../controllers/controller_home.php');
 
 ?>

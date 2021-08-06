@@ -9,6 +9,7 @@ class Company{
     private $street;
     private $number;
     private $postalCode;
+    private $state;
     private $phone;
     private $mail;
     private $image;

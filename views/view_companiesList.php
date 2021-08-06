@@ -24,7 +24,7 @@
             }
             ?>
             
-        <div class="card" style="width: 18rem;">
+        <div class="card border border-dark pt-2" style="width: 18rem;">
             <img src="<?php echo $company->image; ?>" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><b><?php echo $company->name; ?></b></h5>
@@ -43,13 +43,12 @@
                     <br>
                     <b>Localisation :</b> <?php echo $company->city; ?>
                 </p>
-                <a href="../controllers/controller_companyDetails.php?idCompany=<?php echo $company->id; ?>" class="btn btn-primary">Accéder</a>
             </div>
+            <a href="../controllers/controller_companyDetails.php?idCompany=<?php echo $company->id; ?>" class="btn btn-primary mb-2">Accéder</a>
         </div>          
-
-            <?php
+        <?php
         }
-    ?>
+        ?>
     </div>
 
 
