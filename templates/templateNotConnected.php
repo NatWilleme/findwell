@@ -29,7 +29,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="../views/view_Home.php">
+        <a class="navbar-brand mt-2 mt-lg-0" href="../controllers/controller_home.php">
           <img
             src="../images/logo1.png"
             height="70"
@@ -81,6 +81,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+  <?php if(isset($scripts)) echo $scripts; ?>
 </body>
 </html>

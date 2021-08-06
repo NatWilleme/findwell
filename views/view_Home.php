@@ -65,7 +65,7 @@
   </div>
 
 
-    <div class="row mt-5 mb-5 m-0">
+    <div class="row mt-5 mb-3 m-0">
         <div class="col-1"></div>
         <div class="col-4">
             <div class="d-flex mb-5">
@@ -104,6 +104,38 @@
         <!-- Video youtube -->
         <div class="col-6">
             <iframe width="600" height="400" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>        
+    </div>
+
+    <div class="row ms-5 mb-5">
+        <div class="col-8"></div>
+        <div id="carouselExampleIndicators" class="carousel slide col-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <?php $i=0; foreach ($ads as $ad) { if($i == 0) {?>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo $i; ?>" class="active" aria-current="true" aria-label="Slide <?php echo $i+1; ?>"></button>   
+                <?php } else { ?> 
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo $i; ?>" aria-label="Slide <?php echo $i+1; ?>"></button>  
+                <?php } $i++;} ?>
+            </div>
+            <div class="carousel-inner">
+                <?php $i=0; foreach ($ads as $ad) { if($i == 0) {?>
+                <div class="carousel-item active" data-bs-interval="4000">
+                    <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="...">
+                </div>   
+                <?php } else { ?> 
+                <div class="carousel-item" data-bs-interval="4000">
+                <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="...">
+                </div>   
+                <?php } $i++;} ?>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 

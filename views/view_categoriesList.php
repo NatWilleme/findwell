@@ -23,17 +23,15 @@
             }
             ?>
             
-        <div class="card" style="width: 18rem;">
+        <div class="card border border-dark pt-2" style="width: 18rem;">
             <img src="<?php echo $category->image; ?>" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><?php echo $category->name; ?></h5>
-                <a href="../controllers/controller_companiesList.php?subcategory=<?php echo $category->name; ?>" class="btn btn-primary">Accéder</a>
             </div>
+            <a href="../controllers/controller_companiesList.php?subcategory=<?php echo $category->name; ?>" class="btn btn-primary mb-2">Accéder</a>
         </div>          
-
-            <?php
+    <?php
         }
-
     ?>
     </div>
 

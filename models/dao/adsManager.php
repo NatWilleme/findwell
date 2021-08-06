@@ -1,5 +1,7 @@
 <?php
 
+require_once('../models/dao/DBManager.php');
+
 abstract class AdsManager extends DBManager{
     
     static public function addAd(Ad $ad){
@@ -72,6 +74,35 @@ abstract class AdsManager extends DBManager{
     static public function getAllAds(){
         $result = array();
         $sql = "SELECT * FROM ads";
+        try{
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute();
+            $resultQuery = $pdo_statement->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($resultQuery as $elem) {
+                $values=array(
+                    "id" => $elem["id_ads"],  
+                    "id_comp" => $elem["id_comp"],  
+                    "image" => $elem["image_ads"],
+                    "display" => $elem["display_ads"]
+                );
+                $ad = new Ad();
+                $ad->hydrate($values);
+                array_push($result, $ad);
+            }
+            
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+        return $result;
+    }
+
+    static public function getAdsToDisplay(){
+        $result = array();
+        $sql = "SELECT * FROM ads WHERE display_ads = 1";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);

@@ -5,21 +5,22 @@ require_once('../models/dao/DBManager.php');
 abstract class CompaniesManager extends DBManager{
     
     static public function addCompany(Company $company){
-        $sql = "INSERT INTO companies (name_comp, description_comp, hours_comp, city_comp, street_comp, number_comp, postalcode_comp, phone_comp, image_comp)
-                VALUES (:name_comp, :description_comp, :hours_comp, :city_comp, :street_comp, :number_comp, :postalcode_comp, :phone_comp, :image_comp)";
+        $sql = "INSERT INTO companies (name_comp, description_comp, hours_comp, city_comp, street_comp, number_comp, postalcode_comp, state_comp, mail_comp, phone_comp, image_comp, certified_comp)
+                VALUES (:name_comp, :description_comp, :hours_comp, :city_comp, :street_comp, :number_comp, :postalcode_comp, :state_comp, :mail_comp, :phone_comp, :image_comp, 0)";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
-            $pdo_statement->execute(array(':name_comp' => $company->__get('name'), ':description_comp' => $company->__get('description'),
-                                ':hours_comp' => $company->__get('hours'), ':city_comp' => $company->__get('city_comp'), ':street_comp' => $company->__get('street_comp'),
-                                ':number_comp' => $company->__get('number_comp'), ':postalcode_comp' => $company->__get('postalcode_comp'), ':phone_comp' => $company->__get('phone_comp'), 
-                                ':image_comp' =>  $company->__get('image')));
+            $state = $pdo_statement->execute(array(':name_comp' => $company->name, ':description_comp' => $company->description, ':mail_comp' => $company->mail,
+                                ':hours_comp' => $company->hours, ':city_comp' => $company->city, ':street_comp' => $company->street,
+                                ':number_comp' => $company->number, ':postalcode_comp' => $company->postalCode,':state_comp' => $company->state, ':phone_comp' => $company->phone, 
+                                ':image_comp' =>  $company->image));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
             $pdo_statement->closeCursor();
             $pdo_statement = null;
         }
+        return $state;
     }
 
     static public function updateCompany(Company $company){
@@ -87,6 +88,39 @@ abstract class CompaniesManager extends DBManager{
         return $company;
     }
 
+    static public function getOneCompanyByMail($mail){
+        $sql = "SELECT * FROM companies WHERE mail_comp=:mail_comp";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':mail_comp' => $mail));
+            $elem = $pdo_statement->fetch(PDO::FETCH_ASSOC);
+            $values=array(
+                "id" => $elem["id_comp"],  
+                "name" => $elem["name_comp"],  
+                "description" => $elem["description_comp"],  
+                "hours" => $elem["hours_comp"], 
+                "city" => $elem["city_comp"],
+                "street" => $elem["street_comp"],
+                "number" => $elem["number_comp"],
+                "postalCode" => $elem["postalcode_comp"],
+                "mail" => $elem["mail_comp"],
+                "phone" => $elem["phone_comp"],
+                "image" => $elem["image_comp"],
+                "deleted" => $elem["deleted_comp"],
+                "certified" => $elem["certified_comp"]
+            );
+            $company = new Company();
+            $company->hydrate($values);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+        return $company;
+    }
+
     static public function getAllCompanies(){
         $result = array();
         $sql = "SELECT * FROM companies";
@@ -125,7 +159,7 @@ abstract class CompaniesManager extends DBManager{
 
     static public function getAllCompaniesAccordingTo($category, $subcategory){
         $result = array();
-        $sql = "SELECT * FROM companies INNER JOIN appartient ON appartient.id_comp = companies.id_comp INNER JOIN categories ON categories.id_cat = appartient.id_cat WHERE categories.name_cat = :subcategory AND categories.parent_cat = :category ";
+        $sql = "SELECT * FROM companies INNER JOIN appartient ON appartient.id_comp = companies.id_comp INNER JOIN categories ON categories.id_cat = appartient.id_cat WHERE categories.name_cat = :subcategory AND categories.parent_cat = :category AND certified_comp = 1";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);

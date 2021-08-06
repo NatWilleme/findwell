@@ -52,7 +52,20 @@ abstract class CategoriesManager extends DBManager{
         return $result;
     }
 
-
+    static public function addLinkCatComp($id_comp, $id_cat){
+        $sql = "INSERT INTO appartient (id_cat, id_comp)
+                VALUES (:id_cat, :id_comp)";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_cat' => $id_cat, ':id_comp' => $id_comp));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+    }
 }
 
 ?>
