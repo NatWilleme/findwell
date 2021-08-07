@@ -7,7 +7,12 @@ if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
     
 $ads = adsManager::getAdsToDisplay();
-   
+if(isset($_SESSION['category'])){
+    unset($_SESSION['category']);
+}
+if(isset($_SESSION['subcategory'])){
+    unset($_SESSION['subcategory']);
+}
 
 require_once('../views/view_Home.php');
 

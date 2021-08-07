@@ -1,5 +1,6 @@
 <?php
 require_once('../models/models/category.php');
+require_once('../models/models/user.php');
 require_once('../models/dao/categoriesManager.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();

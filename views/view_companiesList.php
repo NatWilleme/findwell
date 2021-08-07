@@ -7,7 +7,7 @@
 
     <nav class="ms-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../views/view_Home.php">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="../controllers/controller_home.php">Accueil</a></li>
             <li class="breadcrumb-item"><a href="../controllers/controller_categoriesList.php?category=<?php echo $_SESSION['category'] ?>"><?php echo $_SESSION['category'] ?></a></li>
             <li class="breadcrumb-item active" aria-current="page"><?php echo $_SESSION['subcategory'] ?></li>
         </ol>

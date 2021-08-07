@@ -1,5 +1,6 @@
 <?php
 require_once('../models/models/company.php');
+require_once('../models/models/user.php');
 require_once('../models/dao/companiesManager.php');
 require_once('../models/dao/commentsManager.php');
 require_once('../models/dao/categoriesManager.php');

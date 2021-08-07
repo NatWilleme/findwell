@@ -61,7 +61,9 @@ function displayCompanyDetails($idCompany, $messageBtn){
         $user = usersManager::getUserByID($comment->id_user);
         array_push($users,$user);
     }
-    
+    if(str_contains($_SERVER['HTTP_REFERER'], 'controller_search') == 1){
+        $search = true;
+    }
     require_once('../views/view_companyDetails.php');
 }
 
