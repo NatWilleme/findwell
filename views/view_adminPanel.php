@@ -23,6 +23,7 @@
     <?php } ?>
 
     <?php if(isset($companies) && !isset($action)){ ?>
+    <div class="table-responsive">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -57,9 +58,11 @@
             <?php } ?>
         </tbody>
     </table>
+    </div>
     <?php } ?>
     
     <?php if(isset($users)){ ?>
+    <div class="table-responsive">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -87,6 +90,7 @@
             <?php } ?>
         </tbody>
     </table>
+    </div>
     <?php } ?>
 
 
@@ -179,7 +183,7 @@
     <?php } ?>
 
     <?php if(isset($userToEdit)){ ?>
-        <form class="mt-3" action="../controllers/controller_adminPanel.php?view=users" method="post">
+        <form class="mt-3" action="../controllers/controller_adminPanel.php?view=users" method="post" id="formUser">
             <div class="row gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <h6 class="mb-2 text-primary">Informations</h6>
@@ -247,13 +251,15 @@
             <div class="row gutters">
             <input style="display: none;" type="text" name="action" id="action" value="editUser">
             <input style="display: none;" type="text" name="idToEdit" id="idToEdit" value="<?php echo $userToEdit->id;?>">
-            <button class="btn btn-primary mt-4 col-2" type="submit">Modifier</button>
+            
             </div>
         </form>
+        <button class="btn btn-primary mt-3" type="submit" form="formUser">Modifier</button>
     <?php } ?>
 
 
     <?php if(isset($ads) && !isset($action)){ ?>
+    <div class="table-responsive">        
     <table class="table table-hover">
         <thead>
             <tr>
@@ -280,6 +286,7 @@
             <?php } ?>
         </tbody>
     </table>
+    </div>
     <?php } ?>
 
     <?php

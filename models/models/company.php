@@ -18,6 +18,7 @@ class Company{
     private $countComment;
     private $rating;
     private $domaines;
+    private $tva;
 
     // Magic method get
     public function __get($value){   
