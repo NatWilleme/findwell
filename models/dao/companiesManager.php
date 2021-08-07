@@ -266,6 +266,43 @@ abstract class CompaniesManager extends DBManager{
         return $result;
     }
 
+    static public function searchCompany($keyword){
+        $result = array();
+        $sql = "SELECT * FROM companies WHERE companies.name_comp LIKE '%$keyword%'";
+        try{
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute();
+            $resultQuery = $pdo_statement->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($resultQuery as $elem){
+                $values=array(
+                    "id" => $elem["id_comp"],  
+                    "name" => $elem["name_comp"],  
+                    "description" => $elem["description_comp"],  
+                    "hours" => $elem["hours_comp"], 
+                    "city" => $elem["city_comp"],
+                    "street" => $elem["street_comp"],
+                    "number" => $elem["number_comp"],
+                    "postalCode" => $elem["postalcode_comp"],
+                    "phone" => $elem["phone_comp"],
+                    "image" => $elem["image_comp"],
+                    "mail" => $elem["mail_comp"],
+                    "deleted" => $elem["deleted_comp"],
+                    "tva" => $elem["tva_comp"]
+                );
+                $company = new Company();
+                $company->hydrate($values);
+                array_push($result,$company);
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+        return $result;
+    }
+
 }
 
 ?>

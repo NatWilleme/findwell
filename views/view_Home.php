@@ -128,12 +128,12 @@
     </div>
 
     <div class="row mb-5 m-0 col-12">
-        <div id="carouselExampleIndicators" class="carousel slide " data-bs-ride="carousel">
+        <div id="carouselAds" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <?php $i=0; foreach ($ads as $ad) { if($i == 0) {?>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo $i; ?>" class="active" aria-current="true" aria-label="Slide <?php echo $i+1; ?>"></button>   
+                <button type="button" data-bs-target="#carouselAds" data-bs-slide-to="<?php echo $i; ?>" class="active" aria-current="true" aria-label="Slide <?php echo $i+1; ?>"></button>   
                 <?php } else { ?> 
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo $i; ?>" aria-label="Slide <?php echo $i+1; ?>"></button>  
+                <button type="button" data-bs-target="#carouselAds" data-bs-slide-to="<?php echo $i; ?>" aria-label="Slide <?php echo $i+1; ?>"></button>  
                 <?php } $i++;} ?>
             </div>
             <div class="carousel-inner">
@@ -147,11 +147,11 @@
                 </div>   
                 <?php } $i++;} ?>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselAds" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselAds" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>

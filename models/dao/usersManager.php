@@ -5,13 +5,13 @@ require_once('../models/dao/DBManager.php');
 abstract class UsersManager extends DBManager{
     
     static public function addUser($user){
-        $sql = "INSERT INTO users (password_user, mail_user, type_user)
-                VALUES (:password_user, :mail_user, :type_user)";
+        $sql = "INSERT INTO users (password_user, mail_user, type_user, code_user)
+                VALUES (:password_user, :mail_user, :type_user, :code_user)";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $state = $pdo_statement->execute(array(':password_user' => password_hash($user->password, PASSWORD_DEFAULT),
-                                ':mail_user' => $user->mail, ':type_user' => $user->type));
+                                ':mail_user' => $user->mail, ':type_user' => $user->type, ':code_user' => $user->code));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
@@ -24,12 +24,26 @@ abstract class UsersManager extends DBManager{
     static public function updateUser($user){
         $sql = "UPDATE users SET username_user=:username_user, phone_user=:phone_user, 
         street_user=:street_user, city_user=:city_user, state_user=:state_user, zip_user=:zip_user, 
-        type_user=:type_user, number_user=:number_user WHERE id_user=:id_user";
+         number_user=:number_user, image_user=:image_user WHERE id_user=:id_user";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $pdo_statement->execute(array(':username_user' => $user->username, ':phone_user' => $user->phone, ':street_user' => $user->street,
-                                ':city_user' => $user->city, ':state_user' => $user->state, ':zip_user' => $user->zip, ':id_user' => $user->id, ':type_user' => $user->type, ':number_user' => $user->number));
+                                ':city_user' => $user->city, ':state_user' => $user->state, ':zip_user' => $user->zip, ':id_user' => $user->id, ':number_user' => $user->number, ':image_user' => $user->image));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+    }
+
+    static public function confirmUser($idUser){
+        $sql = "UPDATE users SET confirmed_user = 1 WHERE id_user=:id_user";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_user' => $idUser));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
@@ -93,7 +107,9 @@ abstract class UsersManager extends DBManager{
                 "state" => $elem["state_user"],
                 "zip" => $elem["zip_user"],
                 "city" => $elem["city_user"],
-                "type" => $elem["type_user"]
+                "type" => $elem["type_user"],
+                "confirmed" => $elem["confirmed_user"],
+                "code" => $elem["code_user"]
             );
             $user = new User();
             $user->hydrate($values);
@@ -125,7 +141,9 @@ abstract class UsersManager extends DBManager{
                 "state" => $elem["state_user"],
                 "zip" => $elem["zip_user"],
                 "city" => $elem["city_user"],
-                "type" => $elem["type_user"]
+                "type" => $elem["type_user"],
+                "confirmed" => $elem["confirmed_user"],
+                "code" => $elem["code_user"]
             );
             $user = new User();
             $user->hydrate($values);

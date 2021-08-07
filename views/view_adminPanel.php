@@ -266,8 +266,8 @@
                 <th scope="col">#</th>
                 <th scope="col">Entreprise</th>
                 <th scope="col">Image</th>
-                <th scope="col">Action</th>
                 <th scope="col">Affichée ?</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -277,11 +277,11 @@
             <th scope="row"><?php echo $ad->id; ?></th>
             <td><?php echo $ad->name_comp; ?></td>
             <td><img src="<?php echo $ad->image; ?>" width="300" alt=""></td>
+            <td><?php if($ad->display == 1) echo "Oui"; else echo "Non"; ?></td>
             <td>
                 <a class="btn btn-danger" href="../controllers/controller_adminPanel.php?view=ads&delete=<?php echo $ad->id; ?>"><i class="bi bi-trash-fill"></i></a> 
                 <a class="btn btn-warning" href="../controllers/controller_adminPanel.php?view=ads&edit=<?php echo $ad->id; ?>"><i class="bi bi-pencil-fill"></i></a>
             </td>
-            <td><?php if($ad->display == 1) echo "Oui"; else echo "Non"; ?></td>
             </tr>
             <?php } ?>
         </tbody>
@@ -315,7 +315,7 @@
                     <?php if(isset($adToEdit)) { ?>
                         <img src="<?php echo $adToEdit->image; ?>" class="mb-3" width="300" alt="">
                     <?php } ?>
-                    <input type="file" class="form-control" id="image" name="image" accept="image/*" >
+                    <input type="file" class="form-control" id="image" name="image" accept=".jpg, .png" >
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
