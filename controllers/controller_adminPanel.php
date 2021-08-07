@@ -14,9 +14,16 @@ if(isset($_POST['action'])){
     if($_POST['action'] == "addAd"){
         $newAd = new Ad();
         $newAd->__set('id_comp', $_POST['company']);
+        
         $from = $_FILES['image']['tmp_name'];
-        $to = '../images/upload/'.$_FILES['image']['name'];
+        $path = $_FILES['image']['name'];
+        //get the extension of file
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $files = scandir('../images/upload/advertising/');
+        $cptImage = count($files)-1;
+        $to = '../images/upload/advertising/ad_'.$cptImage.'.'.$ext;
         move_uploaded_file($from,$to);
+
         $newAd->__set('image',$to);
         $newAd->__set('display', $_POST['display']);
         adsManager::addAd($newAd);
@@ -28,7 +35,12 @@ if(isset($_POST['action'])){
         $newAd->__set('display', $_POST['display']);
         if(!empty($_FILES['image']['name'])){
             $from = $_FILES['image']['tmp_name'];
-            $to = '../images/upload/'.$_FILES['image']['name'];
+            $path = $_FILES['image']['name'];
+            //get the extension of file
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            $files = scandir('../images/upload/advertising/');
+            $cptImage = count($files)-1;
+            $to = '../images/upload/advertising/ad_'.$cptImage.'.'.$ext;
             move_uploaded_file($from,$to);
             $newAd->__set('image',$to);
         } else {

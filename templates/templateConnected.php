@@ -28,13 +28,29 @@
           <img src="../images/logo1.png" height="70" alt="" loading="lazy">
         </a>
       </div>
-        <div class="dropdown pe-3">
+      
+      <div class="p-1 bg-light rounded rounded-pill shadow-sm mt-4 mb-4">
+        <form action="../controllers/controller_search.php" method="get">
+          <div class="input-group">
+            <input type="search" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light">
+            <div class="input-group-append">
+              <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+        <div class="dropdown pe-3 ms-5">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-person-circle pe-1" style="font-size: 1.5rem; color: black;"></i>Mon profil
+          <img class="rounded" src="<?php if($_SESSION['user']->image != "") echo $_SESSION['user']->image; else echo "../images/upload/photos_profils/default-profil.jpg" ?>" alt="profil" style="width: 50px;">
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <ul class="dropdown-menu shadow" style="transform: translate3d(-60px, 0px, 0px);" aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item" href="../controllers/controller_editProfil.php">Mes informations</a></li>
           <li><a class="dropdown-item" href="../controllers/controller_favorites.php">Mes favoris</a></li>
+          <?php if($_SESSION['user']->type == "admin") { ?>
+            <li><a class="dropdown-item" href="../controllers/controller_adminPanel.php">Gestion du site</a></li>
+          <?php } ?>
+          <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="../controllers/controller_login.php?disconnect=true">Se déconnecter</a></li>
         </ul>
       </div>
@@ -55,7 +71,7 @@
       </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  
   <?php if(isset($scripts)) echo $scripts; ?>
 
 </body>

@@ -13,6 +13,8 @@ class User{
     private $state;
     private $image;
     private $type;
+    private $code;
+    private $confirmed;
 
     // Magic method get
     public function __get($value){   

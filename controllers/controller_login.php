@@ -30,7 +30,13 @@ if(isset($_POST['submitRegister'])){
 } else if(isset($_POST['type'])){
     if($_POST['type'] == 'Utilisateur'){
         $_SESSION['newUser']->__set('type', 'user');
+        $_SESSION['newUser']->__set('code', uniqid());
         registerNewUser($_SESSION['newUser']);
+        $_SESSION['newUser'] = usersManager::getUser($_SESSION['newUser']->mail);
+        $content = "Merci de confirmer votre inscription à Findwell en cliquant sur le lien ci-dessous.";
+        $url = $_SERVER['SERVER_NAME']."/controllers/controller_login.php?idUserToConfirm=".$_SESSION['newUser']->id."&code=".$_SESSION['newUser']->code;
+        $object = "Finalisation de l'inscription";
+        require_once('../models/sendEmail.php');
     } else {
         $_SESSION['newUser']->__set('type', 'company');
         $companyForm = true;
@@ -50,6 +56,7 @@ if(isset($_POST['submitRegister'])){
     $_SESSION['newCompany']->__set('postalCode', $_POST['zip']);
     $_SESSION['newCompany']->__set('image', "");
     $_SESSION['newCompany']->__set('state', $_POST['state']);
+    $_SESSION['newCompany']->__set('tva', $_POST['tva']);
     $domainePage = true;
     $categoriesGrosTravaux = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
     $categoriesPetitsTravaux = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
@@ -64,6 +71,16 @@ if(isset($_POST['submitRegister'])){
             categoriesManager::addLinkCatComp($company->id, $dom);
         }
     }
+    if(isset($_POST['checkPetits'])){
+        foreach ($_POST['checkPetits'] as $dom) {
+            categoriesManager::addLinkCatComp($company->id, $dom);
+        }
+    }
+    if(isset($_POST['checkDepannage'])){
+        foreach ($_POST['checkDepannage'] as $dom) {
+            categoriesManager::addLinkCatComp($company->id, $dom);
+        }
+    }
 // Page Connexion
 } else if(isset($_POST['submitConnexion'])){
     $mail = $_POST['mail'];
@@ -74,6 +91,17 @@ if(isset($_POST['submitRegister'])){
     unset($_COOKIE['userConnected']);
     setcookie('userConnected', '', time() - 3600, '/');
     require_once('../controllers/controller_home.php');
+// Activation du compte
+} else if (isset($_GET['idUserToConfirm'])) {
+    $idUserToConfirm = $_GET['idUserToConfirm'];
+    $code = $_GET['code'];
+    $user = usersManager::getUserByID($idUserToConfirm);
+    if($user->code == $code){
+        usersManager::confirmUser($idUserToConfirm);
+        $alert['color'] = "success";
+        $alert['message'] = "Votre compte est maintenant activé, vous pouvez dès à présent vous connecter et remplir vos informations dans Mon profil > Mes informations";
+        require_once('../views/view_connexion.php');
+    }
 }
 
 function registerNewUser($newUser){
@@ -82,7 +110,7 @@ function registerNewUser($newUser){
         $state = UsersManager::addUser($newUser);
         if($state){
             $alert['color'] = "success";
-            $alert['message'] = "Vous êtes maintenant inscrit.";
+            $alert['message'] = "Vérifier vos mails afin de finaliser votre inscription.";
         } else{
             $alert['color'] = "danger";
             $alert['message'] = "Votre insription a échoué.";
@@ -101,7 +129,7 @@ function registerNewCompany($newUser, $newCompany){
         $operationSuccess2 = companiesManager::addCompany($newCompany);
         if($operationSuccess1 && $operationSuccess2){
             $alert['color'] = "success";
-            $alert['message'] = "Vous êtes maintenant inscrit.";
+            $alert['message'] = "Vérifier vos mails afin de finaliser votre inscription.";
         } else{
             $alert['color'] = "danger";
             $alert['message'] = "Votre insription a échoué.";
@@ -117,7 +145,7 @@ function connectUser($mail, $password){
     $user = UsersManager::checkIfExist($mail);
     if($user['count'] == 1){
         $user = UsersManager::getUser($mail);
-        if($user->mail == $mail && password_verify($password, $user->password)){
+        if($user->mail == $mail && password_verify($password, $user->password) && $user->confirmed == 1){
             $_SESSION['user'] = $user;
             setcookie("userConnected", "1",time()+1*24*60*60,"/",$_SERVER['SERVER_NAME']);
             $_COOKIE['userConnected'] = "1";
@@ -125,7 +153,7 @@ function connectUser($mail, $password){
         } else {
             $alert['color'] = "danger";
             $alert['message'] = "Échec de connexion. Vérifiez vos identifiants";
-            require_once('../controllers/controller_home.php');
+            require_once('../views/view_connexion.php');
         }
     } else {
         require_once('../controllers/controller_home.php');
