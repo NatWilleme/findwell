@@ -5,15 +5,15 @@ require_once('../models/dao/DBManager.php');
 abstract class CompaniesManager extends DBManager{
     
     static public function addCompany(Company $company){
-        $sql = "INSERT INTO companies (name_comp, description_comp, hours_comp, city_comp, street_comp, number_comp, postalcode_comp, state_comp, mail_comp, phone_comp, image_comp, certified_comp)
-                VALUES (:name_comp, :description_comp, :hours_comp, :city_comp, :street_comp, :number_comp, :postalcode_comp, :state_comp, :mail_comp, :phone_comp, :image_comp, 0)";
+        $sql = "INSERT INTO companies (name_comp, description_comp, hours_comp, city_comp, street_comp, number_comp, postalcode_comp, state_comp, mail_comp, phone_comp, image_comp, tva_comp, certified_comp)
+                VALUES (:name_comp, :description_comp, :hours_comp, :city_comp, :street_comp, :number_comp, :postalcode_comp, :state_comp, :mail_comp, :phone_comp, :image_comp, :tva_comp, 0)";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $state = $pdo_statement->execute(array(':name_comp' => $company->name, ':description_comp' => $company->description, ':mail_comp' => $company->mail,
                                 ':hours_comp' => $company->hours, ':city_comp' => $company->city, ':street_comp' => $company->street,
                                 ':number_comp' => $company->number, ':postalcode_comp' => $company->postalCode,':state_comp' => $company->state, ':phone_comp' => $company->phone, 
-                                ':image_comp' =>  $company->image));
+                                ':image_comp' =>  $company->image, ':tva_comp' =>  $company->tva));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
@@ -75,7 +75,8 @@ abstract class CompaniesManager extends DBManager{
                 "phone" => $elem["phone_comp"],
                 "image" => $elem["image_comp"],
                 "deleted" => $elem["deleted_comp"],
-                "certified" => $elem["certified_comp"]
+                "certified" => $elem["certified_comp"],
+                "tva" => $elem["tva_comp"]
             );
             $company = new Company();
             $company->hydrate($values);
@@ -108,7 +109,8 @@ abstract class CompaniesManager extends DBManager{
                 "phone" => $elem["phone_comp"],
                 "image" => $elem["image_comp"],
                 "deleted" => $elem["deleted_comp"],
-                "certified" => $elem["certified_comp"]
+                "certified" => $elem["certified_comp"],
+                "tva" => $elem["tva_comp"]
             );
             $company = new Company();
             $company->hydrate($values);
@@ -142,7 +144,8 @@ abstract class CompaniesManager extends DBManager{
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
                     "mail" => $elem["mail_comp"],
-                    "deleted" => $elem["deleted_comp"]
+                    "deleted" => $elem["deleted_comp"],
+                    "tva" => $elem["tva_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -177,7 +180,8 @@ abstract class CompaniesManager extends DBManager{
                     "postalCode" => $elem["postalcode_comp"],
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
-                    "deleted" => $elem["deleted_comp"]
+                    "deleted" => $elem["deleted_comp"],
+                    "tva" => $elem["tva_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -246,7 +250,8 @@ abstract class CompaniesManager extends DBManager{
                     "postalCode" => $elem["postalcode_comp"],
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
-                    "deleted" => $elem["deleted_comp"]
+                    "deleted" => $elem["deleted_comp"],
+                    "tva" => $elem["tva_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);

@@ -6,7 +6,7 @@
 <div class="container-fluid ps-0 pe-0">
     
 
-  <div class="bg-image" style="background-image: url('../images/HomePage/imageAccueil.jpg'); background-size: cover; height: 800px;">
+  <!-- <div class="bg-image" style="background-image: url('../images/HomePage/imageAccueil.jpg'); background-size: cover; height: 800px;">
       <h1 class="ms-5 fst-italic text-white pt-5">Qu'est-ce que Findwell ?</h1>
       <p class="mt-3 ms-5 fs-4" style="color: white;">
       Findwell est une plateforme communautaire permettant <br>
@@ -17,7 +17,29 @@
       Que ce soit pour des gros travaux, des petits travaux, peut <br>
       importe la demande, vous trouverez ce que vous recherchez sur Findwell !
       </p>
-  </div>
+  </div> -->
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="4000">
+            <img src="../images/HomePage/imageAccueil.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+            <img src="../images/HomePage/imageAccueil.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+            <img src="../images/HomePage/imageAccueil.jpg" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
 
 
   <!-- Les tuiles -->
@@ -25,7 +47,7 @@
 
       <div class="col-2"></div>
 
-      <div class="col-2 position-relative" style="border: none;  bottom: 100px;">
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 position-relative" style="border: none;  bottom: 100px;">
         <div class="containerPerso">
             <a href="../controllers/controller_categoriesList.php?category=Gros Travaux">  
                 <img src="../images/HomePage/card1.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
@@ -38,7 +60,7 @@
 
       <div class="col-1"></div>
 
-      <div class="col-2 position-relative" style="border: none; bottom: 100px;">
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 position-relative" style="border: none; bottom: 100px;">
         <div class="containerPerso">
             <a href="../controllers/controller_categoriesList.php?category=Petits travaux">  
                 <img src="../images/HomePage/card2.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
@@ -50,7 +72,7 @@
 
       <div class="col-1"></div>
 
-      <div class="col-2 position-relative" style="border: none; bottom: 100px;">
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 position-relative" style="border: none; bottom: 100px;">
         <div class="containerPerso">
             <a href="../controllers/controller_categoriesList.php?category=Dépannage d'urgence">  
                 <img src="../images/HomePage/card3.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
@@ -67,7 +89,7 @@
 
     <div class="row mt-5 mb-3 m-0">
         <div class="col-1"></div>
-        <div class="col-4">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
             <div class="d-flex mb-5">
                 <div class="flex-shrink-0">
                     <img src="../images/HomePage/rapide.png" width="100px" alt="...">
@@ -102,14 +124,11 @@
         <div class="col-1"></div>
 
         <!-- Video youtube -->
-        <div class="col-6">
-            <iframe width="600" height="400" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>        
+        <iframe class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>      
     </div>
 
-    <div class="row ms-5 mb-5">
-        <div class="col-8"></div>
-        <div id="carouselExampleIndicators" class="carousel slide col-3" data-bs-ride="carousel">
+    <div class="row mb-5 m-0 col-12">
+        <div id="carouselExampleIndicators" class="carousel slide " data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <?php $i=0; foreach ($ads as $ad) { if($i == 0) {?>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo $i; ?>" class="active" aria-current="true" aria-label="Slide <?php echo $i+1; ?>"></button>   
@@ -138,7 +157,6 @@
             </button>
         </div>
     </div>
-
 </div>
 
 <?php

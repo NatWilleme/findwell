@@ -12,7 +12,6 @@ if(session_status() != PHP_SESSION_ACTIVE)
 
 if(isset($_POST['action'])){
     if($_POST['action'] == "addAd"){
-        print_r($_POST);
         $newAd = new Ad();
         $newAd->__set('id_comp', $_POST['company']);
         $from = $_FILES['image']['tmp_name'];
@@ -37,7 +36,6 @@ if(isset($_POST['action'])){
         }
         adsManager::updateAd($newAd);
     } else if($_POST['action'] == "editUser"){
-        print_r($_POST);
         $newUser = new User();
         $newUser->__set('id', $_POST['idToEdit']);
         $newUser->__set('username', $_POST['username']);
