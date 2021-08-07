@@ -90,6 +90,7 @@ if(isset($_POST['submitRegister'])){
 } else if(isset($_GET['disconnect'])){
     unset($_COOKIE['userConnected']);
     setcookie('userConnected', '', time() - 3600, '/');
+    session_destroy();
     require_once('../controllers/controller_home.php');
 // Activation du compte
 } else if (isset($_GET['idUserToConfirm'])) {
