@@ -28,9 +28,9 @@ if(isset($_POST['submitRegister'])){
     
 // Page 2 Choix du type d'utilisateur
 } else if(isset($_POST['type'])){
+    $_SESSION['newUser']->__set('code', uniqid());
     if($_POST['type'] == 'Utilisateur'){
         $_SESSION['newUser']->__set('type', 'user');
-        $_SESSION['newUser']->__set('code', uniqid());
         registerNewUser($_SESSION['newUser']);
         $_SESSION['newUser'] = usersManager::getUser($_SESSION['newUser']->mail);
         $content = "Merci de confirmer votre inscription à Findwell en cliquant sur le lien ci-dessous.";
