@@ -1,6 +1,7 @@
 <?php
     $title = "Contact";
-    $scripts = "<script src=\"../js/checkEntriesComment.js\"></script><script>
+    $scripts = "<script src=\"../js/checkEntries/checkEntriesComment.js\"></script>
+    <script>
     if ( window.history.replaceState ) {
       window.history.replaceState( null, null, window.location.href );
     }
