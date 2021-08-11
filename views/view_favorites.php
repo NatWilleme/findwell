@@ -4,7 +4,7 @@
 ?>
 
 <div class="container-fluid ps-0 pe-0 mt-2 mb-5">
-    <h2>Mes favoris:</h2>
+    <h2 class="ms-5">Mes favoris:</h2>
     <div class="row d-flex justify-content-around mb-4">
     <?php
         $cpt = 0;
@@ -35,7 +35,7 @@
                     <br>
                     <b>Localisation :</b> <?php echo $company->city; ?>
                 </p>
-                <a href="../controllers/controller_companyDetails.php?idCompany=<?php echo $company->id; ?>" class="btn btn-primary">Accéder</a>
+                <a href="../controllers/controller_companyDetails.php?idCompany=<?php echo $company->id; ?>&displayfavorites=true" class="btn btn-primary">Accéder</a>
             </div>
         </div>          
 

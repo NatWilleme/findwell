@@ -6,7 +6,8 @@
 <div class="container mt-2 mb-5">
 
     <?php if(!isset($_GET['view'])) { ?>
-    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=companies">Gérer les entreprises</a><br>
+    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=companies">Gérer les entreprises actives</a><br>
+    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=companiesNotCertified">Gérer les entreprises non certifiées <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
     <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=ads">Gérer les publicités</a><br>
     <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=users">Gérer les utilisateurs</a><br>
     <a class="btn btn-primary" href="../controllers/controller_adminPanel.php?view=stats">Accéder aux statistiques</a>
@@ -14,7 +15,8 @@
     <a class="btn btn-secondary" href="../controllers/controller_adminPanel.php?
         <?php if($_GET['view'] == "companies" && isset($_GET['edit'])) echo "view=companies"; 
         else if($_GET['view'] == "ads" && isset($_GET['edit'])) echo 'view=ads'; 
-        else if($_GET['view'] == "users" && isset($_GET['edit'])) echo 'view=users'; ?>
+        else if($_GET['view'] == "users" && isset($_GET['edit'])) echo 'view=users';
+        else if($_GET['view'] == "companiesNotCertified" && isset($companyToConfirm)) echo 'view=companiesNotCertified'; ?>
     ">Retour</a>
     <?php } ?>
 
@@ -60,7 +62,134 @@
     </table>
     </div>
     <?php } ?>
+
+    <?php if(isset($companiesToBeConfirmed) && !isset($action)){ ?>
+    <div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Mail</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Afficher</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($companiesToBeConfirmed as $company) { ?>
+            <tr>
+            <th scope="row"><?php echo $company->id; ?></th>
+            <td><?php echo $company->name; ?></td>
+            <td><?php echo $company->mail; ?></td>
+            <td><?php echo $company->phone; ?></td>
+            <td>
+                <a class="btn btn-primary" href="../controllers/controller_adminPanel.php?view=companiesNotCertified&see=<?php echo $company->id; ?>"><i class="bi bi-eye-fill"></i></a> 
+            </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    </div>
+    <?php } ?>
     
+    <?php if(isset($companyToConfirm)){ ?>
+        <form class="mt-3" action="../controllers/controller_adminPanel.php" method="post">
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mb-2 text-primary">Informations</h6>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="username">Nom de l'entreprise</label>
+                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $companyToConfirm->name; ?>" <?php if($companyToConfirm->name == "") echo "style=\"background-color:#FF3603;\""; ?> disabled readonly>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="mail">Adresse-mail</label><br>
+                        <a href="mailto:<?php echo $companyToConfirm->mail; ?>"><?php echo $companyToConfirm->mail; ?></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <input type="text" class="form-control" name="phone" id="phone" value="<?php echo $companyToConfirm->phone; ?>" disabled readonly <?php if($companyToConfirm->phone == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>>
+                    </div>
+                </div>
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" rows="6" disabled readonly <?php if($companyToConfirm->description == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>><?php echo $companyToConfirm->description; ?></textarea>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="hours">Heure d'ouverture</label>
+                        <textarea class="form-control" name="hours" id="hours" rows="6" disabled readonly <?php if($companyToConfirm->hours == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>><?php echo $companyToConfirm->hours; ?></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="domaines">Domaines</label>
+                        <textarea class="form-control" name="domaines" id="domaines" rows="6" disabled readonly <?php if($companyToConfirm->domaines == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>><?php echo $companyToConfirm->domaines; ?></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mt-3 mb-2 text-primary">Adresse</h6>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="street">Rue</label>
+                        <input type="text" name="street" class="form-control" id="street" value="<?php echo $companyToConfirm->street; ?>" disabled readonly <?php if($companyToConfirm->street == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="city">Ville</label>
+                        <input type="name" class="form-control" name="city" id="city" value="<?php echo $companyToConfirm->city; ?>" disabled readonly <?php if($companyToConfirm->city == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="state">Numéro de rue</label>
+                        <input type="text" class="form-control" name="number" id="number" value="<?php echo $companyToConfirm->number; ?>" disabled readonly <?php if($companyToConfirm->number == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="zip">Code Postal</label>
+                        <input type="text" class="form-control" id="zip" name="zip" value="<?php echo $companyToConfirm->postalCode; ?>" disabled readonly <?php if($companyToConfirm->postalCode == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mt-3 mb-2 text-primary">TVA</h6>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="tva">Numéro de TVA</label>
+                        <input type="text" class="form-control" name="tva" id="tva" value="<?php echo $companyToConfirm->tva; ?>" disabled readonly <?php if($companyToConfirm->tva == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>>
+                        <p id="errorTva"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-9 col-6"></div>
+                <a class="btn btn-danger mt-4 me-3 col-xl-1 col-md-1 col-2 rounded rounded-pill" href="../controllers/controller_adminPanel.php?view=companiesNotCertified&delete=<?php echo $companyToConfirm->id; ?>"><i class="bi bi-trash-fill"></i></a> 
+                <a class="btn btn-success mt-4 col-xl-1 col-md-1 col-2 rounded rounded-pill" href="../controllers/controller_adminPanel.php?view=companiesNotCertified&accept=<?php echo $companyToConfirm->id; ?>"><i class="bi bi-check-lg"></i></a>
+            </div>
+        </form>
+    <?php } ?>
+
     <?php if(isset($users)){ ?>
     <div class="table-responsive">
     <table class="table table-hover">
@@ -173,6 +302,18 @@
                         <label for="yes">Oui</label><br>
                         <input type="radio" name="certified" id="no" value="no" <?php if($companyToEdit->certified == 0) echo 'checked'; ?>>
                         <label for="no">Non</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mt-3 mb-2 text-primary">TVA</h6>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="tva">Numéro de TVA</label>
+                        <input type="text" class="form-control" name="tva" id="tva" value="<?php echo $companyToEdit->tva; ?>" <?php if($companyToEdit->tva == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>>
+                        <p id="errorTva"></p>
                     </div>
                 </div>
             </div>

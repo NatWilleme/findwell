@@ -41,17 +41,23 @@
       </div>
 
         <div class="dropdown pe-3 ms-5">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn dropdown-toggle position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php if($_SESSION['user']->type == "admin" && $notification != 0){ ?>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <?php echo $notification; ?>
+            <span class="visually-hidden">Entreprise à confirmer</span>
+          </span>
+          <?php } ?>
           <img class="rounded" src="<?php if($_SESSION['user']->image != "") echo $_SESSION['user']->image; else echo "../images/upload/photos_profils/default-profil.jpg" ?>" alt="profil" style="width: 50px;">
         </button>
         <ul class="dropdown-menu shadow" style="transform: translate3d(-60px, 0px, 0px);" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="../controllers/controller_editProfil.php">Mes informations</a></li>
-          <li><a class="dropdown-item" href="../controllers/controller_favorites.php">Mes favoris</a></li>
+          <li><a class="dropdown-item" href="../controllers/controller_editProfil.php">Mes informations  <i class="bi bi-info-circle-fill text-secondary"></i></a></li>
+          <li><a class="dropdown-item" href="../controllers/controller_favorites.php">Mes favoris  <i class="bi bi-star-fill text-warning"></i></a></li>
           <?php if($_SESSION['user']->type == "admin") { ?>
-            <li><a class="dropdown-item" href="../controllers/controller_adminPanel.php">Gestion du site</a></li>
+            <li><a class="dropdown-item" href="../controllers/controller_adminPanel.php">Gestion du site  <?php if($notification != 0) { ?><span class="badge bg-primary"><?php echo $notification; ?></span><?php } else {?><i class="bi bi-gear-fill"></i><?php } ?></a></li>
           <?php } ?>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="../controllers/controller_login.php?disconnect=true">Se déconnecter</a></li>
+          <li><a class="dropdown-item" href="../controllers/controller_login.php?disconnect=true">Se déconnecter  <i class="bi bi-box-arrow-right"></i></a></li>
         </ul>
       </div>
     </div>

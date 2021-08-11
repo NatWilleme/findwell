@@ -4,9 +4,10 @@ require_once('../models/models/user.php');
 require_once('../models/dao/companiesManager.php');
 require_once('../models/dao/commentsManager.php');
 require_once('../models/dao/categoriesManager.php');
-require_once('../models/geolocation.php');
+//require_once('../models/geolocation.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
+$notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
 
 $subcategory = $_GET['subcategory'];
 $_SESSION['subcategory'] = $subcategory;
