@@ -3,12 +3,15 @@ require_once('../models/models/company.php');
 require_once('../models/models/user.php');
 require_once('../models/models/comment.php');
 require_once('../models/models/ad.php');
+require_once('../models/models/category.php');
 require_once('../models/dao/companiesManager.php');
 require_once('../models/dao/adsManager.php');
 require_once('../models/dao/usersManager.php');
 require_once('../models/dao/commentsManager.php');
+require_once('../models/dao/categoriesManager.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
+$notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
 
 if(isset($_POST['action'])){
     if($_POST['action'] == "addAd"){
@@ -69,7 +72,7 @@ if(isset($_GET['view'])){
         } else if(isset($_GET['edit'])) {
             $companyToEdit = companiesManager::getOneCompany($_GET['edit']);
         } else {
-            $companies = companiesManager::getAllCompanies();
+            $companies = companiesManager::getAllActiveCompanies();
             foreach ($companies as $company) {
                 $company->__set('rating', number_format(commentsManager::getRatingForCompany($company->id)['rate']) );
                 $company->countComment = count(commentsManager::getCommentsForACompany($company->id));
@@ -98,6 +101,34 @@ if(isset($_GET['view'])){
         $ads = adsManager::getAllAds();
         foreach ($ads as $ad) {
             $ad->name_comp = companiesManager::getOneCompany($ad->id_comp)->name;
+        }
+    } else if($_GET['view'] == "companiesNotCertified"){
+
+        if(isset($_GET['accept'])){
+            $idCompany = $_GET['accept'];
+            companiesManager::confirmCompany($idCompany);
+            $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
+        } else if(isset($_GET['delete'])) {
+            $idCompany = $_GET['delete'];
+            companiesManager::deleteCompany($idCompany);
+            $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
+        } else if(isset($_GET['see'])) {
+            $idCompany = $_GET['see'];
+            $companyToConfirm = companiesManager::getOneCompany($idCompany);
+            $domaines = categoriesManager::getAllDomainesForCompany($idCompany);
+            $domainesAsString = "";
+            if(sizeof($domaines) != 0){
+                foreach ($domaines as $domaine) {
+                    $domainesAsString .= $domaine;
+                    $domainesAsString .= ", ";
+                }
+                $domainesAsString = substr($domainesAsString,0,-2);
+                $domainesAsString .= '.';
+            } 
+            
+            $companyToConfirm->__set('domaines', $domainesAsString); 
+        } else {
+            $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
         }
     }
 }

@@ -29,10 +29,24 @@ abstract class CompaniesManager extends DBManager{
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
-            $pdo_statement->execute(array(':id_comp' => $company->__get('id'), ':name_comp' => $company->__get('name'), ':description_comp' => $company->__get('description'),
-                                ':hours_comp' => $company->__get('hours'), ':city_comp' => $company->__get('city_comp'), ':street_comp' => $company->__get('street_comp'),
-                                ':number_comp' => $company->__get('number_comp'), ':postalcode_comp' => $company->__get('postalcode_comp'), ':phone_comp' => $company->__get('phone_comp'), 
-                                ':image_comp' => $company->__get('image')));
+            $pdo_statement->execute(array(':id_comp' => $company->id, ':name_comp' => $company->name, ':description_comp' => $company->description,
+                                ':hours_comp' => $company->hours, ':city_comp' => $company->city, ':street_comp' => $company->street,
+                                ':number_comp' => $company->number, ':postalcode_comp' => $company->postalCode, ':phone_comp' => $company->phone, 
+                                ':image_comp' => $company->image));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+    }
+
+    static public function confirmCompany($idCompany){
+        $sql = "UPDATE companies SET certified_comp = 1 WHERE id_comp=:id_comp";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_comp' => $idCompany));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
@@ -123,9 +137,46 @@ abstract class CompaniesManager extends DBManager{
         return $company;
     }
 
-    static public function getAllCompanies(){
+    static public function getAllActiveCompanies(){
         $result = array();
-        $sql = "SELECT * FROM companies";
+        $sql = "SELECT * FROM companies WHERE certified_comp = 1";
+        try{
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute();
+            $resultQuery = $pdo_statement->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($resultQuery as $elem){
+                $values=array(
+                    "id" => $elem["id_comp"],  
+                    "name" => $elem["name_comp"],  
+                    "description" => $elem["description_comp"],  
+                    "hours" => $elem["hours_comp"], 
+                    "city" => $elem["city_comp"],
+                    "street" => $elem["street_comp"],
+                    "number" => $elem["number_comp"],
+                    "postalCode" => $elem["postalcode_comp"],
+                    "phone" => $elem["phone_comp"],
+                    "image" => $elem["image_comp"],
+                    "mail" => $elem["mail_comp"],
+                    "deleted" => $elem["deleted_comp"],
+                    "tva" => $elem["tva_comp"]
+                );
+                $company = new Company();
+                $company->hydrate($values);
+                array_push($result,$company);
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+        return $result;
+    }
+
+    static public function getAllCompaniesToBeConfirmed(){
+        $result = array();
+        $sql = "SELECT * FROM companies WHERE certified_comp = 0";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
@@ -232,7 +283,7 @@ abstract class CompaniesManager extends DBManager{
 
     static public function getAllFavoriteCompaniesFor($idUser){
         $result = array();
-        $sql = "SELECT * FROM companies INNER JOIN favoris ON favoris.id_comp = companies.id_comp WHERE favoris.id_user = :id_user";
+        $sql = "SELECT * FROM companies INNER JOIN favoris ON favoris.id_comp = companies.id_comp WHERE favoris.id_user = :id_user AND certified_comp = 1";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
@@ -268,7 +319,7 @@ abstract class CompaniesManager extends DBManager{
 
     static public function searchCompany($keyword){
         $result = array();
-        $sql = "SELECT * FROM companies WHERE companies.name_comp LIKE '%$keyword%'";
+        $sql = "SELECT * FROM companies WHERE companies.name_comp LIKE '%$keyword%' AND certified_comp = 1";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);

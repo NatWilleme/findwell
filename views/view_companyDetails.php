@@ -10,7 +10,7 @@
 ?>
 
 <div class="container-fluid mt-2 mb-5">
-    <?php if(!isset($search)) { ?>
+    <?php if(!isset($search) && !isset($favorite)) { ?>
     <nav class="ms-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="../controllers/controller_home.php">Accueil</a></li>
@@ -95,14 +95,6 @@
                 }
             }
         ?>
-    </div>
-
-    <div class="row d-flex justify-content-around mb-4 ms-5">
-        <h2>Contacts:</h2>
-        <p>
-            <b>Mail</b>: <a href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
-            <b>Téléphone</b>: <?php echo $company->phone; ?>
-        </p>
     </div>
 
     <div class="row mb-4 ms-5">

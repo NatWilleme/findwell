@@ -8,6 +8,7 @@ require_once('../models/dao/categoriesManager.php');
 require_once('../models/dao/companiesManager.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
+$notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
 
 // Page 1 Inscription
 if(isset($_POST['submitRegister'])){
@@ -81,6 +82,11 @@ if(isset($_POST['submitRegister'])){
             categoriesManager::addLinkCatComp($company->id, $dom);
         }
     }
+    $_SESSION['newUser'] = usersManager::getUser($_SESSION['newUser']->mail);
+    $content = "Merci de confirmer votre inscription à Findwell en cliquant sur le lien ci-dessous.";
+    $url = $_SERVER['SERVER_NAME']."/controllers/controller_login.php?idUserToConfirm=".$_SESSION['newUser']->id."&code=".$_SESSION['newUser']->code;
+    $object = "Finalisation de l'inscription";
+    require_once('../models/sendEmail.php');
 // Page Connexion
 } else if(isset($_POST['submitConnexion'])){
     $mail = $_POST['mail'];

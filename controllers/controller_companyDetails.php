@@ -8,10 +8,12 @@ require_once('../models/dao/categoriesManager.php');
 require_once('../models/dao/usersManager.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
+$notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
 
 if(isset($_GET['favorite'])){
     $idCompany = $_GET['favorite'];
     CompaniesManager::editFavorite($_GET['favorite'], $_SESSION['user']->id);
+    
 } else {
     $idCompany = $_GET["idCompany"];
 }
@@ -63,6 +65,9 @@ function displayCompanyDetails($idCompany, $messageBtn){
     }
     if(str_contains($_SERVER['HTTP_REFERER'], 'controller_search') == 1){
         $search = true;
+    }
+    if(isset($_GET['displayfavorites'])){
+        $favorite = true;
     }
     require_once('../views/view_companyDetails.php');
 }

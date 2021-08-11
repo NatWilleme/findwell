@@ -13,6 +13,9 @@
  * @url https://www.codexworld.com
  *
  */
+$addressFrom = "60 rue de gosselies, 6183 Trazegnies";
+$addressTo = "92 rue du butia, 6183 Trazegnies";
+echo getDistance($addressFrom, $addressTo, $unit = '');
 function getDistance($addressFrom, $addressTo, $unit = ''){
     // Google API key
     $apiKey = 'AIzaSyCm8qTRwtRQuLyqw2fYV1OSqXClER8_Klk';
