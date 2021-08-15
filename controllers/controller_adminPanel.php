@@ -89,7 +89,7 @@ if(isset($_GET['view'])){
 
     } else if($_GET['view'] == "ads") {
         if((isset($_GET['action']) && $_GET['action'] == "add") || (isset($_GET['edit']))){
-            $companies = companiesManager::getAllCompanies();
+            $companies = companiesManager::getAllActiveCompanies();
             $action = true;
             if(isset($_GET['edit'])){
                 $adToEdit = adsManager::getAd($_GET['edit']);

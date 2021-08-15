@@ -18,7 +18,7 @@
     </div>
     <?php } ?>
 
-    
+    <!-- Premier écran d'inscription -->
     <?php if (!isset($choice) && !isset($companyForm) && !isset($domainePage)) { ?>
     <main class="form-signin">
     <form method="post" action="../controllers/controller_login.php" id="formRegister">
@@ -38,7 +38,9 @@
 
         <button class="w-100 btn btn-lg btn-primary" type="submit" name="submitRegister">S'inscrire</button>
     </form>
-    </main>    
+    </main>  
+    
+    <!-- Deuxième écran d'inscription -->
     <?php } else if(isset($choice) && !isset($domainePage)) { ?>
     <main class="form-signin">
     <form method="post" action="../controllers/controller_login.php">
@@ -53,6 +55,8 @@
         </div>
     </form>
     </main> 
+
+    <!-- Premier écran d'inscription en tant qu'entreprise -->
     <?php } else if(isset($companyForm) && !isset($domainePage)){ ?>
     <form id="formCompany" class="mb-3 mt-3" action="../controllers/controller_login.php" method="post">
         <img class="mb-4" src="../images/logo1.png" alt="" width="120">
@@ -170,6 +174,7 @@
     </form>
     <?php } ?>
 
+    <!-- Deuxième écran d'inscription en tant qu'entreprise -->
     <?php if(isset($domainePage)) { ?>
         <form class="mb-3 mt-3" id="formDomaine" action="../controllers/controller_login.php" method="post">
         <img class="mb-4" src="../images/logo1.png" alt="" width="120">

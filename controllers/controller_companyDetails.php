@@ -8,7 +8,7 @@ require_once('../models/dao/categoriesManager.php');
 require_once('../models/dao/usersManager.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
-$notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
+
 
 if(isset($_GET['favorite'])){
     $idCompany = $_GET['favorite'];
@@ -55,6 +55,7 @@ if(isset($_COOKIE['userConnected'])){
 displayCompanyDetails($idCompany, $messageBtn);
 
 function displayCompanyDetails($idCompany, $messageBtn){
+    $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
     $company = companiesManager::getOneCompany($idCompany);
     $rating = commentsManager::getRatingForCompany($idCompany);
     $comments = commentsManager::getCommentsForACompany($idCompany);
