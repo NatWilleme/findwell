@@ -53,9 +53,9 @@
                 <img src="../images/HomePage/card1.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
                 <div class="overlay">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
             </a>
-            
+            <label class="fw-bold fst-italic fs-3" style="text-align: center;">Gros travaux</label>  
         </div>
-        <label class="fst-italic fs-4">Gros travaux</label>
+        
       </div>
 
       <div class="col-1"></div>
@@ -67,7 +67,7 @@
                 <div class="overlay">Effectuez vos petits travaux d'un simple clic.</div>
             </a>
         </div>
-        <label class="fst-italic fs-4">Petits travaux</label>
+        <label class="fw-bold fst-italic fs-3">Petits travaux</label>
       </div>
 
       <div class="col-1"></div>
@@ -79,7 +79,7 @@
                 <div class="overlay">Accédez aux entreprises disponible 24h/24h.</div>
             </a>
         </div>
-        <label class="fst-italic fs-4">Dépannage d'urgence</label>
+        <label class="fw-bold fst-italic fs-3">Dépannage d'urgence</label>
       </div>
 
       <div class="col-1"></div>

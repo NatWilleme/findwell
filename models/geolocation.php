@@ -13,9 +13,35 @@
  * @url https://www.codexworld.com
  *
  */
-$addressFrom = "60 rue de gosselies, 6183 Trazegnies";
-$addressTo = "92 rue du butia, 6183 Trazegnies";
-echo getDistance($addressFrom, $addressTo, $unit = '');
+
+function getUserAddress(){
+    $ipaddress = '';
+    if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else if (isset($_SERVER['HTTP_X_FORWARDED'])) {
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    } else if (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    } else if (isset($_SERVER['HTTP_FORWARDED'])) {
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    } else if (isset($_SERVER['REMOTE_ADDR'])) {
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    } else {
+        $ipaddress = 'UNKNOWN';
+    }
+    $PublicIP = $ipaddress;
+    $PublicIP = "94.107.14.100";
+    $json     = file_get_contents("http://ipinfo.io/$PublicIP/geo");
+    $json     = json_decode($json, true);
+    $country  = $json['country'];
+    $region   = $json['region'];
+    $city     = $json['city'];
+    $completeAddress = $country.' '.$region.' '.$city;
+    return $completeAddress;
+}
+
 function getDistance($addressFrom, $addressTo, $unit = ''){
     // Google API key
     $apiKey = 'AIzaSyCm8qTRwtRQuLyqw2fYV1OSqXClER8_Klk';
@@ -54,11 +80,11 @@ function getDistance($addressFrom, $addressTo, $unit = ''){
     // Convert unit and return distance
     $unit = strtoupper($unit);
     if($unit == "K"){
-        return round($miles * 1.609344, 2).' km';
+        return round($miles * 1.609344, 2);
     }elseif($unit == "M"){
-        return round($miles * 1609.344, 2).' meters';
+        return round($miles * 1609.344, 2);
     }else{
-        return round($miles, 2).' miles';
+        return round($miles, 2);
     }
 }
 

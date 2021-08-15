@@ -19,6 +19,7 @@ class Company{
     private $rating;
     private $domaines;
     private $tva;
+    private $distance;
 
     // Magic method get
     public function __get($value){   

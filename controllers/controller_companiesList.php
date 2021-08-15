@@ -4,10 +4,10 @@ require_once('../models/models/user.php');
 require_once('../models/dao/companiesManager.php');
 require_once('../models/dao/commentsManager.php');
 require_once('../models/dao/categoriesManager.php');
-//require_once('../models/geolocation.php');
+require_once('../models/geolocation.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
-$notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
+
 
 $subcategory = $_GET['subcategory'];
 $_SESSION['subcategory'] = $subcategory;
@@ -22,11 +22,17 @@ displayCompaniesAccordingTo($_SESSION['category'], $subcategory);
 //FIN DU TEST DE GEOLOCALISATION
 
 
-
+function cmp($object1, $object2) {
+    return $object1->distance > $object2->distance ? 1 : 0;
+}
 
 function displayCompaniesAccordingTo($category, $subcategory){
+    $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
     $companies = CompaniesManager::getAllCompaniesAccordingTo($category, $subcategory);
+    $userAddress = getUserAddress();
     foreach ($companies as $company) {
+        $companyAddress = $company->number.' '.$company->street.', '.$company->postalCode.' '.$company->city;
+        $company->distance = getDistance($userAddress, $companyAddress, $unit = 'K');
         $rate = commentsManager::getRatingForCompany($company->id);
         $company->__set('rating', $rate['rate']); 
 
@@ -41,7 +47,9 @@ function displayCompaniesAccordingTo($category, $subcategory){
         $company->__set('domaines', $domainesAsString); 
         
     } 
+    usort($companies, 'cmp');
     require_once('../views/view_companiesList.php');
 }
+
 
 ?>

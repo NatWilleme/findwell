@@ -40,6 +40,16 @@
       </div>
 
       <!-- Right elements -->
+      <div class="p-1 bg-light rounded rounded-pill shadow-sm mt-4 mb-4 me-2">
+        <form action="../controllers/controller_search.php" method="get">
+          <div class="input-group">
+            <input type="search" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light">
+            <div class="input-group-append">
+              <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
       <div class="d-flex align-items-center">
         <!-- Se connecter -->
         <a

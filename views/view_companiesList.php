@@ -1,6 +1,7 @@
 <?php
     $title = "Contact";
     ob_start();	
+    $scripts = "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>";
 ?>
 
 <div class="container-fluid ps-0 pe-0 mt-2 mb-5">
@@ -41,7 +42,7 @@
                         echo $company->domaines;
                     ?>
                     <br>
-                    <b>Localisation :</b> <?php echo $company->city; ?>
+                    <b>Distance :</b> <?php echo $company->distance; ?> km
                 </p>
             </div>
             <a href="../controllers/controller_companyDetails.php?idCompany=<?php echo $company->id; ?>" class="btn btn-primary mb-2">Accéder</a>
