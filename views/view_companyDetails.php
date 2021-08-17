@@ -10,7 +10,17 @@
 ?>
 
 <div class="container-fluid mt-2 mb-5">
-    <?php if(!isset($search) && !isset($favorite)) { ?>
+    <?php if(isset($alert['color'])){ ?>
+    <div class="mt-4 alert alert-<?php echo $alert['color']; ?> alert-dismissible fade show" role="alert">
+        <?php
+            if($alert['color'] == "danger"){echo "<i class=\"bi bi-exclamation-triangle me-2 fs-4\"></i>";}
+            else echo "<i class=\"bi bi-check-square me-2 fs-4\"></i>";
+            echo $alert['message']; 
+        ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_SESSION['category']) && isset($_SESSION['subcategory'])) { ?>
     <nav class="ms-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="../controllers/controller_home.php">Accueil</a></li>
@@ -32,15 +42,19 @@
     <div class="row d-flex justify-content-around mb-4">
 
         <img class="col-5"  src="<?php echo $company->image; ?>">
-        <p class="col-5 fs-5"><?php echo $company->hours; ?></p>
+        <div class="col-5">
+            <h2>Description de l'entreprise:</h2>
+            <p><?php echo $company->description; ?></p>
+        </div>
+        
         
 
     </div>
     
     <div class="row d-flex justify-content-around mb-4">
         <div class="col-5">
-            <h2>Description de l'entreprise:</h2>
-            <p><?php echo $company->description; ?></p>
+            <h2>Heures d'ouverture:</h2>
+            <p><?php echo $company->hours; ?></p>
         </div>
 
         <div class="col-5">

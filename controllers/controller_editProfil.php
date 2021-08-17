@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
         $userToEdit->__set("state", $_POST['state']);
         $userToEdit->__set("zip", $_POST['zip']);
         UsersManager::updateUser($userToEdit);
-
+        $user = UsersManager::getUser($_SESSION['user']->mail);
         if($_POST['submit'] == "updateCompany"){
             $companyToEdit = new Company();
             $companyToEdit->__set("id", $company->id);
@@ -70,7 +70,7 @@ if(isset($_POST['submit'])){
             companiesManager::updateCompany($companyToEdit);
         }
 
-        $user = UsersManager::getUser($_SESSION['user']->mail);
+        $_SESSION['user'] = UsersManager::getUser($_SESSION['user']->mail);
         if($user->type == "company")
             $company = companiesManager::getOneCompanyByMail($_SESSION['user']->mail);
         $alert['color'] = "success";

@@ -21,12 +21,6 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark" style="background-color: #FFD338">
     <div class="container-fluid">
-      <button
-        class="navbar-toggler"
-        type="button"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Navbar brand -->
         <a class="navbar-brand mt-2 mt-lg-0" href="../controllers/controller_home.php">
@@ -40,10 +34,10 @@
       </div>
 
       <!-- Right elements -->
-      <div class="p-1 bg-light rounded rounded-pill shadow-sm mt-4 mb-4 me-2">
+      <div class="p-1 bg-light rounded rounded-pill shadow-sm ">
         <form action="../controllers/controller_search.php" method="get">
           <div class="input-group">
-            <input type="search" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light">
+            <input type="search" id="searchInput" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light">
             <div class="input-group-append">
               <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="bi bi-search"></i></button>
             </div>

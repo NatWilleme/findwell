@@ -60,6 +60,7 @@ if(isset($_POST['action'])){
         $newUser->__set('city', $_POST['city']);
         $newUser->__set('zip', $_POST['zip']);
         $newUser->__set('type', $_POST['type']);
+        $newUser->__set('image', $_SESSION['user']->image);
         usersManager::updateUser($newUser);
     }
 }

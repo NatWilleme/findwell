@@ -19,7 +19,7 @@
       </p>
   </div> -->
 
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="4000">
             <img src="../images/HomePage/imageAccueil.jpg" class="d-block w-100" alt="...">
@@ -45,22 +45,21 @@
   <!-- Les tuiles -->
   <div class="row mb-5 m-0">
 
-      <div class="col-2"></div>
+      <div class="col-xl-2"></div>
 
-      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 position-relative" style="border: none;  bottom: 100px;">
+      <div class="col-xl-2 col-lg-4 col-md-12 col-sm-8 col-8 position-relative tuile">
         <div class="containerPerso">
             <a href="../controllers/controller_categoriesList.php?category=Gros Travaux">  
                 <img src="../images/HomePage/card1.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
                 <div class="overlay">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
             </a>
-            <label class="fw-bold fst-italic fs-3" style="text-align: center;">Gros travaux</label>  
         </div>
-        
+        <label class="fw-bold fst-italic fs-3" style="text-align: center;">Gros travaux</label>  
       </div>
 
-      <div class="col-1"></div>
+      <div class="col-xl-1"></div>
 
-      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 position-relative" style="border: none; bottom: 100px;">
+      <div class="col-xl-2 col-lg-4 col-md-12 col-sm-8 col-8 position-relative tuile">
         <div class="containerPerso">
             <a href="../controllers/controller_categoriesList.php?category=Petits travaux">  
                 <img src="../images/HomePage/card2.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
@@ -70,9 +69,9 @@
         <label class="fw-bold fst-italic fs-3">Petits travaux</label>
       </div>
 
-      <div class="col-1"></div>
+      <div class="col-xl-1"></div>
 
-      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 position-relative" style="border: none; bottom: 100px;">
+      <div class="col-xl-2 col-lg-4 col-md-12 col-sm-8 col-8 position-relative tuile">
         <div class="containerPerso">
             <a href="../controllers/controller_categoriesList.php?category=Dépannage d'urgence">  
                 <img src="../images/HomePage/card3.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
@@ -82,12 +81,12 @@
         <label class="fw-bold fst-italic fs-3">Dépannage d'urgence</label>
       </div>
 
-      <div class="col-1"></div>
+      <div class="col-xl-1"></div>
 
   </div>
 
 
-    <div class="row mt-5 mb-3 m-0">
+    <div class="row mt-5 mb-5 m-0">
         <div class="col-1"></div>
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
             <div class="d-flex mb-5">
@@ -139,11 +138,15 @@
             <div class="carousel-inner">
                 <?php $i=0; foreach ($ads as $ad) { if($i == 0) {?>
                 <div class="carousel-item active" data-bs-interval="4000">
-                    <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="...">
+                <a href="../controllers/controller_companyDetails.php?idCompany=<?php echo $ad->id_comp; ?>">
+                    <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="..." >
+                </a>
                 </div>   
                 <?php } else { ?> 
                 <div class="carousel-item" data-bs-interval="4000">
-                <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="...">
+                <a href="../controllers/controller_companyDetails.php?idCompany=<?php echo $ad->id_comp; ?>">
+                    <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="..." href="../controllers/controller_companyDetails.php?idCompany=<?php echo $ad->id_comp; ?>">
+                </a>
                 </div>   
                 <?php } $i++;} ?>
             </div>
