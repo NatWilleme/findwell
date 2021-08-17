@@ -21,18 +21,20 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark" style="background-color: #FFD338">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button"> <i class="fas fa-bars"></i></button>
+      
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Logo -->
         <a class="navbar-brand mt-2 mt-lg-0" href="../controllers/controller_home.php">
-          <img src="../images/logo1.png" height="70" alt="" loading="lazy">
+          <img src="../images/logo1.png" height="70" alt="Findwell" loading="lazy">
         </a>
       </div>
       
-      <div class="p-1 bg-light rounded rounded-pill shadow-sm mt-4 mb-4">
+      <a class="btn btn-secondary d-lg-none col-sm-2" href="../controllers/controller_home.php"><i class="bi bi-house-fill"></i></a>
+      <div class="col-4 d-lg-none"></div>
+      <div class="p-1 bg-light rounded rounded-pill shadow-sm">
         <form action="../controllers/controller_search.php" method="get">
           <div class="input-group">
-            <input type="search" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light">
+            <input type="search" id="searchInput" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light" style="">
             <div class="input-group-append">
               <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="bi bi-search"></i></button>
             </div>
@@ -40,7 +42,7 @@
         </form>
       </div>
 
-        <div class="dropdown pe-3 ms-5">
+        <div class="dropdown pe-3">
         <button class="btn dropdown-toggle position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           <?php if($_SESSION['user']->type == "admin" && $notification != 0){ ?>
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">

@@ -8,8 +8,7 @@ require_once('../models/dao/categoriesManager.php');
 require_once('../models/dao/usersManager.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
-
-
+$alert = null;
 if(isset($_GET['favorite'])){
     $idCompany = $_GET['favorite'];
     CompaniesManager::editFavorite($_GET['favorite'], $_SESSION['user']->id);
@@ -31,30 +30,38 @@ if(isset($_COOKIE['userConnected'])){
     else $messageBtn = "<i class=\"bi bi-suit-heart-fill\"></i>Retirer des favoris";
 
     if(isset($_POST["submit"])){
-        $newComment = new Comment();
-        $newComment->__set('comment',$_POST['newComment']);
-        if(isset($_FILES['img'])){
-            $from = $_FILES['img']['tmp_name'];
-            $to = '../images/upload/'.$_FILES['img']['name'];
-            move_uploaded_file($from,$to);
-            $newComment->__set('image',$to);
+        if($_SESSION['user']->username != ""){
+            $newComment = new Comment();
+            $newComment->__set('comment',$_POST['newComment']);
+            if(isset($_FILES['img'])){
+                $from = $_FILES['img']['tmp_name'];
+                $to = '../images/upload/'.$_FILES['img']['name'];
+                move_uploaded_file($from,$to);
+                $newComment->__set('image',$to);
+            } else {
+                $newComment->__set('image',"");
+            }
+            $newComment->__set('rating',$_POST['rating']);
+            $newComment->__set('date',date("Y-m-d"));
+            $newComment->__set('id_comp',$idCompany);
+            $newComment->__set('id_user',$idUser);
+            commentsManager::addComment($newComment);
+            unset($newComment);
+            $alert['color'] = "success";
+            $alert['message'] = "Votre commentaire a été publié.";
         } else {
-            $newComment->__set('image',"");
+            $alert['color'] = "danger";
+            $alert['message'] = "Veuillez compléter vos informations pour pouvoir ajouter un commentaire.";
         }
-        $newComment->__set('rating',$_POST['rating']);
-        $newComment->__set('date',date("Y-m-d"));
-        $newComment->__set('id_comp',$idCompany);
-        $newComment->__set('id_user',$idUser);
-        commentsManager::addComment($newComment);
-        unset($newComment);
+        
     }
 
 } else $messageBtn = "";
 
 
-displayCompanyDetails($idCompany, $messageBtn);
+displayCompanyDetails($idCompany, $messageBtn, $alert);
 
-function displayCompanyDetails($idCompany, $messageBtn){
+function displayCompanyDetails($idCompany, $messageBtn, $alert){
     $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
     $company = companiesManager::getOneCompany($idCompany);
     $rating = commentsManager::getRatingForCompany($idCompany);
@@ -63,12 +70,6 @@ function displayCompanyDetails($idCompany, $messageBtn){
     foreach ($comments as $comment) {
         $user = usersManager::getUserByID($comment->id_user);
         array_push($users,$user);
-    }
-    if(str_contains($_SERVER['HTTP_REFERER'], 'controller_search') == 1){
-        $search = true;
-    }
-    if(isset($_GET['displayfavorites'])){
-        $favorite = true;
     }
     require_once('../views/view_companyDetails.php');
 }

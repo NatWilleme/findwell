@@ -8,6 +8,11 @@ require_once('../models/dao/categoriesManager.php');
 require_once('../models/dao/commentsManager.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
+
+if(isset($_SESSION['category'])) 
+    unset($_SESSION['category']);
+if(isset($_SESSION['subcategory']))
+    unset($_SESSION['subcategory']);
 $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
 
 $searchResult = companiesManager::searchCompany($_GET['company']);

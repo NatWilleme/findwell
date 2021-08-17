@@ -4,15 +4,15 @@
 ?>
 
 <div class="container mt-2 mb-5">
-
+    
     <?php if(!isset($_GET['view'])) { ?>
-    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=companies">Gérer les entreprises actives</a><br>
-    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=companiesNotCertified">Gérer les entreprises non certifiées <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
-    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=ads">Gérer les publicités</a><br>
-    <a class="btn btn-primary mb-2" href="../controllers/controller_adminPanel.php?view=users">Gérer les utilisateurs</a><br>
-    <a class="btn btn-primary" href="../controllers/controller_adminPanel.php?view=stats">Accéder aux statistiques</a>
+    <a class="btn btn-primary mb-2 mt-3 col-12" href="../controllers/controller_adminPanel.php?view=companies">Gérer les entreprises actives</a><br>
+    <a class="btn btn-primary mb-2 col-12" href="../controllers/controller_adminPanel.php?view=companiesNotCertified">Gérer les entreprises non certifiées <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
+    <a class="btn btn-primary mb-2 col-12" href="../controllers/controller_adminPanel.php?view=ads">Gérer les publicités</a><br>
+    <a class="btn btn-primary mb-2 col-12" href="../controllers/controller_adminPanel.php?view=users">Gérer les utilisateurs</a><br>
+    <a class="btn btn-primary col-12" href="../controllers/controller_adminPanel.php?view=stats">Accéder aux statistiques</a>
     <?php } else { ?>
-    <a class="btn btn-secondary" href="../controllers/controller_adminPanel.php?
+    <a class="btn btn-secondary col-12 mt-3 mb-3" href="../controllers/controller_adminPanel.php?
         <?php if($_GET['view'] == "companies" && isset($_GET['edit'])) echo "view=companies"; 
         else if($_GET['view'] == "ads" && isset($_GET['edit'])) echo 'view=ads'; 
         else if($_GET['view'] == "users" && isset($_GET['edit'])) echo 'view=users';
@@ -25,7 +25,7 @@
     <?php } ?>
 
     <?php if(isset($companies) && !isset($action)){ ?>
-    <div class="table-responsive">
+    <div class="table-responsive mb-5">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -64,7 +64,7 @@
     <?php } ?>
 
     <?php if(isset($companiesToBeConfirmed) && !isset($action)){ ?>
-    <div class="table-responsive">
+    <div class="table-responsive mb-5">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -191,7 +191,7 @@
     <?php } ?>
 
     <?php if(isset($users)){ ?>
-    <div class="table-responsive">
+    <div class="table-responsive mb-5">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -400,7 +400,7 @@
 
 
     <?php if(isset($ads) && !isset($action)){ ?>
-    <div class="table-responsive">        
+    <div class="table-responsive mb-5">        
     <table class="table table-hover">
         <thead>
             <tr>
