@@ -8,18 +8,10 @@ require_once('../models/geolocation.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
 
-
 $subcategory = $_GET['subcategory'];
 $_SESSION['subcategory'] = $subcategory;
 displayCompaniesAccordingTo($_SESSION['category'], $subcategory);
 
-// TEST DE GEOLOCALISATION
-
-// $addressFrom = "92, rue du butia, 6183 Trazegnies";
-// $addressTo = "60, rue de gosselies, 6183 Trazegnies";
-// echo getDistance($addressFrom, $addressTo, $unit = 'K');
-
-//FIN DU TEST DE GEOLOCALISATION
 
 
 function cmp($object1, $object2) {
