@@ -11,6 +11,7 @@ require_once('../models/dao/commentsManager.php');
 require_once('../models/dao/categoriesManager.php');
 if(session_status() != PHP_SESSION_ACTIVE)
     session_start();
+
 $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
 
 if(isset($_POST['action'])){
@@ -139,4 +140,8 @@ if($_SESSION['user']->type == "admin")
 else
     require_once('../controllers/controller_home.php');
 
+
+
+
+    
 ?>

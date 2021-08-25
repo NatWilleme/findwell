@@ -17,7 +17,7 @@ if(isset($_GET['favorite'])){
     $idCompany = $_GET["idCompany"];
 }
 
-if(isset($_COOKIE['userConnected'])){
+if(isset($_COOKIE['userConnected']) && isset($_SESSION['user'])){
     $idUser = $_SESSION['user']->id;
     $favoris = CompaniesManager::getAllFavoriteCompaniesFor($idUser);
     $cpt = $flag = 0;

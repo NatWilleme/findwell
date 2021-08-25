@@ -1,5 +1,4 @@
 <?php
-
 require_once('../models/models/user.php');
 require_once('../models/models/company.php');
 require_once('../models/models/category.php');
@@ -26,6 +25,7 @@ if(isset($_POST['submitRegister'])){
         $alert['message'] = "Un compte avec cette adresse mail existe déjà.";
         require_once('../views/view_register.php');
     }
+    //checkIfUserExist($mail, $password)
     
 // Page 2 Choix du type d'utilisateur
 } else if(isset($_POST['type'])){
@@ -167,5 +167,20 @@ function connectUser($mail, $password){
     }
 }
 
+function checkIfUserExist($mail, $password)
+{
+    $user = UsersManager::checkIfExist($mail);
+    if($user['count'] == 0){
+        $_SESSION['newUser'] = new User();
+        $_SESSION['newUser']->__set('mail', $mail);
+        $_SESSION['newUser']->__set('password', $password);
+        $choice = true;
+        displayRegister();
+    } else{
+        $alert['color'] = "danger";
+        $alert['message'] = "Un compte avec cette adresse mail existe déjà.";
+        displayRegister($alert);
+    }
+}
 
 ?>
