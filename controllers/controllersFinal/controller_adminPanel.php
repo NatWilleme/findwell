@@ -100,7 +100,7 @@ function getAllAdsWithCompanyName(){
 }
 
 function confirmCompany(){
-    $idCompany = $_GET['accept'];
+    $idCompany = $_POST['accept'];
     companiesManager::confirmCompany($idCompany);
 }
 
@@ -127,7 +127,24 @@ function getCompanyToConfirm(){
     return $companyToConfirm;
 }
 
+function sendAcceptMail($idCompany)
+{
+    $mailTo = companiesManager::getOneCompany($idCompany)->mail;
+    $content = "Félicitation ! Votre entreprise a été accepté sur la plateforme Findwell !";
+    $url = '';
+    $object = "Votre entreprise a été ajouté avec succès sur Findwell";
+    require_once('models/sendEmail.php');
+}
 
+function sendRejectMail($idCompany, $rejectMessage)
+{
+    companiesManager::switchAcceptPending($idCompany);
+    $mailTo = companiesManager::getOneCompany($idCompany)->mail;
+    $content = "Malheureusement, votre entreprise n'a pu être ajoutée à Findwell...<br>Raison du refus:<br><i>$rejectMessage</i>";
+    $url = '';
+    $object = "Votre entreprise n'a pas pu être ajouter à Findwell";
+    require_once('models/sendEmail.php');
+}
 
 
 

@@ -93,7 +93,7 @@
     <?php } ?>
     
     <?php if(isset($companyToConfirm)){ ?>
-        <form class="mt-3" action="index.php?viewToDisplay=displayAdminPanel" method="post">
+        <form class="mt-3" action="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified" method="post">
             <div class="row gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <h6 class="mb-2 text-primary">Informations</h6>
@@ -107,7 +107,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="mail">Adresse-mail</label><br>
-                        <a href="mailto:<?php echo $companyToConfirm->mail; ?>"><?php echo $companyToConfirm->mail; ?></a>
+                        <input type="email" name="mail" id="mail" value="<?php echo $companyToConfirm->mail; ?>" disabled readonly>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -183,8 +183,40 @@
             </div>
             <div class="row gutters">
                 <div class="col-xl-9 col-6"></div>
-                <a class="btn btn-danger mt-4 me-3 col-xl-1 col-md-1 col-2 rounded rounded-pill" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified&delete=<?php echo $companyToConfirm->id; ?>"><i class="bi bi-trash-fill"></i></a> 
-                <a class="btn btn-success mt-4 col-xl-1 col-md-1 col-2 rounded rounded-pill" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified&accept=<?php echo $companyToConfirm->id; ?>"><i class="bi bi-check-lg"></i></a>
+
+                <button type="button" class="btn btn-danger mt-4 me-3 col-xl-1 col-md-1 col-2 rounded rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                <button type="submit" class="btn btn-success mt-4 me-3 col-xl-1 col-md-1 col-2 rounded rounded-pill" id="accept" name="accept" value="<?php echo $companyToConfirm->id; ?>">
+                    <i class="bi bi-check-lg"></i>
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Raison du refus</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="messageRefus" class="col-form-label">Indiquez ci-dessous la raison du refus:</label>
+                                <textarea class="form-control" id="messageRefus" name="messageRefus" rows='5'></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <!-- <a class="btn btn-primary" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified&delete=<?php echo $companyToConfirm->id; ?>">Envoyer</a> -->
+                            <button type="submit" class="btn btn-primary" id="delete" name="delete" value="<?php echo $companyToConfirm->id; ?>">
+                                Envoyer
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Modal -->
+                
             </div>
         </form>
     <?php } ?>
@@ -483,9 +515,6 @@
     </form>
 
     <?php } ?>
-
-
-
 
 </div>
 

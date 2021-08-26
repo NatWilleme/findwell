@@ -41,7 +41,21 @@ abstract class CompaniesManager extends DBManager{
     }
 
     static public function confirmCompany($idCompany){
-        $sql = "UPDATE companies SET certified_comp = 1 WHERE id_comp=:id_comp";
+        $sql = "UPDATE companies SET certified_comp = 1, acceptPending_comp = 0 WHERE id_comp=:id_comp";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_comp' => $idCompany));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+    }
+
+    static public function switchAcceptPending($idCompany){
+        $sql = "UPDATE companies SET acceptPending_comp = 1-acceptPending_comp WHERE id_comp=:id_comp";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
@@ -89,7 +103,8 @@ abstract class CompaniesManager extends DBManager{
                 "image" => $elem["image_comp"],
                 "deleted" => $elem["deleted_comp"],
                 "certified" => $elem["certified_comp"],
-                "tva" => $elem["tva_comp"]
+                "tva" => $elem["tva_comp"],
+                "acceptPending" => $elem["acceptPending_comp"]
             );
             $company = new Company();
             $company->hydrate($values);
@@ -123,7 +138,8 @@ abstract class CompaniesManager extends DBManager{
                 "image" => $elem["image_comp"],
                 "deleted" => $elem["deleted_comp"],
                 "certified" => $elem["certified_comp"],
-                "tva" => $elem["tva_comp"]
+                "tva" => $elem["tva_comp"],
+                "acceptPending" => $elem["acceptPending_comp"]
             );
             $company = new Company();
             $company->hydrate($values);
@@ -158,7 +174,8 @@ abstract class CompaniesManager extends DBManager{
                     "image" => $elem["image_comp"],
                     "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"],
-                    "tva" => $elem["tva_comp"]
+                    "tva" => $elem["tva_comp"],
+                    "acceptPending" => $elem["acceptPending_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -175,7 +192,7 @@ abstract class CompaniesManager extends DBManager{
 
     static public function getAllCompaniesToBeConfirmed(){
         $result = array();
-        $sql = "SELECT * FROM companies WHERE certified_comp = 0";
+        $sql = "SELECT * FROM companies WHERE certified_comp = 0 AND acceptPending_comp = 1";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
@@ -195,7 +212,8 @@ abstract class CompaniesManager extends DBManager{
                     "image" => $elem["image_comp"],
                     "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"],
-                    "tva" => $elem["tva_comp"]
+                    "tva" => $elem["tva_comp"],
+                    "acceptPending" => $elem["acceptPending_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -231,7 +249,8 @@ abstract class CompaniesManager extends DBManager{
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
                     "deleted" => $elem["deleted_comp"],
-                    "tva" => $elem["tva_comp"]
+                    "tva" => $elem["tva_comp"],
+                    "acceptPending" => $elem["acceptPending_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -301,7 +320,8 @@ abstract class CompaniesManager extends DBManager{
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
                     "deleted" => $elem["deleted_comp"],
-                    "tva" => $elem["tva_comp"]
+                    "tva" => $elem["tva_comp"],
+                    "acceptPending" => $elem["acceptPending_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -338,7 +358,8 @@ abstract class CompaniesManager extends DBManager{
                     "image" => $elem["image_comp"],
                     "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"],
-                    "tva" => $elem["tva_comp"]
+                    "tva" => $elem["tva_comp"],
+                    "acceptPending" => $elem["acceptPending_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);

@@ -20,6 +20,7 @@ class Company{
     private $domaines;
     private $tva;
     private $distance;
+    private $acceptPending;
 
     // Magic method get
     public function __get($value){   
