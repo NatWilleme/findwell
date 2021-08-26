@@ -18,14 +18,13 @@ try{
 
 
     $mail->setFrom("nathanwilleme@gmail.com", 'FindWell');
-    $mail->addAddress($_SESSION['newUser']->mail);
+    $mail->addAddress($mailTo);
 
     $mail->Subject = $object;
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';
     $templateMail = file_get_contents('templates/templateEmail.html', true);
     $templateMail = str_replace('${CONTENT}', $content, $templateMail);
-    $templateMail = str_replace('${URL_FORM}', $url, $templateMail);
 
     $mail->Body = $templateMail;
     $mail->send();

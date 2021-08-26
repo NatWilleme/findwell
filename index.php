@@ -90,6 +90,10 @@ try {
 
                 if($_POST['submit'] == "updateCompany"){
                     updateCompanyInformation();
+                    $company = companiesManager::getOneCompanyByMail($_SESSION['user']->mail);
+                    if($company->acceptPending == 0 && $company->certified == 0){
+                        companiesManager::switchAcceptPending($company->id);
+                    }
                 }
                 $_SESSION['user'] = UsersManager::getUser($_SESSION['user']->mail);
                 if($user->type == "company")
@@ -159,24 +163,25 @@ try {
                     $ad->name_comp = companiesManager::getOneCompany($ad->id_comp)->name;
                 }
             } else if($_GET['view'] == "companiesNotCertified"){
-                    
-                $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
-                if(isset($_GET['accept'])){
-                    confirmCompany();
-                    $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
-                } else if(isset($_GET['delete'])) {
-                    deleteCompany();
-                    $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
-                } else if(isset($_GET['see'])) {
+                if(isset($_GET['see'])) {
                     $companyToConfirm = getCompanyToConfirm();
+                } else {
+                    if(isset($_POST['accept'])) {
+                        confirmCompany();
+                        sendAcceptMail($_POST['accept']);
+                    } else if(isset($_POST['delete'])) {
+                        sendRejectMail($_POST['delete'], $_POST['messageRefus']);
+                    }
+                    $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
                 }
+                
             }
         }
 
-        if($_SESSION['user']->type == "admin")
+        if(isset($_SESSION['user']) && $_SESSION['user']->type == "admin")
             displayAdminPanel($companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $notification);
         else
-            homePage();
+            homePage($notification);
 
 
 
