@@ -55,7 +55,7 @@ function getFailAlert()
 
 function prepareDisplayCompanyDetails($idCompany, $notification){
     $alert = '';
-    if(isset($_COOKIE['userConnected'])){
+    if(isset($_COOKIE['userConnected']) && isset($_SESSION['user'])){
         $messageBtn = getMessageBtnToDisplay($idCompany);
     } else $messageBtn = "";
     $company = companiesManager::getOneCompany($idCompany);
