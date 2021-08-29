@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 07 août 2021 à 11:04
--- Version du serveur :  5.7.31
--- Version de PHP : 7.3.21
+-- Généré le : dim. 29 août 2021 à 21:02
+-- Version du serveur : 5.7.31
+-- Version de PHP : 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,17 +34,17 @@ CREATE TABLE IF NOT EXISTS `ads` (
   `image_ads` varchar(100) NOT NULL,
   `display_ads` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_ads`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `ads`
 --
 
 INSERT INTO `ads` (`id_ads`, `id_comp`, `image_ads`, `display_ads`) VALUES
-(15, 1, '../images/upload/1.jpg', 1),
-(16, 2, '../images/upload/2.jpg', 1),
-(17, 3, '../images/upload/3.jpg', 1),
-(18, 4, '../images/upload/4.jpg', 1);
+(1, 1, '../images/upload/advertising/ad_1.jpg', 1),
+(2, 3, '../images/upload/advertising/ad_2.jpg', 1),
+(3, 5, '../images/upload/advertising/ad_3.jpg', 1),
+(4, 3, '../images/upload/advertising/ad_4.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,6 @@ INSERT INTO `appartient` (`id_cat`, `id_comp`) VALUES
 (1, 6),
 (2, 1),
 (2, 2),
-(2, 18),
 (3, 1),
 (3, 2),
 (5, 3),
@@ -84,9 +83,10 @@ INSERT INTO `appartient` (`id_cat`, `id_comp`) VALUES
 (8, 5),
 (9, 5),
 (9, 9),
-(10, 18),
-(11, 18),
-(37, 18);
+(29, 12),
+(30, 12),
+(31, 12),
+(34, 12);
 
 -- --------------------------------------------------------
 
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `id_user` int(11) NOT NULL,
   `deleted_com` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_com`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comments`
@@ -175,8 +175,9 @@ INSERT INTO `comments` (`id_com`, `comment_com`, `image_com`, `rate_com`, `date_
 (2, 'Travail moyen', '', 3, '2021-07-01', 2, 2, 0),
 (3, 'Bon travail', '', 5, '2021-07-01', 5, 3, 0),
 (4, 'Bof', '', 2, '2021-07-01', 2, 2, 0),
-(25, 'aaaaaa', '../images/upload/', 2, '2021-08-02', 2, 12, 0),
-(26, 'eeeee', '../images/upload/', 2, '2021-08-02', 2, 12, 0);
+(27, 'ceci est un test', '../images/upload/', 4, '2021-08-17', 3, 12, 0),
+(38, 'test', '../images/upload/', 2, '2021-08-22', 2, 12, 0),
+(39, 'J\'aime bien', 'images/upload/attention.jpeg', 4, '2021-08-24', 6, 31, 0);
 
 -- --------------------------------------------------------
 
@@ -201,25 +202,27 @@ CREATE TABLE IF NOT EXISTS `companies` (
   `tva_comp` varchar(25) NOT NULL,
   `deleted_comp` tinyint(1) NOT NULL DEFAULT '0',
   `certified_comp` tinyint(1) NOT NULL DEFAULT '0',
+  `hasPaid_comp` tinyint(1) NOT NULL DEFAULT '0',
+  `acceptPending_comp` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_comp`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `companies`
 --
 
-INSERT INTO `companies` (`id_comp`, `name_comp`, `description_comp`, `hours_comp`, `city_comp`, `street_comp`, `number_comp`, `postalcode_comp`, `state_comp`, `mail_comp`, `phone_comp`, `image_comp`, `tva_comp`, `deleted_comp`, `certified_comp`) VALUES
-(1, 'entreprise 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\r\nmardi : 08:00 - 18:00<br>\r\nmercredi : 08:00 - 18:00<br>\r\njeudi : 08:00 - 18:00<br>\r\nvendredi : 08:00 - 18:00<br>\r\nsamedi : fermé<br>\r\ndimanche : fermé', 'Trazegnies', 'rue de gosselies', '60', 6183, '', 'entreprise1@gmail.com', '0485/25.35.78', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 1),
-(2, 'entreprise 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\r\nmardi : 08:00 - 18:00<br>\r\nmercredi : 08:00 - 18:00<br>\r\njeudi : 08:00 - 18:00<br>\r\nvendredi : 08:00 - 18:00<br>\r\nsamedi : fermé<br>\r\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, '', 'entreprise2@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 1),
-(3, 'entreprise 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00\r\nmardi : 08:00 - 18:00\r\nmercredi : 08:00 - 18:00\r\njeudi : 08:00 - 18:00\r\nvendredi : 08:00 - 18:00\r\nsamedi : fermé\r\ndimanche : fermé', '50.4640054,4.3386835', '', '', 0, '', '', '', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 0),
-(4, 'entreprise 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00\r\nmardi : 08:00 - 18:00\r\nmercredi : 08:00 - 18:00\r\njeudi : 08:00 - 18:00\r\nvendredi : 08:00 - 18:00\r\nsamedi : fermé\r\ndimanche : fermé', '50.4640054,4.3386835', '', '', 0, '', '', '', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 0),
-(5, 'entreprise 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00\r\nmardi : 08:00 - 18:00\r\nmercredi : 08:00 - 18:00\r\njeudi : 08:00 - 18:00\r\nvendredi : 08:00 - 18:00\r\nsamedi : fermé\r\ndimanche : fermé', '50.4640054,4.3386835', '', '', 0, '', '', '', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 0),
-(6, 'entreprise 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00\r\nmardi : 08:00 - 18:00\r\nmercredi : 08:00 - 18:00\r\njeudi : 08:00 - 18:00\r\nvendredi : 08:00 - 18:00\r\nsamedi : fermé\r\ndimanche : fermé', '50.4640054,4.3386835', '', '', 0, '', '', '', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 0),
-(7, 'entreprise 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00\r\nmardi : 08:00 - 18:00\r\nmercredi : 08:00 - 18:00\r\njeudi : 08:00 - 18:00\r\nvendredi : 08:00 - 18:00\r\nsamedi : fermé\r\ndimanche : fermé', '50.4640054,4.3386835', '', '', 0, '', '', '', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 0),
-(8, 'entreprise 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00\r\nmardi : 08:00 - 18:00\r\nmercredi : 08:00 - 18:00\r\njeudi : 08:00 - 18:00\r\nvendredi : 08:00 - 18:00\r\nsamedi : fermé\r\ndimanche : fermé', '50.4640054,4.3386835', '', '', 0, '', '', '', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 0),
-(9, 'entreprise 9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00\r\nmardi : 08:00 - 18:00\r\nmercredi : 08:00 - 18:00\r\njeudi : 08:00 - 18:00\r\nvendredi : 08:00 - 18:00\r\nsamedi : fermé\r\ndimanche : fermé', '50.4640054,4.3386835', '', '', 0, '', '', '', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 0),
-(10, 'entreprise 10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00\r\nmardi : 08:00 - 18:00\r\nmercredi : 08:00 - 18:00\r\njeudi : 08:00 - 18:00\r\nvendredi : 08:00 - 18:00\r\nsamedi : fermé\r\ndimanche : fermé', '50.4640054,4.3386835', '', '', 0, '', '', '', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', '', 0, 0),
-(18, 'aze', 'aze', 'aze', 'aze', 'aze', '123', 123, 'Belgique', 'test3@gmail.com', '123', '', '', 0, 1);
+INSERT INTO `companies` (`id_comp`, `name_comp`, `description_comp`, `hours_comp`, `city_comp`, `street_comp`, `number_comp`, `postalcode_comp`, `state_comp`, `mail_comp`, `phone_comp`, `image_comp`, `tva_comp`, `deleted_comp`, `certified_comp`, `hasPaid_comp`, `acceptPending_comp`) VALUES
+(1, 'entreprise 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\r\nmardi : 08:00 - 18:00<br>\r\nmercredi : 08:00 - 18:00<br>\r\njeudi : 08:00 - 18:00<br>\r\nvendredi : 08:00 - 18:00<br>\r\nsamedi : fermé<br>\r\ndimanche : fermé', 'Trazegnies', 'rue de gosselies', '60', 6183, '', 'entreprise1@gmail.com', '0485/25.35.78', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 0, 0),
+(2, 'entreprise 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, '', 'entreprise2@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 0, 0),
+(3, 'entreprise 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Courcelles', 'Rue Paul Janson', '1', 6182, '', 'entreprise3@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 0, 0),
+(4, 'entreprise 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Chapelle-lez-Herlaimont', 'Rue Solvay', '13', 7160, '', 'entreprise4@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 0, 0),
+(5, 'entreprise 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, '', 'entreprise5@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 0, 0),
+(6, 'entreprise 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, '', 'entreprise6@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 0, 0),
+(7, 'entreprise 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, '', 'entreprise7@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 0, 0, 1),
+(8, 'entreprise 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, '', 'entreprise8@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 0, 0, 1),
+(9, 'entreprise 9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, '', 'entreprise9@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 0, 0, 1),
+(10, 'entreprise 10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, '', 'entreprise10@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 0, 0, 1),
+(12, 'Mon entreprise', 'Ceci est une description de mon entreprise', 'Tous les jours de 10h à 18h', 'Trazegnies', 'Rue destrée', '145', 6183, 'Belgique', 'test4@gmail.com', '0488123456', '../images/upload/photos_profils/profil3.png', 'BE0987654321', 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -239,8 +242,9 @@ CREATE TABLE IF NOT EXISTS `favoris` (
 --
 
 INSERT INTO `favoris` (`id_user`, `id_comp`) VALUES
-(12, 2),
-(12, 5);
+(12, 5),
+(12, 12),
+(31, 6);
 
 -- --------------------------------------------------------
 
@@ -262,26 +266,31 @@ CREATE TABLE IF NOT EXISTS `users` (
   `zip_user` varchar(6) DEFAULT NULL,
   `image_user` varchar(500) DEFAULT NULL,
   `type_user` varchar(10) DEFAULT NULL,
+  `confirmed_user` tinyint(1) NOT NULL DEFAULT '0',
+  `code_user` varchar(30) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id_user`, `username_user`, `password_user`, `mail_user`, `phone_user`, `street_user`, `number_user`, `city_user`, `state_user`, `zip_user`, `image_user`, `type_user`) VALUES
-(1, 'profil1', '$2y$10$6O.lwTyZp5TIc4WTmLNImuY84Z7WZWx4Y0Bti7icPSnAlVroHdpZW', 'profil1@gmail.com', '0496814072', 'rue test', 54, 'Paris', NULL, '70000', 'https://static.vecteezy.com/ti/vecteur-libre/p1/1840612-image-profil-icon-male-icon-human-or-people-sign-and-symbol-vector-gratuit-vectoriel.jpg', 'user'),
-(2, 'profil2', 'motdepasse2', 'profil2@gmail.com', NULL, NULL, NULL, NULL, NULL, '', 'https://static.vecteezy.com/ti/vecteur-libre/p1/1840612-image-profil-icon-male-icon-human-or-people-sign-and-symbol-vector-gratuit-vectoriel.jpg', 'company'),
-(3, 'profil3', 'motdepasse3', 'profil3@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', ''),
-(4, 'profil4', 'motdepasse4', 'profil4@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', ''),
-(5, 'profil5', 'motdepasse5', 'profil5@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', ''),
-(6, 'profil6', 'motdepasse6', 'profil6@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', ''),
-(7, 'profil7', 'motdepasse7', 'profil7@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', ''),
-(8, 'profil8', 'motdepasse8', 'profil8@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', ''),
-(9, 'profil9', 'motdepasse9', 'profil9@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', ''),
-(10, 'profil10', 'motdepasse10', 'profil10@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', ''),
-(12, 'Nathan Willeme', '$2y$10$6O.lwTyZp5TIc4WTmLNImuY84Z7WZWx4Y0Bti7icPSnAlVroHdpZW', 'test@gmail.com', '0496814072', 'rue de gosselies', 60, 'Trazegnies', 'Belgique', '6183', 'https://scontent-bru2-1.xx.fbcdn.net/v/t1.6435-9/75328719_10221233400569582_577359585879261184_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=zZJJq0s62rsAX-fKIuz&_nc_ht=scontent-bru2-1.xx&oh=11edda7ac3d6e8d6577c275a739e3002&oe=6129FADD', 'admin'),
-(22, NULL, '$2y$10$IzippInBMKhr6EusS2nUHOkVfvaGTrdWDGoD7V06pzFcuD3gK/OBy', 'test3@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'company');
+INSERT INTO `users` (`id_user`, `username_user`, `password_user`, `mail_user`, `phone_user`, `street_user`, `number_user`, `city_user`, `state_user`, `zip_user`, `image_user`, `type_user`, `confirmed_user`, `code_user`) VALUES
+(1, 'profil1', '$2y$10$6O.lwTyZp5TIc4WTmLNImuY84Z7WZWx4Y0Bti7icPSnAlVroHdpZW', 'profil1@gmail.com', '0496814072', 'rue test', 60, 'Paris', NULL, '70000', '../images/upload/photos_profils/profil4.jpg', 'user', 1, ''),
+(2, 'profil2', 'motdepasse2', 'profil2@gmail.com', NULL, NULL, NULL, NULL, NULL, '', 'https://static.vecteezy.com/ti/vecteur-libre/p1/1840612-image-profil-icon-male-icon-human-or-people-sign-and-symbol-vector-gratuit-vectoriel.jpg', 'company', 1, ''),
+(3, 'profil3', 'motdepasse3', 'profil3@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', '', 1, ''),
+(4, 'profil4', 'motdepasse4', 'profil4@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', '', 1, ''),
+(5, 'profil5', 'motdepasse5', 'profil5@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', '', 1, ''),
+(6, 'profil6', 'motdepasse6', 'profil6@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', '', 1, ''),
+(7, 'profil7', 'motdepasse7', 'profil7@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', '', 1, ''),
+(8, 'profil8', 'motdepasse8', 'profil8@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', '', 1, ''),
+(9, 'profil9', 'motdepasse9', 'profil9@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', '', 1, ''),
+(10, 'profil10', 'motdepasse10', 'profil10@gmail.com', NULL, NULL, NULL, NULL, NULL, '', '', '', 1, ''),
+(12, 'Nathan Willeme', '$2y$10$6O.lwTyZp5TIc4WTmLNImuY84Z7WZWx4Y0Bti7icPSnAlVroHdpZW', 'test@gmail.com', '0496814072', 'rue de gosselies', 60, 'Trazegnies', 'Belgique', '6183', '../images/upload/photos_profils/profil4.jpg', 'admin', 1, ''),
+(22, '', '$2y$10$IzippInBMKhr6EusS2nUHOkVfvaGTrdWDGoD7V06pzFcuD3gK/OBy', 'test3@gmail.com', '', '', NULL, '', 'Belgique', '', NULL, 'user', 1, ''),
+(25, 'Nathan Willeme', '$2y$10$Bwhmgzw9qDoR.DX8r6MbrONhXTO.6.tTrb2pvafuhtL1tTgl3f/5S', 'nathanwilleme@gmail.com', '0496814072', 'Rue du butia', 3, 'Trazegnies', 'Belgique', '6183', '../images/upload/photos_profils/profil4.png', 'user', 1, '610e9b57d6757'),
+(27, 'Mon entreprise', '$2y$10$OOXrcWaOpclDPtXMal.sSuZh9qIPCHk6YOMKUbebbAhhphrx188CS', 'test4@gmail.com', '0488123456', 'Rue destrée', 145, 'Trazegnies', 'Belgique', '6183', '../images/upload/photos_profils/profil3.png', 'company', 1, '6113e3e87bd7a'),
+(31, 'Mon Prénom', '$2y$10$YTN53VBrKW54W78WUp6rbu545Ckq8iKNLyMfnToueCDhTODhDZu1q', 'la198444@student.helha.be', '0477111111', 'Rue Albert 1er', 12, 'Gosselies', 'Belgique', '6254', 'images/upload/photos_profils/profil6.png', 'user', 1, '6124c5cda1de3');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
