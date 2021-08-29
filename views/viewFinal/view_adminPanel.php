@@ -7,7 +7,7 @@
     
     <?php if(!isset($_GET['view'])) { ?>
     <a class="btn btn-primary mb-2 mt-3 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=companies">Gérer les entreprises actives</a><br>
-    <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises non certifiées <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
+    <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises en attente de certification <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
     <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=ads">Gérer les publicités</a><br>
     <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=users">Gérer les utilisateurs</a><br>
     <a class="btn btn-primary col-12" href="index.php?viewToDisplay=displayAdminPanel&view=stats">Accéder aux statistiques</a>

@@ -10,6 +10,7 @@
 ?>
 
 <div class="container-fluid mt-2 mb-5">
+    <?php if($company->certified != 0){ ?>
     <?php if(isset($alert['color'])){ ?>
     <div class="mt-4 alert alert-<?php echo $alert['color']; ?> alert-dismissible fade show" role="alert">
         <?php
@@ -65,20 +66,6 @@
 
     </div>
     
-    <!-- <div class="row d-flex justify-content-around mb-4">
-        <div class="col-5">
-            <h2>Heures d'ouverture:</h2>
-            <p><?php echo $company->hours; ?></p>
-        </div>
-
-        <div class="col-5">
-            <h2>Contacts:</h2>
-            <p>
-                <b>Mail</b>: <a href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
-                <b>Téléphone</b>: <?php echo $company->phone; ?>
-            </p>
-        </div>
-    </div> -->
     <div class="ms-5 me-5">
         <?php if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) { ?>
         <div class="row d-flex justify-content-around mb-4">
@@ -157,6 +144,9 @@
             ?>
         </div>
     </div>
+    <?php } else { ?>
+        <h1>Cette page n'est pas disponible pour le moment !</h1>
+    <?php } ?>
 </div>
 
 <?php
