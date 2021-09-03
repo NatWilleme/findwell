@@ -34,7 +34,7 @@ function registerNewCompany($newUser, $newCompany){
         $alert['color'] = "danger";
         $alert['message'] = "Un compte avec cette adresse mail existe déjà.";
     }
-    displayRegister();
+    displayConnexion($alert);
 }
 
 function connectUser($mail, $password){

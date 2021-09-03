@@ -40,12 +40,16 @@ function displaySearch($searchResult, $notification) {
     require_once('views/viewFinal/view_search.php');
 }
 
-function displayTemplateConnected($title, $content, $notification){
+function displayTemplateConnected($title, $content, $notification, $scripts = ''){
     require_once('templates/templateFinal/templateConnected.php');
 }
 
-function displayTemplateNotConnected($title, $content){
+function displayTemplateNotConnected($title, $content, $scripts = ''){
     require_once('templates/templateFinal/templateNotConnected.php');
+}
+
+function displayPayment($notification){
+    require_once('views/viewFinal/view_payment.php');
 }
 
 ?>
