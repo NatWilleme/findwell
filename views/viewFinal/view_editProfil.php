@@ -252,5 +252,5 @@
 
 <?php
     $content = ob_get_clean();
-    displayTemplateConnected($title, $content, $notification);
+    displayTemplateConnected($title, $content, $notification, $scripts);
 ?>

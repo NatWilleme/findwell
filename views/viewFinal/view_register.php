@@ -1,7 +1,6 @@
 <?php
     $title = "Connexion";
-    $scripts = "<script src=\"../js/checkEntries/checkEntries_inscription.js\"></script>";
-    if($domainePage == '') $scripts.="<script src=\"js/checkedDomaine.js\"></script>";
+    $scripts = "<script src=\"js/checkEntries/checkEntries_inscription.js\"></script><script src=\"js/checkedDomaine.js\"></script>";
     ob_start();	
 ?>
 
@@ -195,7 +194,7 @@
                                         <div class="col-2"></div>
                                         <div id="listGrosTravaux" style="display: none;"  class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
                                             <h5 class="text-primary">Gros Travaux</h5>
-                                        <?php foreach ($categoriesGrosTravaux as $category) { ?>
+                                        <?php foreach ($domainePage['categoriesGrosTravaux'] as $category) { ?>
                                             <div class="form-check">
                                                 <label class="form-check-label" for="<?php echo $category->id; ?>"><?php echo $category->name; ?></label>
                                                 <input type="checkbox" class="form-check-input" name="checkGros[]" id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>">
@@ -204,7 +203,7 @@
                                         </div>
                                         <div id="listPetitsTravaux" style="display: none;"  class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
                                             <h5 class="text-primary">Petits Travaux</h5>
-                                        <?php foreach ($categoriesPetitsTravaux as $category) { ?>
+                                        <?php foreach ($domainePage['categoriesPetitsTravaux'] as $category) { ?>
                                             <div class="form-check">
                                                 <label class="form-check-label" for="<?php echo $category->id; ?>"><?php echo $category->name; ?></label>
                                                 <input type="checkbox" class="form-check-input" name="checkPetits[]"  id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>">
@@ -213,7 +212,7 @@
                                         </div>
                                         <div id="listDepannage" style="display: none;"  class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
                                             <h5 class="text-primary">Dépannage d'urgence</h5>
-                                        <?php foreach ($categoriesDepannage as $category) { ?>
+                                        <?php foreach ($domainePage['categoriesDepannage'] as $category) { ?>
                                             <div class="form-check">
                                                 <label class="form-check-label" for="<?php echo $category->id; ?>"><?php echo $category->name; ?></label>
                                                 <input type="checkbox" class="form-check-input" name="checkDepannage[]"  id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>">
@@ -268,5 +267,5 @@
 
 <?php
     $content = ob_get_clean();
-    displayTemplateNotConnected($title, $content);
+    displayTemplateNotConnected($title, $content, $scripts);
 ?>

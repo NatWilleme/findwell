@@ -111,7 +111,8 @@ try {
         $companies = getFavoriteCompanies();
         displayFavorites($companies, $notification);
 
-
+    } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayPayment'){
+        displayPayment($notification);
 
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAdminPanel'){
         $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = null;
@@ -214,10 +215,10 @@ try {
     // Page 3 Inscription pour entreprise
     } else if(isset($_POST['submitCompany'])){
         saveNewCompanySession();
-        $domainePage = true;
-        $categoriesGrosTravaux = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
-        $categoriesPetitsTravaux = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
-        $categoriesDepannage = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
+        $domainePage['value'] = true;
+        $domainePage['categoriesGrosTravaux'] = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
+        $domainePage['categoriesPetitsTravaux'] = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
+        $domainePage['categoriesDepannage'] = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
         displayRegister('', '', '', $domainePage);
     } else if(isset($_POST['submitDomaine'])){  
         registerNewCompany($_SESSION['newUser'], $_SESSION['newCompany']);
@@ -249,11 +250,7 @@ try {
             displayConnexion($alert);
         }
     }
-    
-    
-    
-    
-    
+  
     else {
         homePage($notification);
     }

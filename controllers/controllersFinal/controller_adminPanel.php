@@ -130,7 +130,7 @@ function getCompanyToConfirm(){
 function sendAcceptMail($idCompany)
 {
     $mailTo = companiesManager::getOneCompany($idCompany)->mail;
-    $content = "Félicitation ! Votre entreprise a été accepté sur la plateforme Findwell !";
+    $content = "Félicitation ! Votre entreprise a été accepté sur la plateforme Findwell !<br>Vous pouvez dès à présent accéder à la page de paiement afin de figurer sur la plateforme Findwell en suivant ce lien:<br><a href=\"index.php?viewToDisplay=displayPayment\"></a>";
     $url = '';
     $object = "Votre entreprise a été ajouté avec succès sur Findwell";
     require_once('models/sendEmail.php');
@@ -145,78 +145,5 @@ function sendRejectMail($idCompany, $rejectMessage)
     $object = "Votre entreprise n'a pas pu être ajouter à Findwell";
     require_once('models/sendEmail.php');
 }
-
-
-
-
-
-
-
-
-// if(isset($_POST['action'])){
-//     if($_POST['action'] == "addAd"){
-//         addAd();
-//     } else if($_POST['action'] == "editAd"){
-//         editAd();
-//     } else if($_POST['action'] == "editUser"){
-//         editUser();
-//     }
-// }
-
-// if(isset($_GET['view'])){
-//     if($_GET['view'] == "companies"){
-//         if(isset($_GET['delete'])){
-//             deleteCompany();
-//         } else if(isset($_GET['edit'])) {
-//             $companyToEdit = getCompanyToEdit();
-//         } else {
-//             $companies = getAllActiveCompanyWithRatingAndCommentCount();
-//         }   
-
-//     } else if($_GET['view'] == "users"){
-
-//         if(isset($_GET['edit'])) {
-//             $userToEdit = getUserToEdit();
-//         } else {
-//             $users = getAllUsers();
-//         }
-
-//     } else if($_GET['view'] == "ads") {
-//         if((isset($_GET['action']) && $_GET['action'] == "add") || (isset($_GET['edit']))){
-//             $companies = companiesManager::getAllActiveCompanies();
-//             $action = true;
-//             if(isset($_GET['edit'])){
-//                 $adToEdit = adsManager::getAd($_GET['edit']);
-//             }
-//         }
-//         if(isset($_GET['delete'])){
-//             adsManager::deleteAd($_GET['delete']);
-//         }
-//         $ads = adsManager::getAllAds();
-//         foreach ($ads as $ad) {
-//             $ad->name_comp = companiesManager::getOneCompany($ad->id_comp)->name;
-//         }
-//     } else if($_GET['view'] == "companiesNotCertified"){
-
-//         if(isset($_GET['accept'])){
-//             confirmCompany();
-//             $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
-//         } else if(isset($_GET['delete'])) {
-//             deleteCompany();
-//             $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
-//         } else if(isset($_GET['see'])) {
-//             $companyToConfirm = getCompanyToConfirm();
-//         }
-//     }
-// }
-
-// if($_SESSION['user']->type == "admin")
-//     require_once('../views/view_adminPanel.php');
-// else
-//     require_once('../controllers/controller_home.php');
-
-
-
-
     
 ?>

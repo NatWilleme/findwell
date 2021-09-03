@@ -151,6 +151,6 @@
 
 <?php
     $content = ob_get_clean();
-    if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification);
-    else displayTemplateNotConnected($title, $content);
+    if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification, $scripts);
+    else displayTemplateNotConnected($title, $content, $scripts);
 ?>
