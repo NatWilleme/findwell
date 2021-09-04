@@ -1,7 +1,7 @@
 <?php
 
 function cmp($object1, $object2) {
-    return $object1->distance > $object2->distance ? 1 : 0;
+    return $object1->rating < $object2->rating ? 1 : 0;
 }
 
 function displayCompaniesAccordingTo($category, $subcategory){

@@ -6,30 +6,19 @@
 <div class="container-fluid ps-0 pe-0">
     
 
-  <!-- <div class="bg-image" style="background-image: url('../images/HomePage/imageAccueil.jpg'); background-size: cover; height: 800px;">
-      <h1 class="ms-5 fst-italic text-white pt-5">Qu'est-ce que Findwell ?</h1>
-      <p class="mt-3 ms-5 fs-4" style="color: white;">
-      Findwell est une plateforme communautaire permettant <br>
-      de faciliter la recherche d’une entreprise au moment <br>
-      où l’on en a le plus besoin ! 
-      </p>
-      <p class="mt-3 ms-5 fs-4 text-white">
-      Que ce soit pour des gros travaux, des petits travaux, peut <br>
-      importe la demande, vous trouverez ce que vous recherchez sur Findwell !
-      </p>
-  </div> -->
 
 <div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="4000">
             <img src="../images/HomePage/imageAccueil.jpg" class="d-block w-100" alt="...">
         </div>
+        <?php foreach ($ads as $ad) { ?>
         <div class="carousel-item" data-bs-interval="4000">
-            <img src="../images/HomePage/imageAccueil.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item" data-bs-interval="4000">
-            <img src="../images/HomePage/imageAccueil.jpg" class="d-block w-100" alt="...">
-        </div>
+        <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
+            <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="..." href="../controllers/controller_companyDetails.php?idCompany=<?php echo $ad->id_comp; ?>">
+        </a>
+        </div>   
+        <?php } ?>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -123,43 +112,10 @@
         <div class="col-1"></div>
 
         <!-- Video youtube -->
-        <iframe class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>      
+        <!-- <iframe class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>       -->
     </div>
 
-    <div class="row mb-5 m-0 col-12">
-        <div id="carouselAds" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <?php $i=0; foreach ($ads as $ad) { if($i == 0) {?>
-                <button type="button" data-bs-target="#carouselAds" data-bs-slide-to="<?php echo $i; ?>" class="active" aria-current="true" aria-label="Slide <?php echo $i+1; ?>"></button>   
-                <?php } else { ?> 
-                <button type="button" data-bs-target="#carouselAds" data-bs-slide-to="<?php echo $i; ?>" aria-label="Slide <?php echo $i+1; ?>"></button>  
-                <?php } $i++;} ?>
-            </div>
-            <div class="carousel-inner">
-                <?php $i=0; foreach ($ads as $ad) { if($i == 0) {?>
-                <div class="carousel-item active" data-bs-interval="4000">
-                <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
-                    <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="..." >
-                </a>
-                </div>   
-                <?php } else { ?> 
-                <div class="carousel-item" data-bs-interval="4000">
-                <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
-                    <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="..." href="../controllers/controller_companyDetails.php?idCompany=<?php echo $ad->id_comp; ?>">
-                </a>
-                </div>   
-                <?php } $i++;} ?>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselAds" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselAds" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
+    
 </div>
 
 <?php

@@ -7,7 +7,6 @@
 <div class="container">
     <div class="border border-warning border-5 mt-5 p-3">
         <h2 class="text-center">Félicitation ! Votre entreprise correspond aux attentes de Findwell!</h2>
-        <!-- <h4>Afin de pouvoir figurer sur la plateforme, nous vous invitions à suivre les étapes suivantes:</h4> -->
         <fieldset>
             <legend class="text-center ">Afin de pouvoir figurer sur la plateforme, nous vous invitions à suivre les étapes suivantes:</legend>
             <ol>
@@ -24,7 +23,7 @@
 
 <?php
     $content = ob_get_clean();
-    // if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification);
-    // else displayTemplateNotConnected($title, $content);
-    require_once('../../templates/templateFinal/templateNotConnected.php');
+    if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification);
+    else displayTemplateNotConnected($title, $content);
+    // require_once('../../templates/templateFinal/templateNotConnected.php');
 ?>

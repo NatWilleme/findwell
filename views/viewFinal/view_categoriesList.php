@@ -13,26 +13,15 @@
     </nav>
 
     <div class="row d-flex justify-content-around mb-4 m-0">
-    <?php
-        $cpt = 0;
-        foreach ($categories as $category) {
-            $cpt++;
-            if ($cpt > 5) {
-                echo "</div><div class='row d-flex justify-content-around mb-4 m-0'>";
-                $cpt = 1;
-            }
-            ?>
-            
-        <div class="card border border-dark pt-2" style="width: 18rem;">
+    <?php foreach ($categories as $category) { ?>
+        <div class="card border border-dark pt-2 ms-3 me-3" style="width: 18rem;">
             <img src="<?php echo $category->image; ?>" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><?php echo $category->name; ?></h5>
             </div>
             <a href="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $category->name; ?>" class="btn btn-primary mb-2">Accéder</a>
         </div>          
-    <?php
-        }
-    ?>
+    <?php } ?>
     </div>
 
 

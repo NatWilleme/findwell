@@ -40,8 +40,8 @@ abstract class CompaniesManager extends DBManager{
         }
     }
 
-    static public function confirmCompany($idCompany){
-        $sql = "UPDATE companies SET certified_comp = 1, acceptPending_comp = 0 WHERE id_comp=:id_comp";
+    static public function switchConfirmCompany($idCompany){
+        $sql = "UPDATE companies SET certified_comp = 1-certified_comp, acceptPending_comp = 0 WHERE id_comp=:id_comp";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
@@ -56,6 +56,20 @@ abstract class CompaniesManager extends DBManager{
 
     static public function switchAcceptPending($idCompany){
         $sql = "UPDATE companies SET acceptPending_comp = 1-acceptPending_comp WHERE id_comp=:id_comp";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_comp' => $idCompany));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+    }
+
+    static public function switchCompanyPaid($idCompany){
+        $sql = "UPDATE companies SET hasPaid_comp = 1-hasPaid_comp WHERE id_comp=:id_comp";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
@@ -104,7 +118,8 @@ abstract class CompaniesManager extends DBManager{
                 "deleted" => $elem["deleted_comp"],
                 "certified" => $elem["certified_comp"],
                 "tva" => $elem["tva_comp"],
-                "acceptPending" => $elem["acceptPending_comp"]
+                "acceptPending" => $elem["acceptPending_comp"],
+                "hasPaid" => $elem["hasPaid_comp"]
             );
             $company = new Company();
             $company->hydrate($values);
@@ -139,7 +154,8 @@ abstract class CompaniesManager extends DBManager{
                 "deleted" => $elem["deleted_comp"],
                 "certified" => $elem["certified_comp"],
                 "tva" => $elem["tva_comp"],
-                "acceptPending" => $elem["acceptPending_comp"]
+                "acceptPending" => $elem["acceptPending_comp"],
+                "hasPaid" => $elem["hasPaid_comp"]
             );
             $company = new Company();
             $company->hydrate($values);
@@ -175,7 +191,8 @@ abstract class CompaniesManager extends DBManager{
                     "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],
-                    "acceptPending" => $elem["acceptPending_comp"]
+                    "acceptPending" => $elem["acceptPending_comp"],
+                    "hasPaid" => $elem["hasPaid_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -213,7 +230,8 @@ abstract class CompaniesManager extends DBManager{
                     "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],
-                    "acceptPending" => $elem["acceptPending_comp"]
+                    "acceptPending" => $elem["acceptPending_comp"],
+                    "hasPaid" => $elem["hasPaid_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -230,7 +248,7 @@ abstract class CompaniesManager extends DBManager{
 
     static public function getAllCompaniesAccordingTo($category, $subcategory){
         $result = array();
-        $sql = "SELECT * FROM companies INNER JOIN appartient ON appartient.id_comp = companies.id_comp INNER JOIN categories ON categories.id_cat = appartient.id_cat WHERE categories.name_cat = :subcategory AND categories.parent_cat = :category AND certified_comp = 1 AND deleted_comp = 0";
+        $sql = "SELECT * FROM companies INNER JOIN appartient ON appartient.id_comp = companies.id_comp INNER JOIN categories ON categories.id_cat = appartient.id_cat WHERE categories.name_cat = :subcategory AND categories.parent_cat = :category AND certified_comp = 1 AND deleted_comp = 0 AND hasPaid_comp = 1";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
@@ -250,7 +268,8 @@ abstract class CompaniesManager extends DBManager{
                     "image" => $elem["image_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],
-                    "acceptPending" => $elem["acceptPending_comp"]
+                    "acceptPending" => $elem["acceptPending_comp"],
+                    "hasPaid" => $elem["hasPaid_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -301,7 +320,7 @@ abstract class CompaniesManager extends DBManager{
 
     static public function getAllFavoriteCompaniesFor($idUser){
         $result = array();
-        $sql = "SELECT * FROM companies INNER JOIN favoris ON favoris.id_comp = companies.id_comp WHERE favoris.id_user = :id_user AND certified_comp = 1 AND deleted_comp = 0";
+        $sql = "SELECT * FROM companies INNER JOIN favoris ON favoris.id_comp = companies.id_comp WHERE favoris.id_user = :id_user AND certified_comp = 1 AND deleted_comp = 0 AND hasPaid_comp = 1";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
@@ -321,7 +340,8 @@ abstract class CompaniesManager extends DBManager{
                     "image" => $elem["image_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],
-                    "acceptPending" => $elem["acceptPending_comp"]
+                    "acceptPending" => $elem["acceptPending_comp"],
+                    "hasPaid" => $elem["hasPaid_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
@@ -338,7 +358,7 @@ abstract class CompaniesManager extends DBManager{
 
     static public function searchCompany($keyword){
         $result = array();
-        $sql = "SELECT * FROM companies WHERE companies.name_comp LIKE '%$keyword%' AND certified_comp = 1 AND deleted_comp = 0";
+        $sql = "SELECT * FROM companies WHERE companies.name_comp LIKE '%$keyword%' AND certified_comp = 1 AND deleted_comp = 0 AND hasPaid_comp = 1";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
@@ -359,7 +379,8 @@ abstract class CompaniesManager extends DBManager{
                     "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],
-                    "acceptPending" => $elem["acceptPending_comp"]
+                    "acceptPending" => $elem["acceptPending_comp"],
+                    "hasPaid" => $elem["hasPaid_comp"]
                 );
                 $company = new Company();
                 $company->hydrate($values);
