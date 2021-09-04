@@ -6,7 +6,7 @@
 <div class="container mt-2 mb-5">
     
     <?php if(!isset($_GET['view'])) { ?>
-    <a class="btn btn-primary mb-2 mt-3 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=companies">Gérer les entreprises actives</a><br>
+    <a class="btn btn-primary mb-2 mt-3 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=companies">Gérer les entreprises certifiées</a><br>
     <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises en attente de certification <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
     <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=ads">Gérer les publicités</a><br>
     <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=users">Gérer les utilisateurs</a><br>
@@ -331,9 +331,20 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div>
-                        <input type="radio" name="certified" id="yes" value="yes" <?php if($companyToEdit->certified == 1) echo 'checked'; ?>>
+                        <input type="radio" name="certified" id="yes" value="1" <?php if($companyToEdit->certified == 1) echo 'checked'; ?>>
                         <label for="yes">Oui</label><br>
-                        <input type="radio" name="certified" id="no" value="no" <?php if($companyToEdit->certified == 0) echo 'checked'; ?>>
+                        <input type="radio" name="certified" id="no" value="0" <?php if($companyToEdit->certified == 0) echo 'checked'; ?>>
+                        <label for="no">Non</label>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mt-3 mb-2 text-primary">Active</h6>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div>
+                        <input type="radio" name="hasPaid" id="yes" value="1" <?php if($companyToEdit->hasPaid == 1) echo 'checked'; ?>>
+                        <label for="yes">Oui</label><br>
+                        <input type="radio" name="hasPaid" id="no" value="0" <?php if($companyToEdit->hasPaid == 0) echo 'checked'; ?>>
                         <label for="no">Non</label>
                     </div>
                 </div>

@@ -21,6 +21,7 @@ class Company{
     private $tva;
     private $distance;
     private $acceptPending;
+    private $hasPaid;
 
     // Magic method get
     public function __get($value){   

@@ -65,8 +65,16 @@ function editCompany()
     $newCompany->__set('city', $_POST['city']);
     $newCompany->__set('postalCode', $_POST['zip']);
     $newCompany->__set('certified', $_POST['certified']);
+    $newCompany->__set('hasPaid', $_POST['hasPaid']);
     $newCompany->__set('image', $_POST['image']);
     companiesManager::updateCompany($newCompany);
+    $company = companiesManager::getOneCompany($newCompany->id);
+    if($newCompany->certified != $company->certified){
+        companiesManager::switchConfirmCompany($company->id);
+    }
+    if($newCompany->hasPaid != $company->hasPaid){
+        companiesManager::switchCompanyPaid($company->id);
+    }
     
 }
 
@@ -101,7 +109,7 @@ function getAllAdsWithCompanyName(){
 
 function confirmCompany(){
     $idCompany = $_POST['accept'];
-    companiesManager::confirmCompany($idCompany);
+    companiesManager::switchConfirmCompany($idCompany);
 }
 
 function deleteCompany(){
@@ -130,7 +138,7 @@ function getCompanyToConfirm(){
 function sendAcceptMail($idCompany)
 {
     $mailTo = companiesManager::getOneCompany($idCompany)->mail;
-    $content = "Félicitation ! Votre entreprise a été accepté sur la plateforme Findwell !<br>Vous pouvez dès à présent accéder à la page de paiement afin de figurer sur la plateforme Findwell en suivant ce lien:<br><a href=\"index.php?viewToDisplay=displayPayment\"></a>";
+    $content = "Félicitation ! Votre entreprise a été accepté sur la plateforme Findwell !<br>Vous pouvez dès à présent accéder à la page de paiement afin de figurer sur la plateforme Findwell en suivant ce lien: <a href=\"findwell/index.php?viewToDisplay=displayPayment\">Cliquez ici</a>";
     $url = '';
     $object = "Votre entreprise a été ajouté avec succès sur Findwell";
     require_once('models/sendEmail.php');

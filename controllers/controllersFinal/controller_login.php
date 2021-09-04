@@ -68,7 +68,7 @@ function prepareNewUser($mail, $password)
 
 function sendConfirmationMail()
 {
-    $content = "Merci de confirmer votre inscription à Findwell en cliquant sur le lien ci-dessous.<br><a href=\"".$_SERVER['SERVER_NAME']."/index.php?idUserToConfirm=".$_SESSION['newUser']->id."&code=".$_SESSION['newUser']->code."\">Cliquez ici pour confirmer votre compte</a>";
+    $content = "Merci de confirmer votre inscription à Findwell en cliquant sur le lien ci-dessous.<br><a href=\"findwell/index.php?idUserToConfirm=".$_SESSION['newUser']->id."&code=".$_SESSION['newUser']->code."\">Cliquez ici pour confirmer votre compte</a>";
     $object = "Finalisation de l'inscription";
     $mailTo = $_SESSION['newUser']->mail;
     require_once('models/sendEmail.php');

@@ -134,6 +134,8 @@
                                 </div>
                                 <h5 class="user-name"><?php echo $company->name; ?></h5>
                                 <h6 class="user-email"><?php echo $company->mail; ?></h6>
+                                <h6 class="mt-2">Certifié: <?php if($company->certified == 1) echo "<span class='text-success fw-bold'>Oui</span>"; else echo "<span class='text-danger fw-bold'>Non</span>"; ?></h6>
+                                <h6>Etat de l'abonnement: <?php if($company->hasPaid == 1) echo "<span class='text-success fw-bold'>Actif</span>"; else echo "<span class='text-danger fw-bold'>Inactif</span>"; ?></h6>
                             </div>
                         </div>
                     </div>

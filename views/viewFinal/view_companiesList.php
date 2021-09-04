@@ -21,14 +21,9 @@
             echo "<h3>Il n'y a pas encore d'entreprises dans cette categorie!</h3>";
         } else {
         foreach ($companies as $company) {
-            $cpt++;
-            if ($cpt > 5) {
-                echo "</div><div class='row d-flex justify-content-around mb-4 m-0'>";
-                $cpt = 1;
-            }
             ?>
             
-        <div class="card border border-dark pt-2" style="width: 18rem;">
+        <div class="card border border-dark pt-2 ms-3 me-3" style="width: 18rem;">
             <img src="<?php echo $company->image; ?>" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><b><?php echo $company->name; ?></b></h5>
