@@ -6,11 +6,20 @@
 <div class="container mt-2 mb-5">
     
     <?php if(!isset($_GET['view'])) { ?>
-    <a class="btn btn-primary mb-2 mt-3 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=companies">Gérer les entreprises certifiées</a><br>
-    <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises en attente de certification <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
-    <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=ads">Gérer les publicités</a><br>
-    <a class="btn btn-primary mb-2 col-12" href="index.php?viewToDisplay=displayAdminPanel&view=users">Gérer les utilisateurs</a><br>
-    <a class="btn btn-primary col-12" href="index.php?viewToDisplay=displayAdminPanel&view=stats">Accéder aux statistiques</a>
+    <div class="row d-flex mt-5 align-items-center">
+        <div class="col-6 ">
+            <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companies">Gérer les entreprises certifiées</a><br>
+            <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises en attente de certification <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
+            <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=ads">Gérer les publicités</a><br>
+            <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=users">Gérer les utilisateurs</a><br>
+            <a class="btn btn-warning p-3 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=stats">Accéder aux statistiques</a>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-5">
+            <img src="images/settings.png" height="600" alt="">
+        </div>
+    </div>
+    
     <?php } else { ?>
     <a class="btn btn-secondary col-12 mt-3 mb-3" href="index.php?viewToDisplay=displayAdminPanel<?php if($_GET['view'] == "companies" && isset($_GET['edit'])) echo "&view=companies"; 
         else if($_GET['view'] == "ads" && (isset($_GET['edit']) || isset($_GET['action']) )) echo '&view=ads'; 
