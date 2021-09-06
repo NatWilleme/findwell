@@ -34,7 +34,7 @@
       </div>
       <a class="btn btn-secondary d-lg-none col-sm-2" href="index.php"><i class="bi bi-house-fill"></i></a>
       <!-- Right elements -->
-      <div class="p-1 bg-light rounded rounded-pill shadow-sm ">
+      <div class="p-1 me-2 bg-light rounded rounded-pill shadow-sm ">
         <form action="index.php" method="get">
           <div class="input-group">
             <input type="text" name="viewToDisplay" value="displaySearch" style="display: none;">
