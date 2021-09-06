@@ -9,15 +9,15 @@ $mail = new PHPMailer(true);
 
 try{
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = 'mail51.lwspanel.com';
     $mail->Port = 587;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->SMTPAuth = true;
-    $mail->Username = "nathanwilleme@gmail.com";
-    $mail->Password = "AzE602573";
+    $mail->Username = "contact@findwell.be";
+    $mail->Password = "bT8-dXmC8duy91!";
 
 
-    $mail->setFrom("nathanwilleme@gmail.com", 'FindWell');
+    $mail->setFrom("contact@findwell.be", 'FindWell');
     $mail->addAddress($mailTo);
 
     $mail->Subject = $object;

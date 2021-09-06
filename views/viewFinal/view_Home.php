@@ -30,6 +30,29 @@
     </button>
 </div>
 
+<div id="carouselExampleIndicators" class="carousel slide d-lg-none d-sm-block" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="4000">
+            <img src="../images/HomePage/imageAccueilResponsive.jpg" class="d-block w-100" alt="...">
+        </div>
+        <?php foreach ($ads as $ad) { ?>
+        <div class="carousel-item" data-bs-interval="4000">
+        <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
+            <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="..." href="../controllers/controller_companyDetails.php?idCompany=<?php echo $ad->id_comp; ?>">
+        </a>
+        </div>   
+        <?php } ?>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
 
   <!-- Les tuiles -->
   <div class="row mb-5 m-0">

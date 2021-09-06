@@ -68,9 +68,16 @@ function prepareNewUser($mail, $password)
 
 function sendConfirmationMail()
 {
-    $content = "Merci de confirmer votre inscription à Findwell en cliquant sur le lien ci-dessous.<br><a href=\"findwell/index.php?idUserToConfirm=".$_SESSION['newUser']->id."&code=".$_SESSION['newUser']->code."\">Cliquez ici pour confirmer votre compte</a>";
+    $content = "Merci de confirmer votre inscription à Findwell en cliquant sur le lien ci-dessous.<br><a href=\"www.findwell.be/index.php?idUserToConfirm=".$_SESSION['newUser']->id."&code=".$_SESSION['newUser']->code."\">Cliquez ici pour confirmer votre compte</a>";
     $object = "Finalisation de l'inscription";
     $mailTo = $_SESSION['newUser']->mail;
+    require_once('models/sendEmail.php');
+}
+
+function sendReinitialisationMail($mail) {
+    $content = "Une demande de réinitialisation a été demandée. Si vous n'êtes pas à l'origine de cette demande, ignorez ce mail.<br><a href='www.findwell.be/index.php?viewToDisplay=displayConnexion&newpwd=1&mail=$mail' class='btn btn-primary'>Cliquez ici pour réinitialiser le mot de passe</a>";
+    $object = "Findwell : Réinitialisation du mot de passe";
+    $mailTo = $mail;
     require_once('models/sendEmail.php');
 }
 
