@@ -7,12 +7,12 @@ require_once('models/modelsFinal/comment.php');
 require_once('models/modelsFinal/company.php');
 require_once('models/modelsFinal/user.php');
 
-require_once('models/daofinal/DBManager.php');
-require_once('models/daofinal/adsManager.php');
-require_once('models/daofinal/categoriesManager.php');
-require_once('models/daofinal/commentsManager.php');
-require_once('models/daofinal/companiesManager.php');
-require_once('models/daofinal/usersManager.php');
+require_once('models/daoFinal/DBManager.php');
+require_once('models/daoFinal/adsManager.php');
+require_once('models/daoFinal/categoriesManager.php');
+require_once('models/daoFinal/commentsManager.php');
+require_once('models/daoFinal/companiesManager.php');
+require_once('models/daoFinal/usersManager.php');
 
 require_once('controllers/controllersFinal/controller_adminPanel.php');
 require_once('controllers/controllersFinal/controller_categoriesList.php');
@@ -51,7 +51,37 @@ try {
     }
 
     if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayConnexion'){
-        displayConnexion($alert);
+        if(isset($_GET['pwdforget']) && $_GET['pwdforget'] == 1){
+            $forget = true;
+            displayConnexion($alert, $forget);
+        } else if(isset($_GET['newpwd']) && $_GET['newpwd'] == 1){
+            $_SESSION['mailToChangePwd'] = $_GET['mail'];
+            $newPwd = true;
+            displayConnexion($alert, $forget = '', $newPwd);
+        } else if(isset($_POST['submitForget'])){
+            if(checkIfUserExist($_POST['mail'])){
+                sendReinitialisationMail($_POST['mail']);
+                $alert['color'] = "warning";
+                $alert['message'] = "Un mail de réinitialisation a été envoyé à l'adresse : ".$_POST['mail'];
+            } else {
+                $alert['color'] = "danger";
+                $alert['message'] = "L'adresse mail entrée ne correspond à aucun compte Findwell.";
+            }
+            displayConnexion($alert);
+        } else if(isset($_POST['submitReinitialisation'])){
+            if($_POST['password'] == $_POST['passwordVerif']){
+                usersManager::updatePwd($_SESSION['mailToChangePwd'], $_POST['password']);
+                $alert['color'] = "success";
+                $alert['message'] = "Votre mot de passe a bien été changé.";
+            } else{
+                $alert['color'] = "danger";
+                $alert['message'] = "Les deux champs de mot de passe ne correspondent pas.";
+            }
+            displayConnexion($alert);
+        } else{
+            displayConnexion($alert);
+        }
+        
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayRegister'){
         displayRegister();
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displaySearch'){

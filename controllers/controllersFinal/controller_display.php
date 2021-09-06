@@ -24,7 +24,7 @@ function displayCompanyDetails($company, $rating, $comments, $messageBtn, $users
     require_once('views/viewFinal/view_companyDetails.php');
 }
 
-function displayConnexion($alert) {
+function displayConnexion($alert, $forget = '', $newPwd = '') {
     require_once('views/viewFinal/view_connexion.php');
 }
 

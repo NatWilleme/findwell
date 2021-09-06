@@ -36,6 +36,20 @@ abstract class UsersManager extends DBManager{
         }
     }
 
+    static public function updatePwd($mail, $password){
+        $sql = "UPDATE users SET password_user=:password_user WHERE mail_user=:mail_user";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':password_user' => password_hash($password, PASSWORD_DEFAULT), ':mail_user' => $mail));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+    }
+
     static public function confirmUser($idUser){
         $sql = "UPDATE users SET confirmed_user = 1 WHERE id_user=:id_user";
         try {

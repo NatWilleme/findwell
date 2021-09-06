@@ -6,6 +6,10 @@ abstract class DBManager{
         $login = "root";
         $pwd = "";
         $DB = "findwell";
+        // $host = "91.216.107.184";
+        // $login = "findw1710907";
+        // $pwd = "fH3*1Z_Wja6x3Ce";
+        // $DB = "findw1710907";
 
         try {
             $pdo = new PDO("mysql:host=$host;dbname=$DB;charset=utf8", $login, $pwd);
