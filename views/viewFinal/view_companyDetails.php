@@ -1,5 +1,5 @@
 <?php
-    $title = "Contact";
+    $title = $company->name;
     $scripts = "<script src=\"../js/checkEntries/checkEntriesComment.js\"></script>
     <script>
     if ( window.history.replaceState ) {

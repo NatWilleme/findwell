@@ -1,5 +1,5 @@
 <?php
-    $title = "Connexion";
+    $title = "Inscription";
     $scripts = "<script src=\"js/checkEntries/checkEntries_inscription.js\"></script><script src=\"js/checkedDomaine.js\"></script>";
     ob_start();	
 ?>
