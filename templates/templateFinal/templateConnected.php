@@ -13,6 +13,12 @@
     <style>
       body{
         font-family: 'Roboto', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }    
+      footer{
+        margin-top: auto;
       }
     </style>
 </head>
@@ -74,10 +80,35 @@
   <?php echo $content; ?>
 
   <!-- FOOTER -->
-  <footer class="footer text-center pt-2 pb-2 border-top border-2 border-dark fixed-bottom" style="background-color : #FFD338;">
-      <div class="container">
-          <span class="text-muted">footer</span>
+  <footer class="footer text-center" id="footer" style="background-color: #FFD338;">
+
+    <div class="container pt-1">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-dark">Contacts</a>
+            </li>
+            <li>
+              <a href="#!" class="text-dark">Condition d'utilisation</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+          <a class="fs-1 text-dark" href="#!" role="button">
+            <i class="bi bi-facebook"></i>
+          </a>  
+        </div>
       </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      ©2021 Copyright:
+      <a class="text-reset fw-bold" href="https://findwell.be/">findwell.be</a>
+    </div>
+    <!-- Copyright -->
+
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  
