@@ -109,7 +109,7 @@
               <a href="#!" class="text-dark">Contacts</a>
             </li>
             <li>
-              <a href="#!" class="text-dark">Condition d'utilisation</a>
+              <a href="#!" class="text-dark">Qui sommes-nous ?</a>
             </li>
           </ul>
         </div>
