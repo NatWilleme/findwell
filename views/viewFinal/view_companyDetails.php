@@ -32,31 +32,31 @@
     </nav>
     <?php } ?>
     <div class="row d-flex justify-content-around mt-4">
-        <h1 class="col-5"><?php echo $company->name; ?></h1> 
+        <h1 class="col-12 col-lg-5 text-center fw-bold"><?php echo $company->name; ?></h1> 
         <?php if($messageBtn != "") {?>
-        <span class="col-1"></span>
-        <button onclick="location.href='index.php?viewToDisplay=displayCompanyDetails&favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-5 col-lg-2 " type="button" ><?php echo $messageBtn; ?></button>
+        <span class="col-12 col-lg-3"></span>    
+        <button onclick="location.href='index.php?viewToDisplay=displayCompanyDetails&favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-5 col-lg-2" type="button" ><?php echo $messageBtn; ?></button>
         <?php } else { ?>
-        <span class="col-5"></span>
+        <span class="col-12 col-lg-5"></span>
         <?php } ?>
     </div>
     <div class="row d-flex justify-content-around mb-4 mt-4">
 
         <img class="col-12 col-lg-5 img-fluid"  src="<?php echo $company->image; ?>">
         <div class="col-12 col-lg-5">
-            <h2>Description de l'entreprise:</h2>
+            <h2 class="fw-bold mt-3 mt-lg-0">Description de l'entreprise:</h2>
             <p><?php echo $company->description; ?></p>
             <div class="d-lg-flex">
                 <div class="col-12 col-lg-5">
-                    <h2>Heures d'ouverture:</h2>
+                    <h2 class="fw-bold">Heures d'ouverture:</h2>
                     <p><?php echo $company->hours; ?></p>
                 </div>
                 <span class="col-2"></span>
                 <div class="col-12 col-lg-5">
-                    <h2>Contacts:</h2>
+                    <h2 class="fw-bold">Contacts:</h2>
                     <p>
-                        <b>Mail</b>: <a href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
-                        <b>Téléphone</b>: <?php echo $company->phone; ?>
+                        <b class="fw-bold">Mail</b>: <a href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
+                        <b class="fw-bold">Téléphone</b>: <?php echo $company->phone; ?>
                     </p>
                 </div>
             </div>
@@ -64,65 +64,75 @@
         
         
 
-    </div>
+    <!-- </div>
     
-    <div class="ms-5 me-5">
+    <div class="ms-5 me-5"> -->
         <?php if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) { ?>
         <div class="row d-flex justify-content-around mb-4">
-            <h2>Qu'avez-vous pensez de <?php echo $company->name; ?> ?</h2>
-            <form id="commentForm" action="index.php?viewToDisplay=displayCompanyDetails&newComment=<?php echo $company->id; ?>" method="post" enctype='multipart/form-data'>
-                <textarea class="mb-2" name="newComment" id="newComment" rows="6"  style="width: 100%;" ></textarea><br>
-                <label for="newComment" id="newCommentError"></label><br>
-                <input class="mb-2" type="file" id="img" name="img" accept="image/*"><br>
-                <div class="rating" id="starRating" required> 
-                    <input type="radio" name="rating" value="5" id="5">
-                    <label for="5">☆</label> 
-                    <input type="radio" name="rating" value="4" id="4">
-                    <label for="4">☆</label> 
-                    <input type="radio" name="rating" value="3" id="3">
-                    <label for="3">☆</label> 
-                    <input type="radio" name="rating" value="2" id="2">
-                    <label for="2">☆</label> 
-                    <input type="radio" name="rating" value="1" id="1">
-                    <label for="1">☆</label>
-                </div>
-                <label for="starRating" id="ratingError"></label><br>
-                <input class="btn btn-primary" type="submit" name="submit" id="submit" value="Publier">
-            </form>
+            <div class="col-12 col-lg-5 p-0 mt-3">
+                <h4><i>Qu'avez-vous pensez de <?php echo $company->name; ?> ?</i></h4>
+                <form id="commentForm" action="index.php?viewToDisplay=displayCompanyDetails&newComment=<?php echo $company->id; ?>" method="post" enctype='multipart/form-data'>
+                    <textarea class="" name="newComment" id="newComment" rows="6"  style="width: 100%;" ></textarea>
+                    <label for="newComment" id="newCommentError"></label>
+                    <input class="mt-2" type="file" id="img" name="img" accept="image/*">
+                    <div class="rating" id="starRating" required> 
+                        <input type="radio" name="rating" value="5" id="5">
+                        <label for="5">☆</label> 
+                        <input type="radio" name="rating" value="4" id="4">
+                        <label for="4">☆</label> 
+                        <input type="radio" name="rating" value="3" id="3">
+                        <label for="3">☆</label> 
+                        <input type="radio" name="rating" value="2" id="2">
+                        <label for="2">☆</label> 
+                        <input type="radio" name="rating" value="1" id="1">
+                        <label for="1">☆</label>
+                    </div>
+                    <label for="starRating" id="ratingError"></label>
+                    <input class="btn btn-primary" type="submit" name="submit" id="submit" value="Publier">
+                </form>
+            </div>
+            <div class="col-12 col-lg-5"></div>
         </div>
         <?php } else {?>
-        <div class="row d-flex justify-content-around">
-            <h2 class="col-5 mb-4" style="padding: 12px;">Connectez-vous pour laisser un avis !</h2>
-            <span class="col-5 mb-4"></span>
+        <div class="row d-flex justify-content-around mt-4">
+            <h2 class="col-12 col-lg-5 mb-4 ps-0">Connectez-vous pour laisser un avis !</h2>
+            <span class="col-12 col-lg-5 mb-4"></span>
         </div>
         <?php } ?>
-        <div class="row d-flex justify-content-around mb-4">
+        <div class="row d-flex justify-content-around mb-4 p-0">
+            <span class="col-12 col-lg-5">
             <?php 
                 if ($rating['rate'] == 0) {
-                    echo "<h2>Pas encore de note !</h2>";
+                    echo "<h2 class='fw-bold'>Pas encore de note !</h2>";
                 } else {
-                    echo "<h2>Note globale: ";
+                    echo "<h2 class='col-12 fw-bold'>Note globale: ";
     
                     for ($i=0; $i < 5; $i++) { 
                         if($i < $rating['rate']){
                             echo "<i class='bi bi-star-fill text-warning'></i>";
                         } else echo "<i class='bi bi-star text-warning'></i>";
                     }
+                    echo "</h2>";
                 }
             ?>
+            </span>
+            <span class="col-12 col-lg-5"></span>
         </div>
+        
 
-        <div class="row d-flex justify-content-around mb-4">
-            <h2> Avis (<?php echo count($comments); ?>)</h2>
+
+        <div class="row d-flex justify-content-around mb-4 p-0">
+            <div class="col-12 col-lg-8">
+            <h2 class="mb-4"> Avis (<?php echo count($comments); ?>)</h2>
             <?php 
                 $cpt = 0;
                 foreach ($comments as $comment) {
             ?>
-            <div class="row">
-                <div class="col-12 p-0 ">
+            <div class="row border border-dark mb-2 pt-2">
+                <div class="col-12">
                     <p>
-                        <img src="<?php if($users[$cpt]->image == "") echo "../images/default-profil.jpg"; else echo $users[$cpt]->image; ?>" class="ps-0 pe-0 rounded-circle" style="height:40px;width:40px" alt="">
-                        <?php echo $users[$cpt]->username ?><br>
+                        <img src="<?php if($users[$cpt]->image == "") echo "../images/default-profil.jpg"; else echo $users[$cpt]->image; ?>" class="rounded-circle" style="height:40px;width:40px" alt="">
+                        <span class="ms-2 fw-bold"><?php echo $users[$cpt]->username ?></span><br>
                         <?php 
                             for ($i=0; $i < 5; $i++) { 
                                 if($i < $comment->rating){
@@ -131,10 +141,10 @@
                             }
                         ?>
                         <?php $date = new DateTime($comment->date); echo $date->format('d-m-Y'); ?><br>
-                        <?php echo $comment->comment; ?><br>
+                        <?php echo $comment->comment; ?>
                         <?php if ($comment->image != "") {
                             ?>
-                        <img class="col-12 col-lg-4" src="<?php echo $comment->image; $cpt++; ?>" alt="">
+                        <br><img class="col-12 col-lg-4" src="<?php echo $comment->image; $cpt++; ?>" alt="">
                         <?php } ?>
                     </p>
                 </div>
@@ -142,6 +152,8 @@
             <?php
                 }
             ?>
+            </div>
+            <div class="col-12 col-lg-2"></div>
         </div>
     </div>
     <?php } else { ?>
