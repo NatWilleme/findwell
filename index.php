@@ -59,7 +59,7 @@ try {
             $newPwd = true;
             displayConnexion($alert, $forget = '', $newPwd);
         } else if(isset($_POST['submitForget'])){
-            if(checkIfUserExist($_POST['mail'])){
+            if(checkIfUserExist($_POST['mail']) != 0){
                 sendReinitialisationMail($_POST['mail']);
                 $alert['color'] = "warning";
                 $alert['message'] = "Un mail de réinitialisation a été envoyé à l'adresse : ".$_POST['mail'];
@@ -73,11 +73,14 @@ try {
                 usersManager::updatePwd($_SESSION['mailToChangePwd'], $_POST['password']);
                 $alert['color'] = "success";
                 $alert['message'] = "Votre mot de passe a bien été changé.";
+                displayConnexion($alert);
             } else{
                 $alert['color'] = "danger";
                 $alert['message'] = "Les deux champs de mot de passe ne correspondent pas.";
+                $newPwd = true;
+                displayConnexion($alert, $forget = '', $newPwd);
             }
-            displayConnexion($alert);
+            
         } else{
             displayConnexion($alert);
         }
