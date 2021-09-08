@@ -85,7 +85,7 @@ abstract class UsersManager extends DBManager{
 
     static public function getAllUser(){
         $result = array();
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT * FROM users WHERE type_user LIKE 'admin' OR type_user LIKE 'user'";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);

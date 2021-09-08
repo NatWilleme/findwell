@@ -448,6 +448,7 @@
                         
                     </div>
                 </div>
+                <?php if($userToEdit->type != "company"){ ?>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <h6 class="mt-3 mb-2 text-primary">Type d'utilisateur</h6>
                 </div>
@@ -459,6 +460,7 @@
                         <label for="no">Administrateur</label>
                     </div>
                 </div>
+                <?php } ?>
             </div>
             <div class="row gutters">
             <input style="display: none;" type="text" name="action" id="action" value="editUser">
