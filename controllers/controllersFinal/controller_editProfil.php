@@ -71,27 +71,18 @@ function getSuccessAlertForEditProfil()
     return $alert;
 }
 
-// $user = $_SESSION['user'];
-// if($user->type == "company")
-//     $company = companiesManager::getOneCompanyByMail($_SESSION['user']->mail);
-// if(isset($_POST['submit'])){
-//     if($_POST['submit'] == "update" || $_POST['submit'] == "updateCompany"){
-//         $user = updateAndGetUserInformation();
-//         if($_POST['submit'] == "updateCompany"){
-//             updateCompanyInformation();
-//         }
-//         $_SESSION['user'] = UsersManager::getUser($_SESSION['user']->mail);
-//         if($user->type == "company")
-//             $company = companiesManager::getOneCompanyByMail($_SESSION['user']->mail);
-//         $alert = getSuccessAlert();
-//         unset($_POST['submit']);
-//         displayEditProfil($alert, $user, $company);
-//     } else {
-//         displayEditProfil($alert, $user, $company);
-//     }
-// } else {
-//     displayEditProfil($alert, $user, $company);
-// }
+function getSuccessAlertForChangePwd()
+{
+    $alert['color'] = "success";
+    $alert['message'] = "Votre mot de passe a été changé.";
+    return $alert;
+}
 
+function getFailAlertForChangePwd()
+{
+    $alert['color'] = "danger";
+    $alert['message'] = "Les mots de passes entrés ne correspondent pas.";
+    return $alert;
+}
 
 ?>
