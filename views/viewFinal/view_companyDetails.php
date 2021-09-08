@@ -1,6 +1,6 @@
 <?php
     $title = $company->name;
-    $scripts = "<script src=\"../js/checkEntries/checkEntriesComment.js\"></script>
+    $scripts = "<script src=\"../js/checkEntries/checkEntries_comment.js\"></script>
     <script>
     if ( window.history.replaceState ) {
       window.history.replaceState( null, null, window.location.href );
@@ -73,7 +73,7 @@
                 <h4><i>Qu'avez-vous pensez de <?php echo $company->name; ?> ?</i></h4>
                 <form id="commentForm" action="index.php?viewToDisplay=displayCompanyDetails&newComment=<?php echo $company->id; ?>" method="post" enctype='multipart/form-data'>
                     <textarea class="" name="newComment" id="newComment" rows="6"  style="width: 100%;" ></textarea>
-                    <label for="newComment" id="newCommentError"></label>
+                    <label for="newComment" id="newCommentError"></label><br>
                     <input class="mt-2" type="file" id="img" name="img" accept="image/*">
                     <div class="rating" id="starRating" required> 
                         <input type="radio" name="rating" value="5" id="5">
@@ -87,7 +87,7 @@
                         <input type="radio" name="rating" value="1" id="1">
                         <label for="1">☆</label>
                     </div>
-                    <label for="starRating" id="ratingError"></label>
+                    <label for="starRating" id="ratingError"></label><br>
                     <input class="btn btn-primary" type="submit" name="submit" id="submit" value="Publier">
                 </form>
             </div>
