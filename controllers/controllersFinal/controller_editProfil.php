@@ -43,14 +43,14 @@ function updateCompanyInformation()
     $companyToEdit->__set("phone", $_POST['phone']);
     $companyToEdit->__set("description", $_POST['description']);
     $companyToEdit->__set("hours", $_POST['hours']);
-    if(!empty($_FILES['image']['name'])){
+    if($_FILES['image']['name'] != ""){
         $from = $_FILES['image']['tmp_name'];
         $path = $_FILES['image']['name'];
         //get the extension of file
         $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $files = scandir('../images/upload/photos_profils/');
+        $files = scandir('images/upload/photos_profils/');
         $cptImage = count($files)-1;
-        $to = '../images/upload/photos_profils/profil'.$cptImage.'.'.$ext;
+        $to = 'images/upload/photos_profils/profil'.$cptImage.'.'.$ext;
         move_uploaded_file($from,$to);
         $companyToEdit->__set('image',$to);
     } else {

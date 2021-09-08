@@ -203,6 +203,7 @@ try {
                     if(isset($_POST['accept'])) {
                         confirmCompany();
                         sendAcceptMail($_POST['accept']);
+                        $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
                     } else if(isset($_POST['delete'])) {
                         sendRejectMail($_POST['delete'], $_POST['messageRefus']);
                     }
@@ -248,6 +249,7 @@ try {
     // Page 3 Inscription pour entreprise
     } else if(isset($_POST['submitCompany'])){
         saveNewCompanySession();
+        saveNewUserSession();
         $domainePage['value'] = true;
         $domainePage['categoriesGrosTravaux'] = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
         $domainePage['categoriesPetitsTravaux'] = categoriesManager::getAllSubcategoriesFor('Petits Travaux');

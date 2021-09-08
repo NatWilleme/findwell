@@ -37,7 +37,7 @@
 
     <!-- Premier écran d'inscription en tant qu'entreprise -->
     <?php } else if($companyForm != ''){ ?>
-    <form id="formCompany" class="mb-3 mt-3" action="index.php" method="post">
+    <form id="formCompany" class="mb-3 mt-3" action="index.php" method="post" enctype='multipart/form-data'>
         <img class="mb-4" src="../images/logo1.png" alt="" width="120">
         <h1 class="h3 mb-3 fw-normal">Enregistrement de vos informations</h1>
 
@@ -89,6 +89,12 @@
                                     <label for="tva">Numéro de TVA</label>
                                     <input type="text" class="form-control" name="tva" id="tva" placeholder="Entrez votre numéro de TVA" required>
                                     <p id="errorTva"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="image">Photo de l'entreprise</label>
+                                    <input type="file" class="form-control" name="image" id="image" accept=".jpg, .png">
                                 </div>
                             </div>
                         </div>

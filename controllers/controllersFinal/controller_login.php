@@ -21,7 +21,7 @@ function registerNewUser($newUser){
 function registerNewCompany($newUser, $newCompany){
     $user = UsersManager::checkIfExist($newUser->mail);
     if($user['count'] == 0){
-        $operationSuccess1 = UsersManager::addUser($newUser);
+        $operationSuccess1 = UsersManager::addUserWithFullInformation($newUser);
         $operationSuccess2 = companiesManager::addCompany($newCompany);
         if($operationSuccess1 && $operationSuccess2){
             $alert['color'] = "success";
@@ -93,9 +93,32 @@ function saveNewCompanySession()
     $_SESSION['newCompany']->__set('street', $_POST['street']);
     $_SESSION['newCompany']->__set('number', $_POST['number']);
     $_SESSION['newCompany']->__set('postalCode', $_POST['zip']);
-    $_SESSION['newCompany']->__set('image', "");
+    if($_FILES['image']['name'] != ""){
+        $from = $_FILES['image']['tmp_name'];
+        $path = $_FILES['image']['name'];
+        //get the extension of file
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $files = scandir('images/upload/photos_profils/');
+        $cptImage = count($files)-1;
+        $to = 'images/upload/photos_profils/profil'.$cptImage.'.'.$ext;
+        move_uploaded_file($from,$to);
+        $_SESSION['newCompany']->__set('image',$to);
+    }
     $_SESSION['newCompany']->__set('state', $_POST['state']);
     $_SESSION['newCompany']->__set('tva', $_POST['tva']);
+}
+
+function saveNewUserSession()
+{
+    $_SESSION['newUser']->__set('username', $_POST['name']);
+    $_SESSION['newUser']->__set('phone', $_POST['phone']);
+    $_SESSION['newUser']->__set('hours', nl2br($_POST['hours'], true));
+    $_SESSION['newUser']->__set('city', $_POST['city']);
+    $_SESSION['newUser']->__set('street', $_POST['street']);
+    $_SESSION['newUser']->__set('number', $_POST['number']);
+    $_SESSION['newUser']->__set('zip', $_POST['zip']);
+    $_SESSION['newUser']->__set('image',$_SESSION['newCompany']->image);
+    $_SESSION['newUser']->__set('state', $_POST['state']);
 }
 
 function validUser($idUserToConfirm)
