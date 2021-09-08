@@ -7,7 +7,7 @@
     
     <?php if(!isset($_GET['view'])) { ?>
     <div class="row d-flex mt-5 align-items-center">
-        <div class="col-6 ">
+        <div class="col-12 col-lg-6">
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companies">Gérer les entreprises certifiées</a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises en attente de certification <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=ads">Gérer les publicités</a><br>
@@ -15,8 +15,8 @@
             <a class="btn btn-warning p-3 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=stats">Accéder aux statistiques</a>
         </div>
         <div class="col-1"></div>
-        <div class="col-5">
-            <img src="images/settings.png" height="600" alt="">
+        <div class="col-12 col-lg-5">
+            <img src="images/settings.png" class="d-none d-lg-block" height="600" alt="">
         </div>
     </div>
     
@@ -123,6 +123,12 @@
                     <div class="form-group">
                         <label for="phone">Téléphone</label>
                         <input type="text" class="form-control" name="phone" id="phone" value="<?php echo $companyToConfirm->phone; ?>" disabled readonly <?php if($companyToConfirm->phone == "") echo "style=\"background-color:rgb(255,0,0,0.4);\""; ?>>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="profil">Photo de profil</label><br>
+                        <img class="border" style="max-height: 200px; max-width: 400px; width: auto; height: auto;" name="profil" id="profil" src="<?php echo $companyToConfirm->image; ?>" alt="">
                     </div>
                 </div>
             </div>
@@ -291,6 +297,12 @@
                         <input type="text" class="form-control" name="phone" id="phone"  placeholder="Numéro de téléphone" value="<?php echo $companyToEdit->phone; ?>">
                     </div>
                 </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="profil">Photo de profil</label><br>
+                        <img class="border" style="max-height: 200px; max-width: 400px; width: auto; height: auto;" name="profil" id="profil" src="<?php echo $companyToEdit->image; ?>" alt="">
+                    </div>
+                </div>
             </div>
             <div class="row gutters">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -398,6 +410,12 @@
                     <div class="form-group">
                         <label for="phone">Téléphone</label>
                         <input type="text" class="form-control" name="phone" id="phone"  placeholder="Numéro de téléphone" value="<?php echo $userToEdit->phone; ?>">
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="profil">Photo de profil</label><br>
+                        <img class="border" style="max-height: 200px; max-width: 400px; width: auto; height: auto;" name="profil" id="profil" src="<?php echo $userToEdit->image; ?>" alt="">
                     </div>
                 </div>
             </div>
