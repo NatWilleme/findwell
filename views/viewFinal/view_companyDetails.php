@@ -144,7 +144,7 @@
                         <?php echo $comment->comment; ?>
                         <?php if ($comment->image != "") {
                             ?>
-                        <br><img class="col-12 col-lg-4" src="<?php echo $comment->image; $cpt++; ?>" alt="">
+                        <br><img class="col-12 col-lg-4" src="<?php echo $comment->image; $cpt++; ?>" style="max-height:500px; max-width:500px; height:auto; width:auto;" alt="">
                         <?php } ?>
                     </p>
                 </div>
