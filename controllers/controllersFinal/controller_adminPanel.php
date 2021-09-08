@@ -138,7 +138,7 @@ function getCompanyToConfirm(){
 function sendAcceptMail($idCompany)
 {
     $mailTo = companiesManager::getOneCompany($idCompany)->mail;
-    $content = "Félicitation ! Votre entreprise a été accepté sur la plateforme Findwell !<br>Vous pouvez dès à présent accéder à la page de paiement afin de figurer sur la plateforme Findwell en suivant ce lien: <a href=\"findwell/index.php?viewToDisplay=displayPayment\">Cliquez ici</a>";
+    $content = "Félicitation ! Votre entreprise a été accepté sur la plateforme Findwell !<br>Vous pouvez dès à présent accéder à la page de paiement afin de figurer sur la plateforme Findwell en suivant ce lien: <a href=\"findwell.be/index.php?viewToDisplay=displayPayment\">Cliquez ici</a>";
     $url = '';
     $object = "Votre entreprise a été ajouté avec succès sur Findwell";
     require_once('models/sendEmail.php');
