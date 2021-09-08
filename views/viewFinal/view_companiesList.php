@@ -24,7 +24,7 @@
             ?>
             
         <div class="card border border-dark pt-2 ms-3 me-3" style="width: 18rem;">
-            <img src="<?php echo $company->image; ?>" class="card-img-top" alt="...">
+            <img src="<?php echo $company->image; ?>" style="max-height:200px; max-width:280px; height:auto; width:auto;" class="card-img-top" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><b><?php echo $company->name; ?></b></h5>
                 <p class="card-text">
