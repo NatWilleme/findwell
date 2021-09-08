@@ -23,7 +23,7 @@ function addComment($idCompany, $idUser)
 {
     $newComment = new Comment();
     $newComment->__set('comment',$_POST['newComment']);
-    if(isset($_FILES['img'])){
+    if(isset($_FILES['img']) && $_FILES['img'] != ""){
         $from = $_FILES['img']['tmp_name'];
         $to = 'images/upload/'.$_FILES['img']['name'];
         move_uploaded_file($from,$to);
