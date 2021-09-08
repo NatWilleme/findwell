@@ -59,7 +59,7 @@ try {
             $newPwd = true;
             displayConnexion($alert, $forget = '', $newPwd);
         } else if(isset($_POST['submitForget'])){
-            if(checkIfUserExist($_POST['mail']) != 0){
+            if(checkIfUserExist($_POST['mail'])['count'] != 0){
                 sendReinitialisationMail($_POST['mail']);
                 $alert['color'] = "warning";
                 $alert['message'] = "Un mail de réinitialisation a été envoyé à l'adresse : ".$_POST['mail'];
