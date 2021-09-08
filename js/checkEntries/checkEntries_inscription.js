@@ -1,6 +1,6 @@
 if (document.getElementById("formRegister") != null) {
     document.getElementById("formRegister").addEventListener("submit", function (e) {
-        
+        var regexPassword = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
         document.getElementById('errorMail').innerHTML = "";
         document.getElementById('errorPwd').innerHTML = "";
         
@@ -10,9 +10,9 @@ if (document.getElementById("formRegister") != null) {
             document.getElementById('errorMail').style.color = "red";
         }
 
-        if(document.getElementById("password").value == "") {
+        if(document.getElementById("password").value == "" || !regexPassword.test(document.getElementById("password").value)) {
             e.preventDefault();
-            document.getElementById('errorPwd').innerHTML = "Veuillez entrer un mot de passe.";
+            document.getElementById('errorPwd').innerHTML = "Le mot de passe doit contenir minimum 8 caractères avec une majuscule, une minuscule et un chiffre.";
             document.getElementById('errorPwd').style.color = "red";
         }
 
