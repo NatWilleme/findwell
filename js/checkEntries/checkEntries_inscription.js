@@ -1,31 +1,12 @@
 if (document.getElementById("formRegister") != null) {
     document.getElementById("formRegister").addEventListener("submit", function (e) {
         var regexPassword = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
-        document.getElementById('errorMail').innerHTML = "";
         document.getElementById('errorPwd').innerHTML = "";
-        
-        if(document.getElementById("mail").value == "") {
-            e.preventDefault();
-            document.getElementById('errorMail').innerHTML = "Veuillez entrer une adresse mail.";
-            document.getElementById('errorMail').style.color = "red";
-        }
 
         if(document.getElementById("password").value == "" || !regexPassword.test(document.getElementById("password").value)) {
             e.preventDefault();
             document.getElementById('errorPwd').innerHTML = "Le mot de passe doit contenir minimum 8 caractères avec une majuscule, une minuscule et un chiffre.";
             document.getElementById('errorPwd').style.color = "red";
-        }
-
-        if(document.getElementById("name").value == "") {
-            e.preventDefault();
-            document.getElementById('errorName').innerHTML = "Veuillez entrer un nom pour l'entreprise.";
-            document.getElementById('errorName').style.color = "red";
-        }
-
-        if(document.getElementById("phone").value == "") {
-            e.preventDefault();
-            document.getElementById('errorPhone').innerHTML = "Veuillez entrer un numéro de téléphone pour l'entreprise.";
-            document.getElementById('errorPhone').style.color = "red";
         }
 
     })

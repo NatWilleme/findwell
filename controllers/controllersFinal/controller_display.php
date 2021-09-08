@@ -28,7 +28,7 @@ function displayConnexion($alert, $forget = '', $newPwd = '') {
     require_once('views/viewFinal/view_connexion.php');
 }
 
-function displayEditProfil($alert, $user, $company, $notification) {
+function displayEditProfil($alert, $user, $company, $notification, $changePwd = '') {
     require_once('views/viewFinal/view_editProfil.php');
 }
 

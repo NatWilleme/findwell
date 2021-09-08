@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : mer. 08 sep. 2021 à 15:39
--- Version du serveur : 10.3.25-MariaDB-0+deb10u1
--- Version de PHP : 7.3.27-1~deb10u1
+-- Hôte : 127.0.0.1:3306
+-- Généré le : mer. 08 sep. 2021 à 18:34
+-- Version du serveur : 5.7.31
+-- Version de PHP : 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `findw1710907`
+-- Base de données : `findwell`
 --
 
 -- --------------------------------------------------------
@@ -27,22 +27,14 @@ SET time_zone = "+00:00";
 -- Structure de la table `ads`
 --
 
-CREATE TABLE `ads` (
-  `id_ads` int(3) NOT NULL,
+DROP TABLE IF EXISTS `ads`;
+CREATE TABLE IF NOT EXISTS `ads` (
+  `id_ads` int(3) NOT NULL AUTO_INCREMENT,
   `id_comp` int(3) NOT NULL,
   `image_ads` varchar(100) NOT NULL,
-  `display_ads` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `ads`
---
-
-INSERT INTO `ads` (`id_ads`, `id_comp`, `image_ads`, `display_ads`) VALUES
-(1, 1, '../images/upload/advertising/ad_1.jpg', 1),
-(2, 3, '../images/upload/advertising/ad_2.jpg', 1),
-(3, 5, '../images/upload/advertising/ad_3.jpg', 1),
-(4, 6, '../images/upload/advertising/ad_4.jpg', 1);
+  `display_ads` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_ads`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -50,9 +42,12 @@ INSERT INTO `ads` (`id_ads`, `id_comp`, `image_ads`, `display_ads`) VALUES
 -- Structure de la table `appartient`
 --
 
-CREATE TABLE `appartient` (
+DROP TABLE IF EXISTS `appartient`;
+CREATE TABLE IF NOT EXISTS `appartient` (
   `id_cat` int(2) NOT NULL,
-  `id_comp` int(3) NOT NULL
+  `id_comp` int(3) NOT NULL,
+  PRIMARY KEY (`id_cat`,`id_comp`),
+  KEY `id_cat` (`id_cat`,`id_comp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -74,15 +69,12 @@ INSERT INTO `appartient` (`id_cat`, `id_comp`) VALUES
 (6, 7),
 (7, 2),
 (7, 7),
-(7, 13),
 (8, 2),
 (8, 5),
 (9, 5),
 (9, 9),
 (11, 12),
-(22, 13),
 (29, 11),
-(29, 13),
 (30, 11),
 (31, 11),
 (34, 11);
@@ -93,12 +85,14 @@ INSERT INTO `appartient` (`id_cat`, `id_comp`) VALUES
 -- Structure de la table `categories`
 --
 
-CREATE TABLE `categories` (
-  `id_cat` int(2) NOT NULL,
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id_cat` int(2) NOT NULL AUTO_INCREMENT,
   `name_cat` varchar(50) NOT NULL,
   `parent_cat` varchar(20) NOT NULL,
-  `image_cat` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `image_cat` varchar(250) NOT NULL,
+  PRIMARY KEY (`id_cat`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `categories`
@@ -150,16 +144,18 @@ INSERT INTO `categories` (`id_cat`, `name_cat`, `parent_cat`, `image_cat`) VALUE
 -- Structure de la table `comments`
 --
 
-CREATE TABLE `comments` (
-  `id_com` int(11) NOT NULL,
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id_com` int(11) NOT NULL AUTO_INCREMENT,
   `comment_com` varchar(500) NOT NULL,
   `image_com` varchar(500) NOT NULL,
   `rate_com` int(1) NOT NULL,
   `date_com` date DEFAULT NULL,
   `id_comp` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `deleted_com` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `deleted_com` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_com`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comments`
@@ -176,8 +172,9 @@ INSERT INTO `comments` (`id_com`, `comment_com`, `image_com`, `rate_com`, `date_
 -- Structure de la table `companies`
 --
 
-CREATE TABLE `companies` (
-  `id_comp` int(3) NOT NULL,
+DROP TABLE IF EXISTS `companies`;
+CREATE TABLE IF NOT EXISTS `companies` (
+  `id_comp` int(3) NOT NULL AUTO_INCREMENT,
   `name_comp` varchar(50) NOT NULL,
   `description_comp` varchar(500) NOT NULL,
   `hours_comp` varchar(300) NOT NULL,
@@ -190,11 +187,12 @@ CREATE TABLE `companies` (
   `phone_comp` varchar(15) NOT NULL,
   `image_comp` varchar(200) NOT NULL,
   `tva_comp` varchar(25) NOT NULL,
-  `deleted_comp` tinyint(1) NOT NULL DEFAULT 0,
-  `certified_comp` tinyint(1) NOT NULL DEFAULT 0,
-  `hasPaid_comp` tinyint(1) NOT NULL DEFAULT 0,
-  `acceptPending_comp` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `deleted_comp` tinyint(1) NOT NULL DEFAULT '0',
+  `certified_comp` tinyint(1) NOT NULL DEFAULT '0',
+  `hasPaid_comp` tinyint(1) NOT NULL DEFAULT '0',
+  `acceptPending_comp` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_comp`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `companies`
@@ -207,13 +205,12 @@ INSERT INTO `companies` (`id_comp`, `name_comp`, `description_comp`, `hours_comp
 (4, 'entreprise 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Chapelle-lez-Herlaimont', 'Rue Solvay', '13', 7160, 'Belgique', 'entreprise4@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 1, 0),
 (5, 'entreprise 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\r\nmardi : 08:00 - 18:00<br>\r\nmercredi : 08:00 - 18:00<br>\r\njeudi : 08:00 - 18:00<br>\r\nvendredi : 08:00 - 18:00<br>\r\nsamedi : fermé<br>\r\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, 'Belgique', 'entreprise5@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 1, 0),
 (6, 'entreprise 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\r\nmardi : 08:00 - 18:00<br>\r\nmercredi : 08:00 - 18:00<br>\r\njeudi : 08:00 - 18:00<br>\r\nvendredi : 08:00 - 18:00<br>\r\nsamedi : fermé<br>\r\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, 'Belgique', 'entreprise6@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 1, 0),
-(7, 'entreprise 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, 'Belgique', 'entreprise7@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 0, 0, 1),
+(7, 'entreprise 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, 'Belgique', 'entreprise7@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 1, 0, 0),
 (8, 'entreprise 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, 'Belgique', 'entreprise8@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 0, 0, 1),
 (9, 'entreprise 9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, 'Belgique', 'entreprise9@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 0, 0, 1),
 (10, 'entreprise 10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae sapien nec erat bibendum ultrices id interdum lectus. Vivamus eleifend sapien ipsum, a rutrum quam vestibulum ut. Phasellus elementum felis in sollicitudin ullamcorper. Donec mollis arcu elit, vitae interdum metus ultrices sit amet. Maecenas mattis a neque eget consequat. Curabitur metus lectus, tristique sed libero quis, consectetur venenatis sapien. Nam quis neque vitae proin.', 'lundi : 08:00 - 18:00<br>\nmardi : 08:00 - 18:00<br>\nmercredi : 08:00 - 18:00<br>\njeudi : 08:00 - 18:00<br>\nvendredi : 08:00 - 18:00<br>\nsamedi : fermé<br>\ndimanche : fermé', 'Charleroi', 'rue Neuve', '71', 6000, 'Belgique', 'entreprise10@gmail.com', '0485/96.54.25', 'https://vss.astrocenter.fr/habitatpresto/pictures/29568772-adobestock-81895775.jpeg', 'BE0123456789', 0, 0, 0, 1),
-(11, 'Mon entreprise', 'Ceci est une description de mon entreprise', 'Tous les jours de 10h à 18h', 'Trazegnies', 'Rue destrée', '145', 6183, 'Belgique', 'test4@gmail.com', '0488123456', '../images/upload/photos_profils/profil3.png', 'BE0987654321', 0, 1, 1, 0),
-(12, 'Johnny et fils', 'Entreprise de père en fils', '08h -> 18h', 'Charleroi', 'Rue destrée', '123', 7800, 'Belgique', 'nathanwilleme@gmail.com', '0485888888', '', 'BE0123456789', 0, 1, 0, 0),
-(13, 'Moermano\'s Club', 'On est des motards ^^', 'h24', 'Marchienne Au Pont', 'Place Verstappen', '15', 6030, 'Belgique', 'nnageik@gmail.com', '0468367437', '../images/upload/photos_profils/profil10.png', '123', 1, 1, 1, 0);
+(11, 'Mon entreprise', 'Ceci est une description de mon entreprise', 'Tous les jours de 10h à 18h', 'Trazegnies', 'Rue destrée', '145', 6183, 'Belgique', 'test4@gmail.com', '0488123456', 'images/upload/photos_profils/profil5.png', 'BE0987654321', 0, 1, 1, 0),
+(12, 'Johnny et fils', 'Entreprise de père en fils', '08h -> 18h', 'Charleroi', 'Rue destrée', '123', 7800, 'Belgique', 'nathanwilleme@gmail.com', '0485888888', '', 'BE0123456789', 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -221,9 +218,11 @@ INSERT INTO `companies` (`id_comp`, `name_comp`, `description_comp`, `hours_comp
 -- Structure de la table `favoris`
 --
 
-CREATE TABLE `favoris` (
+DROP TABLE IF EXISTS `favoris`;
+CREATE TABLE IF NOT EXISTS `favoris` (
   `id_user` int(20) NOT NULL,
-  `id_comp` int(3) NOT NULL
+  `id_comp` int(3) NOT NULL,
+  PRIMARY KEY (`id_user`,`id_comp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -243,8 +242,9 @@ INSERT INTO `favoris` (`id_user`, `id_comp`) VALUES
 -- Structure de la table `users`
 --
 
-CREATE TABLE `users` (
-  `id_user` int(20) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id_user` int(20) NOT NULL AUTO_INCREMENT,
   `username_user` varchar(30) DEFAULT NULL,
   `password_user` varchar(100) NOT NULL,
   `mail_user` varchar(50) NOT NULL,
@@ -256,101 +256,20 @@ CREATE TABLE `users` (
   `zip_user` varchar(6) DEFAULT NULL,
   `image_user` varchar(500) DEFAULT NULL,
   `type_user` varchar(10) DEFAULT NULL,
-  `confirmed_user` tinyint(1) NOT NULL DEFAULT 0,
-  `code_user` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `confirmed_user` tinyint(1) NOT NULL DEFAULT '0',
+  `code_user` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id_user`, `username_user`, `password_user`, `mail_user`, `phone_user`, `street_user`, `number_user`, `city_user`, `state_user`, `zip_user`, `image_user`, `type_user`, `confirmed_user`, `code_user`) VALUES
-(1, 'Eric François', '$2y$10$6O.lwTyZp5TIc4WTmLNImuY84Z7WZWx4Y0Bti7icPSnAlVroHdpZW', 'test@gmail.com', '0475123456', 'Rue du bois', 40, 'Charleroi', 'Belgique', '6000', 'images/upload/photos_profils/profil8.png', 'user', 1, ''),
-(2, 'Mon entreprise', '$2y$10$OOXrcWaOpclDPtXMal.sSuZh9qIPCHk6YOMKUbebbAhhphrx188CS', 'test4@gmail.com', '0488123456', 'Rue destrée', 145, 'Trazegnies', 'Belgique', '6183', '../images/upload/photos_profils/profil3.png', 'company', 1, '6113e3e87bd7a'),
-(3, 'Mon Prénom', '$2y$10$YTN53VBrKW54W78WUp6rbu545Ckq8iKNLyMfnToueCDhTODhDZu1q', 'la198444@student.helha.be', '0477111111', 'Rue Albert 1er', 12, 'Gosselies', 'Belgique', '6254', 'images/upload/photos_profils/profil6.png', 'user', 1, '6124c5cda1de3'),
-(4, 'Nathan Willeme', '$2y$10$1OTfAkEC.WKgHEcS4tHJ5ejcX1HfkWJxA/Ia6qViZ7s6ICaPPLC8S', 'nathanwilleme@gmail.com', '0496814072', 'Rue de gosselies', 60, 'Trazegnies', 'Belgique', '6183', 'images/upload/photos_profils/profil13.png', 'admin', 1, '6138aac6b68d2'),
-(6, 'Moermano\'s Club', '$2y$10$cLdsGFl7io3WSa0x8O7PVeym54ht33hBTrRHV6.3bLljU7cU3Dfbq', 'nnageik@gmail.com', '0468367437', 'Place Verstappen', 15, 'Marchienne Au Pont', 'Belgique', '6030', 'images/upload/photos_profils/profil10.png', 'company', 1, '6138b571c0499');
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `ads`
---
-ALTER TABLE `ads`
-  ADD PRIMARY KEY (`id_ads`);
-
---
--- Index pour la table `appartient`
---
-ALTER TABLE `appartient`
-  ADD PRIMARY KEY (`id_cat`,`id_comp`),
-  ADD KEY `id_cat` (`id_cat`,`id_comp`);
-
---
--- Index pour la table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id_cat`);
-
---
--- Index pour la table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id_com`);
-
---
--- Index pour la table `companies`
---
-ALTER TABLE `companies`
-  ADD PRIMARY KEY (`id_comp`);
-
---
--- Index pour la table `favoris`
---
-ALTER TABLE `favoris`
-  ADD PRIMARY KEY (`id_user`,`id_comp`);
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `ads`
---
-ALTER TABLE `ads`
-  MODIFY `id_ads` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT pour la table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id_cat` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
--- AUTO_INCREMENT pour la table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `id_com` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT pour la table `companies`
---
-ALTER TABLE `companies`
-  MODIFY `id_comp` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id_user` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+(1, 'Eric François', '$2y$10$6O.lwTyZp5TIc4WTmLNImuY84Z7WZWx4Y0Bti7icPSnAlVroHdpZW', 'test@gmail.com', '0475123456', 'Rue du bois', 40, 'Charleroi', NULL, '6000', 'images/upload/photos_profils/profil5.png', 'user', 1, ''),
+(2, 'Mon entreprise', '$2y$10$OOXrcWaOpclDPtXMal.sSuZh9qIPCHk6YOMKUbebbAhhphrx188CS', 'test4@gmail.com', '0488123456', 'Rue destrée', 145, 'Trazegnies', 'Belgique', '6183', 'images/upload/photos_profils/profil5.png', 'company', 1, '6113e3e87bd7a'),
+(3, 'Marc Henry', '$2y$10$YTN53VBrKW54W78WUp6rbu545Ckq8iKNLyMfnToueCDhTODhDZu1q', 'la198444@student.helha.be', '0477111111', 'Rue Albert 1er', 12, 'Gosselies', 'Belgique', '6254', 'images/upload/photos_profils/profil3.png', 'user', 1, '6124c5cda1de3'),
+(4, 'Nathan Willeme', '$2y$10$1OTfAkEC.WKgHEcS4tHJ5ejcX1HfkWJxA/Ia6qViZ7s6ICaPPLC8S', 'nathanwilleme@gmail.com', '0496814072', 'Rue de gosselies', 60, 'Trazegnies', 'Belgique', '6183', 'images/upload/photos_profils/profil5.png', 'admin', 1, '6138aac6b68d2');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

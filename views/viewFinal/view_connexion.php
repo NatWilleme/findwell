@@ -54,26 +54,31 @@
         </form>
     </main>
     <?php } else if ($newPwd != ''){?>
+        <?php if(!isset($_GET['code'])){ ?>
+            <h1>Vous ne pouvez pas modifier ce mot de passe</h1>
+        <?php } else { ?>
         <main class="form-signin">
-        <form id="formLogin" method="post" action="index.php?viewToDisplay=displayConnexion">
+        
+        <form id="formPassword" method="post" action="index.php?viewToDisplay=displayConnexion">
             <img class="mb-4" src="../images/logo1.png" alt="" width="120">
             <h1 class="h3 mb-3 fw-normal">Réinitialisation du mot de passe</h1>
-
-            <div class="form-floating">
+            <input type="text" class="d-none" value="<?php echo $_GET['mail']; ?>" name="mail" id="mail">
+            <input type="text" class="d-none" value="<?php echo $_GET['code']; ?>" name="code" id="code">
+            <div class="form-floating mb-2">
                 <input type="password" class="form-control" id="password" name="password" required>
                 <label for="floatingPassword">Mot de passe</label>
-                <p for="floatingInput" id="errorPwd"></p>
             </div>
             <div class="form-floating ">
                 <input type="password" class="form-control" id="passwordVerif" name="passwordVerif"  required>
                 <label for="floatingPassword">Vérification du mot de passe</label>
-                <p id="errorPwdVerif"></p>
+                <p id="errorPwd"></p>
             </div>
 
             <button class="w-100 btn btn-lg btn-primary" name="submitReinitialisation" type="submit">Réinitialiser le mot de passe</button>
         </form>
+        
     </main>
-    <?php } ?>
+    <?php }} ?>
 </div>
 
 <?php

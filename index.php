@@ -60,7 +60,8 @@ try {
             displayConnexion($alert, $forget = '', $newPwd);
         } else if(isset($_POST['submitForget'])){
             if(checkIfUserExist($_POST['mail'])['count'] != 0){
-                sendReinitialisationMail($_POST['mail']);
+                $user = UsersManager::getUser($_POST['mail']);
+                sendReinitialisationMail($user->mail, $user->code);
                 $alert['color'] = "warning";
                 $alert['message'] = "Un mail de réinitialisation a été envoyé à l'adresse : ".$_POST['mail'];
             } else {
@@ -69,18 +70,23 @@ try {
             }
             displayConnexion($alert);
         } else if(isset($_POST['submitReinitialisation'])){
-            if($_POST['password'] == $_POST['passwordVerif']){
-                usersManager::updatePwd($_SESSION['mailToChangePwd'], $_POST['password']);
-                $alert['color'] = "success";
-                $alert['message'] = "Votre mot de passe a bien été changé.";
-                displayConnexion($alert);
-            } else{
-                $alert['color'] = "danger";
-                $alert['message'] = "Les deux champs de mot de passe ne correspondent pas.";
+            $user = usersManager::getUser($_POST['mail']);
+            if($user->code == $_POST['code']){
+                if($_POST['password'] == $_POST['passwordVerif']){
+                    usersManager::updatePwd($_SESSION['mailToChangePwd'], $_POST['password']);
+                    $alert['color'] = "success";
+                    $alert['message'] = "Votre mot de passe a bien été changé.";
+                    displayConnexion($alert);
+                } else{
+                    $alert['color'] = "danger";
+                    $alert['message'] = "Les deux champs de mot de passe ne correspondent pas.";
+                    $newPwd = true;
+                    displayConnexion($alert, $forget = '', $newPwd);
+                }
+            } else {
                 $newPwd = true;
                 displayConnexion($alert, $forget = '', $newPwd);
             }
-            
         } else{
             displayConnexion($alert);
         }
@@ -133,6 +139,17 @@ try {
                     $company = companiesManager::getOneCompanyByMail($_SESSION['user']->mail);
                 $alert = getSuccessAlertForEditProfil();
                 unset($_POST['submit']);
+                displayEditProfil($alert, $user, $company, $notification);
+            } else if($_POST['submit'] == "changePwd") {
+                $changePwd = true;
+                displayEditProfil($alert, $user, $company, $changePwd, $notification);
+            } else if($_POST['submit'] == "acceptChangePwd") {
+                if($_POST['password'] == $_POST['passwordVerif']){
+                    usersManager::updatePwd($_SESSION['user']->mail, $_POST['password']);
+                    $alert = getSuccessAlertForChangePwd();
+                } else {
+                    $alert = getFailAlertForChangePwd();
+                }
                 displayEditProfil($alert, $user, $company, $notification);
             } else {
                 displayEditProfil($alert, $user, $company, $notification);

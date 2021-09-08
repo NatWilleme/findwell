@@ -17,7 +17,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php } ?>
-    <?php if($user->type == "user" || $user->type == "admin") { ?>
+    <?php if($changePwd == ''){ ?>
+        <?php if($user->type == "user" || $user->type == "admin") { ?>
     <form action="index.php?viewToDisplay=displayEditProfil" method="post" enctype='multipart/form-data'>
         <div class="row gutters">
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
@@ -106,11 +107,10 @@
                             </div>
                         </div>
                         <div class="row gutters mt-2 mb-4">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="text-right">
-                                    <button type="submit" id="submit" name="submit" value="cancel" class="btn btn-secondary">Annuler</button>
-                                    <button type="submit" id="submit" name="submit" value="update" class="btn btn-primary">Modifier</button>
-                                </div>
+                            <div class="col-12">
+                                <button type="submit" id="submit" name="submit" value="cancel" class="btn btn-secondary">Annuler</button>
+                                <button type="submit" id="submit" name="submit" value="update" class="btn btn-primary">Modifier</button>
+                                <button type="submit" id="submit" name="submit" value="changePwd" class="btn btn-warning">Changer de mot de passe</button>
                             </div>
                         </div>
                         <input style="display: none;" type="text" name="imageOld" id="imageOld" value="<?php if($user->image != "") echo $user->image; else echo "../images/default-profil.jpg";?>">
@@ -239,6 +239,7 @@
                                 <div class="text-right">
                                     <button type="submit" id="submit" name="submit" value="cancelCompany" class="btn btn-secondary">Annuler</button>
                                     <button type="submit" id="submit" name="submit" value="updateCompany" class="btn btn-primary">Modifier</button>
+                                    <button type="changePwd" class="btn btn-secondary">Changer de mot de passe</button>
                                 </div>
                             </div>
                         </div>
@@ -249,6 +250,22 @@
         </div>
     </form>
 
+    <?php }} else {?>
+        <main style="width: 100%; max-width: 600px; margin: auto;" class="mt-5">
+        <form id="formChangePwd" action="index.php?viewToDisplay=displayEditProfil" method="post">
+            <div class="form-floating mb-2">
+                <input type="password" class="form-control" id="password" name="password">
+                <label for="floatingPassword">Nouveau mot de passe</label>
+            </div>
+            <div class="form-floating ">
+                <input type="password" class="form-control" id="passwordVerif" name="passwordVerif">
+                <label for="floatingPassword">Vérification du nouveau mot de passe</label>
+                <p id="errorPwd"></p>
+            </div>
+            <button type="submit" name="submit" id="acceptChangePwd" value="acceptChangePwd" class="btn btn-primary">Confirmer</button>
+            <button type="submit" name="submit" value="cancelChangePwd" class="btn btn-secondary">Annuler</button>
+        </form>
+        </main>
     <?php } ?>
 </div>
 
