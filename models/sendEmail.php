@@ -13,11 +13,11 @@ try{
     $mail->Port = 587;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->SMTPAuth = true;
-    $mail->Username = "contact@findwell.be";
-    $mail->Password = "bT8-dXmC8duy91!";
+    $mail->Username = "noreply@findwell.be";
+    $mail->Password = "dF4-zZ8f$4TsSJ-";
 
 
-    $mail->setFrom("contact@findwell.be", 'FindWell');
+    $mail->setFrom("noreply@findwell.be", 'FindWell');
     $mail->addAddress($mailTo);
 
     $mail->Subject = $object;

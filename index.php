@@ -239,7 +239,7 @@ try {
             $alert = registerNewUser($_SESSION['newUser']);
             $_SESSION['newUser'] = usersManager::getUser($_SESSION['newUser']->mail);
             sendConfirmationMail();
-            homePage($notification);
+            displayConnexion($alert);
         } else {
             $_SESSION['newUser']->__set('type', 'company');
             $companyForm = true;
@@ -280,6 +280,10 @@ try {
         $user = usersManager::getUserByID($idUserToConfirm);
         if($user->code == $code){
             $alert = validUser($idUserToConfirm);
+            displayConnexion($alert);
+        } else {
+            $alert['color'] = "danger";
+            $alert['message'] = "Une erreur est survenue lors de l'activation de votre compte. Si le problème subsiste, contactez-nous.";
             displayConnexion($alert);
         }
     }
