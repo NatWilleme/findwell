@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 08 sep. 2021 à 18:34
+-- Généré le : jeu. 09 sep. 2021 à 17:25
 -- Version du serveur : 5.7.31
 -- Version de PHP : 8.0.6
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `ads` (
   `image_ads` varchar(100) NOT NULL,
   `display_ads` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_ads`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -99,44 +99,44 @@ CREATE TABLE IF NOT EXISTS `categories` (
 --
 
 INSERT INTO `categories` (`id_cat`, `name_cat`, `parent_cat`, `image_cat`) VALUES
-(1, 'Construction gros oeuvre fermé', 'Gros travaux', '../images/imagesCategories/grosOeuvre.jpg'),
-(2, 'Carreleur', 'Gros travaux', '../images/imagesCategories/carreleur.jpg'),
-(3, 'Plafonneur', 'Gros travaux', '../images/imagesCategories/plafonneur.jpg'),
-(4, 'Chapiste', 'Gros travaux', '../images/imagesCategories/chapiste.jpg'),
-(5, 'Menuisier', 'Gros travaux', '../images/imagesCategories/menuisier.jpg'),
-(6, 'Chauffagiste', 'Gros travaux', '../images/imagesCategories/chauffagiste.jpg'),
-(7, 'Toiture', 'Gros travaux', '../images/imagesCategories/toiture.jpg'),
-(8, 'Terrassement', 'Gros travaux', '../images/imagesCategories/terrassement.jpg'),
-(9, 'Peintre', 'Gros travaux', '../images/imagesCategories/peintre.jpg'),
-(10, 'Ferronnerie', 'Gros travaux', '../images/imagesCategories/ferronnerie.jpg'),
-(11, 'Électricien', 'Gros travaux', '../images/imagesCategories/electricien.jpg'),
-(12, 'Revêtement de sol', 'Gros travaux', '../images/imagesCategories/revetementDeSol.jpg'),
-(13, 'Pose de chassis', 'Gros travaux', '../images/imagesCategories/chassis.jpg'),
-(14, 'Frigoriste & climatisation', 'Gros travaux', '../images/imagesCategories/frigoriste.jpg'),
-(15, 'Carreleur', 'Petits travaux', '../images/imagesCategories/carreleur.jpg'),
-(16, 'Chauffagiste', 'Petits travaux', '../images/imagesCategories/chauffagiste.jpg'),
-(17, 'Plombier', 'Petits travaux', '../images/imagesCategories/plombier.jpg'),
-(18, 'Menuisier', 'Petits travaux', '../images/imagesCategories/menuisier.jpg'),
-(19, 'Peintre', 'Petits travaux', '../images/imagesCategories/peintre.jpg'),
-(20, 'Plafonneur', 'Petits travaux', '../images/imagesCategories/plafonneur.jpg'),
-(21, 'Électricien', 'Petits travaux', '../images/imagesCategories/electricien.jpg'),
-(22, 'Toiture', 'Petits travaux', '../images/imagesCategories/toiture.jpg'),
-(23, 'Chapiste', 'Petits travaux', '../images/imagesCategories/chapiste.jpg'),
-(24, 'Ferronnerie', 'Petits travaux', '../images/imagesCategories/ferronnerie.jpg'),
-(25, 'Revêtement de sol', 'Petits travaux', '../images/imagesCategories/revetementDeSol.jpg'),
-(26, 'Maçonnerie', 'Petits travaux', '../images/imagesCategories/macon.jpg'),
-(27, 'Chassis', 'Petits travaux', '../images/imagesCategories/chassis.jpg'),
-(28, 'Frigoriste & climatisation', 'Petits travaux', '../images/imagesCategories/frigoriste.jpg'),
-(29, 'Toiture', 'Dépannage d\'urgence', '../images/imagesCategories/toiture.jpg'),
-(30, 'Plombier', 'Dépannage d\'urgence', '../images/imagesCategories/plombier.jpg'),
-(31, 'Électricien', 'Dépannage d\'urgence', '../images/imagesCategories/electricien.jpg'),
-(32, 'Maçonnerie', 'Dépannage d\'urgence', '../images/imagesCategories/macon.jpg'),
-(33, 'Pose de chassis', 'Dépannage d\'urgence', '../images/imagesCategories/chassis.jpg'),
-(34, 'Frigoriste & climatisation', 'Dépannage d\'urgence', '../images/imagesCategories/frigoriste.jpg'),
-(35, 'Faux plafond & cloison', 'Gros travaux', '../images/imagesCategories/fauxPlafond.jpg'),
-(36, 'Faux plafond & cloison', 'Petits travaux', '../images/imagesCategories/fauxPlafond.jpg'),
-(37, 'Jardinier', 'Gros travaux', '../images/imagesCategories/jardinier.jpg'),
-(38, 'Jardinier', 'Petits travaux', '../images/imagesCategories/jardinier.jpg');
+(1, 'Construction gros oeuvre fermé', 'Gros travaux', 'images/imagesCategories/grosOeuvre.jpg'),
+(2, 'Carreleur', 'Gros travaux', 'images/imagesCategories/carreleur.jpg'),
+(3, 'Plafonneur', 'Gros travaux', 'images/imagesCategories/plafonneur.jpg'),
+(4, 'Chapiste', 'Gros travaux', 'images/imagesCategories/chapiste.jpg'),
+(5, 'Menuisier', 'Gros travaux', 'images/imagesCategories/menuisier.jpg'),
+(6, 'Chauffagiste', 'Gros travaux', 'images/imagesCategories/chauffagiste.jpg'),
+(7, 'Toiture', 'Gros travaux', 'images/imagesCategories/toiture.jpg'),
+(8, 'Terrassement', 'Gros travaux', 'images/imagesCategories/terrassement.jpg'),
+(9, 'Peintre', 'Gros travaux', 'images/imagesCategories/peintre.jpg'),
+(10, 'Ferronnerie', 'Gros travaux', 'images/imagesCategories/ferronnerie.jpg'),
+(11, 'Électricien', 'Gros travaux', 'images/imagesCategories/electricien.jpg'),
+(12, 'Revêtement de sol', 'Gros travaux', 'images/imagesCategories/revetementDeSol.jpg'),
+(13, 'Pose de chassis', 'Gros travaux', 'images/imagesCategories/chassis.jpg'),
+(14, 'Frigoriste & climatisation', 'Gros travaux', 'images/imagesCategories/frigoriste.jpg'),
+(15, 'Carreleur', 'Petits travaux', 'images/imagesCategories/carreleur.jpg'),
+(16, 'Chauffagiste', 'Petits travaux', 'images/imagesCategories/chauffagiste.jpg'),
+(17, 'Plombier', 'Petits travaux', 'images/imagesCategories/plombier.jpg'),
+(18, 'Menuisier', 'Petits travaux', 'images/imagesCategories/menuisier.jpg'),
+(19, 'Peintre', 'Petits travaux', 'images/imagesCategories/peintre.jpg'),
+(20, 'Plafonneur', 'Petits travaux', 'images/imagesCategories/plafonneur.jpg'),
+(21, 'Électricien', 'Petits travaux', 'images/imagesCategories/electricien.jpg'),
+(22, 'Toiture', 'Petits travaux', 'images/imagesCategories/toiture.jpg'),
+(23, 'Chapiste', 'Petits travaux', 'images/imagesCategories/chapiste.jpg'),
+(24, 'Ferronnerie', 'Petits travaux', 'images/imagesCategories/ferronnerie.jpg'),
+(25, 'Revêtement de sol', 'Petits travaux', 'images/imagesCategories/revetementDeSol.jpg'),
+(26, 'Maçonnerie', 'Petits travaux', 'images/imagesCategories/macon.jpg'),
+(27, 'Chassis', 'Petits travaux', 'images/imagesCategories/chassis.jpg'),
+(28, 'Frigoriste & climatisation', 'Petits travaux', 'images/imagesCategories/frigoriste.jpg'),
+(29, 'Toiture', 'Dépannage d\'urgence', 'images/imagesCategories/toiture.jpg'),
+(30, 'Plombier', 'Dépannage d\'urgence', 'images/imagesCategories/plombier.jpg'),
+(31, 'Électricien', 'Dépannage d\'urgence', 'images/imagesCategories/electricien.jpg'),
+(32, 'Maçonnerie', 'Dépannage d\'urgence', 'images/imagesCategories/macon.jpg'),
+(33, 'Pose de chassis', 'Dépannage d\'urgence', 'images/imagesCategories/chassis.jpg'),
+(34, 'Frigoriste & climatisation', 'Dépannage d\'urgence', 'images/imagesCategories/frigoriste.jpg'),
+(35, 'Faux plafond & cloison', 'Gros travaux', 'images/imagesCategories/fauxPlafond.jpg'),
+(36, 'Faux plafond & cloison', 'Petits travaux', 'images/imagesCategories/fauxPlafond.jpg'),
+(37, 'Jardinier', 'Gros travaux', 'images/imagesCategories/jardinier.jpg'),
+(38, 'Jardinier', 'Petits travaux', 'images/imagesCategories/jardinier.jpg');
 
 -- --------------------------------------------------------
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `id_user` int(11) NOT NULL,
   `deleted_com` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_com`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comments`
@@ -266,10 +266,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username_user`, `password_user`, `mail_user`, `phone_user`, `street_user`, `number_user`, `city_user`, `state_user`, `zip_user`, `image_user`, `type_user`, `confirmed_user`, `code_user`) VALUES
-(1, 'Eric François', '$2y$10$6O.lwTyZp5TIc4WTmLNImuY84Z7WZWx4Y0Bti7icPSnAlVroHdpZW', 'test@gmail.com', '0475123456', 'Rue du bois', 40, 'Charleroi', NULL, '6000', 'images/upload/photos_profils/profil5.png', 'user', 1, ''),
+(1, 'Eric François', '$2y$10$siIvC.bsVabRyex2vU.XruwkKhHWSkPzq7Kc9OpWzXb/yTTJ8VQA.', 'test@gmail.com', '0475123456', 'Rue du bois', 40, 'Charleroi', NULL, '6000', 'images/upload/photos_profils/profil5.png', 'user', 1, ''),
 (2, 'Mon entreprise', '$2y$10$OOXrcWaOpclDPtXMal.sSuZh9qIPCHk6YOMKUbebbAhhphrx188CS', 'test4@gmail.com', '0488123456', 'Rue destrée', 145, 'Trazegnies', 'Belgique', '6183', 'images/upload/photos_profils/profil5.png', 'company', 1, '6113e3e87bd7a'),
 (3, 'Marc Henry', '$2y$10$YTN53VBrKW54W78WUp6rbu545Ckq8iKNLyMfnToueCDhTODhDZu1q', 'la198444@student.helha.be', '0477111111', 'Rue Albert 1er', 12, 'Gosselies', 'Belgique', '6254', 'images/upload/photos_profils/profil3.png', 'user', 1, '6124c5cda1de3'),
-(4, 'Nathan Willeme', '$2y$10$1OTfAkEC.WKgHEcS4tHJ5ejcX1HfkWJxA/Ia6qViZ7s6ICaPPLC8S', 'nathanwilleme@gmail.com', '0496814072', 'Rue de gosselies', 60, 'Trazegnies', 'Belgique', '6183', 'images/upload/photos_profils/profil5.png', 'admin', 1, '6138aac6b68d2');
+(4, 'Nathan Willeme', '$2y$10$Aq7PxnBQwVoXXa51k/vieuZNYxPHFNfej4iOcgDKS0RjCK9z0Ndhi', 'nathanwilleme@gmail.com', '0496814072', 'Rue de gosselies', 60, 'Trazegnies', 'Belgique', '6183', 'images/upload/photos_profils/profil5.png', 'admin', 1, '6138aac6b68d2');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
