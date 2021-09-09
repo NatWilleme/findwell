@@ -156,3 +156,17 @@
         
     }
 }
+
+#imgCompany{
+    margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 600px) {
+    #imgCompany{
+        max-height:500px; 
+        max-width:1000px; 
+        height:auto; 
+        width:auto;
+        margin-bottom: 0px;
+    }
+  }

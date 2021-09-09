@@ -41,6 +41,12 @@
         <div class="carousel-item active" data-bs-interval="4000">
             <img src="../images/HomePage/imageAccueilResponsive.jpg" class="d-block w-100" alt="...">
         </div>
+        <div class="carousel-item" data-bs-interval="4000">
+            <img src="../images/HomePage/imageAccueil2Responsive.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+            <img src="../images/HomePage/imageAccueil3Responsive.jpg" class="d-block w-100" alt="...">
+        </div>
         <?php foreach ($ads as $ad) { ?>
         <div class="carousel-item" data-bs-interval="4000">
         <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">

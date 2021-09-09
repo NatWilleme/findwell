@@ -42,8 +42,8 @@
     </div>
     <div class="row d-flex justify-content-around mb-4 mt-4">
 
-        <img class="col-12 col-lg-5 img-fluid" style="max-height:500px; max-width:1000px; height:auto; width:auto;" src="<?php echo $company->image; ?>">
-        <div class="col-12 col-lg-5 border border-dark">
+        <img id="imgCompany" class="col-12 col-lg-5 img-fluid" src="<?php echo $company->image; ?>">
+        <div class="col-11 col-lg-5 border border-dark">
             <h2 class="fw-bold mt-3 mt-lg-0">Description de l'entreprise:</h2>
             <p><?php echo $company->description; ?></p>
             <div class="d-lg-flex">
