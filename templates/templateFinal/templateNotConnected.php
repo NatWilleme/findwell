@@ -31,7 +31,7 @@
         <!-- Navbar brand -->
         <a class="navbar-brand mt-2 mt-lg-0" href="index.php">
           <img
-            src="../images/logo1.png"
+            src="images/logo1.png"
             height="80"
             alt=""
             loading="lazy"
