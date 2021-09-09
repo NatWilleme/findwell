@@ -222,7 +222,6 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <!-- <a class="btn btn-primary" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified&delete=<?php echo $companyToConfirm->id; ?>">Envoyer</a> -->
                             <button type="submit" class="btn btn-primary" id="delete" name="delete" value="<?php echo $companyToConfirm->id; ?>">
                                 Envoyer
                             </button>

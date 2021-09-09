@@ -23,7 +23,7 @@
     <?php if($choice != '') { ?>
     <main class="form-signin">
         <form method="post" action="index.php">
-            <img class="mb-4" src="../images/logo1.png" alt="" width="120">
+            <img class="mb-4" src="images/logo1.png" alt="" width="120">
             <h1 class="h3 mb-3 fw-normal">S'inscrire en tant que :</h1>
 
             <div class="form-floating">
@@ -38,7 +38,7 @@
     <!-- Premier écran d'inscription en tant qu'entreprise -->
     <?php } else if($companyForm != ''){ ?>
     <form id="formCompany" class="mb-3 mt-3" action="index.php" method="post" enctype='multipart/form-data'>
-        <img class="mb-4" src="../images/logo1.png" alt="" width="120">
+        <img class="mb-4" src="images/logo1.png" alt="" width="120">
         <h1 class="h3 mb-3 fw-normal">Enregistrement de vos informations</h1>
 
         <div class="row gutters">
@@ -161,7 +161,7 @@
     <!-- Deuxième écran d'inscription en tant qu'entreprise -->
     <?php } else if($domainePage != '') { ?>
         <form class="mb-3 mt-3" id="formDomaine" action="index.php" method="post">
-        <img class="mb-4" src="../images/logo1.png" alt="" width="120">
+        <img class="mb-4" src="images/logo1.png" alt="" width="120">
         <h1 class="h3 mb-3 fw-normal">Enregistrement de vos informations</h1>
 
             <div class="row gutters">
@@ -245,7 +245,7 @@
         <?php } else { ?>
         <main class="form-signin">
         <form method="post" action="index.php" id="formRegister">
-            <img class="mb-4" src="../images/logo1.png" alt="" width="120">
+            <img class="mb-4" src="images/logo1.png" alt="" width="120">
             <h1 class="h3 mb-3 fw-normal">Inscription</h1>
 
             <div class="form-floating">

@@ -1,6 +1,6 @@
 <?php
     $title = "Profil";
-    $scripts = "<script src=\"../js/checkEntries/checkEntries_editProfil.js\"></script>";
+    $scripts = "<script src=\"js/checkEntries/checkEntries_editProfil.js\"></script>";
     ob_start();	
 ?>
 
@@ -27,7 +27,7 @@
                         <div class="account-settings">
                             <div class="user-profile">
                                 <div class="user-avatar">
-                                    <img src="<?php if($user->image != ""){ echo $user->image;} else { echo "../images/default-profil.jpg"; } ?>" alt="<?php echo $user->username; ?>">
+                                    <img src="<?php if($user->image != ""){ echo $user->image;} else { echo "images/default-profil.jpg"; } ?>" alt="<?php echo $user->username; ?>">
                                 </div>
                                 <h5 class="user-name"><?php echo $user->username; ?></h5>
                                 <h6 class="user-email"><?php echo $user->mail; ?></h6>
@@ -113,7 +113,7 @@
                                 <button type="submit" id="submit" name="submit" value="changePwd" class="btn btn-warning">Changer de mot de passe</button>
                             </div>
                         </div>
-                        <input style="display: none;" type="text" name="imageOld" id="imageOld" value="<?php if($user->image != "") echo $user->image; else echo "../images/default-profil.jpg";?>">
+                        <input style="display: none;" type="text" name="imageOld" id="imageOld" value="<?php if($user->image != "") echo $user->image; else echo "images/default-profil.jpg";?>">
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
                         <div class="account-settings">
                             <div class="user-profile">
                                 <div class="user-avatar">
-                                    <img src="<?php if($user->image != ""){ echo $user->image;} else { echo "../images/upload/photos_profils/default-profil.jpg"; } ?>" alt="<?php echo $user->username; ?>">
+                                    <img src="<?php if($user->image != ""){ echo $user->image;} else { echo "images/upload/photos_profils/default-profil.jpg"; } ?>" alt="<?php echo $user->username; ?>">
                                 </div>
                                 <h5 class="user-name"><?php echo $company->name; ?></h5>
                                 <h6 class="user-email"><?php echo $company->mail; ?></h6>
@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input style="display: none;" type="text" name="imageOld" id="imageOld" value="<?php if($user->image != "") echo $user->image; else echo "../images/default-profil.jpg";?>">
+                        <input style="display: none;" type="text" name="imageOld" id="imageOld" value="<?php if($user->image != "") echo $user->image; else echo "images/default-profil.jpg";?>">
                     </div>
                 </div>
             </div>
