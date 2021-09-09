@@ -1,6 +1,6 @@
 <?php
     $title = $company->name;
-    $scripts = "<script src=\"../js/checkEntries/checkEntries_comment.js\"></script>
+    $scripts = "<script src=\"js/checkEntries/checkEntries_comment.js\"></script>
     <script>
     if ( window.history.replaceState ) {
       window.history.replaceState( null, null, window.location.href );
@@ -131,7 +131,7 @@
             <div class="row border border-dark mb-2 pt-2">
                 <div class="col-12">
                     <p>
-                        <img src="<?php if($users[$cpt]->image == "") echo "../images/default-profil.jpg"; else echo $users[$cpt]->image; ?>" class="rounded-circle" style="height:40px;width:40px" alt="">
+                        <img src="<?php if($users[$cpt]->image == "") echo "images/default-profil.jpg"; else echo $users[$cpt]->image; ?>" class="rounded-circle" style="height:40px;width:40px" alt="">
                         <span class="ms-2 fw-bold"><?php echo $users[$cpt]->username ?></span><br>
                         <?php 
                             for ($i=0; $i < 5; $i++) { 

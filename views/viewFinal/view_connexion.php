@@ -1,6 +1,6 @@
 <?php
     $title = "Connexion";
-    $scripts="<script src=\"../js/checkEntries/checkEntries_connexion.js\"></script>";
+    $scripts="<script src=\"js/checkEntries/checkEntries_connexion.js\"></script>";
     ob_start();	
 ?>
 
@@ -19,7 +19,7 @@
 
     <main class="form-signin">
         <form id="formLogin" method="post" action="index.php">
-            <img class="mb-4" src="../images/logo1.png" alt="" width="120">
+            <img class="mb-4" src="images/logo1.png" alt="" width="120">
             <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 
             <div class="form-floating">
@@ -41,7 +41,7 @@
     <?php } else if($forget != ''){ ?>
     <main class="form-signin">
         <form id="formLogin" method="post" action="index.php?viewToDisplay=displayConnexion">
-            <img class="mb-4" src="../images/logo1.png" alt="" width="120">
+            <img class="mb-4" src="images/logo1.png" alt="" width="120">
             <h1 class="h3 mb-3 fw-normal">Mot de passe oublié</h1>
 
             <div class="form-floating">
@@ -60,7 +60,7 @@
         <main class="form-signin">
         
         <form id="formPassword" method="post" action="index.php?viewToDisplay=displayConnexion">
-            <img class="mb-4" src="../images/logo1.png" alt="" width="120">
+            <img class="mb-4" src="images/logo1.png" alt="" width="120">
             <h1 class="h3 mb-3 fw-normal">Réinitialisation du mot de passe</h1>
             <input type="text" class="d-none" value="<?php echo $_GET['mail']; ?>" name="mail" id="mail">
             <input type="text" class="d-none" value="<?php echo $_GET['code']; ?>" name="code" id="code">

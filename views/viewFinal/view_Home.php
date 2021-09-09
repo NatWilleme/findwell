@@ -10,18 +10,18 @@
 <div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="4000">
-            <img src="../images/HomePage/imageAccueil.jpg" class="d-block w-100" alt="...">
+            <img src="images/HomePage/imageAccueil.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item" data-bs-interval="4000">
-            <img src="../images/HomePage/imageAccueil2.jpg" class="d-block w-100" alt="...">
+            <img src="images/HomePage/imageAccueil2.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item" data-bs-interval="4000">
-            <img src="../images/HomePage/imageAccueil3.jpg" class="d-block w-100" alt="...">
+            <img src="images/HomePage/imageAccueil3.jpg" class="d-block w-100" alt="...">
         </div>
         <?php foreach ($ads as $ad) { ?>
         <div class="carousel-item" data-bs-interval="4000">
         <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
-            <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="..." href="../controllers/controller_companyDetails.php?idCompany=<?php echo $ad->id_comp; ?>">
+            <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="...">
         </a>
         </div>   
         <?php } ?>
@@ -39,18 +39,18 @@
 <div id="carouselExampleIndicators" class="carousel slide d-lg-none d-sm-block" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="4000">
-            <img src="../images/HomePage/imageAccueilResponsive.jpg" class="d-block w-100" alt="...">
+            <img src="images/HomePage/imageAccueilResponsive.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item" data-bs-interval="4000">
-            <img src="../images/HomePage/imageAccueil2Responsive.jpg" class="d-block w-100" alt="...">
+            <img src="images/HomePage/imageAccueil2Responsive.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item" data-bs-interval="4000">
-            <img src="../images/HomePage/imageAccueil3Responsive.jpg" class="d-block w-100" alt="...">
+            <img src="images/HomePage/imageAccueil3Responsive.jpg" class="d-block w-100" alt="...">
         </div>
         <?php foreach ($ads as $ad) { ?>
         <div class="carousel-item" data-bs-interval="4000">
         <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
-            <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="..." href="../controllers/controller_companyDetails.php?idCompany=<?php echo $ad->id_comp; ?>">
+            <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="...">
         </a>
         </div>   
         <?php } ?>
@@ -74,7 +74,7 @@
       <div class="col-xl-2 col-lg-4 col-md-12 col-sm-8 col-8 position-relative tuile">
         <div class="containerPerso">
             <a href="index.php?viewToDisplay=displayCategoriesList&category=Gros Travaux">  
-                <img src="../images/HomePage/card1.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
+                <img src="images/HomePage/card1.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
                 <div class="overlay">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
             </a>
         </div>
@@ -86,7 +86,7 @@
       <div class="col-xl-2 col-lg-4 col-md-12 col-sm-8 col-8 position-relative tuile">
         <div class="containerPerso">
             <a href="index.php?viewToDisplay=displayCategoriesList&category=Petits travaux">  
-                <img src="../images/HomePage/card2.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
+                <img src="images/HomePage/card2.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
                 <div class="overlay">Effectuez vos petits travaux d'un simple clic.</div>
             </a>
         </div>
@@ -98,7 +98,7 @@
       <div class="col-xl-2 col-lg-4 col-md-12 col-sm-8 col-8 position-relative tuile">
         <div class="containerPerso">
             <a href="index.php?viewToDisplay=displayCategoriesList&category=Dépannage d'urgence">  
-                <img src="../images/HomePage/card3.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
+                <img src="images/HomePage/card3.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
                 <div class="overlay">Accédez aux entreprises disponible 24h/24h.</div>
             </a>
         </div>
@@ -115,7 +115,7 @@
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
             <div class="d-flex mb-5">
                 <div class="flex-shrink-0">
-                    <img src="../images/HomePage/rapide.png" width="100px" alt="...">
+                    <img src="images/HomePage/rapide.png" width="100px" alt="...">
                 </div>
                 <div class="flex-grow-1 ms-3">
                     <h3 class="fw-bold">Rapide</h3>
@@ -125,7 +125,7 @@
 
             <div class="d-flex mb-5">
                 <div class="flex-shrink-0">
-                    <img src="../images/HomePage/assistance.png" width="100px" alt="...">
+                    <img src="images/HomePage/assistance.png" width="100px" alt="...">
                 </div>
                 <div class="flex-grow-1 ms-3">
                     <h3 class="fw-bold">Assistance</h3>
@@ -135,7 +135,7 @@
 
             <div class="d-flex">
                 <div class="flex-shrink-0">
-                    <img src="../images/HomePage/satisfaction.png" width="100px" alt="...">
+                    <img src="images/HomePage/satisfaction.png" width="100px" alt="...">
                 </div>
                 <div class="flex-grow-1 ms-3">
                     <h3 class="fw-bold">Satisfaction</h3>
