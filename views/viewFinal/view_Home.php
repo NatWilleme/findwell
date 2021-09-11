@@ -150,16 +150,16 @@
         <!-- <iframe class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>       -->
     </div>
 
-    <div class="row mt-5 mb-5 col-12">
+    <div class="row mt-5 mb-5 d-flex justify-content-around col-12">
         
-        <div class="card col-6">
-            <img src="..." class="card-img-top" alt="...">
+        <div class="card col-4">
+            <img src="images/imagesCategories/carreleur.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
         </div>
-        <div class="card col-6">
-            <img src="..." class="card-img-top" alt="...">
+        <div class="card col-4">
+            <img src="images/imagesCategories/carreleur.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
