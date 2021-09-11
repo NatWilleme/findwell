@@ -106,17 +106,26 @@
         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
           <ul class="list-unstyled mb-0">
             <li>
-              <a href="#!" class="text-dark">Contacts</a>
+              <a href="#!" class="text-dark footer-link">À propos de nous</a>
             </li>
             <li>
-              <a href="#!" class="text-dark">Qui sommes-nous ?</a>
+              <a href="index.php?viewToDisplay=displayContact" class="text-dark footer-link">Contacts</a>
+            </li>
+            <li>
+              <a href="#!" class="text-dark footer-link">Politique de confidentialité</a>
+            </li>
+            <li>
+              <a href="#!" class="text-dark footer-link">Politique de cookies</a>
             </li>
           </ul>
         </div>
         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
-          <a class="fs-1 text-dark" href="https://www.facebook.com/findwell.be" role="button">
+          <a class="fs-1 text-dark footer-link" href="https://www.facebook.com/findwell.be" role="button">
             <i class="bi bi-facebook"></i>
-          </a>  
+          </a>
+          <a class="fs-1 text-dark footer-link" href="#" role="button">
+            <i class="bi bi-instagram"></i>
+          </a> 
         </div>
       </div>
     </div>
