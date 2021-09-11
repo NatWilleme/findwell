@@ -52,4 +52,8 @@ function displayPayment($notification){
     require_once('views/viewFinal/view_payment.php');
 }
 
+function displayContact($notification){
+    require_once('views/viewFinal/view_contact.php');
+}
+
 ?>

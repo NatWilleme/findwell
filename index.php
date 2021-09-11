@@ -93,6 +93,8 @@ try {
         
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayRegister'){
         displayRegister();
+    } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayContact'){
+        displayContact($notification);
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displaySearch'){
         if(isset($_SESSION['category'])) 
             unset($_SESSION['category']);

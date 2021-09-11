@@ -135,7 +135,7 @@
 
             <div class="d-flex">
                 <div class="flex-shrink-0">
-                    <img src="images/HomePage/satisfaction.png" width="100px" alt="...">
+                    <img src="images/HomePage/satisfaction.png" width="100px">
                 </div>
                 <div class="flex-grow-1 ms-3">
                     <h3 class="fw-bold">Satisfaction</h3>
@@ -149,19 +149,25 @@
         <!-- Video youtube -->
         <!-- <iframe class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>       -->
     </div>
-
-    <div class="row mt-5 mb-5 d-flex justify-content-around col-12">
-        
-        <div class="card col-4">
-            <img src="images/imagesCategories/carreleur.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    
+    <div class="row mt-5 mb-5 justify-content-around" style="--bs-gutter-x: 0;">
+        <h1 class="col-12 col-lg-10 mb-5 text-center text-secondary" style="word-spacing: -2px; font-size: 2em;"><i>Quoi que vous recherchez, Findwell vous accompagne dans vos projets</i></h1>
+        <div class="card col-12 col-lg-4">
+            <img src="images/HomePage/satisfaction2.png" class="card-img-top">
+            <div class="card-body pt-0">
+                <p class="card-text">
+                    <h5 class="fw-bold">Notre engagement pour votre satisfaction</h5>
+                    Chacune des entreprises présentes sur la plateforme ont été vérifiées et confirmées au préalable.
+                </p>
             </div>
         </div>
-        <div class="card col-4">
-            <img src="images/imagesCategories/carreleur.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div class="card col-12 col-lg-4">
+            <img src="images/HomePage/assistance2.png" class="card-img-top">
+            <div class="card-body pt-0">
+                <p class="card-text">
+                    <h5 class="fw-bold">Une assistance à tout moment</h5>
+                    N'hésitez pas à contacter notre assistance si vous avez quelconques questions.
+                </p>
             </div>
         </div>
     </div>
