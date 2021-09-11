@@ -95,7 +95,7 @@
           </ul>
         </div>
         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
-          <a class="fs-1 text-dark" href="#!" role="button">
+          <a class="fs-1 text-dark" href="https://www.facebook.com/findwell.be" role="button">
             <i class="bi bi-facebook"></i>
           </a>  
         </div>
