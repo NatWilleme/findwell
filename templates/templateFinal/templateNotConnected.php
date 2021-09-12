@@ -120,7 +120,7 @@
           </ul>
         </div>
         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
-          <a class="fs-1 text-dark footer-link" href="https://www.facebook.com/findwell.be" role="button">
+          <a class="fs-1 text-dark footer-link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/findwell.be" role="button">
             <i class="bi bi-facebook"></i>
           </a>
           <a class="fs-1 text-dark footer-link" href="#" role="button">
