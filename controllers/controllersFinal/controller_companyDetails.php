@@ -23,7 +23,8 @@ function addComment($idCompany, $idUser)
 {
     $newComment = new Comment();
     $newComment->__set('comment',$_POST['newComment']);
-    if(isset($_FILES['img']) && $_FILES['img'] != ""){
+    if(isset($_FILES['img']) && $_FILES['img']['name'] != ""){
+        print_r($_FILES);
         $from = $_FILES['img']['tmp_name'];
         $to = 'images/upload/'.$_FILES['img']['name'];
         move_uploaded_file($from,$to);
@@ -53,8 +54,7 @@ function getFailAlert()
     return $alert;
 }
 
-function prepareDisplayCompanyDetails($idCompany, $notification){
-    $alert = '';
+function prepareDisplayCompanyDetails($idCompany, $notification, $alert = ''){
     if(isset($_COOKIE['userConnected']) && isset($_SESSION['user'])){
         $messageBtn = getMessageBtnToDisplay($idCompany);
     } else $messageBtn = "";

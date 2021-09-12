@@ -113,7 +113,8 @@
                                 <button type="submit" id="submit" name="submit" value="changePwd" class="btn btn-warning">Changer de mot de passe</button>
                             </div>
                         </div>
-                        <input style="display: none;" type="text" name="imageOld" id="imageOld" value="<?php if($user->image != "") echo $user->image; else echo "images/default-profil.jpg";?>">
+                        <input class="d-none" type="text" name="imageOld" id="imageOld" value="<?php if($user->image != "") echo $user->image; else echo "images/default-profil.jpg";?>">
+                        <input class="d-none" type="text" name="type" id="type" value="<?php echo $user->type;?>">
                     </div>
                 </div>
             </div>

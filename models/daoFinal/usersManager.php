@@ -41,12 +41,12 @@ abstract class UsersManager extends DBManager{
     static public function updateUser($user){
         $sql = "UPDATE users SET username_user=:username_user, phone_user=:phone_user, 
         street_user=:street_user, city_user=:city_user, state_user=:state_user, zip_user=:zip_user, 
-         number_user=:number_user, image_user=:image_user WHERE id_user=:id_user";
+         number_user=:number_user, image_user=:image_user, type_user=:type_user WHERE id_user=:id_user";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $pdo_statement->execute(array(':username_user' => $user->username, ':phone_user' => $user->phone, ':street_user' => $user->street,
-                                ':city_user' => $user->city, ':state_user' => $user->state, ':zip_user' => $user->zip, ':id_user' => $user->id, ':number_user' => $user->number, ':image_user' => $user->image));
+                                ':city_user' => $user->city, ':state_user' => $user->state, ':zip_user' => $user->zip, ':id_user' => $user->id, ':number_user' => $user->number, ':image_user' => $user->image, ':type_user' => $user->type));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{

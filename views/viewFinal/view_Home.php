@@ -151,7 +151,7 @@
     </div>
     
     <div class="row mt-5 mb-5 justify-content-around" style="--bs-gutter-x: 0;">
-        <h1 class="col-12 col-lg-10 mb-5 text-center text-secondary" style="word-spacing: -2px; font-size: 2em;"><i>Quoi que vous recherchez, Findwell vous accompagne dans vos projets</i></h1>
+        <h1 class="col-12 col-lg-10 mb-5 text-center text-secondary" style="word-spacing: -2px; font-size: 2em;"><i>Peu importe votre recherche, Findwell vous accompagne dans vos projets</i></h1>
         <div class="card col-12 col-lg-4">
             <img src="images/HomePage/satisfaction2.png" class="card-img-top">
             <div class="card-body pt-0">

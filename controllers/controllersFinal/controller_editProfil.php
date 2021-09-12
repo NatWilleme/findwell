@@ -5,9 +5,17 @@ function updateAndGetUserInformation()
     $user = UsersManager::getUser($_SESSION['user']->mail);
     $userToEdit = new User();
     $userToEdit->__set("id", $user->id);
-    $userToEdit->__set("username", $_POST['username']);
-    $userToEdit->__set("username", $_POST['username']);
-    $userToEdit->__set("phone", $_POST['phone']);
+
+    if($_POST['username'] != "")
+        $userToEdit->__set("username", $_POST['username']);
+    else
+        $userToEdit->__set("username", NULL);
+
+    if($_POST['phone'] != "")
+        $userToEdit->__set("phone", $_POST['phone']);
+    else
+        $userToEdit->__set("phone", NULL);
+
     if(!empty($_FILES['image']['name'])){
         $from = $_FILES['image']['tmp_name'];
         $path = $_FILES['image']['name'];
@@ -26,10 +34,27 @@ function updateAndGetUserInformation()
     else
         $userToEdit->__set("number", $_POST['number']);
 
-    $userToEdit->__set("street", $_POST['street']);
-    $userToEdit->__set("city", $_POST['city']);
-    $userToEdit->__set("state", $_POST['state']);
-    $userToEdit->__set("zip", $_POST['zip']);
+    if($_POST['street'] == "")
+        $userToEdit->__set("street", NULL);
+    else
+        $userToEdit->__set("street", $_POST['street']);
+
+    if($_POST['city'] == "")
+        $userToEdit->__set("city", NULL);
+    else
+        $userToEdit->__set("city", $_POST['city']);
+
+    if($_POST['state'] == "")
+        $userToEdit->__set("state", NULL);
+    else
+        $userToEdit->__set("state", $_POST['state']);
+
+    if($_POST['zip'] == "")
+        $userToEdit->__set("zip", NULL);
+    else
+        $userToEdit->__set("zip", $_POST['zip']);
+    $userToEdit->__set("type", $_POST['type']);
+
     UsersManager::updateUser($userToEdit);
     return UsersManager::getUser($_SESSION['user']->mail);
 }
