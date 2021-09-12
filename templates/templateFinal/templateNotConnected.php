@@ -106,13 +106,13 @@
         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
           <ul class="list-unstyled mb-0">
             <li>
-              <a href="#!" class="text-dark footer-link">À propos de nous</a>
+              <a href="index.php?viewToDisplay=displayAboutUs" class="text-dark footer-link">À propos de nous</a>
             </li>
             <li>
               <a href="index.php?viewToDisplay=displayContact" class="text-dark footer-link">Contacts</a>
             </li>
             <li>
-              <a href="#!" class="text-dark footer-link">Politique de confidentialité</a>
+              <a href="" class="text-dark footer-link">Politique de confidentialité</a>
             </li>
             <li>
               <a href="#!" class="text-dark footer-link">Politique de cookies</a>
