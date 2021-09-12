@@ -48,7 +48,7 @@ function editUser(){
     $newUser->__set('city', $_POST['city']);
     $newUser->__set('zip', $_POST['zip']);
     $newUser->__set('type', $_POST['type']);
-    $newUser->__set('image', $_SESSION['user']->image);
+    $newUser->__set('image', UsersManager::getUserByID($_POST['idToEdit'])->image);
     usersManager::updateUser($newUser);
 }
 

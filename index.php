@@ -112,8 +112,17 @@ try {
         AddOrRemoveFavorite($_GET['favorite']);
         prepareDisplayCompanyDetails($_GET['favorite'], $notification);
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayCompanyDetails' && isset($_GET['newComment'])){
-        addComment($_GET['newComment'], $_SESSION['user']->id);
-        prepareDisplayCompanyDetails($_GET['newComment'], $notification);
+        if($_SESSION['user']->username != NULL){
+            addComment($_GET['newComment'], $_SESSION['user']->id);
+            $alert['color'] = "success";
+            $alert['message'] = "Votre commentaire a bien été pris en compte.";
+            prepareDisplayCompanyDetails($_GET['newComment'], $notification, $alert);
+        } else {
+            $alert['color'] = "danger";
+            $alert['message'] = "Vous devez completer votre profil pour ajouter un commentaire.";
+            prepareDisplayCompanyDetails($_GET['newComment'], $notification, $alert);
+        }
+        
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayCompaniesList'){
         $subcategory = $_GET['subcategory'];
         $_SESSION['subcategory'] = $subcategory;
