@@ -67,42 +67,48 @@
 
 
     <!-- Les tuiles -->
-    <div class="row d-flex justify-content-lg-around">
+    <div class="row d-flex justify-content-lg-around justify-content-center mt-2 mt-lg-0 mx-0">
 
         
 
-        <div class="col-12 col-lg-3 position-relative tuile">
-        <div class="containerPerso">
-            <a href="index.php?viewToDisplay=displayCategoriesList&category=Gros Travaux">  
-                <img src="images/HomePage/card1.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
-                <div class="overlay">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
-            </a>
-        </div>
-        <label class="fw-bold fst-italic fs-3" style="text-align: center;">Gros travaux</label>  
-        </div>
-
-        
-
-        <div class="col-12 col-lg-3 position-relative tuile">
-        <div class="containerPerso">
-            <a href="index.php?viewToDisplay=displayCategoriesList&category=Petits travaux">  
-                <img src="images/HomePage/card2.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
-                <div class="overlay">Effectuez vos petits travaux d'un simple clic.</div>
-            </a>
-        </div>
-        <label class="fw-bold fst-italic fs-3">Petits travaux</label>
+        <div class="col-8 col-lg-2 col-md-3 mb-3">
+            <div class="containerPerso tuile">
+                <a href="index.php?viewToDisplay=displayCategoriesList&category=Gros Travaux">  
+                    <img src="images/HomePage/card1.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
+                    <div class="overlay">
+                        <div class="text">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
+                    </div>
+                </a>
+                <label class="fw-bold fst-italic fs-3">Gros travaux</label>  
+            </div>
         </div>
 
         
 
-        <div class="col-12 col-lg-3 position-relative tuile">
-        <div class="containerPerso">
-            <a href="index.php?viewToDisplay=displayCategoriesList&category=Dépannage d'urgence">  
-                <img src="images/HomePage/card3.jpg" alt="Avatar" class="card-img-top border border-dark rounded border-2 image">
-                <div class="overlay">Accédez aux entreprises disponible 24h/24h.</div>
-            </a>
+        <div class="col-8 col-lg-2 col-md-3 mb-3">
+            <div class="containerPerso tuile">
+                <a href="index.php?viewToDisplay=displayCategoriesList&category=Petits travaux">  
+                    <img src="images/HomePage/card2.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
+                    <div class="overlay">
+                        <div class="text">Effectuez vos petits travaux d'un simple clic.</div>
+                    </div>
+                </a>
+                <label class="fw-bold fst-italic fs-3">Petits travaux</label>                
+            </div>
         </div>
-        <label class="fw-bold fst-italic fs-3">Dépannage d'urgence</label>
+
+        
+
+        <div class="col-8 col-lg-2 col-md-3 mb-3">
+            <div class="containerPerso tuile">
+                <a href="index.php?viewToDisplay=displayCategoriesList&category=Dépannage d'urgence">  
+                    <img src="images/HomePage/card3.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
+                    <div class="overlay">
+                        <div class="text">Accédez aux entreprises disponible 24h/24h.</div>
+                    </div>
+                </a>
+                <label class="fw-bold fst-italic fs-3">Dépannage d'urgence</label>
+            </div>
         </div>
 
         

@@ -56,4 +56,8 @@ function displayContact($notification){
     require_once('views/viewFinal/view_contact.php');
 }
 
+function displayAboutUs($notification){
+    require_once('views/viewFinal/view_aboutUs.php');
+}
+
 ?>

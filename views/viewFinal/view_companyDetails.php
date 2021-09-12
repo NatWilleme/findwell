@@ -42,8 +42,8 @@
     </div>
     <div class="row d-flex justify-content-around mb-4 mt-4">
 
-        <img id="imgCompany" class="col-12 col-lg-5 img-fluid" src="<?php echo $company->image; ?>">
-        <div class="col-11 col-lg-5 border border-dark">
+        <img id="imgCompany" class="col-12 col-md-5 col-lg-5 col-xl-5" style="object-fit: cover;" src="<?php echo $company->image; ?>">
+        <div class="col-11 col-md-5 col-lg-5 border border-dark mt-3 mt-lg-0">
             <h2 class="fw-bold mt-3 mt-lg-0">Description de l'entreprise:</h2>
             <p><?php echo $company->description; ?></p>
             <div class="d-lg-flex">
@@ -51,8 +51,7 @@
                     <h2 class="fw-bold">Heures d'ouverture:</h2>
                     <p><?php echo $company->hours; ?></p>
                 </div>
-                <span class="col-2"></span>
-                <div class="col-12 col-lg-5">
+                <div class="col-12 col-lg-5 offset-lg-2">
                     <h2 class="fw-bold">Contacts:</h2>
                     <p>
                         <b class="fw-bold">Mail</b>: <a href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
@@ -61,12 +60,7 @@
                 </div>
             </div>
         </div>
-        
-        
 
-    <!-- </div>
-    
-    <div class="ms-5 me-5"> -->
         <?php if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) { ?>
         <div class="row d-flex justify-content-around mb-4">
             <div class="col-12 col-lg-5 p-0 mt-3">
