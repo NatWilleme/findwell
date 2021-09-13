@@ -177,6 +177,12 @@
             </div>
         </div>
     </div>
+    <div class="row col-12 mx-auto p-0 d-none d-lg-block">
+        <img class="p-0" src="images/HomePage/banner.png" alt="">
+    </div>
+    <div class="row col-12 mx-auto p-0 d-lg-none d-sm-block">
+        <img class="p-0" src="images/HomePage/bannerMobile.png" alt="">
+    </div>
 
     
 </div>
