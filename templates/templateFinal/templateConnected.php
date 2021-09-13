@@ -38,10 +38,10 @@
       <a class="btn btn-secondary d-lg-none col-sm-2" href="index.php"><i class="bi bi-house-fill"></i></a>
       <div class="col-4 d-lg-none"></div>
       <div class="p-1 bg-light rounded rounded-pill shadow-sm">
-        <form action="index.php" method="get">
+        <form action="index.php?viewToDisplay=displaySearch" method="POST">
           <div class="input-group">
-            <input type="text" name="viewToDisplay" value="displaySearch" style="display: none;">
-            <input type="search" id="searchInput" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light" style="">
+            <input type="search" id="searchInput" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light">
+            <input type="text" class="d-none" name="location">
             <div class="input-group-append">
               <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="bi bi-search"></i></button>
             </div>
@@ -118,6 +118,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  
+  <script src="js/location.js"></script>
   <?php if(isset($scripts) && $scripts != '') echo $scripts; ?>
 
 </body>
