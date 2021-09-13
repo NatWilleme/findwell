@@ -24,9 +24,13 @@ function addComment($idCompany, $idUser)
     $newComment = new Comment();
     $newComment->__set('comment',$_POST['newComment']);
     if(isset($_FILES['img']) && $_FILES['img']['name'] != ""){
-        print_r($_FILES);
         $from = $_FILES['img']['tmp_name'];
-        $to = 'images/upload/'.$_FILES['img']['name'];
+        $path = $_FILES['img']['name'];
+        //get the extension of file
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $files = scandir('images/upload/comments/');
+        $cptImage = count($files)-1;
+        $to = 'images/upload/comments/comment'.$cptImage.'.'.$ext;
         move_uploaded_file($from,$to);
         $newComment->__set('image',$to);
     } else {
