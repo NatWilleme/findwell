@@ -95,9 +95,6 @@
             <li>
               <a href="index.php?viewToDisplay=displayConfidential" class="text-dark footer-link">Politique de confidentialité</a>
             </li>
-            <li>
-              <a href="#!" class="text-dark footer-link">Politique de cookies</a>
-            </li>
           </ul>
         </div>
         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
