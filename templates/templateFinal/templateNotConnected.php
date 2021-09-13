@@ -94,7 +94,7 @@
   </nav>
   <!-- Navbar -->
 
-  <div class="mb-5">
+  <div>
   <!-- CONTENU -->
   <?php echo $content; ?>
   </div>
