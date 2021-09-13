@@ -4,18 +4,23 @@
 ?>
 
 <div class="container mt-5 mb-3">
+    <?php if(isset($alert['color'])){ ?>
+    <div class="mt-4 alert alert-<?php echo $alert['color']; ?> alert-dismissible fade show" role="alert">
+        <?php
+            if($alert['color'] == "danger"){echo "<i class=\"bi bi-exclamation-triangle me-2 fs-4\"></i>";}
+            else echo "<i class=\"bi bi-check-square me-2 fs-4\"></i>";
+            echo $alert['message']; 
+        ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php } ?>
     <div class="row">
-
         <div class="text-center col-12 col-lg-7">
             <img class="mb-3" src="images/icons/contactUs.png" width="350" alt="">
-            <form action="index.php" method="post">
+            <form name="formContact" action="index.php?viewToDisplay=displayContact" method="post">
                 <div class="mb-3">
                     <label for="mail" class="form-label fw-bold">Adresse mail</label>
-                    <input type="mail" class="form-control" id="mail" name="mail" placeholder="ex: jeandubois@gmail.com" required>
-                </div>
-                <div class="mb-3">
-                    <label for="name" class="form-label fw-bold">Nom complet</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="ex: Jean Dubois" required>
+                    <input type="mail" class="form-control" id="mail" name="mail" placeholder="ex: jeandubois@gmail.com" <?php if(isset($_SESSION['user'])){ ?> value="<?php echo $_SESSION['user']->mail; ?>" <?php } ?> required>
                 </div>
                 <div class="mb-3">
                     <label for="subject" class="form-label fw-bold">Sujet</label>

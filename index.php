@@ -24,6 +24,7 @@ require_once('controllers/controllersFinal/controller_home.php');
 require_once('controllers/controllersFinal/controller_login.php');
 require_once('controllers/controllersFinal/controller_search.php');
 require_once('controllers/controllersFinal/controller_display.php');
+require_once('controllers/controllersFinal/controller_contact.php');
 
 
 try {
@@ -94,7 +95,15 @@ try {
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayRegister'){
         displayRegister();
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayContact'){
-        displayContact($notification);
+        if(isset($_POST['sendContactMail'])){
+            sendContactMail();
+            $alert['color'] = "success";
+            $alert['message'] = "Votre message a bien été envoyé à notre service client.";
+            displayContact($notification, $alert);
+        } else {
+            displayContact($notification);
+        }
+        
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAboutUs'){
         displayAboutUs($notification);
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayConfidential'){
