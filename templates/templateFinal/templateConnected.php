@@ -93,7 +93,7 @@
               <a href="index.php?viewToDisplay=displayContact" class="text-dark footer-link">Contacts</a>
             </li>
             <li>
-              <a href="" class="text-dark footer-link">Politique de confidentialité</a>
+              <a href="index.php?viewToDisplay=displayConfidential" class="text-dark footer-link">Politique de confidentialité</a>
             </li>
             <li>
               <a href="#!" class="text-dark footer-link">Politique de cookies</a>

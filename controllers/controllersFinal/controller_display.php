@@ -60,4 +60,8 @@ function displayAboutUs($notification){
     require_once('views/viewFinal/view_aboutUs.php');
 }
 
+function displayConfidential($notification){
+    require_once('views/viewFinal/view_confidential.php');
+}
+
 ?>

@@ -1,5 +1,6 @@
 <?php
     $title = "Categories";
+    $scripts = "<script src=\"js/location.js\"></script>";
     ob_start();	
 ?>
 
@@ -19,7 +20,10 @@
             <div class="card-body">
                 <h5 class="card-title"><?php echo $category->name; ?></h5>
             </div>
-            <a href="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $category->name; ?>" class="btn btn-primary mb-2">Accéder</a>
+            <form id="formAccess" action="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $category->name; ?>" method="post">
+            <input type="text" class="d-none" name="location">
+                <button class="btn btn-primary mb-2 col-12">Accéder</button>
+            </form>
         </div>          
     <?php } ?>
     </div>
@@ -29,6 +33,6 @@
 
 <?php
     $content = ob_get_clean();
-    if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification);
-    else displayTemplateNotConnected($title, $content);
+    if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification, $scripts);
+    else displayTemplateNotConnected($title, $content, $scripts);
 ?>
