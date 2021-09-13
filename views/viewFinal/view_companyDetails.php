@@ -47,18 +47,23 @@
             <h2 class="fw-bold mt-3 mt-lg-0">Description de l'entreprise:</h2>
             <p><?php echo $company->description; ?></p>
             <div class="d-lg-flex">
-                <div class="col-12 col-lg-5">
+                <div class="col-12 col-lg-4">
                     <h2 class="fw-bold">Heures d'ouverture:</h2>
                     <p><?php echo $company->hours; ?></p>
                 </div>
-                <div class="col-12 col-lg-5 offset-lg-2">
+                <div class="col-12 col-lg-4">
                     <h2 class="fw-bold">Contacts:</h2>
                     <p>
                         <b class="fw-bold">Mail</b>: <a href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
                         <b class="fw-bold">Téléphone</b>: <?php echo $company->phone; ?>
                     </p>
                 </div>
+                <div class="col-12 col-lg-4">
+                    <h2 class="fw-bold mt-3 mt-lg-0">Adresse:</h2>
+                    <p><a href="https://www.google.be/maps/place/<?php echo $company->number.", ".$company->street." ".$company->postalCode." ".$company->city; ?>"  target="_blank" rel="noopener noreferrer"><?php echo $company->number.", ".$company->street."<br>".$company->postalCode." ".$company->city; ?></a></p>
+                </div>
             </div>
+            
         </div>
 
         <?php if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) { ?>
