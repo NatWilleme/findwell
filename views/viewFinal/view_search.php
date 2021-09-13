@@ -12,7 +12,7 @@
         } else {
             $cpt = 0;
             foreach ($searchResult as $company) {
-            ?>
+    ?>
             
             <div class="card border border-dark pt-2 ms-3 me-3 mb-5" style="width: 18rem;">
                 <img src="<?php echo $company->image; ?>" style="max-height:200px; max-width:280px; height:auto; width:auto;" class="card-img-top" alt="...">
