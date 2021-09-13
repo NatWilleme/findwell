@@ -1,10 +1,11 @@
 <?php
     $title = "Entreprises";
     ob_start();	
-    $scripts = "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>";
+    $scripts = "
+    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>";
 ?>
 
-<div class="container-fluid ps-0 pe-0 mt-2 mb-5">
+<div class="container-fluid ps-0 pe-0 mt-2 mb-5" onload="getLocation()">
 
     <nav class="ms-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -40,7 +41,9 @@
                         echo $company->domaines;
                     ?>
                     <br>
+                    <?php if($company->distance != null){ ?>
                     <b>Distance :</b> <?php echo $company->distance; ?> km
+                    <?php } ?>
                 </p>
             </div>
             <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $company->id; ?>" class="btn btn-primary mb-2">Accéder</a>

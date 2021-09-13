@@ -7,10 +7,19 @@ function cmp($object1, $object2) {
 function displayCompaniesAccordingTo($category, $subcategory){
     $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
     $companies = CompaniesManager::getAllCompaniesAccordingTo($category, $subcategory);
-    $userAddress = getUserAddress();
+    if($_POST['location'] == ""){
+        $userAddress = null;
+    } else {
+        $userAddress = $_POST['location'];
+    }
     foreach ($companies as $company) {
         $companyAddress = $company->number.' '.$company->street.', '.$company->postalCode.' '.$company->city;
-        $company->distance = getDistance($userAddress, $companyAddress, $unit = 'K');
+        if($userAddress == null){
+            $company->distance = null;
+        } else {
+            $companyAddress = $company->number.' '.$company->street.', '.$company->postalCode.' '.$company->city;
+            $company->distance = getDistance($userAddress, $companyAddress, $unit = 'K');
+        }
         $rate = commentsManager::getRatingForCompany($company->id);
         $company->__set('rating', $rate['rate']); 
 

@@ -3,7 +3,7 @@
     ob_start();	
 ?>
 
-<div class="container mt-5">
+<div class="container mt-5 mb-3">
     <div class="row">
 
         <div class="text-center col-12 col-lg-7">
