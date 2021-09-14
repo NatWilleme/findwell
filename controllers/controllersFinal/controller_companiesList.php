@@ -1,7 +1,11 @@
 <?php
 
-function cmp($object1, $object2) {
+function cmpRating($object1, $object2) {
     return $object1->rating < $object2->rating ? 1 : 0;
+}
+
+function cmpDistance($object1, $object2) {
+    return $object1->distance > $object2->distance ? 1 : 0;
 }
 
 function displayCompaniesAccordingTo($category, $subcategory){
@@ -37,7 +41,11 @@ function displayCompaniesAccordingTo($category, $subcategory){
         $company->__set('domaines', $domainesAsString); 
         
     } 
-    usort($companies, 'cmp');
+    if(!isset($_POST['sort']) || $_POST['sort'] == "note"){
+        usort($companies, 'cmpRating');
+    } else {
+        usort($companies, 'cmpDistance');
+    }
     displayCompaniesList($companies, $notification);
 }
 

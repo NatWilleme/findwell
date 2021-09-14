@@ -48,7 +48,11 @@ function getSearchResult()
         $domainesAsString .= '.';
         $company->__set('domaines', $domainesAsString);
     } 
-    usort($searchResult, 'cmp');
+    if(!isset($_POST['sort']) || $_POST['sort'] == "note"){
+        usort($companies, 'cmpRating');
+    } else {
+        usort($companies, 'cmpDistance');
+    }
     return $searchResult;
 }
 
