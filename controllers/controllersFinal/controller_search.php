@@ -49,9 +49,9 @@ function getSearchResult()
         $company->__set('domaines', $domainesAsString);
     } 
     if(!isset($_POST['sort']) || $_POST['sort'] == "note"){
-        usort($companies, 'cmpRating');
+        usort($searchResult, 'cmpRating');
     } else {
-        usort($companies, 'cmpDistance');
+        usort($searchResult, 'cmpDistance');
     }
     return $searchResult;
 }
