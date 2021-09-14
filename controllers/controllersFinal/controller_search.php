@@ -5,7 +5,6 @@
 function getSearchResult()
 {
     $searchResult = companiesManager::searchCompany($_POST['company']);
-    print_r($_POST);
     if(!isset($_POST['location']) || $_POST['location'] == ""){
         $userAddress = null;
     } else {
