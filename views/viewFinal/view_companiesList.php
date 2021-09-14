@@ -7,6 +7,7 @@
 
 <div class="container-fluid ps-0 pe-0 mt-2 mb-5" onload="getLocation()">
 
+    <?php if(isset($_SESSION['category']) && isset($_SESSION['subcategory'])) { ?>
     <nav class="ms-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Accueil</a></li>
@@ -14,11 +15,12 @@
             <li class="breadcrumb-item active" aria-current="page"><?php echo $_SESSION['subcategory'] ?></li>
         </ol>
     </nav>
+    <?php } ?>
 
-    <div class="col-2 offset-10 mb-3">
+    <div class="col-12 col-lg-2 offset-lg-10 mb-3">
         <form action="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $_GET['subcategory'] ?>" method="post">
             <label for="sort">Trier par: </label>
-            <select name="sort" id="sort" onchange="this.form.submit()">
+            <select class="form-select" name="sort" id="sort" onchange="this.form.submit()">
                 <option value="note" <?php if(!isset($_POST['sort']) || $_POST['sort'] == "note") echo "selected"; ?>>Note</option>
                 <option value="distance" <?php if(isset($_POST['sort']) && $_POST['sort'] == "distance") echo "selected"; ?>>Distance</option>
             </select>
