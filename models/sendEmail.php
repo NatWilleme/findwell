@@ -14,7 +14,7 @@ try{
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->SMTPAuth = true;
     $mail->Username = "noreply@findwell.be";
-    $mail->Password = "dF4-zZ8f$4TsSJ-";
+    $mail->Password = "gR8@9@Hy8P3qkjU";
 
 
     $mail->setFrom("noreply@findwell.be", 'FindWell');
