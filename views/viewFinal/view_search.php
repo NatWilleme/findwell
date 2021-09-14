@@ -4,6 +4,16 @@
 ?>
 
 <div class="container-fluid mt-2 mb-5">
+    <!-- <div class="col-2 offset-10 mb-3">
+        <form action="index.php?viewToDisplay=displaySearch" method="post">
+            <input class="d-none" type="text" name="company" value="<?php echo $_POST['company']; ?>">
+            <label for="sort">Trier par: </label>
+            <select name="sort" id="sort" onchange="this.form.submit()">
+                <option value="note" <?php if(!isset($_POST['sort']) || $_POST['sort'] == "note") echo "selected"; ?>>Note</option>
+                <option value="distance" <?php if(isset($_POST['sort']) && $_POST['sort'] == "distance") echo "selected"; ?>>Distance</option>
+            </select>
+        </form>
+    </div> -->
     <h2 class="fw-bold text-center mb-3">Résultat de la recherche:</h2>
     <div class="row d-flex justify-content-around mb-4">
     <?php
