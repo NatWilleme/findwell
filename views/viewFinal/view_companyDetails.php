@@ -21,16 +21,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php } ?>
-    <?php if(isset($_SESSION['category']) && isset($_SESSION['subcategory'])) { ?>
-    <nav class="ms-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.php">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="index.php?viewToDisplay=displayCategoriesList&category=<?php echo $_SESSION['category'] ?>"><?php echo $_SESSION['category'] ?></a></li>
-            <li class="breadcrumb-item"><a href="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $_SESSION['subcategory']; ?>"><?php echo $_SESSION['subcategory'] ?></a></li>
-            <li class="breadcrumb-item active" aria-current="page"><?php echo $company->name; ?></li>
-        </ol>
-    </nav>
-    <?php } ?>
     <div class="row d-flex justify-content-around mt-4">
         <h1 class="col-12 col-lg-5 text-center fw-bold"><?php echo $company->name; ?></h1> 
         <?php if($messageBtn != "") {?>
