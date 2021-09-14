@@ -109,11 +109,6 @@ try {
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayConfidential'){
         displayConfidential($notification);
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displaySearch'){
-        if(isset($_SESSION['category'])) 
-            unset($_SESSION['category']);
-        if(isset($_SESSION['subcategory']))
-            unset($_SESSION['subcategory']);
-
         $searchResult = getSearchResult();
         displaySearch($searchResult, $notification);
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayCategoriesList'){
