@@ -6,7 +6,7 @@ function sendContactMail()
     $object = $_POST['subject'];
     $content = "Vous avez un nouveau message de : ". $_POST['mail']. "<br><i>";
     $content .= $_POST['message']. "</i>";
-    require "models/SendEmail.php";
+    require "models/sendEmail.php";
 }
 
 ?>
