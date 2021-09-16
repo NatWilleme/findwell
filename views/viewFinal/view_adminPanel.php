@@ -12,7 +12,7 @@
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises en attente de certification <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=ads">Gérer les publicités</a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=users">Gérer les utilisateurs</a><br>
-            <a class="btn btn-warning p-3 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=stats">Accéder aux statistiques</a>
+            <a class="btn btn-warning p-3 col-12 fw-bold" target="_blank" rel="noopener noreferrer" href="https://analytics.google.com/analytics/web/#/p286595337/realtime/overview?params=_u..nav%3Dmaui">Accéder aux statistiques</a>
         </div>
         <div class="col-1"></div>
         <div class="col-12 col-lg-5">
