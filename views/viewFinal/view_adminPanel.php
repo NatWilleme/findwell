@@ -478,7 +478,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Entreprise</th>
-                <th scope="col">Image</th>
+                <th scope="col">Image PC</th>
+                <th scope="col">Image Mobile</th>
                 <th scope="col">Affichée ?</th>
                 <th scope="col">Action</th>
             </tr>
@@ -489,7 +490,8 @@
             <tr>
             <th scope="row"><?php echo $ad->id; ?></th>
             <td><?php echo $ad->name_comp; ?></td>
-            <td><img src="<?php echo $ad->image; ?>" width="300" alt=""></td>
+            <td><img src="<?php echo $ad->imagePC; ?>" width="300" alt=""></td>
+            <td><img src="<?php echo $ad->imageMobile; ?>" width="300" alt=""></td>
             <td><?php if($ad->display == 1) echo "Oui"; else echo "Non"; ?></td>
             <td>
                 <a class="btn btn-danger" href="index.php?viewToDisplay=displayAdminPanel&view=ads&delete=<?php echo $ad->id; ?>"><i class="bi bi-trash-fill"></i></a> 
@@ -524,15 +526,6 @@
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
-                    <label for="image">Publicité <?php if(isset($adToEdit)) echo 'actuelle';?></label><br>
-                    <?php if(isset($adToEdit)) { ?>
-                        <img src="<?php echo $adToEdit->image; ?>" class="mb-3" width="300" alt="">
-                    <?php } ?>
-                    <input type="file" class="form-control" id="image" name="image" accept=".jpg, .png" >
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <div class="form-group">
                     <label for="display">Afficher ?</label>
                     <div id ="display" class="form-control">
                         <input type="radio" name="display" id="yes" value="1" <?php if(isset($adToEdit) && $adToEdit->display == 1) echo 'checked'; ?>>
@@ -542,12 +535,31 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                    <label for="image">Publicité PC</label><br>
+                    <?php if(isset($adToEdit)) { ?>
+                        <img src="<?php echo $adToEdit->imagePC; ?>" class="mb-3" width="300" alt="">
+                    <?php } ?>
+                    <input type="file" class="form-control" id="imagePC" name="imagePC" accept=".jpg, .png">
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                    <label for="image">Publicité Mobile</label><br>
+                    <?php if(isset($adToEdit)) { ?>
+                        <img src="<?php echo $adToEdit->imageMobile; ?>" class="mb-3" width="300" alt="">
+                    <?php } ?>
+                    <input type="file" class="form-control" id="imageMobile" name="imageMobile" accept=".jpg, .png">
+                </div>
+            </div>
         </div>
         <div class="row gutters">
             <input style="display: none;" type="text" name="action" id="action" value="<?php if(isset($adToEdit)) echo 'editAd'; else echo 'addAd';?>">
             <?php if(isset($adToEdit)) { ?>
                 <input style="display: none;" type="text" name="idToEdit" id="idToEdit" value="<?php echo $adToEdit->id;?>">
-                <input style="display: none;" type="text" name="imageOld" id="imageOld" value="<?php echo $adToEdit->image;?>">
+                <input style="display: none;" type="text" name="imageOldPC" id="imageOldPC" value="<?php echo $adToEdit->imagePC;?>">
+                <input style="display: none;" type="text" name="imageOldMobile" id="imageOldMobile" value="<?php echo $adToEdit->imageMobile;?>">
             <?php } ?>
             <button class="btn btn-primary mt-4 col-2" id="submit" type="submit"><?php if(isset($adToEdit)) echo 'Modifier'; else echo 'Ajouter';?></button>
         </div>

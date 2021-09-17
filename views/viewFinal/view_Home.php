@@ -21,7 +21,7 @@
             <?php foreach ($ads as $ad) { ?>
             <div class="carousel-item" data-bs-interval="4000">
             <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
-                <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="...">
+                <img src="<?php echo $ad->imagePC; ?>" class="d-block w-100" alt="...">
             </a>
             </div>   
             <?php } ?>
@@ -50,7 +50,7 @@
             <?php foreach ($ads as $ad) { ?>
             <div class="carousel-item" data-bs-interval="4000">
             <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
-                <img src="<?php echo $ad->image; ?>" class="d-block w-100" alt="...">
+                <img src="<?php echo $ad->imageMobile; ?>" class="d-block w-100" alt="...">
             </a>
             </div>   
             <?php } ?>
