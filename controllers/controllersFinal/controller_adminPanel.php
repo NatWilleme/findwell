@@ -3,15 +3,27 @@
 function addAd(){
     $newAd = new Ad();
     $newAd->__set('id_comp', $_POST['company']);
-    $from = $_FILES['image']['tmp_name'];
-    $path = $_FILES['image']['name'];
+
+    $from = $_FILES['imagePC']['tmp_name'];
+    $path = $_FILES['imagePC']['name'];
     //get the extension of file
     $ext = pathinfo($path, PATHINFO_EXTENSION);
-    $files = scandir('../images/upload/advertising/');
+    $files = scandir('images/upload/advertising/pc/');
     $cptImage = count($files)-1;
-    $to = '../images/upload/advertising/ad_'.$cptImage.'.'.$ext;
+    $to = 'images/upload/advertising/pc/ad_'.$cptImage.'.'.$ext;
     move_uploaded_file($from,$to);
-    $newAd->__set('image',$to);
+    $newAd->__set('imagePC',$to);
+
+    $from = $_FILES['imageMobile']['tmp_name'];
+    $path = $_FILES['imageMobile']['name'];
+    //get the extension of file
+    $ext = pathinfo($path, PATHINFO_EXTENSION);
+    $files = scandir('images/upload/advertising/mobile/');
+    $cptImage = count($files)-1;
+    $to = 'images/upload/advertising/mobile/ad_'.$cptImage.'.'.$ext;
+    move_uploaded_file($from,$to);
+    $newAd->__set('imageMobile',$to);
+
     $newAd->__set('display', $_POST['display']);
     adsManager::addAd($newAd);
     unset($newAd);
@@ -22,18 +34,31 @@ function editAd(){
     $newAd->__set('id', $_POST['idToEdit']);
     $newAd->__set('id_comp', $_POST['company']);
     $newAd->__set('display', $_POST['display']);
-    if(!empty($_FILES['image']['name'])){
-        $from = $_FILES['image']['tmp_name'];
-        $path = $_FILES['image']['name'];
+    if(!empty($_FILES['imagePC']['name'])){
+        $from = $_FILES['imagePC']['tmp_name'];
+        $path = $_FILES['imagePC']['name'];
         //get the extension of file
         $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $files = scandir('../images/upload/advertising/');
+        $files = scandir('images/upload/advertising/pc/');
         $cptImage = count($files)-1;
-        $to = '../images/upload/advertising/ad_'.$cptImage.'.'.$ext;
+        $to = 'images/upload/advertising/pc/adPC_'.$cptImage.'.'.$ext;
         move_uploaded_file($from,$to);
-        $newAd->__set('image',$to);
+        $newAd->__set('imagePC',$to);
     } else {
-        $newAd->__set('image',$_POST['imageOld']);
+        $newAd->__set('imagePC',$_POST['imageOldPC']);
+    }
+    if(!empty($_FILES['imageMobile']['name'])){
+        $from = $_FILES['imageMobile']['tmp_name'];
+        $path = $_FILES['imageMobile']['name'];
+        //get the extension of file
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $files = scandir('images/upload/advertising/mobile/');
+        $cptImage = count($files)-1;
+        $to = 'images/upload/advertising/mobile/adMobile_'.$cptImage.'.'.$ext;
+        move_uploaded_file($from,$to);
+        $newAd->__set('imageMobile',$to);
+    } else {
+        $newAd->__set('imageMobile',$_POST['imageOldMobile']);
     }
     adsManager::updateAd($newAd);
 }
@@ -134,6 +159,22 @@ function getCompanyToConfirm(){
     
     $companyToConfirm->__set('domaines', $domainesAsString); 
     return $companyToConfirm;
+}
+
+function addCompanyFromAdmin()
+{
+    
+}
+
+function randomPassword() {
+    $chars =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.'0123456789`-=~!@#$%^&*()_+,./<>?;:[]{}\|';
+    $str = '';
+    $max = strlen($chars) - 1;
+
+    for ($i=0; $i < 10; $i++)
+    $str .= $chars[random_int(0, $max)];
+
+    return $str;
 }
 
 function sendAcceptMail($idCompany)

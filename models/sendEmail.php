@@ -10,7 +10,7 @@ $mail = new PHPMailer(true);
 try{
     $mail->isSMTP();
     $mail->Host = 'mail51.lwspanel.com';
-    $mail->Port = 465;
+    $mail->Port = 587;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->SMTPAuth = true;
     $mail->Username = "noreply@findwell.be";

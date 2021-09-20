@@ -3,12 +3,12 @@
 abstract class AdsManager extends DBManager{
     
     static public function addAd(Ad $ad){
-        $sql = "INSERT INTO ads (id_comp, image_ads, display_ads)
-                VALUES (:id_comp, :image_ads, :display_ads)";
+        $sql = "INSERT INTO ads (id_comp, imagePC_ads, imageMobile_ads, display_ads)
+                VALUES (:id_comp, :imagePC_ads, :imageMobile_ads, :display_ads)";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
-            $pdo_statement->execute(array(':id_comp' => $ad->id_comp, ':image_ads' => $ad->image, ':display_ads' => $ad->display));
+            $pdo_statement->execute(array(':id_comp' => $ad->id_comp, ':imagePC_ads' => $ad->imagePC, ':imageMobile_ads' => $ad->imageMobile, ':display_ads' => $ad->display));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
@@ -18,11 +18,11 @@ abstract class AdsManager extends DBManager{
     }
 
     static public function updateAd(Ad $ad){
-        $sql = "UPDATE ads SET id_comp=:id_comp, image_ads=:image_ads, display_ads=:display_ads WHERE id_ads=:id_ads";
+        $sql = "UPDATE ads SET id_comp=:id_comp, imagePC_ads=:imagePC_ads, imageMobile_ads=:imageMobile_ads, display_ads=:display_ads WHERE id_ads=:id_ads";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
-            $pdo_statement->execute(array(':id_comp' => $ad->id_comp, ':image_ads' => $ad->image, ':id_ads' => $ad->id, ':display_ads' => $ad->display));
+            $pdo_statement->execute(array(':id_comp' => $ad->id_comp, ':imagePC_ads' => $ad->imagePC, ':imageMobile_ads' => $ad->imageMobile, ':display_ads' => $ad->display, ':id_ads' => $ad->id));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
@@ -55,7 +55,8 @@ abstract class AdsManager extends DBManager{
             $values=array(
                 "id" => $result["id_ads"],  
                 "id_comp" => $result["id_comp"],  
-                "image" => $result["image_ads"],
+                "imagePC" => $result["imagePC_ads"],
+                "imageMobile" => $result["imageMobile_ads"],
                 "display" => $result["display_ads"]
             );
             $ad = new Ad();
@@ -81,7 +82,8 @@ abstract class AdsManager extends DBManager{
                 $values=array(
                     "id" => $elem["id_ads"],  
                     "id_comp" => $elem["id_comp"],  
-                    "image" => $elem["image_ads"],
+                    "imagePC" => $elem["imagePC_ads"],
+                    "imageMobile" => $elem["imageMobile_ads"],
                     "display" => $elem["display_ads"]
                 );
                 $ad = new Ad();
@@ -110,7 +112,8 @@ abstract class AdsManager extends DBManager{
                 $values=array(
                     "id" => $elem["id_ads"],  
                     "id_comp" => $elem["id_comp"],  
-                    "image" => $elem["image_ads"],
+                    "imagePC" => $elem["imagePC_ads"],
+                    "imageMobile" => $elem["imageMobile_ads"],
                     "display" => $elem["display_ads"]
                 );
                 $ad = new Ad();
