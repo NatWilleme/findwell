@@ -12,6 +12,19 @@
         </ol>
     </nav>
 
+    <div class="col-12 col-lg-10 offset-lg-1 border border-dark mb-lg-4 p-2">
+        <h5 class="fst-italic text-secondary">
+            <?php if($_SESSION['category'] == "Gros Travaux") {?>
+                Les gros travaux concernent principalement la construction totale d'une nouvelle maison ou bien la rénovation de fond en comble de celle-ci. 
+                Que ce soit pour carler une grande surface, effectuer l'électricité complète, la plomberie, etc.. Ces entreprises feront le travail!
+            <?php } else if ($_SESSION['category'] == "Petits travaux") { ?>
+                Dans les petits travaux, vous retrouverez une sélection de petites enterprises familiales à des prix imbattables ! Peu importe la petite rénovation à effectuer à votre domicile, vous trouverez certainement ce que vous recherchez ici !
+            <?php } else { ?>
+                Dans les dépannages d'urgences, vous retrouverez des entreprises joignables 24H/24H et 7J/7J. Que ce soit pour un toit qui fuite, problème de chauffe-eau, soyez rassuré !
+            <?php } ?>
+        </h5>
+    </div>
+    
     <div class="row d-flex justify-content-around mb-4 m-0">
     <?php foreach ($categories as $category) { ?>
         <div class="card border border-dark pt-2 ms-3 me-3" style="width: 18rem;">
