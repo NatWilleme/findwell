@@ -4,7 +4,8 @@ class Ad{
     private $id;
     private $id_comp;
     private $name_comp;
-    private $image;
+    private $imagePC;
+    private $imageMobile;
     private $display;
 
     // Magic method get

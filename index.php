@@ -184,7 +184,7 @@ try {
         displayPayment($notification);
 
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAdminPanel'){
-        $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = null;
+        $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = null;
         if(isset($_POST['action'])){
             if($_POST['action'] == "addAd"){
                 addAd();
@@ -205,10 +205,21 @@ try {
                 } else if(isset($_POST['submitEditCompany'])){
                     editCompany();
                     $companies = companiesManager::getAllActiveCompanies();
+                } else if(isset($_GET['action']) && $_GET['action'] == "add"){
+                    $addNewCompany = true;
+                    $domainePage['categoriesGrosTravaux'] = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
+                    $domainePage['categoriesPetitsTravaux'] = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
+                    $domainePage['categoriesDepannage'] = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
+                } else if(isset($_POST['submitNewCompanyByAdmin'])){
+                    $newUser = new User();
+                    $newCompany = new Company();
+                    $newUser->__set("mail", $_POST['mail']);
+                    $newCompany->__set("mail", $_POST['mail']);
+                    $newUser->__set('password', randomPassword());
+                    $newCompany->__set('password', $newUser->password);
                 } else {
                     $companies = getAllActiveCompanyWithRatingAndCommentCount();
                 }   
-
             } else if($_GET['view'] == "users"){
 
                 if(isset($_GET['edit'])) {
@@ -250,7 +261,7 @@ try {
         }
 
         if(isset($_SESSION['user']) && $_SESSION['user']->type == "admin")
-            displayAdminPanel($companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $notification);
+            displayAdminPanel($companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $addNewCompany, $domainePage, $notification);
         else
             homePage($notification);
 
