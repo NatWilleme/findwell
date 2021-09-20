@@ -111,14 +111,15 @@
             </div>
         </div>
 
-        
-
     </div>
 
+    <div class="row">
+        <!-- Video youtube -->
+        <!-- <iframe class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 offset-lg-1" height="600" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+    </div>
 
     <div class="row mt-5 mb-5 m-0">
-        <div class="col-1"></div>
-        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 offset-lg-1">
             <div class="d-flex mb-5">
                 <div class="flex-shrink-0">
                     <img src="images/HomePage/rapide.png" width="100px" alt="...">
@@ -150,10 +151,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-1"></div>
+        <img class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 offset-lg-1" src="images/HomePage/encart.gif" alt="">
 
-        <!-- Video youtube -->
-        <!-- <iframe class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>       -->
+        
     </div>
     
     <div class="row mt-5 mb-5 justify-content-around" style="--bs-gutter-x: 0;">
