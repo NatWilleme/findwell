@@ -18,7 +18,7 @@
                 Les gros travaux concernent principalement la construction totale d'une nouvelle maison ou bien la rénovation de fond en comble de celle-ci. 
                 Que ce soit pour carler une grande surface, effectuer l'électricité complète, la plomberie, etc.. Ces entreprises feront le travail!
             <?php } else if ($_SESSION['category'] == "Petits travaux") { ?>
-                Dans les petits travaux, vous retrouverez une sélection de petites enterprises familiales à des prix imbattables ! Peu importe la petite rénovation à effectuer à votre domicile, vous trouverez certainement ce que vous recherchez ici !
+                Dans les petits travaux, vous retrouverez une sélection de petites entreprises familiales à des prix imbattables ! Peu importe la petite rénovation à effectuer à votre domicile, vous trouverez certainement ce que vous recherchez ici !
             <?php } else { ?>
                 Dans les dépannages d'urgences, vous retrouverez des entreprises joignables 24H/24H et 7J/7J. Que ce soit pour un toit qui fuite, problème de chauffe-eau, soyez rassuré !
             <?php } ?>

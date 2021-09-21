@@ -34,6 +34,16 @@
     <?php } ?>
 
     <?php if(isset($companies) && !isset($action) && !isset($addNewCompany)){ ?>
+    <?php if(isset($alert['color'])){ ?>
+        <div class="mt-4 alert alert-<?php echo $alert['color']; ?> alert-dismissible fade show" role="alert">
+            <?php
+                if($alert['color'] == "danger"){echo "<i class=\"bi bi-exclamation-triangle me-2 fs-4\"></i>";}
+                else echo "<i class=\"bi bi-check-square me-2 fs-4\"></i>";
+                echo $alert['message']; 
+            ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
     <a class="btn btn-primary" href="index.php?viewToDisplay=displayAdminPanel&view=companies&action=add">Ajouter une nouvelle entreprise</a>
     <div class="table-responsive mb-5">
     <table class="table table-hover">
@@ -74,7 +84,7 @@
     <?php } ?>
 
     <?php if(isset($addNewCompany)) { ?>
-    <form id="formCompanyFromAdmin" class="mb-3 mt-3" action="index.php" method="post" enctype='multipart/form-data'>
+    <form id="formCompanyFromAdmin" class="mb-3 mt-3" action="index.php?viewToDisplay=displayAdminPanel&view=companies" method="post" enctype='multipart/form-data'>
         <h3 class="text-center mb-3 fw-bold">Informations de l'entreprise :</h3>
 
         <div class="row gutters">
@@ -137,7 +147,8 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="image">Photo de l'entreprise</label>
-                                    <input type="file" class="form-control" name="image" id="image" accept=".png, .jpg, .jpeg">
+                                    <input type="file" class="form-control" name="image" id="image" accept=".png, .jpg, .jpeg" >
+                                    <p id="errorImage"></p>
                                 </div>
                             </div>
                         </div>
