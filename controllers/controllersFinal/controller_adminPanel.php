@@ -104,6 +104,17 @@ function editCompany()
     
 }
 
+function sendConfirmationMailToCompanyRegisteredByAdmin($mailTo, $password){
+    $content = "Votre entreprise est maintenant disponible sur la plateforme Findwell!<br>
+                Vous pouvez dès à présent vous connecter avec les identifiants suivants: <br>
+                <ul>
+                    <li>adresse mail: $mailTo</li>
+                    <li>mot de passe provisoire: $password</li>
+                </ul>";
+    $object = "Bienvenue chez Findwell !";
+    require_once('models/sendEmail.php');
+}
+
 function getCompanyToEdit(){
     return companiesManager::getOneCompany($_GET['edit']);
 }

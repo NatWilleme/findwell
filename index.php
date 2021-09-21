@@ -184,7 +184,7 @@ try {
         displayPayment($notification);
 
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAdminPanel'){
-        $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = null;
+        $alert = $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = null;
         if(isset($_POST['action'])){
             if($_POST['action'] == "addAd"){
                 addAd();
@@ -212,11 +212,67 @@ try {
                     $domainePage['categoriesDepannage'] = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
                 } else if(isset($_POST['submitNewCompanyByAdmin'])){
                     $newUser = new User();
-                    $newCompany = new Company();
                     $newUser->__set("mail", $_POST['mail']);
-                    $newCompany->__set("mail", $_POST['mail']);
                     $newUser->__set('password', randomPassword());
-                    $newCompany->__set('password', $newUser->password);
+                    $newUser->__set('username', $_POST['name']);
+                    $newUser->__set('phone', $_POST['phone']);
+                    $newUser->__set('street', $_POST['street']);
+                    $newUser->__set('number', $_POST['number']);
+                    $newUser->__set('city', $_POST['city']);
+                    $newUser->__set('state', $_POST['state']);
+                    $newUser->__set('zip', $_POST['zip']);
+
+                    $from = $_FILES['image']['tmp_name'];
+                    $path = $_FILES['image']['name'];
+                    //get the extension of file
+                    $ext = pathinfo($path, PATHINFO_EXTENSION);
+                    $files = scandir('images/upload/photos_profils/');
+                    $cptImage = count($files)-1;
+                    $to = 'images/upload/photos_profils/profil'.$cptImage.'.'.$ext;
+                    move_uploaded_file($from,$to);
+                    $newUser->__set('image',$to);
+
+                    $newUser->__set('type', "company");
+                    $newUser->__set('code', uniqid());
+                    
+                    $newCompany = new Company();
+                    $newCompany->__set("mail", $_POST['mail']);
+                    $newCompany->__set('name', $_POST['name']);
+                    $newCompany->__set('description', $_POST['description']);
+                    $newCompany->__set('hours', $_POST['hours']);
+                    $newCompany->__set('city', $_POST['city']);
+                    $newCompany->__set('street', $_POST['street']);
+                    $newCompany->__set('number', $_POST['number']);
+                    $newCompany->__set('postalCode', $_POST['zip']);
+                    $newCompany->__set('state', $_POST['state']);
+                    $newCompany->__set('phone', $_POST['phone']);
+                    $newCompany->__set('image',$to);
+                    $newCompany->__set('tva', $_POST['tva']);
+                    usersManager::addUserWithFullInformation($newUser);
+                    companiesManager::addCompany($newCompany);
+                    usersManager::confirmUser(usersManager::getUser($newUser->mail)->id);
+                    $company = companiesManager::getOneCompanyByMail($newCompany->mail);
+                    if(isset($_POST['checkGros'])){
+                        foreach ($_POST['checkGros'] as $dom) {
+                            categoriesManager::addLinkCatComp($company->id, $dom);
+                        }
+                    }
+                    if(isset($_POST['checkPetits'])){
+                        foreach ($_POST['checkPetits'] as $dom) {
+                            categoriesManager::addLinkCatComp($company->id, $dom);
+                        }
+                    }
+                    if(isset($_POST['checkDepannage'])){
+                        foreach ($_POST['checkDepannage'] as $dom) {
+                            categoriesManager::addLinkCatComp($company->id, $dom);
+                        }
+                    }
+                    CompaniesManager::switchConfirmCompany($company->id);
+                    CompaniesManager::switchCompanyPaid($company->id);
+                    sendConfirmationMailToCompanyRegisteredByAdmin($newUser ->mail, $newUser->password);
+                    $companies = getAllActiveCompanyWithRatingAndCommentCount();
+                    $alert['color'] = "success";
+                    $alert['message'] = "L'entreprise $company->name a été ajoutée.";
                 } else {
                     $companies = getAllActiveCompanyWithRatingAndCommentCount();
                 }   
@@ -261,7 +317,7 @@ try {
         }
 
         if(isset($_SESSION['user']) && $_SESSION['user']->type == "admin")
-            displayAdminPanel($companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $addNewCompany, $domainePage, $notification);
+            displayAdminPanel($alert, $companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $addNewCompany, $domainePage, $notification);
         else
             homePage($notification);
 
