@@ -113,9 +113,10 @@
 
     </div>
 
-    <div class="row">
-        <!-- Video youtube -->
-        <!-- <iframe class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 offset-lg-1" height="600" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+    <div>
+        <video id="youtubeVideo" class="col-xl-10 col-12 offset-xl-1" controls>
+            <source src="images/findwell.mp4" type="video/mp4">
+        </video>
     </div>
 
     <div class="row mt-5 mb-5 m-0">
