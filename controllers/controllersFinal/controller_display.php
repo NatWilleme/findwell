@@ -64,4 +64,8 @@ function displayConfidential($notification){
     require_once('views/viewFinal/view_confidential.php');
 }
 
+function displayCGV($notification){
+    require_once('views/viewFinal/view_cgv.php');
+}
+
 ?>
