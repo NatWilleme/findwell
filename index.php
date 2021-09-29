@@ -108,6 +108,8 @@ try {
         displayAboutUs($notification);
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayConfidential'){
         displayConfidential($notification);
+    } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayCGV'){
+        displayCGV($notification);
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displaySearch'){
         $searchResult = getSearchResult();
         displaySearch($searchResult, $notification);
