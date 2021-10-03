@@ -246,6 +246,7 @@ try {
                     $newCompany->__set('street', $_POST['street']);
                     $newCompany->__set('number', $_POST['number']);
                     $newCompany->__set('postalCode', $_POST['zip']);
+                    $newCompany->__set('web', $_POST['web']);
                     $newCompany->__set('state', $_POST['state']);
                     $newCompany->__set('phone', $_POST['phone']);
                     $newCompany->__set('image',$to);

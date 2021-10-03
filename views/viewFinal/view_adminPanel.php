@@ -153,6 +153,15 @@
                             </div>
                         </div>
 
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="web">Site web ou réseau sociaux</label>
+                                    <input type="text" class="form-control" name="web" id="web" placeholder="Entrez votre URL">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row gutters mb-3">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <h6 class="mt-3 mb-2 text-primary">Adresse</h6>
@@ -509,6 +518,14 @@
                     <div class="form-group">
                         <label for="profil">Photo de profil</label><br>
                         <img class="border" style="max-height: 200px; max-width: 400px; width: auto; height: auto;" name="profil" id="profil" src="<?php echo $companyToEdit->image; ?>" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="web">Site web ou réseau sociaux</label>
+                        <input type="text" class="form-control" name="web" id="web" placeholder="Entrez votre URL" value="<?php echo $companyToEdit->web; ?>">
                     </div>
                 </div>
             </div>

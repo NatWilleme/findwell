@@ -12,6 +12,7 @@ class Company{
     private $state;
     private $phone;
     private $mail;
+    private $web;
     private $image;
     private $deleted;
     private $certified;
