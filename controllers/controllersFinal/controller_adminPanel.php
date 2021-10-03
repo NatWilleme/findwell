@@ -83,8 +83,8 @@ function editCompany()
     $newCompany->__set('id', $_POST['idCompany']);
     $newCompany->__set('name', $_POST['name']);
     $newCompany->__set('phone', $_POST['phone']);
-    $newCompany->__set('description', $_POST['description']);
-    $newCompany->__set('hours', $_POST['hours']);
+    $newCompany->__set('description', nl2br($_POST['description'], true));
+    $newCompany->__set('hours', nl2br($_POST['hours'], true));
     $newCompany->__set('street', $_POST['street']);
     $newCompany->__set('number', $_POST['number']);
     $newCompany->__set('city', $_POST['city']);

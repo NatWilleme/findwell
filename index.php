@@ -240,8 +240,8 @@ try {
                     $newCompany = new Company();
                     $newCompany->__set("mail", $_POST['mail']);
                     $newCompany->__set('name', $_POST['name']);
-                    $newCompany->__set('description', $_POST['description']);
-                    $newCompany->__set('hours', $_POST['hours']);
+                    $newCompany->__set('description', nl2br($_POST['description'], true));
+                    $newCompany->__set('hours', nl2br($_POST['hours'], true));
                     $newCompany->__set('city', $_POST['city']);
                     $newCompany->__set('street', $_POST['street']);
                     $newCompany->__set('number', $_POST['number']);
