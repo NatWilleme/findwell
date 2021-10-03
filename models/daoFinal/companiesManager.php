@@ -4,12 +4,12 @@
 abstract class CompaniesManager extends DBManager{
     
     static public function addCompany(Company $company){
-        $sql = "INSERT INTO companies (name_comp, description_comp, hours_comp, city_comp, street_comp, number_comp, postalcode_comp, state_comp, mail_comp, phone_comp, image_comp, tva_comp, certified_comp)
-                VALUES (:name_comp, :description_comp, :hours_comp, :city_comp, :street_comp, :number_comp, :postalcode_comp, :state_comp, :mail_comp, :phone_comp, :image_comp, :tva_comp, 0)";
+        $sql = "INSERT INTO companies (name_comp, description_comp, hours_comp, city_comp, street_comp, number_comp, postalcode_comp, state_comp, mail_comp, web_comp, phone_comp, image_comp, tva_comp, certified_comp)
+                VALUES (:name_comp, :description_comp, :hours_comp, :city_comp, :street_comp, :number_comp, :postalcode_comp, :state_comp, :mail_comp, :web_comp, :phone_comp, :image_comp, :tva_comp, 0)";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
-            $state = $pdo_statement->execute(array(':name_comp' => $company->name, ':description_comp' => $company->description, ':mail_comp' => $company->mail,
+            $state = $pdo_statement->execute(array(':name_comp' => $company->name, ':description_comp' => $company->description, ':mail_comp' => $company->mail, ':web_comp' => $company->web,
                                 ':hours_comp' => $company->hours, ':city_comp' => $company->city, ':street_comp' => $company->street,
                                 ':number_comp' => $company->number, ':postalcode_comp' => $company->postalCode,':state_comp' => $company->state, ':phone_comp' => $company->phone, 
                                 ':image_comp' =>  $company->image, ':tva_comp' =>  $company->tva));
@@ -24,13 +24,13 @@ abstract class CompaniesManager extends DBManager{
 
     static public function updateCompany(Company $company){
         $sql = "UPDATE companies SET name_comp=:name_comp, description_comp=:description_comp, hours_comp=:hours_comp,
-                city_comp=:city_comp, street_comp=:street_comp, number_comp=:number_comp, postalcode_comp=:postalcode_comp, phone_comp=:phone_comp, image_comp=:image_comp WHERE id_comp=:id_comp";
+                city_comp=:city_comp, street_comp=:street_comp, number_comp=:number_comp, postalcode_comp=:postalcode_comp, phone_comp=:phone_comp, web_comp=:web_comp, image_comp=:image_comp WHERE id_comp=:id_comp";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $pdo_statement->execute(array(':id_comp' => $company->id, ':name_comp' => $company->name, ':description_comp' => $company->description,
                                 ':hours_comp' => $company->hours, ':city_comp' => $company->city, ':street_comp' => $company->street,
-                                ':number_comp' => $company->number, ':postalcode_comp' => $company->postalCode, ':phone_comp' => $company->phone, 
+                                ':number_comp' => $company->number, ':postalcode_comp' => $company->postalCode, ':phone_comp' => $company->phone, ':web_comp' => $company->web,
                                 ':image_comp' => $company->image));
         } catch (Exception $e) {
             die($e->getMessage());
@@ -115,6 +115,7 @@ abstract class CompaniesManager extends DBManager{
                 "mail" => $elem["mail_comp"],
                 "phone" => $elem["phone_comp"],
                 "image" => $elem["image_comp"],
+                "web" => $elem["web_comp"],
                 "deleted" => $elem["deleted_comp"],
                 "certified" => $elem["certified_comp"],
                 "tva" => $elem["tva_comp"],
@@ -151,6 +152,7 @@ abstract class CompaniesManager extends DBManager{
                 "mail" => $elem["mail_comp"],
                 "phone" => $elem["phone_comp"],
                 "image" => $elem["image_comp"],
+                "web" => $elem["web_comp"],
                 "deleted" => $elem["deleted_comp"],
                 "certified" => $elem["certified_comp"],
                 "tva" => $elem["tva_comp"],
@@ -188,6 +190,7 @@ abstract class CompaniesManager extends DBManager{
                     "postalCode" => $elem["postalcode_comp"],
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
+                    "web" => $elem["web_comp"],
                     "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],
@@ -227,6 +230,7 @@ abstract class CompaniesManager extends DBManager{
                     "postalCode" => $elem["postalcode_comp"],
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
+                    "web" => $elem["web_comp"],
                     "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],
@@ -266,6 +270,7 @@ abstract class CompaniesManager extends DBManager{
                     "postalCode" => $elem["postalcode_comp"],
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
+                    "web" => $elem["web_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],
                     "acceptPending" => $elem["acceptPending_comp"],
@@ -338,6 +343,7 @@ abstract class CompaniesManager extends DBManager{
                     "postalCode" => $elem["postalcode_comp"],
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
+                    "web" => $elem["web_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],
                     "acceptPending" => $elem["acceptPending_comp"],
@@ -376,6 +382,7 @@ abstract class CompaniesManager extends DBManager{
                     "postalCode" => $elem["postalcode_comp"],
                     "phone" => $elem["phone_comp"],
                     "image" => $elem["image_comp"],
+                    "web" => $elem["web_comp"],
                     "mail" => $elem["mail_comp"],
                     "deleted" => $elem["deleted_comp"],
                     "tva" => $elem["tva_comp"],

@@ -89,6 +89,7 @@ function editCompany()
     $newCompany->__set('number', $_POST['number']);
     $newCompany->__set('city', $_POST['city']);
     $newCompany->__set('postalCode', $_POST['zip']);
+    $newCompany->__set('web', $_POST['web']);
     $newCompany->__set('certified', $_POST['certified']);
     $newCompany->__set('hasPaid', $_POST['hasPaid']);
     $newCompany->__set('image', $_POST['image']);
@@ -170,11 +171,6 @@ function getCompanyToConfirm(){
     
     $companyToConfirm->__set('domaines', $domainesAsString); 
     return $companyToConfirm;
-}
-
-function addCompanyFromAdmin()
-{
-    
 }
 
 function randomPassword() {

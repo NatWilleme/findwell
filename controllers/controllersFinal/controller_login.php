@@ -92,6 +92,7 @@ function saveNewCompanySession()
     $_SESSION['newCompany']->__set('city', $_POST['city']);
     $_SESSION['newCompany']->__set('street', $_POST['street']);
     $_SESSION['newCompany']->__set('number', $_POST['number']);
+    $_SESSION['newCompany']->__set('web', $_POST['web']);
     $_SESSION['newCompany']->__set('postalCode', $_POST['zip']);
     if($_FILES['image']['name'] != ""){
         $from = $_FILES['image']['tmp_name'];
