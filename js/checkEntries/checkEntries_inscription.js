@@ -135,11 +135,18 @@ if (document.getElementById("formCompanyFromAdmin") != null ) {
         document.getElementById('errorCity').innerHTML = "";
         document.getElementById('errorState').innerHTML = "";
         document.getElementById('errorZip').innerHTML = "";
+        var imageType = document.getElementById('companyImage').files[0].type;
         
         if(document.getElementById("name").value == "") {
             e.preventDefault();
             document.getElementById('errorName').innerHTML = "Veuillez entrer un nom";
             document.getElementById('errorName').style.color = "red";
+        }
+
+        if(!imageType.includes("image")) {
+            e.preventDefault();
+            document.getElementById('errorImage').innerHTML = "Le type d'image sélectionné n'est pas supporté";
+            document.getElementById('errorImage').style.color = "red";
         }
 
         if(document.getElementById("phone").value == "" || !regexPhone.test(document.getElementById("phone").value)) {
@@ -196,7 +203,7 @@ if (document.getElementById("formCompanyFromAdmin") != null ) {
             document.getElementById('errorZip').style.color = "red";
         }
 
-        if(document.getElementById("image").value == "") {
+        if(document.getElementById("companyImage").value == "") {
             e.preventDefault();
             document.getElementById('errorImage').innerHTML = "Veuillez ajouter une image pour l'entreprise";
             document.getElementById('errorImage').style.color = "red";
