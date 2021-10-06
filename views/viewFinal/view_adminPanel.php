@@ -533,13 +533,13 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" name="description" id="description" placeholder="Description de l'entreprise" rows="6"><?php echo $companyToEdit->description; ?></textarea>
+                        <textarea class="form-control" name="description" id="description" placeholder="Description de l'entreprise" rows="6"><?php echo str_replace("<br />", "", $companyToEdit->description) ; ?></textarea>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="hours">Heure d'ouverture</label>
-                        <textarea class="form-control" name="hours" id="hours" placeholder="Heure d'ouverture" rows="6"><?php echo $companyToEdit->hours; ?></textarea>
+                        <textarea class="form-control" name="hours" id="hours" placeholder="Heure d'ouverture" rows="6"><?php echo str_replace("<br />", "", $companyToEdit->hours) ; ?></textarea>
                     </div>
                 </div>
             </div>
