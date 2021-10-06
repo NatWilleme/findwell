@@ -39,6 +39,7 @@ function getSearchResult()
         $company->__set('rating', $rate['rate']); 
 
         $domaines = categoriesManager::getAllDomainesForCompany($company->id);
+        $domaines = array_unique($domaines);
         $domainesAsString = "";
         foreach ($domaines as $domaine) {
             $domainesAsString .= $domaine;
