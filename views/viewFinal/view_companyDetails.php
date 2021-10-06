@@ -32,7 +32,7 @@
     </div>
     <div class="row d-flex justify-content-around mb-4 mt-4">
 
-        <img id="imgCompany" class="col-12 col-md-5 col-lg-5 col-xl-5" style="object-fit: cover;" src="<?php echo $company->image; ?>">
+        <img id="imgCompany" class="col-12 col-md-5 col-lg-5 col-xl-5" style="height: 100%;" src="<?php echo $company->image; ?>">
         <div class="col-11 col-md-5 col-lg-5 border border-dark mt-3 mt-lg-0">
             <h2 class="fw-bold mt-3 mt-lg-0">Description de l'entreprise:</h2>
             <p><?php echo $company->description; ?></p>
