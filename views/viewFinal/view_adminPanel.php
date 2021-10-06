@@ -166,14 +166,14 @@
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <h6 class="mt-3 mb-2 text-primary">Adresse</h6>
                             </div>
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-12">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
                                 <div class="form-group">
                                     <label for="number">Numéro</label>
                                     <input type="text" name="number" class="form-control" id="number" placeholder="Numéro" required>
                                     <p id="errorNumber"></p>
                                 </div>
                             </div>
-                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-12">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
                                 <div class="form-group">
                                     <label for="street">Rue</label>
                                     <input type="text" name="street" class="form-control" id="street" placeholder="Rue" required>
