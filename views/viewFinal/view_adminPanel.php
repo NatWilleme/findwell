@@ -147,7 +147,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="image">Photo de l'entreprise</label>
-                                    <input type="file" class="form-control" name="image" id="image" accept=".png, .jpg, .jpeg" >
+                                    <input type="file" id="companyImage" class="form-control" name="image" id="image" accept=".png, .jpg, .jpeg" required>
                                     <p id="errorImage"></p>
                                 </div>
                             </div>
