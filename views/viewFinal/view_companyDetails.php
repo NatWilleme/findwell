@@ -60,7 +60,7 @@
         <?php if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) { ?>
         <div class="row d-flex justify-content-around mb-4">
             <div class="col-12 col-lg-5 p-0 mt-3">
-                <h4><i>Qu'avez-vous pensez de <?php echo $company->name; ?> ?</i></h4>
+                <h4><i>Qu'avez-vous pensé de <?php echo $company->name; ?> ?</i></h4>
                 <form id="commentForm" action="index.php?viewToDisplay=displayCompanyDetails&newComment=<?php echo $company->id; ?>" method="post" enctype='multipart/form-data'>
                     <textarea class="" name="newComment" id="newComment" rows="6"  style="width: 100%;" ></textarea>
                     <label for="newComment" id="newCommentError"></label><br>
