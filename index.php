@@ -186,7 +186,7 @@ try {
         displayPayment($notification);
 
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAdminPanel'){
-        $alert = $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = null;
+        $alert = $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = $companyDomaines = null;
         if(isset($_POST['action'])){
             if($_POST['action'] == "addAd"){
                 addAd();
@@ -204,8 +204,28 @@ try {
                     $companies = companiesManager::getAllActiveCompanies();
                 } else if(isset($_GET['edit'])) {
                     $companyToEdit = getCompanyToEdit();
+                    $companyDomaines = categoriesManager::getAllIdDomainesForCompany($companyToEdit->id);
+                    $domainePage['categoriesGrosTravaux'] = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
+                    $domainePage['categoriesPetitsTravaux'] = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
+                    $domainePage['categoriesDepannage'] = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
                 } else if(isset($_POST['submitEditCompany'])){
                     editCompany();
+                    categoriesManager::delAllLinkCatComp($_POST['idCompany']);
+                    if(isset($_POST['checkGros'])){
+                        foreach ($_POST['checkGros'] as $dom) {
+                            categoriesManager::addLinkCatComp($_POST['idCompany'], $dom);
+                        }
+                    }
+                    if(isset($_POST['checkPetits'])){
+                        foreach ($_POST['checkPetits'] as $dom) {
+                            categoriesManager::addLinkCatComp($_POST['idCompany'], $dom);
+                        }
+                    }
+                    if(isset($_POST['checkDepannage'])){
+                        foreach ($_POST['checkDepannage'] as $dom) {
+                            categoriesManager::addLinkCatComp($_POST['idCompany'], $dom);
+                        }
+                    }
                     $companies = companiesManager::getAllActiveCompanies();
                 } else if(isset($_GET['action']) && $_GET['action'] == "add"){
                     $addNewCompany = true;
@@ -320,7 +340,7 @@ try {
         }
 
         if(isset($_SESSION['user']) && $_SESSION['user']->type == "admin")
-            displayAdminPanel($alert, $companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $addNewCompany, $domainePage, $notification);
+            displayAdminPanel($alert, $companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $addNewCompany, $domainePage, $notification, $companyDomaines);
         else
             homePage($notification);
 

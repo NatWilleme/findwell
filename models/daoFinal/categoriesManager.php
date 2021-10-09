@@ -23,6 +23,26 @@ abstract class CategoriesManager extends DBManager{
         return $result;
     }
 
+    static public function getAllIdDomainesForCompany($idCompany){
+        $result = array();
+        $sql = "SELECT categories.id_cat FROM categories INNER JOIN appartient ON appartient.id_cat = categories.id_cat WHERE appartient.id_comp = :id_comp ORDER BY categories.name_cat";
+        try{
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_comp' => $idCompany));
+            $resultQuery = $pdo_statement->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($resultQuery as $elem){
+                array_push($result,$elem["id_cat"]);
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+        return $result;
+    }
+
     static public function getAllSubcategoriesFor($categoryName){
         $result = array();
         $sql = "SELECT * FROM categories WHERE categories.parent_cat = :name_cat ORDER BY categories.name_cat";
@@ -58,6 +78,20 @@ abstract class CategoriesManager extends DBManager{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $pdo_statement->execute(array(':id_cat' => $id_cat, ':id_comp' => $id_comp));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+    }
+
+    static public function delAllLinkCatComp($id_comp){
+        $sql = "DELETE FROM appartient WHERE id_comp = :id_comp";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':id_comp' => $id_comp));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
