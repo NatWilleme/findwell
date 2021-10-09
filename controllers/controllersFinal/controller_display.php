@@ -8,7 +8,7 @@ function displayRegister($alert = '', $choice = '', $companyForm = '', $domaineP
     require_once('views/viewFinal/view_register.php');
 }
 
-function displayAdminPanel($alert, $companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $addNewCompany, $domainePage, $notification) {
+function displayAdminPanel($alert, $companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $addNewCompany, $domainePage, $notification, $companyDomaines) {
     require_once('views/viewFinal/view_adminPanel.php');
 }
 

@@ -608,6 +608,57 @@
                 </div>
             </div>
             <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card h-100">
+                        <div class="card-body">
+
+                            <div class="row gutters mb-3">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h5 class="mb-2 text-primary">Domaines</h6>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h6 class="mb-2 text-primary">Travaux acceptés:</h6>
+                                    <p id="errorDomaine"></p>
+                                </div>
+                                 
+
+                                    <div class="row gutters mt-2 mb-4">
+                                        <div class="col-2"></div>
+                                        <div id="listGrosTravaux" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                                            <h5 class="text-primary">Gros Travaux</h5>
+                                        <?php foreach ($domainePage['categoriesGrosTravaux'] as $category) { ?>
+                                            <div class="form-check">
+                                                <label class="form-check-label" for="<?php echo $category->id; ?>"><?php echo $category->name; ?></label>
+                                                <input type="checkbox" class="form-check-input" name="checkGros[]" id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>" <?php if(in_array($category->id,$companyDomaines)) echo "checked"; ?>>
+                                            </div>
+                                            <?php } ?>
+                                        </div>
+                                        <div id="listPetitsTravaux" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                                            <h5 class="text-primary">Petits Travaux</h5>
+                                        <?php foreach ($domainePage['categoriesPetitsTravaux'] as $category) { ?>
+                                            <div class="form-check">
+                                                <label class="form-check-label" for="<?php echo $category->id; ?>"><?php echo $category->name; ?></label>
+                                                <input type="checkbox" class="form-check-input" name="checkPetits[]"  id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>" <?php if(in_array($category->id,$companyDomaines)) echo "checked"; ?>>
+                                            </div>
+                                            <?php } ?>
+                                        </div>
+                                        <div id="listDepannage" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+                                            <h5 class="text-primary">Dépannage d'urgence</h5>
+                                        <?php foreach ($domainePage['categoriesDepannage'] as $category) { ?>
+                                            <div class="form-check">
+                                                <label class="form-check-label" for="<?php echo $category->id; ?>"><?php echo $category->name; ?></label>
+                                                <input type="checkbox" class="form-check-input" name="checkDepannage[]"  id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>" <?php if(in_array($category->id,$companyDomaines)) echo "checked"; ?>>
+                                            </div>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row gutters">
             <button class="btn btn-primary mt-4 col-2" name="submitEditCompany" type="submit">Modifier</button>
             </div>
         </form>
