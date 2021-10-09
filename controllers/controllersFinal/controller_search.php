@@ -4,13 +4,13 @@
 
 function getSearchResult()
 {
-    $searchResult = companiesManager::searchCompany($_POST['company']);
+    $searchResult['companies'] = companiesManager::searchCompany($_POST['company']);
     if(!isset($_POST['location']) || $_POST['location'] == ""){
         $userAddress = null;
     } else {
         $userAddress = $_POST['location'];
     }
-    foreach ($searchResult as $company) {
+    foreach ($searchResult['companies'] as $company) {
         $rate = commentsManager::getRatingForCompany($company->id);
         $company->__set('rating', $rate['rate']); 
 
@@ -25,7 +25,10 @@ function getSearchResult()
         $company->__set('domaines', $domainesAsString); 
         
         $companyAddress = $company->number.' '.$company->street.', '.$company->postalCode.' '.$company->city;
-        if(isset($_SESSION['distanceCompanies'][$company->id])){
+        
+        if(isset($_POST['city'])){
+            $company->distance = getDistance($_POST['city'], $companyAddress, $unit = 'K');
+        } else if(isset($_SESSION['distanceCompanies'][$company->id])){
             $company->distance = $_SESSION['distanceCompanies'][$company->id];
         } else if($userAddress == null){
             $company->distance = null;
@@ -49,11 +52,14 @@ function getSearchResult()
         $domainesAsString .= '.';
         $company->__set('domaines', $domainesAsString);
     } 
-    if(!isset($_POST['sort']) || $_POST['sort'] == "note"){
-        usort($searchResult, 'cmpRating');
+    if((!isset($_POST['sort']) && !isset($_POST['city'])) || (isset($_POST['sort']) && $_POST['sort'] == "note")){
+        usort($searchResult['companies'], 'cmpRating');
+        $searchResult['sort'] = "note";
     } else {
-        usort($searchResult, 'cmpDistance');
+        usort($searchResult['companies'], 'cmpDistance');
+        $searchResult['sort'] = "distance";
     }
+
     return $searchResult;
 }
 

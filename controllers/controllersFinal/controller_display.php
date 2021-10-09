@@ -16,7 +16,7 @@ function displayCategoriesList($categories, $notification) {
     require_once('views/viewFinal/view_categoriesList.php');
 }
 
-function displayCompaniesList($companies, $notification) {
+function displayCompaniesList($companies, $notification, $sort) {
     require_once('views/viewFinal/view_companiesList.php');
 }
 
