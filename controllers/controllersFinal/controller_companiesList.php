@@ -18,7 +18,9 @@ function displayCompaniesAccordingTo($category, $subcategory){
     }
     foreach ($companies as $company) {
         $companyAddress = $company->number.' '.$company->street.', '.$company->postalCode.' '.$company->city;
-        if(isset($_SESSION['distanceCompanies'][$company->id])){
+        if(isset($_POST['city'])){
+            $company->distance = getDistance($_POST['city'], $companyAddress, $unit = 'K');
+        } else if(isset($_SESSION['distanceCompanies'][$company->id])){
             $company->distance = $_SESSION['distanceCompanies'][$company->id];
         } else if($userAddress == null){
             $company->distance = null;
@@ -42,12 +44,14 @@ function displayCompaniesAccordingTo($category, $subcategory){
         $company->__set('domaines', $domainesAsString); 
         
     } 
-    if(!isset($_POST['sort']) || $_POST['sort'] == "note"){
+    if((!isset($_POST['sort']) && !isset($_POST['city'])) || (isset($_POST['sort']) && $_POST['sort'] == "note")){
         usort($companies, 'cmpRating');
+        $sort = "note";
     } else {
         usort($companies, 'cmpDistance');
+        $sort = "distance";
     }
-    displayCompaniesList($companies, $notification);
+    displayCompaniesList($companies, $notification, $sort);
 }
 
 

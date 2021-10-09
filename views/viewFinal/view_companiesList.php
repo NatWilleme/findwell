@@ -16,17 +16,26 @@
         </ol>
     </nav>
     <?php } ?>
-
+    <?php if($companies[0]->distance != null) { ?>
     <div class="col-12 col-lg-2 offset-lg-10 mb-3">
         <form action="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $_GET['subcategory'] ?>" method="post">
             <label for="sort">Trier par: </label>
             <select class="form-select" name="sort" id="sort" onchange="this.form.submit()">
-                <option value="note" <?php if(!isset($_POST['sort']) || $_POST['sort'] == "note") echo "selected"; ?>>Note</option>
-                <option value="distance" <?php if(isset($_POST['sort']) && $_POST['sort'] == "distance") echo "selected"; ?>>Distance</option>
+                <option value="note" <?php if($sort == "note") echo "selected"; ?>>Note</option>
+                <option value="distance" <?php if($sort == "distance") echo "selected"; ?>>Distance</option>
             </select>
         </form>
     </div>
-
+    <?php } ?>
+    <div class="col-12 col-lg-2 offset-lg-10 mb-3">
+        <form action="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $_GET['subcategory'] ?>" method="post">
+            <label for="city">Région: </label>
+            <div class="input-group">
+                <input type="text" name="city" class="form-control" role="group" aria-describedby="btnGroupAddon">
+                <button type="submit" class="input-group-text btn-primary" id="btnGroupAddon">Chercher</button>
+            </div>
+        </form>
+    </div>
     <div class="row d-flex justify-content-around mb-4 m-0">
     <?php
         $cpt = 0;

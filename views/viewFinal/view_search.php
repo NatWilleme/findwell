@@ -5,25 +5,37 @@
 
 <div class="container-fluid mt-2 mb-5">
     <h2 class="fw-bold text-center mb-3">Résultat de la recherche:</h2>
-    <?php if($searchResult[0]->distance != null) { ?>
+    <?php if($searchResult['companies'][0]->distance != null) { ?>
     <div class="col-12 col-lg-2 offset-lg-10 mb-3">
         <form action="index.php?viewToDisplay=displaySearch" method="post">
             <input class="d-none" type="text" name="company" value="<?php echo $_POST['company']; ?>">
             <label for="sort">Trier par: </label>
             <select class="form-select" name="sort" id="sort" onchange="this.form.submit()">
-                <option value="note" <?php if(!isset($_POST['sort']) || $_POST['sort'] == "note") echo "selected"; ?>>Note</option>
-                <option value="distance" <?php if(isset($_POST['sort']) && $_POST['sort'] == "distance") echo "selected"; ?>>Distance</option>
+                <option value="note" <?php if($searchResult['sort'] == "note") echo "selected"; ?>>Note</option>
+                <option value="distance" <?php if($searchResult['sort'] == "distance") echo "selected"; ?>>Distance</option>
             </select>
         </form>
     </div>
     <?php } ?>
+
+    <div class="col-12 col-lg-2 offset-lg-10 mb-3">
+        <form action="index.php?viewToDisplay=displaySearch" method="post">
+            <input class="d-none" type="text" name="company" value="<?php echo $_POST['company']; ?>">
+            <label for="city">Région: </label>
+            <div class="input-group">
+                <input type="text" name="city" class="form-control" role="group" aria-describedby="btnGroupAddon">
+                <button type="submit" class="input-group-text btn-primary" id="btnGroupAddon">Chercher</button>
+            </div>
+        </form>
+    </div>
+
     <div class="row d-flex justify-content-around mb-4">
     <?php
-        if(sizeof($searchResult) == 0){
+        if(sizeof($searchResult['companies']) == 0){
             echo "<h3>Aucun résultat pour votre recherche !</h3>";
         } else {
             $cpt = 0;
-            foreach ($searchResult as $company) {
+            foreach ($searchResult['companies'] as $company) {
     ?>
             
             <div class="card border border-dark pt-2 ms-3 me-3 mb-5" style="width: 18rem;">
