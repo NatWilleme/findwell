@@ -53,8 +53,12 @@ function updateAndGetUserInformation()
         $userToEdit->__set("zip", NULL);
     else
         $userToEdit->__set("zip", $_POST['zip']);
-    $userToEdit->__set("type", $_POST['type']);
-
+    if($_POST['submit'] == "updateCompany"){
+        $userToEdit->__set("type", "company");
+    } else {
+        $userToEdit->__set("type", "user");
+    }
+    
     UsersManager::updateUser($userToEdit);
     return UsersManager::getUser($_SESSION['user']->mail);
 }

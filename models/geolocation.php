@@ -53,7 +53,7 @@ function getDistance($addressFrom, $addressTo, $unit = ''){
     // Geocoding API request with start address
     $geocodeFrom = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$formattedAddrFrom.'&sensor=false&key='.$apiKey);
     $outputFrom = json_decode($geocodeFrom);
-    if(!empty($outputFrom->error_message)){
+    if(!empty($outputFrom->error_message) || is_null($outputFrom)){
         return $outputFrom->error_message;
     }
     

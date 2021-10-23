@@ -13,12 +13,19 @@ if (document.getElementById("formEditCompany") != null) {
         document.getElementById('errorCity').innerHTML = "";
         document.getElementById('errorState').innerHTML = "";
         document.getElementById('errorZip').innerHTML = "";
+        document.getElementById('errorImage').innerHTML = "";
+        var imageType = document.getElementById('image').files[0].type;
         
         if(document.getElementById("username").value == "") {           
             e.preventDefault();
             document.getElementById('errorName').innerHTML = "Veuillez entrer un nom";
             document.getElementById('errorName').style.color = "red";
-            
+        }
+
+        if(!imageType.includes("image")) {
+            e.preventDefault();
+            document.getElementById('errorImage').innerHTML = "Le type d'image sélectionné n'est pas supporté";
+            document.getElementById('errorImage').style.color = "red";
         }
 
         if(document.getElementById("phone").value == "" || !regexPhone.test(document.getElementById("phone").value)) {
@@ -90,5 +97,18 @@ if (document.getElementById("formChangePwd") != null) {
             document.getElementById('errorPwd').style.color = "red";
         }
 
+    })
+}
+
+if (document.getElementById("formEditUser") != null) {
+    document.getElementById("formEditUser").addEventListener("submit", function (e) {
+        document.getElementById('errorImage').innerHTML = "";
+        var imageType = document.getElementById('image').files[0].type;
+
+        if(!imageType.includes("image")) {
+            e.preventDefault();
+            document.getElementById('errorImage').innerHTML = "Le type d'image sélectionné n'est pas supporté";
+            document.getElementById('errorImage').style.color = "red";
+        }
     })
 }

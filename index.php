@@ -25,6 +25,7 @@ require_once('controllers/controllersFinal/controller_login.php');
 require_once('controllers/controllersFinal/controller_search.php');
 require_once('controllers/controllersFinal/controller_display.php');
 require_once('controllers/controllersFinal/controller_contact.php');
+require_once('controllers/controllersFinal/controller_annonce.php');
 
 
 try {
@@ -48,6 +49,23 @@ try {
             $alert['color'] = "danger";
             $alert['message'] = "Échec de connexion. Vérifiez vos identifiants";
             displayConnexion($alert);
+        }
+    }
+
+    if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAnnonce'){
+        if(isset($_GET['subcategory'])){
+            if($_GET['subcategory'] == "service"){
+                $categoriesToDisplay = getCategoriesToDisplay("Gros Travaux");
+                displayAnnonce(notification: $notification, categoriesToDisplay: $categoriesToDisplay);
+            } else if($_GET['subcategory'] == "occasion"){
+                $occasions = true;
+                displayAnnonce(notification: $notification, occasions: $occasions);
+            } else {
+
+            }
+            
+        } else {
+            displayAnnonce($notification);
         }
     }
 

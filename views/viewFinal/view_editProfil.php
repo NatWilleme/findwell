@@ -19,7 +19,7 @@
     <?php } ?>
     <?php if($changePwd == ''){ ?>
         <?php if($user->type == "user" || $user->type == "admin") { ?>
-    <form action="index.php?viewToDisplay=displayEditProfil" method="post" enctype='multipart/form-data'>
+    <form action="index.php?viewToDisplay=displayEditProfil" id="formEditUser" method="post" enctype='multipart/form-data'>
         <div class="row gutters">
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
@@ -65,6 +65,7 @@
                                 <div class="form-group">
                                     <label for="image">Photo de profil</label>
                                     <input type="file" class="form-control" name="image" id="image" accept=".png, .jpg, .jpeg">
+                                    <p id="errorImage"></p>
                                 </div>
                             </div>
                         </div>
@@ -173,6 +174,7 @@
                                 <div class="form-group">
                                     <label for="image">Photo de l'entreprise</label>
                                     <input type="file" class="form-control" name="image" id="image" accept=".jpg, .png">
+                                    <p id="errorImage"></p>
                                 </div>
                             </div>
                         </div>

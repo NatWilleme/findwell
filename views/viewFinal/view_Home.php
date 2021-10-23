@@ -111,10 +111,22 @@
             </div>
         </div>
 
+        <div class="col-8 col-lg-2 col-md-3 mb-3">
+            <div class="containerPerso tuile">
+                <a href="index.php?viewToDisplay=displayAnnonce">  
+                    <img src="images/HomePage/card4.png" alt="Avatar" class="border border-dark rounded border-2 image">
+                    <div class="overlay">
+                        <div class="text">Accédez à nos annonces.</div>
+                    </div>
+                </a>
+                <label class="fw-bold fst-italic fs-3">Annonces</label>
+            </div>
+        </div>
+
     </div>
 
     <div>
-        <video id="youtubeVideo" class="col-xl-10 col-12 offset-xl-1" controls>
+        <video id="youtubeVideo" class="col-10 offset-1 border border-5 border-dark" controls>
             <source src="images/findwell.mp4" type="video/mp4">
         </video>
     </div>
@@ -152,14 +164,14 @@
                 </div>
             </div>
         </div>
-        <img class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 offset-lg-1" src="images/HomePage/encart.gif" alt="">
+        <img class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 offset-lg-1" src="images/HomePage/encart.gif" style="height: 100%;">
 
         
     </div>
     
     <div class="row mt-5 mb-5 justify-content-around" style="--bs-gutter-x: 0;">
         <h1 class="col-12 col-lg-10 mb-5 text-center text-secondary" style="word-spacing: -2px; font-size: 2em;"><i>Peu importe votre recherche dans le domaine de la construction ou de la rénovation, Findwell vous accompagne dans vos projets</i></h1>
-        <div class="card col-12 col-lg-4">
+        <div class="card col-10 col-lg-4">
             <img src="images/HomePage/satisfaction2.png" class="card-img-top">
             <div class="card-body pt-0">
                 <p class="card-text">

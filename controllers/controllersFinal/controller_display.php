@@ -20,6 +20,11 @@ function displayCompaniesList($companies, $notification, $sort) {
     require_once('views/viewFinal/view_companiesList.php');
 }
 
+function displayAnnonce($notification, $categoriesToDisplay = null, $occasions = null)
+{
+    require_once('views/viewFinal/view_annonce.php');
+}
+
 function displayCompanyDetails($company, $rating, $comments, $messageBtn, $users, $alert, $notification) {
     require_once('views/viewFinal/view_companyDetails.php');
 }
