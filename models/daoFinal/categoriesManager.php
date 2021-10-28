@@ -71,6 +71,8 @@ abstract class CategoriesManager extends DBManager{
         return $result;
     }
 
+    
+
     static public function addLinkCatComp($id_comp, $id_cat){
         $sql = "INSERT INTO appartient (id_cat, id_comp)
                 VALUES (:id_cat, :id_comp)";

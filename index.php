@@ -6,6 +6,7 @@ require_once('models/modelsFinal/category.php');
 require_once('models/modelsFinal/comment.php');
 require_once('models/modelsFinal/company.php');
 require_once('models/modelsFinal/user.php');
+require_once('models/modelsFinal/service.php');
 
 require_once('models/daoFinal/DBManager.php');
 require_once('models/daoFinal/adsManager.php');
@@ -13,6 +14,7 @@ require_once('models/daoFinal/categoriesManager.php');
 require_once('models/daoFinal/commentsManager.php');
 require_once('models/daoFinal/companiesManager.php');
 require_once('models/daoFinal/usersManager.php');
+require_once('models/daoFinal/servicesManager.php');
 
 require_once('controllers/controllersFinal/controller_adminPanel.php');
 require_once('controllers/controllersFinal/controller_categoriesList.php');
@@ -55,13 +57,39 @@ try {
     if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAnnonce'){
         if(isset($_GET['subcategory'])){
             if($_GET['subcategory'] == "service"){
-                $categoriesToDisplay = getCategoriesToDisplay("Gros Travaux");
-                displayAnnonce(notification: $notification, categoriesToDisplay: $categoriesToDisplay);
+                if(isset($_GET['category'])){
+                    $servicesToDisplay = getServicesForCategories($_GET['category']);
+                    foreach ($servicesToDisplay as $service) {
+                        $service->imageService = unserialize($service->imageService);
+                    }
+                    displayAnnonce(notification: $notification, servicesToDisplay: $servicesToDisplay);
+                } else if(isset($_GET['service'])){
+                    $serviceToDisplay = getServiceByID($_GET['service']);
+                    $serviceToDisplay->imageService = unserialize($serviceToDisplay->imageService);
+                    displayAnnonce(notification: $notification, serviceToDisplay: $serviceToDisplay);
+                } else {
+                    $categoriesServiceToDisplay = getCategoriesOfService();
+                    displayAnnonce(notification: $notification, categoriesServiceToDisplay: $categoriesServiceToDisplay);
+                }
             } else if($_GET['subcategory'] == "occasion"){
-                $occasions = true;
-                displayAnnonce(notification: $notification, occasions: $occasions);
+                if(isset($_GET['occasionToDisplay'])){
+                    $occasionToDisplay = true;
+                    displayAnnonce(notification: $notification, occasionToDisplay: $occasionToDisplay);
+                } else {
+                    $occasions = true;
+                    displayAnnonce(notification: $notification, occasions: $occasions);
+                }
             } else {
-
+                if(isset($_GET['category'])){
+                    $materialsToDisplay = true;
+                    displayAnnonce(notification: $notification, materialsToDisplay: $materialsToDisplay);
+                } else if(isset($_GET['materiel'])){
+                    $materialToDisplay = true;
+                    displayAnnonce(notification: $notification, materialToDisplay: $materialToDisplay);
+                } else {
+                    $categoriesMaterialsToDisplay = getMaterielCategories();
+                    displayAnnonce(notification: $notification, categoriesMaterialsToDisplay: $categoriesMaterialsToDisplay);
+                }
             }
             
         } else {

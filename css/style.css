@@ -157,24 +157,8 @@
         margin-top: 20px;
     }
 
-    #carouselAds{
-        
-    }
 }
 
-/* #imgCompany{
-    margin-bottom: 20px;
-}
-
-@media only screen and (min-width: 600px) {
-    #imgCompany{
-        max-height:500px; 
-        max-width:1000px; 
-        height:auto; 
-        width:auto;
-        margin-bottom: 0px;
-    }
-} */
 
 .footer-link{
     text-decoration: none;
@@ -204,4 +188,18 @@
     #youtubeVideo{
         height: 700px;
     }
+}
+
+
+.side_view{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.side_view img{
+    width: 9rem;
+    height: 7rem;
+    object-fit: cover;
+    cursor: pointer;
+    margin:0.5rem;
 }

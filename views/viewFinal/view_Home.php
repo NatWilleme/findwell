@@ -65,7 +65,6 @@
         </button>
     </div>
 
-
     <!-- Les tuiles -->
     <div class="row d-flex justify-content-lg-around justify-content-center mt-2 mt-lg-0 mx-0">
 
@@ -79,7 +78,7 @@
                         <div class="text">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
                     </div>
                 </a>
-                <label class="fw-bold fst-italic fs-3">Gros travaux</label>  
+                <p class="fw-bold fst-italic fs-3 text-center">Gros travaux</p>  
             </div>
         </div>
 
@@ -93,7 +92,7 @@
                         <div class="text">Effectuez vos petits travaux d'un simple clic.</div>
                     </div>
                 </a>
-                <label class="fw-bold fst-italic fs-3">Petits travaux</label>                
+                <p class="fw-bold fst-italic fs-3 text-center">Petits travaux</p>                
             </div>
         </div>
 
@@ -107,7 +106,7 @@
                         <div class="text">Accédez aux entreprises disponible 24h/24h.</div>
                     </div>
                 </a>
-                <label class="fw-bold fst-italic fs-3">Dépannage d'urgence</label>
+                <p class="fw-bold fst-italic fs-3 text-center">Dépannage d'urgence</p>
             </div>
         </div>
 
@@ -119,14 +118,14 @@
                         <div class="text">Accédez à nos annonces.</div>
                     </div>
                 </a>
-                <label class="fw-bold fst-italic fs-3">Annonces</label>
+                <p class="fw-bold fst-italic fs-3 text-center">Annonces</p>
             </div>
         </div>
 
     </div>
 
-    <div>
-        <video id="youtubeVideo" class="col-10 offset-1 border border-5 border-dark" controls>
+    <div style="background-color: black;">
+        <video id="youtubeVideo" class="col-xl-8 col-10 offset-xl-2 offset-1 border border-5 border-dark my-4" controls>
             <source src="images/findwell.mp4" type="video/mp4">
         </video>
     </div>
@@ -170,7 +169,8 @@
     </div>
     
     <div class="row mt-5 mb-5 justify-content-around" style="--bs-gutter-x: 0;">
-        <h1 class="col-12 col-lg-10 mb-5 text-center text-secondary" style="word-spacing: -2px; font-size: 2em;"><i>Peu importe votre recherche dans le domaine de la construction ou de la rénovation, Findwell vous accompagne dans vos projets</i></h1>
+        <h1 class="col-12 col-lg-10 mb-5 text-center " style="word-spacing: -2px; font-size: 2em;"><i>Peu importe votre recherche dans le domaine de la construction ou de la rénovation, Findwell vous accompagne dans vos projets</i></h1>
+        
         <div class="card col-10 col-lg-4">
             <img src="images/HomePage/satisfaction2.png" class="card-img-top">
             <div class="card-body pt-0">
@@ -180,7 +180,7 @@
                 </p>
             </div>
         </div>
-        <div class="card col-12 col-lg-4">
+        <div class="card col-10 col-lg-4">
             <img src="images/HomePage/assistance2.png" class="card-img-top">
             <div class="card-body pt-0">
                 <p class="card-text">
@@ -196,7 +196,7 @@
     <div class="row col-12 mx-auto p-0 d-lg-none d-sm-block">
         <img class="p-0" src="images/HomePage/bannerMobile.png" alt="">
     </div>
-
+    
     
 </div>
 
