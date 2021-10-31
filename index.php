@@ -7,6 +7,8 @@ require_once('models/modelsFinal/comment.php');
 require_once('models/modelsFinal/company.php');
 require_once('models/modelsFinal/user.php');
 require_once('models/modelsFinal/service.php');
+require_once('models/modelsFinal/occasion.php');
+require_once('models/modelsFinal/material.php');
 
 require_once('models/daoFinal/DBManager.php');
 require_once('models/daoFinal/adsManager.php');
@@ -15,6 +17,8 @@ require_once('models/daoFinal/commentsManager.php');
 require_once('models/daoFinal/companiesManager.php');
 require_once('models/daoFinal/usersManager.php');
 require_once('models/daoFinal/servicesManager.php');
+require_once('models/daoFinal/occasionsManager.php');
+require_once('models/daoFinal/materialsManager.php');
 
 require_once('controllers/controllersFinal/controller_adminPanel.php');
 require_once('controllers/controllersFinal/controller_categoriesList.php');
@@ -66,6 +70,13 @@ try {
                 } else if(isset($_GET['service'])){
                     $serviceToDisplay = getServiceByID($_GET['service']);
                     $serviceToDisplay->imageService = unserialize($serviceToDisplay->imageService);
+                    
+                    //Avoir le nombre de jour depuis l'ajout du service
+                    $datetime1 = new DateTime(date("Y/m/d"));
+                    $datetime2 = new DateTime($serviceToDisplay->date);
+                    $serviceToDisplay->date = $datetime1->diff($datetime2)->format('%d');
+
+                    
                     displayAnnonce(notification: $notification, serviceToDisplay: $serviceToDisplay);
                 } else {
                     $categoriesServiceToDisplay = getCategoriesOfService();
@@ -73,18 +84,37 @@ try {
                 }
             } else if($_GET['subcategory'] == "occasion"){
                 if(isset($_GET['occasionToDisplay'])){
-                    $occasionToDisplay = true;
+                    $occasionToDisplay = getOccasionByID($_GET['occasionToDisplay']);
+                    $occasionToDisplay->imageOccasion = unserialize($occasionToDisplay->imageOccasion);
+
+                    //Avoir le nombre de jour depuis l'ajout du service
+                    $datetime1 = new DateTime(date("Y/m/d"));
+                    $datetime2 = new DateTime($occasionToDisplay->date);
+                    $occasionToDisplay->date = $datetime1->diff($datetime2)->format('%d');
+
                     displayAnnonce(notification: $notification, occasionToDisplay: $occasionToDisplay);
                 } else {
-                    $occasions = true;
+                    $occasions = getAllOccasions();
+                    foreach ($occasions as $occasion) {
+                        $occasion->imageOccasion = unserialize($occasion->imageOccasion);
+                    }
                     displayAnnonce(notification: $notification, occasions: $occasions);
                 }
             } else {
                 if(isset($_GET['category'])){
-                    $materialsToDisplay = true;
+                    $materialsToDisplay = getMaterialsForCategories($_GET['category']);
+                    foreach ($materialsToDisplay as $material) {
+                        $material->imageMaterial = unserialize($material->imageMaterial);
+                    }
                     displayAnnonce(notification: $notification, materialsToDisplay: $materialsToDisplay);
                 } else if(isset($_GET['materiel'])){
-                    $materialToDisplay = true;
+                    $materialToDisplay = getMaterialByID($_GET['materiel']);
+                    $materialToDisplay->imageMaterial = unserialize($materialToDisplay->imageMaterial);
+
+                    //Avoir le nombre de jour depuis l'ajout du service
+                    $datetime1 = new DateTime(date("Y/m/d"));
+                    $datetime2 = new DateTime($materialToDisplay->date);
+                    $materialToDisplay->date = $datetime1->diff($datetime2)->format('%d');
                     displayAnnonce(notification: $notification, materialToDisplay: $materialToDisplay);
                 } else {
                     $categoriesMaterialsToDisplay = getMaterielCategories();
