@@ -20,7 +20,10 @@ function displayCompaniesList($companies, $notification, $sort) {
     require_once('views/viewFinal/view_companiesList.php');
 }
 
-function displayAnnonce($notification, $categoriesServiceToDisplay = null, $occasions = null, $occasionToDisplay = null, $servicesToDisplay = null, $serviceToDisplay = null, $categoriesMaterialsToDisplay = null, $materialsToDisplay = null, $materialToDisplay = null)
+function displayAnnonce($notification, $categoriesServiceToDisplay = null, $occasions = null, $occasionToDisplay = null, $servicesToDisplay = null,
+                        $serviceToDisplay = null, $categoriesMaterialsToDisplay = null, $materialsToDisplay = null, $materialToDisplay = null, $addOccasion = null,
+                        $addService = null, $categoriesService = null, $servicesOfUser = null, $occasionsOfUser = null, $serviceToEdit = null, $editPermission = null,
+                        $occasionToEdit = null)
 {
     require_once('views/viewFinal/view_annonce.php');
 }

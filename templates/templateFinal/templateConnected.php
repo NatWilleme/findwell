@@ -76,6 +76,8 @@
           <?php if($_SESSION['user']->type == "admin") { ?>
             <li><a class="dropdown-item" href="index.php?viewToDisplay=displayAdminPanel">Gestion du site  <?php if($notification != 0) { ?><span class="badge bg-primary"><?php echo $notification; ?></span><?php } else {?><i class="bi bi-gear-fill"></i><?php } ?></a></li>
           <?php } ?>
+          <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item">Mes occasions</a></li>
+          <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item">Mes services</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="index.php?disconnect=true">Se déconnecter  <i class="bi bi-box-arrow-right"></i></a></li>
         </ul>

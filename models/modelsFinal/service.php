@@ -6,6 +6,7 @@ class Service{
     private $description;
     private $date;
     private $region;
+    private $idCategories;
     private $idUser;
     private $username;
     private $mail;

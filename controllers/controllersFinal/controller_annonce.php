@@ -16,6 +16,30 @@ function getAllServices(){
     return ServicesManager::getAllServices();
 }
 
+function getAllServicesOfUser(int $idUser)
+{
+    return ServicesManager::getAllServicesOfUser($idUser);
+}
+
+function addService(Service $newService)
+{
+    if(!is_null($newService->title) && !is_null($newService->description) && !is_null($newService->region) && (!is_null($newService->phone) || !is_null($newService->mail))){
+        return ServicesManager::addService($newService);
+    }
+}
+
+function editService(Service $serviceToEdit)
+{
+    if(!is_null($serviceToEdit->title) && !is_null($serviceToEdit->description) && !is_null($serviceToEdit->region) && (!is_null($serviceToEdit->phone) || !is_null($serviceToEdit->mail))){
+        ServicesManager::editService($serviceToEdit);
+    }
+}
+
+function delAllLinkServiceCategory($idService)
+{
+    ServicesManager::delAllLinkServiceCategory($idService);
+}
+
 function getMaterielCategories(){
     return CategoriesManager::getAllSubcategoriesFor("Materiel");
 }
@@ -26,6 +50,24 @@ function getOccasionByID(int $id){
 
 function getAllOccasions(){
     return OccasionsManager::getAllOccasions();
+}
+
+function getAllOccasionsOfUser(int $îdUser){
+    return OccasionsManager::getAllOccasionsOfUser($îdUser);
+}
+
+function addOccasion(Occasion $newOccasion)
+{
+    if(!is_null($newOccasion->title) && !is_null($newOccasion->description) && !is_null($newOccasion->price) && !is_null($newOccasion->region) && (!is_null($newOccasion->phone) || !is_null($newOccasion->mail))){
+        OccasionsManager::addOccasion($newOccasion);
+    }
+}
+
+function editOccasion(Occasion $occasionToEdit)
+{
+    if(!is_null($occasionToEdit->title) && !is_null($occasionToEdit->description) && !is_null($occasionToEdit->price) && !is_null($occasionToEdit->region) && (!is_null($occasionToEdit->phone) || !is_null($occasionToEdit->mail))){
+        OccasionsManager::editOccasion($occasionToEdit);
+    }
 }
 
 function getMaterialByID(int $id){

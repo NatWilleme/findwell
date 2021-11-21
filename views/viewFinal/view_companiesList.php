@@ -16,7 +16,7 @@
         </ol>
     </nav>
     <?php } ?>
-    <?php if($companies[0]->distance != null) { ?>
+    <?php if(sizeof($companies) > 0 && $companies[0]->distance != null) { ?>
     <div class="col-12 col-lg-2 offset-lg-10 mb-3">
         <form action="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $_GET['subcategory'] ?>" method="post">
             <label for="sort">Trier par: </label>
@@ -43,7 +43,7 @@
             echo "<h3>Il n'y a pas encore d'entreprises dans cette categorie!</h3>";
         } else {
         foreach ($companies as $company) {
-            ?>
+    ?>
             
         <div class="card border border-dark pt-2 ms-3 me-3" style="width: 18rem;">
             <img src="<?php echo $company->image; ?>" style="max-height:200px; max-width:280px; height:auto; width:auto;" class="card-img-top" class="card-img-top" alt="...">
@@ -69,9 +69,7 @@
             </div>
             <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $company->id; ?>" class="btn btn-primary mb-2">Accéder</a>
         </div>          
-        <?php
-        }}
-        ?>
+        <?php }} ?>
     </div>
 
 

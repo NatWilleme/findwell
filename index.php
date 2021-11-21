@@ -69,15 +69,107 @@ try {
                     displayAnnonce(notification: $notification, servicesToDisplay: $servicesToDisplay);
                 } else if(isset($_GET['service'])){
                     $serviceToDisplay = getServiceByID($_GET['service']);
-                    $serviceToDisplay->imageService = unserialize($serviceToDisplay->imageService);
+                    if(!is_null($serviceToDisplay)){
+                        $serviceToDisplay->imageService = unserialize($serviceToDisplay->imageService);
                     
-                    //Avoir le nombre de jour depuis l'ajout du service
-                    $datetime1 = new DateTime(date("Y/m/d"));
-                    $datetime2 = new DateTime($serviceToDisplay->date);
-                    $serviceToDisplay->date = $datetime1->diff($datetime2)->format('%d');
+                        //Avoir le nombre de jour depuis l'ajout du service
+                        $datetime1 = new DateTime(date("Y/m/d"));
+                        $datetime2 = new DateTime($serviceToDisplay->date);
+                        $serviceToDisplay->date = $datetime1->diff($datetime2)->format('%d');
+                        displayAnnonce(notification: $notification, serviceToDisplay: $serviceToDisplay);
+                    } else {
+                        $categoriesServiceToDisplay = getCategoriesOfService();
+                        displayAnnonce(notification: $notification, categoriesServiceToDisplay: $categoriesServiceToDisplay);
+                    }    
+                                    
+                } else if(isset($_GET['action'])){
+                    if($_GET['action'] == 'displayAdd' && isConnected()){
+                        $addService = true;
+                        $categoriesService = getCategoriesToDisplay("Service");
+                        displayAnnonce(notification: $notification, addService: $addService, categoriesService : $categoriesService);
+                    } else if($_GET['action'] == 'add' && isConnected()){
+                        $values = array(
+                            "title" => $_POST['title'],
+                            "description" => $_POST['description'],
+                            "imageService" => $_FILES['image'],
+                            "region" => $_POST['region'],
+                            "phone" => $_POST['phone'],
+                            "mail" => $_POST['mail'],
+                            "idUser" => $_SESSION['user']->id
+                        );
+                        
+                        $newService = new Service();
+                        $newService->hydrate($values);
+                        $imageArray = array();
 
+                        for ($i=0; $i < sizeof($_FILES['image']['name']); $i++) { 
+                            $from = $_FILES['image']['tmp_name'][$i];
+                            $path = $_FILES['image']['name'][$i];
+                            //get the extension of file
+                            $ext = pathinfo($path, PATHINFO_EXTENSION);
+                            $files = scandir('images/upload/services/');
+                            $cptImage = count($files)-1;
+                            $to = 'images/upload/services/service'.$cptImage.'.'.$ext;
+                            move_uploaded_file($from,$to);
+                            array_push($imageArray, $to);
+                        }
+                        $newService->__set('imageService',$imageArray);
+                        $idNewService = addService($newService);
+                        foreach ($_POST['checkService'] as $dom) {
+                            ServicesManager::addLinkServiceCategory($idNewService, $dom);
+                        }
+                        header("Location: index.php?viewToDisplay=displayAnnonce&message=1");
+                    } else if($_GET['action'] == 'edit' && isConnected()){
+                        $values = array(
+                            "idService" => $_POST['idService'],
+                            "title" => $_POST['title'],
+                            "description" => $_POST['description'],
+                            "imageService" => $_FILES['image'],
+                            "region" => $_POST['region'],
+                            "phone" => $_POST['phone'],
+                            "mail" => $_POST['mail'],
+                            "idUser" => $_SESSION['user']->id
+                        );
+                        
+                        $newService = new Service();
+                        $newService->hydrate($values);
+                        $imageArray = array();
+
+                        for ($i=0; $i < sizeof($_FILES['image']['name']); $i++) { 
+                            $from = $_FILES['image']['tmp_name'][$i];
+                            $path = $_FILES['image']['name'][$i];
+                            //get the extension of file
+                            $ext = pathinfo($path, PATHINFO_EXTENSION);
+                            $files = scandir('images/upload/services/');
+                            $cptImage = count($files)-1;
+                            $to = 'images/upload/services/service'.$cptImage.'.'.$ext;
+                            move_uploaded_file($from,$to);
+                            array_push($imageArray, $to);
+                        }
+                        $newService->__set('imageService',$imageArray);
+                        editService($newService);
+                        delAllLinkServiceCategory($newService->idService);
+                        foreach ($_POST['checkService'] as $dom) {
+                            ServicesManager::addLinkServiceCategory($newService->idService, $dom);
+                        }
+                        header("Location: index.php?viewToDisplay=displayAnnonce&message=2");
+                    }
+                } else if(isset($_GET['idUser'])){ 
+                    $servicesOfUser = getAllServicesOfUser($_GET['idUser']);
+                    foreach ($servicesOfUser as $service) {
+                        $service->imageService = unserialize($service->imageService);
+                    }
+                    displayAnnonce(notification: $notification, servicesOfUser: $servicesOfUser);
+                } else if(isset($_GET['edit'])){
+                    $serviceToEdit = getServiceByID($_GET['edit']);
+                    if($serviceToEdit->idUser == $_SESSION['user']->id){
+                        $editPermission = true;
+                    } else {
+                        $editPermission = false;
+                    }
                     
-                    displayAnnonce(notification: $notification, serviceToDisplay: $serviceToDisplay);
+                    $categoriesService = getCategoriesToDisplay("Service");
+                    displayAnnonce(notification: $notification, serviceToEdit: $serviceToEdit, editPermission: $editPermission, categoriesService: $categoriesService);
                 } else {
                     $categoriesServiceToDisplay = getCategoriesOfService();
                     displayAnnonce(notification: $notification, categoriesServiceToDisplay: $categoriesServiceToDisplay);
@@ -85,14 +177,97 @@ try {
             } else if($_GET['subcategory'] == "occasion"){
                 if(isset($_GET['occasionToDisplay'])){
                     $occasionToDisplay = getOccasionByID($_GET['occasionToDisplay']);
-                    $occasionToDisplay->imageOccasion = unserialize($occasionToDisplay->imageOccasion);
+                    if(!is_null($occasionToDisplay)){
+                        $occasionToDisplay->imageOccasion = unserialize($occasionToDisplay->imageOccasion);
 
-                    //Avoir le nombre de jour depuis l'ajout du service
-                    $datetime1 = new DateTime(date("Y/m/d"));
-                    $datetime2 = new DateTime($occasionToDisplay->date);
-                    $occasionToDisplay->date = $datetime1->diff($datetime2)->format('%d');
+                        //Avoir le nombre de jour depuis l'ajout du service
+                        $datetime1 = new DateTime(date("Y/m/d"));
+                        $datetime2 = new DateTime($occasionToDisplay->date);
+                        $occasionToDisplay->date = $datetime1->diff($datetime2)->format('%d');
+                        displayAnnonce(notification: $notification, occasionToDisplay: $occasionToDisplay);
+                    } else {
+                        $occasions = getAllOccasions();
+                        foreach ($occasions as $occasion) {
+                            $occasion->imageOccasion = unserialize($occasion->imageOccasion);
+                        }
+                        displayAnnonce(notification: $notification, occasions: $occasions);
+                    }
+                } else if(isset($_GET['action'])){
+                    if($_GET['action'] == 'displayAdd' && isConnected()){
+                        $addOccasion = true;
+                        displayAnnonce(notification: $notification, addOccasion: $addOccasion);
+                    } else if($_GET['action'] == 'add' && isConnected()){
+                        $values = array(
+                            "title" => $_POST['title'],
+                            "description" => $_POST['description'],
+                            "price" => $_POST['price'],
+                            "imageOccasion" => $_FILES['image'],
+                            "region" => $_POST['region'],
+                            "phone" => $_POST['phone'],
+                            "mail" => $_POST['mail']
+                        );
+                        $newOccasion = new Occasion();
+                        $newOccasion->hydrate($values);
+                        $imageArray = array();
 
-                    displayAnnonce(notification: $notification, occasionToDisplay: $occasionToDisplay);
+                        for ($i=0; $i < sizeof($_FILES['image']['name']); $i++) { 
+                            $from = $_FILES['image']['tmp_name'][$i];
+                            $path = $_FILES['image']['name'][$i];
+                            //get the extension of file
+                            $ext = pathinfo($path, PATHINFO_EXTENSION);
+                            $files = scandir('images/upload/occasions/');
+                            $cptImage = count($files)-1;
+                            $to = 'images/upload/occasions/occasion'.$cptImage.'.'.$ext;
+                            move_uploaded_file($from,$to);
+                            array_push($imageArray, $to);
+                        }
+                        $newOccasion->__set('imageOccasion',$imageArray);
+                        addOccasion($newOccasion);
+                        header("Location: index.php?viewToDisplay=displayAnnonce&message=1");
+                    } else if($_GET['action'] == 'edit' && isConnected()){
+                        $values = array(
+                            "idOccasion" => $_POST['idOccasion'],
+                            "title" => $_POST['title'],
+                            "description" => $_POST['description'],
+                            "price" => $_POST['price'],
+                            "imageOccasion" => $_FILES['image'],
+                            "region" => $_POST['region'],
+                            "phone" => $_POST['phone'],
+                            "mail" => $_POST['mail']
+                        );
+                        $occasionToEdit = new Occasion();
+                        $occasionToEdit->hydrate($values);
+                        $imageArray = array();
+
+                        for ($i=0; $i < sizeof($_FILES['image']['name']); $i++) { 
+                            $from = $_FILES['image']['tmp_name'][$i];
+                            $path = $_FILES['image']['name'][$i];
+                            //get the extension of file
+                            $ext = pathinfo($path, PATHINFO_EXTENSION);
+                            $files = scandir('images/upload/occasions/');
+                            $cptImage = count($files)-1;
+                            $to = 'images/upload/occasions/occasion'.$cptImage.'.'.$ext;
+                            move_uploaded_file($from,$to);
+                            array_push($imageArray, $to);
+                        }
+                        $occasionToEdit->__set('imageOccasion',$imageArray);
+                        editOccasion($occasionToEdit);
+                        header("Location: index.php?viewToDisplay=displayAnnonce&message=2");
+                    }
+                } else if(isset($_GET['idUser'])){ 
+                    $occasionsOfUser = getAllOccasionsOfUser($_GET['idUser']);
+                    foreach ($occasionsOfUser as $occasion) {
+                        $occasion->imageOccasion = unserialize($occasion->imageOccasion);
+                    }
+                    displayAnnonce(notification: $notification, occasionsOfUser: $occasionsOfUser);
+                } else if(isset($_GET['edit'])){
+                    $occasionToEdit = getOccasionByID($_GET['edit']);
+                    if($occasionToEdit->idUser == $_SESSION['user']->id){
+                        $editPermission = true;
+                    } else {
+                        $editPermission = false;
+                    }
+                    displayAnnonce(notification: $notification, occasionToEdit: $occasionToEdit, editPermission: $editPermission);
                 } else {
                     $occasions = getAllOccasions();
                     foreach ($occasions as $occasion) {

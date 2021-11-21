@@ -20,6 +20,7 @@
                         "idCompany" => $elem["id_comp"],  
                         "nameCompany" => $elem["name_comp"],  
                         "mail" => $elem["mail_comp"], 
+                        "region" => $elem["city_comp"],
                         "imageMaterial" => $elem["image_mat"],
                         "imageCompany" => $elem["image_comp"],
                         "phone" => $elem["phone_comp"]
@@ -54,6 +55,7 @@
                     "nameCompany" => $elem["name_comp"],  
                     "mail" => $elem["mail_comp"], 
                     "imageMaterial" => $elem["image_mat"],
+                    "region" => $elem["city_comp"],
                     "imageCompany" => $elem["image_comp"],
                     "phone" => $elem["phone_comp"]
                 );
@@ -88,6 +90,7 @@
                         "mail" => $elem["mail_comp"], 
                         "imageMaterial" => $elem["image_mat"],
                         "imageCompany" => $elem["image_comp"],
+                        "region" => $elem["city_comp"],
                         "phone" => $elem["phone_comp"]
                     );
                     $material = new Material();
