@@ -21,9 +21,9 @@ function displayCompaniesList($companies, $notification, $sort) {
 }
 
 function displayAnnonce($notification, $categoriesServiceToDisplay = null, $occasions = null, $occasionToDisplay = null, $servicesToDisplay = null,
-                        $serviceToDisplay = null, $categoriesMaterialsToDisplay = null, $materialsToDisplay = null, $materialToDisplay = null, $addOccasion = null,
+                        $serviceToDisplay = null, $categoriesMaterialsToDisplay = null, $addOccasion = null,
                         $addService = null, $categoriesService = null, $servicesOfUser = null, $occasionsOfUser = null, $serviceToEdit = null, $editPermission = null,
-                        $occasionToEdit = null)
+                        $occasionToEdit = null, $companiesMaterialToDisplay = null)
 {
     require_once('views/viewFinal/view_annonce.php');
 }

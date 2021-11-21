@@ -462,7 +462,7 @@
         </div>        
     </form>
 
-<?php } else if(!is_null($occasionToEdit) && $editPermission){ //Modification d'un service ?>
+<?php } else if(!is_null($occasionToEdit) && $editPermission){ //Modification d'une occasion ?>
 
     <form id="formEditOccasion" class="mb-3 mt-3" action="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&action=edit" method="post" enctype='multipart/form-data'>
         <input class="d-none" type="text" name="idOccasion" value="<?php echo $occasionToEdit->idOccasion; ?>">
@@ -537,7 +537,7 @@
         </div>        
     </form>
 
-<?php } else if(!is_null($categoriesMaterialsToDisplay)){ //Annonce des services ?>
+<?php } else if(!is_null($categoriesMaterialsToDisplay)){  //Affichage des catégories de matériel ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
     <div class="row d-flex justify-content-around mb-4 mt-4 m-0">
     <?php foreach ($categoriesMaterialsToDisplay as $category) { ?>
@@ -555,73 +555,39 @@
             </div> 
     <?php } ?>  
     </div>
-<?php } else if(!is_null($materialsToDisplay)){ ?>
+<?php } else if(!is_null($companiesMaterialToDisplay)){  //Affichage des catégories de matériel ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
-    <div class="col-10 offset-1 mt-4 table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Titre</th>
-                <th scope="col">Description</th>
-                <th scope="col">Prix</th>
-                <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($materialsToDisplay as $material ) { ?>                
-                <tr>
-                    <td><img src="<?php echo $material->imageMaterial[0]; ?>" style="max-width: 200px; max-height: 200px;" alt=""></th>
-                    <td><?php echo $material->title; ?></td>
-                    <td><?php echo $material->description; ?></td>
-                    <td><?php echo $material->price; ?> €</td>
-                    <td>
-                        <form action="index.php" method="get">
-                            <input type="text" name="viewToDisplay" value="displayAnnonce" class="d-none">
-                            <input type="text" name="subcategory" value="materiel" class="d-none">
-                            <input type="text" name="materiel" value="<?php echo $material->idMaterial; ?>" class="d-none">
-                            <button class="btn btn-primary">Accéder</button>
-                        </form>
-                    </td>
-                </tr>
-                <?php } ?>                
-            </tbody>
-        </table>
+    <?php if(isset($_SESSION['user']) && $_SESSION['user']->type == "company"){     //TODO kdaozkeokaoze?>
+        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel&addMateriel=true&category=<?php echo $_GET['category'] ?>" class="btn btn-primary">Inscrire mon entreprise à cette catégorie</a>
+    <?php } ?>
+    <div class="row d-flex justify-content-around mb-4 mt-4 m-0">
+    <?php
+        $cpt = 0;
+        if(sizeof($companiesMaterialToDisplay) == 0){
+            echo "<h3>Il n'y a pas encore d'entreprises dans cette categorie!</h3>";
+        } else {
+        foreach ($companiesMaterialToDisplay as $company) {
+    ?>
+            
+        <div class="card border border-dark pt-2 ms-3 me-3" style="width: 18rem;">
+            <img src="<?php echo $company->image; ?>" style="max-height:200px; max-width:280px; height:auto; width:auto;" class="card-img-top" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><b><?php echo $company->name; ?></b></h5>
+                <p class="card-text">
+                    <?php 
+                        if ($company->rating == 0) {
+                            echo "<b>Pas encore de note !</b>";
+                        } 
+                        else echo "<b>Note :</b> ".number_format($company->rating,1)." <i class='bi bi-star-fill text-warning'></i>";
+                    ?>
+                    <br>
+                    <b>Région: </b><?php echo $company->city; ?>
+                </p>
+            </div>
+            <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $company->id; ?>" class="btn btn-primary mb-2">Accéder</a>
+        </div>          
+        <?php }} ?>
     </div>
-<?php } else if(!is_null($materialToDisplay)){ ?>
-    <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
-    <div class="d-flex row justify-content-around mt-4">
-        <div class="col-5">
-            <!-- Gallerie photo -->
-            <!-- Photo principale -->
-            <div class="main_view text-center">
-                <img class="img-fluid" src="<?php echo $materialToDisplay->imageMaterial[0]; ?>" id="main" alt="IMAGE" style="max-width: 500px; max-height: 500px;">
-            </div>
-    
-            <!-- Photo en miniature en dessous -->
-            <div class="side_view">
-                <?php foreach ($materialToDisplay->imageMaterial as $image) { ?>
-                    <img src="<?php echo $image; ?>" onclick="change(this.src)">
-                <?php } ?>
-            </div>
-        </div>
-        <div class="col-5">
-            <h1><b><?php echo $materialToDisplay->title; ?></b></h1>
-            <h4><?php echo $materialToDisplay->price; ?> €</h4>
-            <h6>Publié il y a <?php echo $materialToDisplay->date; ?> jours dans <?php echo $materialToDisplay->region; ?></h6>
-            <h4><b>Détails</b></h4>
-            <p><?php echo $materialToDisplay->description; ?></p>
-            <h4><b>Information sur le vendeur :</b></h4>
-            <div>
-                <img src="<?php echo $materialToDisplay->imageCompany; ?>" class="rounded-circle" alt="profil" style="width: 60px;" id="profil">
-                <label for="profil" class="ms-3"><b><a href="http://findwell/index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $materialToDisplay->idCompany; ?>"><?php echo $materialToDisplay->nameCompany; ?></a></b></label>
-            </div>
-            <label for="phone"><b>Téléphone:</b> </label>
-            <p id="phone" class="d-inline"><?php echo $materialToDisplay->phone; ?></p>
-            <br>
-            <label for="phone"><b>Mail:</b> </label>
-            <p id="phone" class="d-inline"><?php echo $materialToDisplay->mail; ?></p>
-        </div>
     </div>
 <?php } else {   //Ecran d'accueil des annonces ?>       
     <?php if(isset($_GET['message'])){
@@ -633,6 +599,11 @@
         <?php } else if($_GET['message'] == 2) { ?>
             <div class="mt-4 alert alert-success alert-dismissible fade show" role="alert">
                 Votre annonce a bien été modifiée
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } else if($_GET['message'] == 3) { ?>
+            <div class="mt-4 alert alert-danger alert-dismissible fade show" role="alert">
+                Votre annonce n'a pas pu être ajoutée
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php }

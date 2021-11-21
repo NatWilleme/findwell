@@ -54,5 +54,15 @@ function displayCompaniesAccordingTo($category, $subcategory){
     displayCompaniesList($companies, $notification, $sort);
 }
 
+function getAllCompaniesAccordingTo($category, $subcategory)
+{
+    return CompaniesManager::getAllCompaniesAccordingTo($category, $subcategory);
+}
+
+function getOneCompanyByMail($mail)
+{
+    return CompaniesManager::getOneCompanyByMail($mail);
+}
+
 
 ?>

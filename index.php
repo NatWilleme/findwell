@@ -276,21 +276,23 @@ try {
                     displayAnnonce(notification: $notification, occasions: $occasions);
                 }
             } else {
-                if(isset($_GET['category'])){
-                    $materialsToDisplay = getMaterialsForCategories($_GET['category']);
-                    foreach ($materialsToDisplay as $material) {
-                        $material->imageMaterial = unserialize($material->imageMaterial);
+                if(isset($_GET['addMateriel'])){
+                    $company = getOneCompanyByMail($_SESSION['user']->mail);
+                    if($company->deleted == 0){
+                        $idCategory = CategoriesManager:: getIDCategoryFromName("Materiel", $_GET['category']);
+                        if(CategoriesManager::checkIfLinkAlreadyExist($company->id, $idCategory) == 0){
+                            CategoriesManager::addLinkCatComp($company->id, $idCategory);
+                            header("Location: index.php?viewToDisplay=displayAnnonce&message=1");
+                        } else {
+                            header("Location: index.php?viewToDisplay=displayAnnonce&message=3");
+                        }
+                    } else {
+                        header("Location: index.php?viewToDisplay=displayAnnonce&message=3");
                     }
-                    displayAnnonce(notification: $notification, materialsToDisplay: $materialsToDisplay);
-                } else if(isset($_GET['materiel'])){
-                    $materialToDisplay = getMaterialByID($_GET['materiel']);
-                    $materialToDisplay->imageMaterial = unserialize($materialToDisplay->imageMaterial);
-
-                    //Avoir le nombre de jour depuis l'ajout du service
-                    $datetime1 = new DateTime(date("Y/m/d"));
-                    $datetime2 = new DateTime($materialToDisplay->date);
-                    $materialToDisplay->date = $datetime1->diff($datetime2)->format('%d');
-                    displayAnnonce(notification: $notification, materialToDisplay: $materialToDisplay);
+                    
+                } else if(isset($_GET['category'])){
+                    $companiesMaterialToDisplay = getAllCompaniesAccordingTo("Materiel", $_GET['category']);
+                    displayAnnonce(notification: $notification, companiesMaterialToDisplay: $companiesMaterialToDisplay);
                 } else {
                     $categoriesMaterialsToDisplay = getMaterielCategories();
                     displayAnnonce(notification: $notification, categoriesMaterialsToDisplay: $categoriesMaterialsToDisplay);
