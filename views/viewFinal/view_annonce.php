@@ -100,14 +100,14 @@
 <?php } else if(!is_null($serviceToDisplay)){ ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
     <?php if(isset($_SESSION['user']) && $serviceToDisplay->idUser == $_SESSION['user']->id){ ?>
-        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&edit=<?php echo $serviceToDisplay->idService; ?>" class="btn btn-primary">Editer le service</a>
+        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&edit=<?php echo $serviceToDisplay->idService; ?>" class="btn btn-primary col-10 offset-1 col-lg-3">Editer le service</a>
     <?php } ?>
     <div class="d-flex row justify-content-around mt-4">
-        <div class="col-5">
+        <div class="col-12 col-lg-5">
             <!-- Gallerie photo -->
             <!-- Photo principale -->
             <div class="main_view text-center">
-                <img class="img-fluid" src="<?php echo $serviceToDisplay->imageService[0]; ?>" id="main" alt="IMAGE" style="max-width: 500px; max-height: 500px;">
+                <img class="img-fluid" src="<?php echo $serviceToDisplay->imageService[0]; ?>" id="main" alt="IMAGE">
             </div>
     
             <!-- Photo en miniature en dessous -->
@@ -118,7 +118,7 @@
                 <?php } ?>
             </div>
         </div>
-        <div class="col-5">
+        <div class="col-lg-5 col-12">
             <h1><b><?php echo $serviceToDisplay->title; ?></b></h1> 
             <h6>Publié il y a <?php echo $serviceToDisplay->date; ?> jours dans <?php echo $serviceToDisplay->region; ?></h6>
             <h4><b>Détails</b></h4>
@@ -285,10 +285,10 @@
 
 <?php } else if(!is_null($occasions)){ //Annonces des outils d'occasion ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
+    <?php if(isConnected()){ ?>
+        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&action=displayAdd" class="btn btn-primary col-2">Ajouter une annonce</a>
+    <?php } ?>
     <div class="col-10 offset-1 mt-4 table-responsive">
-        <?php if(isConnected()){ ?>
-        <a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&action=displayAdd" class="btn btn-primary col-2">Ajouter une annonce</a>
-        <?php } ?>
         <table class="table">
             <thead>
                 <tr>
@@ -353,14 +353,14 @@
 <?php } else if(!is_null($occasionToDisplay)){ ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
     <?php if(isset($_SESSION['user']) && $occasionToDisplay->idUser == $_SESSION['user']->id){ ?>
-        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&edit=<?php echo $occasionToDisplay->idOccasion; ?>" class="btn btn-primary">Editer l'annonce</a>
+        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&edit=<?php echo $occasionToDisplay->idOccasion; ?>" class="btn btn-primary col-10 offset-1 col-lg-3">Editer l'annonce</a>
     <?php } ?>
     <div class="d-flex row justify-content-around mt-4">
-        <div class="col-5">
+        <div class="col-12 col-lg-5">
             <!-- Gallerie photo -->
             <!-- Photo principale -->
             <div class="main_view text-center">
-                <img class="img-fluid" src="<?php echo $occasionToDisplay->imageOccasion[0]; ?>" id="main" alt="IMAGE" style="max-width: 500px; max-height: 500px;">
+                <img class="img-fluid" src="<?php echo $occasionToDisplay->imageOccasion[0]; ?>" id="main" alt="IMAGE" >
             </div>
     
             <!-- Photo en miniature en dessous -->
@@ -370,7 +370,7 @@
                 <?php } ?>
             </div>
         </div>
-        <div class="col-5">
+        <div class="col-12 col-lg-5">
             <h1><b><?php echo $occasionToDisplay->title; ?></b></h1>
             <h4><?php echo $occasionToDisplay->price; ?> €</h4>
             <h6>Publié <?php if($occasionToDisplay->date == 0) echo "aujourd'hui"; else if($occasionToDisplay->date == 1) echo "il y a ".$occasionToDisplay->date." jour"; else echo "il y a ".$occasionToDisplay->date." jours" ?> à <?php echo $occasionToDisplay->region; ?></h6>
@@ -557,8 +557,8 @@
     </div>
 <?php } else if(!is_null($companiesMaterialToDisplay)){  //Affichage des catégories de matériel ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
-    <?php if(isset($_SESSION['user']) && $_SESSION['user']->type == "company"){     //TODO kdaozkeokaoze?>
-        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel&addMateriel=true&category=<?php echo $_GET['category'] ?>" class="btn btn-primary">Inscrire mon entreprise à cette catégorie</a>
+    <?php if(isset($_SESSION['user']) && $_SESSION['user']->type == "company"){?>
+        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel&addMateriel=true&category=<?php echo $_GET['category'] ?>" class="btn btn-primary col-10 offset-1 col-lg-3">Inscrire mon entreprise à cette catégorie</a>
     <?php } ?>
     <div class="row d-flex justify-content-around mb-4 mt-4 m-0">
     <?php
