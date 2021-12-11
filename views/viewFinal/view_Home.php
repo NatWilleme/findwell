@@ -124,7 +124,7 @@
 
     </div>
 
-    <div style="background-color: black;">
+    <div>
         <video id="youtubeVideo" class="col-xl-8 col-10 offset-xl-2 offset-1 border border-5 border-dark my-4" controls>
             <source src="images/findwell.mp4" type="video/mp4">
         </video>
