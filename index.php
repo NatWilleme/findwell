@@ -268,6 +268,15 @@ try {
                         $editPermission = false;
                     }
                     displayAnnonce(notification: $notification, occasionToEdit: $occasionToEdit, editPermission: $editPermission);
+                } else if(isset($_GET['delete'])){
+                    $occasionToDelete = getOccasionByID($_GET['delete']);
+                    if($occasionToDelete->idUser == $_SESSION['user']->id){
+                        $editPermission = true;
+                        OccasionsManager::deleteOccasion($occasionToDelete->idOccasion);
+                    } else {
+                        $editPermission = false;
+                    }
+                    displayAnnonce(notification: $notification, editPermission: $editPermission);
                 } else {
                     $occasions = getAllOccasions();
                     foreach ($occasions as $occasion) {

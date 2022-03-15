@@ -88,10 +88,10 @@
                         "price" => $elem["price_occ"],  
                         "idUser" => $elem["id_user"],  
                         "username" => $elem["username_user"],  
-                        "mail" => $elem["mail_user"], 
+                        "mail" => $elem["mail_occ"], 
                         "imageOccasion" => $elem["image_occ"],
                         "imageUser" => $elem["image_user"],
-                        "phone" => $elem["phone_user"],
+                        "phone" => $elem["phone_occ"],
                         "type" => $elem["type_user"]
                     );
                     $occasion = new Occasion();
@@ -110,8 +110,8 @@
         }
 
         static public function addOccasion(Occasion $newOccasion){
-            $sql = "INSERT INTO occasions (title_occ, description_occ, image_occ, price_occ, id_user, date_occ, region_occ) 
-                    VALUES (:title_occ, :description_occ, :image_occ, :price_occ, :id_user, :date_occ, :region_occ)";
+            $sql = "INSERT INTO occasions (title_occ, description_occ, image_occ, price_occ, id_user, date_occ, region_occ, mail_occ, phone_occ) 
+                    VALUES (:title_occ, :description_occ, :image_occ, :price_occ, :id_user, :date_occ, :region_occ, :mail_occ, :phone_occ)";
             try{
                 $pdo_connexion = parent::connexionDB();
                 $pdo_statement = $pdo_connexion->prepare($sql);
@@ -122,7 +122,9 @@
                     ':price_occ' => $newOccasion->price,
                     ':id_user' => $_SESSION['user']->id,
                     ':date_occ' => date_format(date_create(), 'Y/m/d'),
-                    ':region_occ' => $newOccasion->region
+                    ':region_occ' => $newOccasion->region,
+                    ':mail_occ' => $newOccasion->mail,
+                    ':phone_occ' => $newOccasion->phone
                 ));
                 
             } catch (Exception $e) {
@@ -135,7 +137,7 @@
 
         static public function editOccasion(Occasion $occasionToEdit){
             $sql = "UPDATE occasions SET title_occ = :title_occ, description_occ = :description_occ, image_occ = :image_occ, price_occ = :price_occ, id_user = :id_user,
-                    date_occ = :date_occ, region_occ = :region_occ WHERE id_occ = :id_occ";
+                    date_occ = :date_occ, region_occ = :region_occ, mail_occ = :mail_occ, phone_occ = :phone_occ WHERE id_occ = :id_occ";
             try{
                 $pdo_connexion = parent::connexionDB();
                 $pdo_statement = $pdo_connexion->prepare($sql);
@@ -147,7 +149,9 @@
                     ':price_occ' => $occasionToEdit->price,
                     ':id_user' => $_SESSION['user']->id,
                     ':date_occ' => date_format(date_create(), 'Y/m/d'),
-                    ':region_occ' => $occasionToEdit->region
+                    ':region_occ' => $occasionToEdit->region,
+                    ':mail_occ' => $occasionToEdit->mail,
+                    ':phone_occ' => $occasionToEdit->phone
                 ));
                 
             } catch (Exception $e) {
@@ -158,6 +162,23 @@
             }
         }
 
+        static public function deleteOccasion($id)
+        {
+            $sql = "DELETE FROM occasions WHERE id_occ = :id_occ";
+            try{
+                $pdo_connexion = parent::connexionDB();
+                $pdo_statement = $pdo_connexion->prepare($sql);
+                $pdo_statement->execute(array(
+                    ':id_occ' => $id
+                ));
+                
+            } catch (Exception $e) {
+                die($e->getMessage());
+            } finally{
+                $pdo_statement->closeCursor();
+                $pdo_statement = null;
+            }
+        }
     }
 
 ?>

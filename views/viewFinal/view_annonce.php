@@ -354,6 +354,7 @@
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
     <?php if(isset($_SESSION['user']) && $occasionToDisplay->idUser == $_SESSION['user']->id){ ?>
         <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&edit=<?php echo $occasionToDisplay->idOccasion; ?>" class="btn btn-primary col-10 offset-1 col-lg-3">Editer l'annonce</a>
+        <a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&delete=<?php echo $occasionToDisplay->idOccasion; ?>" class="btn btn-danger col-10 offset-2 col-lg-3">Supprimer l'annonce</a>
     <?php } ?>
     <div class="d-flex row justify-content-around mt-4">
         <div class="col-12 col-lg-5">
