@@ -1,6 +1,7 @@
 <?php
 
-function addAd(){
+function addAd()
+{
     $newAd = new Ad();
     $newAd->__set('id_comp', $_POST['company']);
 
@@ -9,61 +10,63 @@ function addAd(){
     //get the extension of file
     $ext = pathinfo($path, PATHINFO_EXTENSION);
     $files = scandir('images/upload/advertising/pc/');
-    $cptImage = count($files)-1;
-    $to = 'images/upload/advertising/pc/ad_'.$cptImage.'.'.$ext;
-    move_uploaded_file($from,$to);
-    $newAd->__set('imagePC',$to);
+    $cptImage = count($files) - 1;
+    $to = 'images/upload/advertising/pc/ad_' . $cptImage . '.' . $ext;
+    move_uploaded_file($from, $to);
+    $newAd->__set('imagePC', $to);
 
     $from = $_FILES['imageMobile']['tmp_name'];
     $path = $_FILES['imageMobile']['name'];
     //get the extension of file
     $ext = pathinfo($path, PATHINFO_EXTENSION);
     $files = scandir('images/upload/advertising/mobile/');
-    $cptImage = count($files)-1;
-    $to = 'images/upload/advertising/mobile/ad_'.$cptImage.'.'.$ext;
-    move_uploaded_file($from,$to);
-    $newAd->__set('imageMobile',$to);
+    $cptImage = count($files) - 1;
+    $to = 'images/upload/advertising/mobile/ad_' . $cptImage . '.' . $ext;
+    move_uploaded_file($from, $to);
+    $newAd->__set('imageMobile', $to);
 
     $newAd->__set('display', $_POST['display']);
     adsManager::addAd($newAd);
     unset($newAd);
 }
 
-function editAd(){
+function editAd()
+{
     $newAd = new Ad();
     $newAd->__set('id', $_POST['idToEdit']);
     $newAd->__set('id_comp', $_POST['company']);
     $newAd->__set('display', $_POST['display']);
-    if(!empty($_FILES['imagePC']['name'])){
+    if (!empty($_FILES['imagePC']['name'])) {
         $from = $_FILES['imagePC']['tmp_name'];
         $path = $_FILES['imagePC']['name'];
         //get the extension of file
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $files = scandir('images/upload/advertising/pc/');
-        $cptImage = count($files)-1;
-        $to = 'images/upload/advertising/pc/adPC_'.$cptImage.'.'.$ext;
-        move_uploaded_file($from,$to);
-        $newAd->__set('imagePC',$to);
+        $cptImage = count($files) - 1;
+        $to = 'images/upload/advertising/pc/adPC_' . $cptImage . '.' . $ext;
+        move_uploaded_file($from, $to);
+        $newAd->__set('imagePC', $to);
     } else {
-        $newAd->__set('imagePC',$_POST['imageOldPC']);
+        $newAd->__set('imagePC', $_POST['imageOldPC']);
     }
-    if(!empty($_FILES['imageMobile']['name'])){
+    if (!empty($_FILES['imageMobile']['name'])) {
         $from = $_FILES['imageMobile']['tmp_name'];
         $path = $_FILES['imageMobile']['name'];
         //get the extension of file
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $files = scandir('images/upload/advertising/mobile/');
-        $cptImage = count($files)-1;
-        $to = 'images/upload/advertising/mobile/adMobile_'.$cptImage.'.'.$ext;
-        move_uploaded_file($from,$to);
-        $newAd->__set('imageMobile',$to);
+        $cptImage = count($files) - 1;
+        $to = 'images/upload/advertising/mobile/adMobile_' . $cptImage . '.' . $ext;
+        move_uploaded_file($from, $to);
+        $newAd->__set('imageMobile', $to);
     } else {
-        $newAd->__set('imageMobile',$_POST['imageOldMobile']);
+        $newAd->__set('imageMobile', $_POST['imageOldMobile']);
     }
     adsManager::updateAd($newAd);
 }
 
-function editUser(){
+function editUser()
+{
     $newUser = new User();
     $newUser->__set('id', $_POST['idToEdit']);
     $newUser->__set('username', $_POST['username']);
@@ -92,20 +95,32 @@ function editCompany()
     $newCompany->__set('web', $_POST['web']);
     $newCompany->__set('certified', $_POST['certified']);
     $newCompany->__set('hasPaid', $_POST['hasPaid']);
-    $newCompany->__set('image', $_POST['image']);
+    if (!empty($_FILES['image']['name'])) {
+        $from = $_FILES['image']['tmp_name'];
+        $path = $_FILES['image']['name'];
+        //get the extension of file
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $files = scandir('images/upload/photos_profils/');
+        $cptImage = count($files) - 1;
+        $to = 'images/upload/photos_profils/profil' . $cptImage . '.' . $ext;
+        move_uploaded_file($from, $to);
+        $newCompany->__set('image', $to);
+    } else {
+        $newCompany->__set('image', $_POST['image']);
+    }
     companiesManager::updateCompany($newCompany);
     $company = companiesManager::getOneCompany($newCompany->id);
-    if($newCompany->certified != $company->certified){
+    if ($newCompany->certified != $company->certified) {
         companiesManager::switchConfirmCompany($company->id);
     }
-    if($newCompany->hasPaid != $company->hasPaid){
+    if ($newCompany->hasPaid != $company->hasPaid) {
         companiesManager::switchCompanyPaid($company->id);
         sendActiveMail($company->id);
     }
-    
 }
 
-function sendConfirmationMailToCompanyRegisteredByAdmin($mailTo, $password){
+function sendConfirmationMailToCompanyRegisteredByAdmin($mailTo, $password)
+{
     $content = "Votre entreprise est maintenant disponible sur la plateforme Findwell!<br>
                 Vous pouvez dès à présent vous connecter avec les identifiants suivants: <br>
                 <ul>
@@ -116,28 +131,33 @@ function sendConfirmationMailToCompanyRegisteredByAdmin($mailTo, $password){
     require_once('models/sendEmail.php');
 }
 
-function getCompanyToEdit(){
+function getCompanyToEdit()
+{
     return companiesManager::getOneCompany($_GET['edit']);
 }
 
-function getAllActiveCompanyWithRatingAndCommentCount(){
+function getAllActiveCompanyWithRatingAndCommentCount()
+{
     $companies = companiesManager::getAllActiveCompanies();
     foreach ($companies as $company) {
-        $company->__set('rating', number_format(commentsManager::getRatingForCompany($company->id)['rate']) );
+        $company->__set('rating', number_format(commentsManager::getRatingForCompany($company->id)['rate']));
         $company->countComment = count(commentsManager::getCommentsForACompany($company->id));
     }
     return $companies;
 }
 
-function getUserToEdit(){
+function getUserToEdit()
+{
     return usersManager::getUserByID($_GET['edit']);
 }
 
-function getAllUsers(){
+function getAllUsers()
+{
     return usersManager::getAllUser();
 }
 
-function getAllAdsWithCompanyName(){
+function getAllAdsWithCompanyName()
+{
     $ads = adsManager::getAllAds();
     foreach ($ads as $ad) {
         $ad->name_comp = companiesManager::getOneCompany($ad->id_comp)->name;
@@ -145,41 +165,45 @@ function getAllAdsWithCompanyName(){
     return $ads;
 }
 
-function confirmCompany(){
+function confirmCompany()
+{
     $idCompany = $_POST['accept'];
     companiesManager::switchConfirmCompany($idCompany);
 }
 
-function deleteCompany(){
+function deleteCompany()
+{
     $idCompany = $_GET['delete'];
     companiesManager::deleteCompany($idCompany);
 }
 
-function getCompanyToConfirm(){
+function getCompanyToConfirm()
+{
     $idCompany = $_GET['see'];
     $companyToConfirm = companiesManager::getOneCompany($idCompany);
     $domaines = categoriesManager::getAllDomainesForCompany($idCompany);
     $domainesAsString = "";
-    if(sizeof($domaines) != 0){
+    if (sizeof($domaines) != 0) {
         foreach ($domaines as $domaine) {
             $domainesAsString .= $domaine;
             $domainesAsString .= ", ";
         }
-        $domainesAsString = substr($domainesAsString,0,-2);
+        $domainesAsString = substr($domainesAsString, 0, -2);
         $domainesAsString .= '.';
-    } 
-    
-    $companyToConfirm->__set('domaines', $domainesAsString); 
+    }
+
+    $companyToConfirm->__set('domaines', $domainesAsString);
     return $companyToConfirm;
 }
 
-function randomPassword() {
-    $chars =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.'0123456789`-=~!@#$%^&*()_+,./<>?;:[]{}\|';
+function randomPassword()
+{
+    $chars =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' . '0123456789`-=~!@#$%^&*()_+,./<>?;:[]{}\|';
     $str = '';
     $max = strlen($chars) - 1;
 
-    for ($i=0; $i < 10; $i++)
-    $str .= $chars[random_int(0, $max)];
+    for ($i = 0; $i < 10; $i++)
+        $str .= $chars[random_int(0, $max)];
 
     return $str;
 }
@@ -211,5 +235,3 @@ function sendRejectMail($idCompany, $rejectMessage)
     $object = "Votre entreprise n'a pas pu être ajouter à Findwell";
     require_once('models/sendEmail.php');
 }
-    
-?>

@@ -22,7 +22,7 @@
     </div>
     
     <?php } else { ?>
-    <a class="btn btn-secondary col-12 mt-3 mb-3" href="index.php?viewToDisplay=displayAdminPanel<?php if($_GET['view'] == "companies" && isset($_GET['edit'])) echo "&view=companies"; 
+    <a class="btn btn-secondary col-12 col-lg-2 mt-3 mb-3" href="index.php?viewToDisplay=displayAdminPanel<?php if($_GET['view'] == "companies" && isset($_GET['edit'])) echo "&view=companies"; 
         else if($_GET['view'] == "ads" && (isset($_GET['edit']) || isset($_GET['action']) )) echo '&view=ads'; 
         else if($_GET['view'] == "users" && isset($_GET['edit'])) echo '&view=users';
         else if($_GET['view'] == "companiesNotCertified" && isset($companyToConfirm)) echo '&view=companiesNotCertified'; ?>
@@ -44,12 +44,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php } ?>
-    <a class="btn btn-primary" href="index.php?viewToDisplay=displayAdminPanel&view=companies&action=add">Ajouter une nouvelle entreprise</a>
+    <a class="btn btn-primary col-12 col-lg-3" href="index.php?viewToDisplay=displayAdminPanel&view=companies&action=add">Ajouter une nouvelle entreprise</a>
     <div class="table-responsive mb-5">
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Mail</th>
                 <th scope="col">Téléphone</th>
@@ -62,7 +61,6 @@
             <?php
             foreach ($companies as $company) { ?>
             <tr>
-            <th scope="row"><?php echo $company->id; ?></th>
             <td><?php echo $company->name; ?></td>
             <td><?php echo $company->mail; ?></td>
             <td><?php echo $company->phone; ?></td>
@@ -347,6 +345,7 @@
                     <div class="form-group">
                         <label for="profil">Photo de profil</label><br>
                         <img class="border" style="max-height: 200px; max-width: 400px; width: auto; height: auto;" name="profil" id="profil" src="<?php echo $companyToConfirm->image; ?>" alt="">
+                        <input type="file" class="form-control" name="image" id="image" accept=".png, .jpg, .jpeg">
                     </div>
                 </div>
             </div>
@@ -489,7 +488,7 @@
 
 
     <?php if(isset($companyToEdit)){ ?>
-        <form class="mt-3" action="index.php?viewToDisplay=displayAdminPanel&view=companies" method="post">
+        <form class="mt-3" action="index.php?viewToDisplay=displayAdminPanel&view=companies" method="post" enctype='multipart/form-data'>
             <div class="row gutters">
                 <input type="text" name="idCompany" style='display: none;' value='<?php echo $companyToEdit->id; ?>'>
                 <input type="text" name="image" style='display: none;' value='<?php echo $companyToEdit->image; ?>'>
@@ -517,7 +516,8 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="profil">Photo de profil</label><br>
-                        <img class="border" style="max-height: 200px; max-width: 400px; width: auto; height: auto;" name="profil" id="profil" src="<?php echo $companyToEdit->image; ?>" alt="">
+                        <input type="file" class="form-control" name="image" id="image" accept=".png, .jpg, .jpeg">
+                        <img class="border mt-2" style="max-height: 200px; max-width: 400px; width: auto; height: auto;" name="profil" id="profil" src="<?php echo $companyToEdit->image; ?>" alt="">
                     </div>
                 </div>
             </div>

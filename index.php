@@ -405,7 +405,7 @@ try {
         $company = $alert = '';
         $user = $_SESSION['user'];
         if($user->type == "company")
-            $company = companiesManager::getOneCompanyByMail($_SESSION['user']->mail);
+            $company = companiesManager::getOneCompanyByMail(strtolower($_SESSION['user']->mail));
         if(isset($_POST['submit'])){
             if($_POST['submit'] == "update" || $_POST['submit'] == "updateCompany"){
                 $user = updateAndGetUserInformation();
@@ -417,9 +417,9 @@ try {
                         companiesManager::switchAcceptPending($company->id);
                     }
                 }
-                $_SESSION['user'] = UsersManager::getUser($_SESSION['user']->mail);
+                $_SESSION['user'] = UsersManager::getUser(strtolower($_SESSION['user']->mail));
                 if($user->type == "company")
-                    $company = companiesManager::getOneCompanyByMail($_SESSION['user']->mail);
+                    $company = companiesManager::getOneCompanyByMail(strtolower($_SESSION['user']->mail));
                 $alert = getSuccessAlertForEditProfil();
                 unset($_POST['submit']);
                 displayEditProfil($alert, $user, $company, $notification);

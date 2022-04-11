@@ -65,6 +65,8 @@
                                 <div class="form-group">
                                     <label for="image">Photo de profil</label>
                                     <input type="file" class="form-control" name="image" id="image" accept=".png, .jpg, .jpeg">
+                                    <img class="border mt-2" style="max-height: 200px; max-width: 400px; width: auto; height: auto;" name="profil" id="profil" src="<?php echo $user->image; ?>" alt="">
+                                    
                                     <p id="errorImage"></p>
                                 </div>
                             </div>
