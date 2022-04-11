@@ -9,7 +9,7 @@ abstract class UsersManager extends DBManager{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $state = $pdo_statement->execute(array(':password_user' => password_hash($user->password, PASSWORD_DEFAULT),
-                                ':mail_user' => $user->mail, ':type_user' => $user->type, ':code_user' => $user->code));
+                                ':mail_user' => strtolower($user->mail), ':type_user' => $user->type, ':code_user' => $user->code));
         } catch (Exception $e) {
             die($e->getMessage());
         } finally{
@@ -26,7 +26,7 @@ abstract class UsersManager extends DBManager{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $state = $pdo_statement->execute(array(':username_user' => $user->username, ':password_user' => password_hash($user->password, PASSWORD_DEFAULT),
-                                ':mail_user' => $user->mail, ':phone_user' => $user->phone, ':street_user' => $user->street, ':number_user' => $user->number,
+                                ':mail_user' => strtolower($user->mail), ':phone_user' => $user->phone, ':street_user' => $user->street, ':number_user' => $user->number,
                                 ':city_user' => $user->city, ':state_user' => $user->state, ':zip_user' => $user->zip, ':image_user' => $user->image,
                                 ':type_user' => $user->type, ':code_user' => $user->code));
         } catch (Exception $e) {

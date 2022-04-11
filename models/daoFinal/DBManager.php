@@ -5,7 +5,7 @@ abstract class DBManager{
         $host = "localhost";
         $login = "root";
         $pwd = "";
-        $DB = "findwell";
+        $DB = "findw1710907";
         // $host = "91.216.107.184";
         // $login = "findw1710907";
         // $pwd = "fH3*1Z_Wja6x3Ce";

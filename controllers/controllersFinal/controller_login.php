@@ -38,10 +38,10 @@ function registerNewCompany($newUser, $newCompany){
 }
 
 function connectUser($mail, $password){
-    $user = UsersManager::checkIfExist($mail);
+    $user = UsersManager::checkIfExist(strtolower($mail));
     if($user['count'] == 1){
-        $user = UsersManager::getUser($mail);
-        if($user->mail == $mail && password_verify($password, $user->password) && $user->confirmed == 1){
+        $user = UsersManager::getUser(strtolower($mail));
+        if($user->mail == strtolower($mail) && password_verify($password, $user->password) && $user->confirmed == 1){
             $_SESSION['user'] = $user;
             setcookie("userConnected", "1",time()+1*24*60*60,"/",$_SERVER['SERVER_NAME']);
             $_COOKIE['userConnected'] = "1";
