@@ -1,133 +1,145 @@
 <?php
-    $title = "Accueil";
-    ob_start();	
+$title = "Accueil";
+ob_start();
 ?>
 
 <div class="container-fluid ps-0 pe-0">
-    
 
 
-    <div id="carouselHome" class="carousel slide d-none d-lg-block" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="4000">
-                <img src="images/HomePage/carousel1.png" class="d-block w-100" alt="...">
+    <div style="background-color: #36405e;">
+        <div id="carouselHome" class="carousel slide d-none d-lg-block col-10 offset-1" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="4000">
+                    <img src="images/HomePage/carousel1.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="images/HomePage/carousel2.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="images/HomePage/carousel3.png" class="d-block w-100" alt="...">
+                </div>
+                <?php foreach ($ads as $ad) { ?>
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
+                            <img src="<?php echo $ad->imagePC; ?>" class="d-block w-100" alt="...">
+                        </a>
+                    </div>
+                <?php } ?>
             </div>
-            <div class="carousel-item" data-bs-interval="4000">
-                <img src="images/HomePage/carousel2.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="4000">
-                <img src="images/HomePage/carousel3.png" class="d-block w-100" alt="...">
-            </div>
-            <?php foreach ($ads as $ad) { ?>
-            <div class="carousel-item" data-bs-interval="4000">
-            <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
-                <img src="<?php echo $ad->imagePC; ?>" class="d-block w-100" alt="...">
-            </a>
-            </div>   
-            <?php } ?>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+
+        <div id="carouselHome" class="carousel slide d-lg-none d-sm-block" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="4000">
+                    <img src="images/HomePage/carousel1Mobile.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="images/HomePage/carousel2Mobile.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="images/HomePage/carousel3Mobile.png" class="d-block w-100" alt="...">
+                </div>
+                <?php foreach ($ads as $ad) { ?>
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
+                            <img src="<?php echo $ad->imageMobile; ?>" class="d-block w-100" alt="...">
+                        </a>
+                    </div>
+                <?php } ?>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Les tuiles -->
+        <div class="row d-flex justify-content-lg-around justify-content-center mt-2 mt-lg-0 mx-0">
+
+
+
+            <div class="col-8 col-lg-2 col-md-3 mb-3">
+                <div class="containerPerso tuile">
+                    <a href="index.php?viewToDisplay=displayCategoriesList&category=Gros Travaux">
+                        <img src="images/HomePage/card1.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
+                        <div class="overlay">
+                            <div class="text">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
+                        </div>
+                    </a>
+                    <p class="fw-bold fst-italic fs-3 text-center text-white">Gros travaux</p>
+                </div>
+            </div>
+
+
+
+            <div class="col-8 col-lg-2 col-md-3 mb-3">
+                <div class="containerPerso tuile">
+                    <a href="index.php?viewToDisplay=displayCategoriesList&category=Petits travaux">
+                        <img src="images/HomePage/card2.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
+                        <div class="overlay">
+                            <div class="text">Effectuez vos petits travaux d'un simple clic.</div>
+                        </div>
+                    </a>
+                    <p class="fw-bold fst-italic fs-3 text-center text-white">Petits travaux</p>
+                </div>
+            </div>
+
+
+
+            <div class="col-8 col-lg-2 col-md-3 mb-3">
+                <div class="containerPerso tuile">
+                    <a href="index.php?viewToDisplay=displayCategoriesList&category=Dépannage d'urgence">
+                        <img src="images/HomePage/card3.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
+                        <div class="overlay">
+                            <div class="text">Accédez aux entreprises disponible 24h/24h.</div>
+                        </div>
+                    </a>
+                    <p class="fw-bold fst-italic fs-3 text-center text-white">Dépannage d'urgence</p>
+                </div>
+            </div>
+
+            <div class="col-8 col-lg-2 col-md-3 mb-3">
+                <div class="containerPerso tuile">
+                    <a href="index.php?viewToDisplay=displayAnnonce">
+                        <img src="images/HomePage/card4.png" alt="Avatar" class="border border-dark rounded border-2 image">
+                        <div class="overlay">
+                            <div class="text">Accédez à nos annonces.</div>
+                        </div>
+                    </a>
+                    <p class="fw-bold fst-italic fs-3 text-center text-white">Annonces</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row col-12 mx-auto p-0 d-none d-lg-block">
+        <img class="p-0" src="images/HomePage/banner.png" alt="">
+    </div>
+    <div class="row col-12 mx-auto p-0 d-lg-none d-sm-block">
+        <img class="p-0" src="images/HomePage/bannerMobile.png" alt="">
     </div>
 
-    <div id="carouselHome" class="carousel slide d-lg-none d-sm-block" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="4000">
-                <img src="images/HomePage/carousel1Mobile.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="4000">
-                <img src="images/HomePage/carousel2Mobile.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="4000">
-                <img src="images/HomePage/carousel3Mobile.png" class="d-block w-100" alt="...">
-            </div>
-            <?php foreach ($ads as $ad) { ?>
-            <div class="carousel-item" data-bs-interval="4000">
-            <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
-                <img src="<?php echo $ad->imageMobile; ?>" class="d-block w-100" alt="...">
-            </a>
-            </div>   
-            <?php } ?>
+    <div class="row col-12 mt-5">
+        <div class="col-3 my-auto offset-1">
+            <img src="/images/icons/worker.jpg" alt="" class="col-12">
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-    <!-- Les tuiles -->
-    <div class="row d-flex justify-content-lg-around justify-content-center mt-2 mt-lg-0 mx-0">
-
-        
-
-        <div class="col-8 col-lg-2 col-md-3 mb-3">
-            <div class="containerPerso tuile">
-                <a href="index.php?viewToDisplay=displayCategoriesList&category=Gros Travaux">  
-                    <img src="images/HomePage/card1.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
-                    <div class="overlay">
-                        <div class="text">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
-                    </div>
-                </a>
-                <p class="fw-bold fst-italic fs-3 text-center">Gros travaux</p>  
-            </div>
+        <div class="col-6 offset-1">
+            <video id="" controls class="col-12 border border-5 border-dark">
+                <source src="images/findwell.mp4" type="video/mp4">
+            </video>
         </div>
-
-        
-
-        <div class="col-8 col-lg-2 col-md-3 mb-3">
-            <div class="containerPerso tuile">
-                <a href="index.php?viewToDisplay=displayCategoriesList&category=Petits travaux">  
-                    <img src="images/HomePage/card2.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
-                    <div class="overlay">
-                        <div class="text">Effectuez vos petits travaux d'un simple clic.</div>
-                    </div>
-                </a>
-                <p class="fw-bold fst-italic fs-3 text-center">Petits travaux</p>                
-            </div>
-        </div>
-
-        
-
-        <div class="col-8 col-lg-2 col-md-3 mb-3">
-            <div class="containerPerso tuile">
-                <a href="index.php?viewToDisplay=displayCategoriesList&category=Dépannage d'urgence">  
-                    <img src="images/HomePage/card3.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
-                    <div class="overlay">
-                        <div class="text">Accédez aux entreprises disponible 24h/24h.</div>
-                    </div>
-                </a>
-                <p class="fw-bold fst-italic fs-3 text-center">Dépannage d'urgence</p>
-            </div>
-        </div>
-
-        <div class="col-8 col-lg-2 col-md-3 mb-3">
-            <div class="containerPerso tuile">
-                <a href="index.php?viewToDisplay=displayAnnonce">  
-                    <img src="images/HomePage/card4.png" alt="Avatar" class="border border-dark rounded border-2 image">
-                    <div class="overlay">
-                        <div class="text">Accédez à nos annonces.</div>
-                    </div>
-                </a>
-                <p class="fw-bold fst-italic fs-3 text-center">Annonces</p>
-            </div>
-        </div>
-
-    </div>
-
-    <div>
-        <video id="youtubeVideo" class="col-xl-8 col-10 offset-xl-2 offset-1 border border-5 border-dark my-4" controls>
-            <source src="images/findwell.mp4" type="video/mp4">
-        </video>
     </div>
 
     <div class="row mt-5 mb-5 m-0">
@@ -163,46 +175,45 @@
                 </div>
             </div>
         </div>
-        <img class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 offset-lg-1" src="images/HomePage/encart.gif" style="height: 100%;">
+        <div class="col-5 offset-1 my-auto">
+            <img src="/images/icons/worker2.jpg" alt="" class="col-12">
+        </div>
 
-        
+
     </div>
-    
+
     <div class="row mt-5 mb-5 justify-content-around" style="--bs-gutter-x: 0;">
-        <h1 class="col-12 col-lg-10 mb-5 text-center " style="word-spacing: -2px; font-size: 2em;"><i>Peu importe votre recherche dans le domaine de la construction ou de la rénovation, Findwell vous accompagne dans vos projets</i></h1>
-        
-        <div class="card col-10 col-lg-4">
+        <div class="mb-5 text-center p-4" style="background-color: #2e323c; color: white;">
+            <h1 class="col-12 col-lg-10 offset-lg-1" style="word-spacing: -2px; font-size: 2em;"><i>Peu importe votre recherche dans le domaine de la construction ou de la rénovation, Findwell vous accompagne dans vos projets</i></h1>
+        </div>
+
+        <div class="card col-10 col-lg-4 pulseOnHover">
             <img src="images/HomePage/satisfaction2.png" class="card-img-top">
             <div class="card-body pt-0">
                 <p class="card-text">
-                    <h5 class="fw-bold">Notre engagement pour votre satisfaction</h5>
-                    Chacune des entreprises présentes sur la plateforme a été vérifiée et confirmée au préalable.
+                <h5 class="fw-bold">Notre engagement pour votre satisfaction</h5>
+                Chacune des entreprises présentes sur la plateforme a été vérifiée et confirmée au préalable.
                 </p>
             </div>
         </div>
-        <div class="card col-10 col-lg-4">
+        <div class="card col-10 col-lg-4 pulseOnHover">
             <img src="images/HomePage/assistance2.png" class="card-img-top">
             <div class="card-body pt-0">
                 <p class="card-text">
-                    <h5 class="fw-bold">Une assistance à tout moment</h5>
-                    N'hésitez pas à contacter notre assistance si vous avez quelconques questions.
+                <h5 class="fw-bold">Une assistance à tout moment</h5>
+                N'hésitez pas à contacter notre assistance si vous avez quelconques questions.
                 </p>
             </div>
         </div>
     </div>
-    <div class="row col-12 mx-auto p-0 d-none d-lg-block">
-        <img class="p-0" src="images/HomePage/banner.png" alt="">
-    </div>
-    <div class="row col-12 mx-auto p-0 d-lg-none d-sm-block">
-        <img class="p-0" src="images/HomePage/bannerMobile.png" alt="">
-    </div>
-    
-    
+
+
+
 </div>
 
 <?php
-    $content = ob_get_clean();
-    if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification);
-    else displayTemplateNotConnected($title, $content);
-    
+$content = ob_get_clean();
+if (isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification);
+else displayTemplateNotConnected($title, $content);
+
 ?>

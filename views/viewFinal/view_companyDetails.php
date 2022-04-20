@@ -44,14 +44,14 @@
                 <div class="col-12 col-lg-4">
                     <h2 class="fw-bold">Contacts:</h2>
                     <p>
-                        <b class="fw-bold">Mail</b>: <a href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
+                        <b class="fw-bold">Mail</b>: <a class="linkHighlight" href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
                         <b class="fw-bold">Téléphone</b>: <?php echo $company->phone; ?><br>
-                        <b class="fw-bold">Site web</b>: <a href="<?php echo $company->web; ?>"><?php echo $company->web; ?></a>
+                        <b class="fw-bold ">Site web</b>: <a class="linkHighlight" href="<?php echo $company->web; ?>"><?php echo $company->web; ?></a>
                     </p>
                 </div>
                 <div class="col-12 col-lg-4">
                     <h2 class="fw-bold mt-3 mt-lg-0">Adresse:</h2>
-                    <p><a href="https://www.google.be/maps/place/<?php echo $company->number.", ".$company->street." ".$company->postalCode." ".$company->city; ?>"  target="_blank" rel="noopener noreferrer"><?php echo $company->number.", ".$company->street."<br>".$company->postalCode." ".$company->city; ?></a></p>
+                    <p><a class="linkHighlight" href="https://www.google.be/maps/place/<?php echo $company->number.", ".$company->street." ".$company->postalCode." ".$company->city; ?>"  target="_blank" rel="noopener noreferrer"><?php echo $company->number.", ".$company->street."<br>".$company->postalCode." ".$company->city; ?></a></p>
                 </div>
             </div>
             
