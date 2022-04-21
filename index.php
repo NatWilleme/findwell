@@ -58,6 +58,7 @@ try {
         }
     }
 
+
     if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAnnonce'){
         if(isset($_GET['subcategory'])){
             if($_GET['subcategory'] == "service"){
@@ -676,6 +677,9 @@ try {
             $alert['message'] = "Une erreur est survenue lors de l'activation de votre compte. Si le problème subsiste, contactez-nous.";
             displayConnexion($alert);
         }
+    } else if(isset($_GET['searchAll'])){
+        $searchResult = getAllCompanies();
+        displaySearch($searchResult, $notification);
     }
   
     else {

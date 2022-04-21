@@ -611,9 +611,9 @@
     } ?>
     <div class="row d-flex justify-content-around mb-4 mt-5 m-0">
         <div class="card border border-dark pt-2 ms-3 me-3" style="width: 30rem;">
-            <img src="images/annonce/service.png" class="card-img-top" alt="...">
+            <img src="images/annonce/service.png" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title text-center fs-3">Annonces de service</h5>
+                <h5 class="card-title text-center fs-3">Entraide collaborative</h5>
             </div>
             <form id="formAccess" action="index.php" method="get">
                 <input type="text" name="viewToDisplay" value="displayAnnonce" class="d-none">
