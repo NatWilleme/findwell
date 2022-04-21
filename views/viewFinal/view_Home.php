@@ -133,7 +133,7 @@ ob_start();
 
     <div class="row g-0 col-12 mt-5 d-flex justify-content-center">
         <div class="col-8  col-md-3 my-auto">
-            <img src="/images/icons/worker.jpg" alt="" class="col-12">
+            <img src="/images/icons/worker.jpg" title="Painter man vector created by iconicbestiary" class="col-12">
         </div>
         <div class="col-10 col-lg-6 offset-lg-1">
             <video controls class="col-12 border border-5 border-dark">
@@ -176,7 +176,7 @@ ob_start();
             </div>
         </div>
         <div class="col-10 col-lg-5 offset-1 my-auto">
-            <img src="/images/icons/worker2.jpg" alt="" class="col-12">
+            <img src="/images/icons/worker2.jpg" title="Engineering worker vector created by pch.vector" class="col-12">
         </div>
 
 
