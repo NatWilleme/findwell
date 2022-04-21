@@ -45,35 +45,26 @@
 
   <!-- First Navbar -->
   <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark firstNavbar">
-    <div class="container-fluid d-flex flex-row-reverse">
+    <div class="container-fluid d-flex justify-content-around justify-content-lg-end">
 
       <div>
+
         <!-- Se connecter -->
         <div class="hover-underline-animation mx-3">
-          <a class="text-white d-none d-lg-block" href="index.php?viewToDisplay=displayConnexion">
+          <a class="text-white" href="index.php?viewToDisplay=displayConnexion">
             <i class="bi bi-lock-fill pe-1" style="font-size: 1.5rem;"></i>
             Se connecter
           </a>
         </div>
-
-        <a class="d-flex align-items-center me-4 d-lg-none" href="index.php?viewToDisplay=displayConnexion">
-          <i class="bi bi-lock-fill pe-1" style="font-size: 1.5rem;"></i>
-        </a>
-
-
         <!-- END Se connecter -->
 
         <!-- S'inscrire -->
         <div class="hover-underline-animation mx-3">
-          <a class="d-none d-lg-block text-white" href="index.php?viewToDisplay=displayRegister">
+          <a class="text-white" href="index.php?viewToDisplay=displayRegister">
             <i class="bi bi-person-plus-fill pe-1" style="font-size: 1.5rem;"></i>
             S'inscrire
           </a>
         </div>
-
-        <a class="d-flex align-items-center me-4 d-lg-none" href="index.php?viewToDisplay=displayRegister">
-          <i class="bi bi-person-plus-fill pe-1" style="font-size: 1.5rem;"></i>
-        </a>
 
         <!-- END S'inscrire -->
 
@@ -81,61 +72,64 @@
 
     </div>
   </nav>
-  <!-- END First Navbar -->
+
+
 
   <!-- Second Navbar -->
   <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark" style="background-color: #FFD338">
     <div class="container-fluid">
-      <!-- Navbar brand -->
-      <a class="navbar-brand mt-2 mt-lg-0 d-none d-lg-block" href="index.php">
-        <img src="images/logo1.png" height="80" loading="lazy" class="animate__animated  animate__flip ms-3" />
-      </a>
-      <!-- END Navbar brand -->
-      <a class="btn btn-secondary d-lg-none col-sm-2" href="index.php"><i class="bi bi-house-fill"></i></a>
+      <!-- Logo -->
 
-      <div class="bg-light rounded rounded-pill shadow-sm col-4 offset-3">
-        <form action="index.php?viewToDisplay=displaySearch" method="POST" class="d-flex">
-          <div class="input-group">
-            <input style="font-style: italic;" type="search" id="searchInput" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light" placeholder="Rechercher..">
-            <input type="text" class="d-none" name="location">
-            <div class="input-group-append">
-              <button id="button-addon1" type="submit" class="btn btn-link text-primary animate__animated animate__rubberBand"><i class="bi bi-search"></i></button>
+      <!-- PC -->
+      <div class="col-2">
+        <a class="navbar-brand mt-2 mt-lg-0 d-none d-md-block" href="index.php">
+          <img src="images/logo1.png" height="80" loading="lazy" class="animate__animated  animate__flip ms-3" />
+        </a>
+      </div>
+
+      <!-- Mobile -->
+      <div class="col-12 d-md-none d-flex justify-content-center">
+        <a class="btn btn-secondary col-10" href="index.php"><i class="bi bi-house-fill"></i></a>
+      </div>
+
+      <!-- END Logo -->
+
+
+      <div class="col-12 col-md-4 offset-md-2 d-flex justify-content-center">
+        <div class="bg-light rounded rounded-pill shadow-sm col-10 mt-3 mt-lg-0">
+          <form action="index.php?viewToDisplay=displaySearch" method="POST" class="d-flex">
+            <div class="input-group">
+              <input style="font-style: italic;" type="search" id="searchInput" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light" placeholder="Rechercher..">
+              <input type="text" class="d-none" name="location">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link text-primary animate__animated animate__rubberBand"><i class="bi bi-search"></i></button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
+      </div>
+
+      <div class="row mt-3 mt-lg-0 d-flex justify-content-center col-12 col-md-4">
+        <div class="col-5 text-center pulseOnHover my-auto">
+          <a href="index.php?searchAll=true">
+              <img src="/images/icons/book.png" width="40px">
+            <div>
+              <span class="nav-link active text-dark" aria-current="page" >Toutes les entreprises</span>
+            </div>
+          </a>
+        </div>
+        <div class="col-1 myBorderColor"></div>
+        <div class="col-5 text-center pulseOnHover my-auto">
+          <a href="index.php?viewToDisplay=displayContact">
+              <img src="/images/icons/contact2.png" width="40px">
+            <div>
+              <span class="nav-link text-dark">Nous contacter</span>
+            </div>
+          </a>
+        </div>
       </div>
 
 
-      <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNav">
-        <ul class="navbar-nav">
-
-          <li class="nav-item pulseOnHover">
-            <a href="">
-              <div class="text-center">
-                <img src="/images/icons/book.png" width="40px">
-              </div>
-              <div>
-                <span class="nav-link active text-dark" aria-current="page" href="#">Voir toutes les entreprises</span>
-              </div>
-            </a>
-          </li>
-          <li class="myBorderColor"></li>
-          <li class="nav-item pulseOnHover">
-            <a href="">
-              <div class="text-center">
-                <img src="/images/icons/contact2.png" width="40px">
-              </div>
-              <div>
-                <span class="nav-link text-dark">Nous contacter</span>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <!-- Search Bar -->
-
-
-      <!-- END Search Bar -->
     </div>
   </nav>
   <!-- Second Navbar -->
@@ -155,9 +149,6 @@
               <a href="index.php?viewToDisplay=displayAboutUs" class="text-dark footer-link">À propos de nous</a>
             </li>
             <li>
-              <a href="index.php?viewToDisplay=displayContact" class="text-dark footer-link">Contacts</a>
-            </li>
-            <li>
               <a href="index.php?viewToDisplay=displayConfidential" class="text-dark footer-link">Politique de confidentialité</a>
             </li>
             <li>
@@ -168,9 +159,6 @@
         <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
           <a class="fs-1 text-dark footer-link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/findwell.be" role="button">
             <i class="bi bi-facebook"></i>
-          </a>
-          <a class="fs-1 text-dark footer-link" href="#" role="button">
-            <i class="bi bi-instagram"></i>
           </a>
         </div>
       </div>

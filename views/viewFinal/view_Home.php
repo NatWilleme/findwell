@@ -131,12 +131,12 @@ ob_start();
         <img class="p-0" src="images/HomePage/bannerMobile.png" alt="">
     </div>
 
-    <div class="row col-12 mt-5">
-        <div class="col-3 my-auto offset-1">
+    <div class="row g-0 col-12 mt-5 d-flex justify-content-center">
+        <div class="col-8  col-md-3 my-auto">
             <img src="/images/icons/worker.jpg" alt="" class="col-12">
         </div>
-        <div class="col-6 offset-1">
-            <video id="" controls class="col-12 border border-5 border-dark">
+        <div class="col-10 col-lg-6 offset-lg-1">
+            <video controls class="col-12 border border-5 border-dark">
                 <source src="images/findwell.mp4" type="video/mp4">
             </video>
         </div>
@@ -175,7 +175,7 @@ ob_start();
                 </div>
             </div>
         </div>
-        <div class="col-5 offset-1 my-auto">
+        <div class="col-10 col-lg-5 offset-1 my-auto">
             <img src="/images/icons/worker2.jpg" alt="" class="col-12">
         </div>
 

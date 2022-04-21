@@ -18,6 +18,7 @@
     </div>
     <?php } ?>
 
+    <?php if(isset($_POST['company'])) { ?>
     <div class="col-12 col-lg-2 offset-lg-10 mb-3">
         <form action="index.php?viewToDisplay=displaySearch" method="post">
             <input class="d-none" type="text" name="company" value="<?php echo $_POST['company']; ?>">
@@ -28,6 +29,7 @@
             </div>
         </form>
     </div>
+    <?php } ?>
 
     <div class="row d-flex justify-content-around mb-4">
     <?php
