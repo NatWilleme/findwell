@@ -5,7 +5,7 @@
 
 <div class="container-fluid mt-2 mb-5">
     <h2 class="fw-bold text-center mb-3">Résultat de la recherche:</h2>
-    <?php if(sizeof($searchResult['companies']) > 0 && $searchResult['companies'][0]->distance != null) { ?>
+    <?php if(sizeof($searchResult['companies']) > 0 && $searchResult['companies'][0]->distance != null && isset($_POST['company'])) { ?>
     <div class="col-12 col-lg-2 offset-lg-10 mb-3">
         <form action="index.php?viewToDisplay=displaySearch" method="post">
             <input class="d-none" type="text" name="company" value="<?php echo $_POST['company']; ?>">

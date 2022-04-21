@@ -6,7 +6,7 @@ ob_start();
 <div class="container-fluid ps-0 pe-0">
 
 
-    <div style="background-color: #36405e;">
+    <div style="background-color: #4e5158;">
         <div id="carouselHome" class="carousel slide d-none d-lg-block col-10 offset-1" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">

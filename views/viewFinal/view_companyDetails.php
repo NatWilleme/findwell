@@ -22,7 +22,10 @@
     </div>
     <?php } ?>
     <div class="row d-flex justify-content-around mt-4">
-        <h1 class="col-12 col-lg-5 text-center fw-bold"><?php echo $company->name; ?></h1> 
+        <div class="p-2 col-10" style="background-color: #2e323c; color: white;">
+            <h1 class="col-12 text-center fw-bold"><?php echo $company->name; ?></h1> 
+        </div>
+        
         <?php if($messageBtn != "") {?>
         <span class="col-12 col-lg-3"></span>    
         <button onclick="location.href='index.php?viewToDisplay=displayCompanyDetails&favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-5 col-lg-2" type="button" ><?php echo $messageBtn; ?></button>
@@ -30,31 +33,35 @@
         <span class="col-12 col-lg-5"></span>
         <?php } ?>
     </div>
-    <div class="row d-flex justify-content-around mb-4 mt-4">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-around mb-4 mt-4 col-12">
 
-        <img id="imgCompany" class="col-12 col-xl-5" style="height: 100%;" src="<?php echo $company->image; ?>">
-        <div class="col-11 col-xl-5 border border-dark mt-3 mt-lg-0">
-            <h2 class="fw-bold mt-3 mt-lg-0">Description de l'entreprise:</h2>
-            <p><?php echo $company->description; ?></p>
-            <div class="d-lg-flex">
-                <div class="col-12 col-lg-4">
-                    <h2 class="fw-bold">Heures d'ouverture:</h2>
-                    <p><?php echo $company->hours; ?></p>
+            <img id="imgCompany" class="col-12 col-lg-4" style="height: 100%;" src="<?php echo $company->image; ?>">
+            <div class="col-11 col-xl-6 border border-dark mt-3 mt-lg-0">
+                <div>
+                    <h2 class="fw-bold mt-3 mt-lg-0">Description de l'entreprise:</h2>
+                    <p><?php echo $company->description; ?></p>
                 </div>
-                <div class="col-12 col-lg-4">
-                    <h2 class="fw-bold">Contacts:</h2>
-                    <p>
-                        <b class="fw-bold">Mail</b>: <a class="linkHighlight" href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
-                        <b class="fw-bold">Téléphone</b>: <?php echo $company->phone; ?><br>
-                        <b class="fw-bold ">Site web</b>: <a class="linkHighlight" href="<?php echo $company->web; ?>"><?php echo $company->web; ?></a>
-                    </p>
+                <div class="row">
+                    <div class="col-12 col-lg-4" style="overflow-wrap: break-word;">
+                        <h2 class="fw-bold">Heures d'ouverture:</h2>
+                        <p><?php echo $company->hours; ?></p>
+                    </div>
+                    <div class="col-12 col-lg-4" style="overflow-wrap: break-word;">
+                        <h2 class="fw-bold">Contacts:</h2>
+                        <p>
+                            <b class="fw-bold">Mail</b>: <a class="linkHighlight"  href="mailto:<?php echo $company->mail; ?>"> <?php echo $company->mail; ?></a><br>
+                            <b class="fw-bold">Téléphone</b>: <?php echo $company->phone; ?><br>
+                            <b class="fw-bold ">Site web</b>: <a class="linkHighlight" href="<?php echo $company->web; ?>"><?php echo $company->web; ?></a>
+                        </p>
+                    </div>
+                    <div class="col-12 col-lg-4" style="overflow-wrap: break-word;">
+                        <h2 class="fw-bold mt-3 mt-lg-0">Adresse:</h2>
+                        <p><a class="linkHighlight" href="https://www.google.be/maps/place/<?php echo $company->number.", ".$company->street." ".$company->postalCode." ".$company->city; ?>"  target="_blank" rel="noopener noreferrer"><?php echo $company->number.", ".$company->street."<br>".$company->postalCode." ".$company->city; ?></a></p>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-4">
-                    <h2 class="fw-bold mt-3 mt-lg-0">Adresse:</h2>
-                    <p><a class="linkHighlight" href="https://www.google.be/maps/place/<?php echo $company->number.", ".$company->street." ".$company->postalCode." ".$company->city; ?>"  target="_blank" rel="noopener noreferrer"><?php echo $company->number.", ".$company->street."<br>".$company->postalCode." ".$company->city; ?></a></p>
-                </div>
+                
             </div>
-            
         </div>
 
         <?php if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) { ?>
