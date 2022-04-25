@@ -623,7 +623,7 @@
         </div>
         
         <div class="card border border-dark pt-2 ms-3 me-3" style="width: 30rem;">
-            <img src="images/annonce/outils.png" class="card-img-top" alt="...">
+            <img src="images/annonce/outils.jpg" class="card-img-top" title="Hardware store vector created by pch.vector">
             <div class="card-body">
                 <h5 class="card-title text-center fs-3">Vente d'outils d'occasion</h5>
             </div>
@@ -635,7 +635,7 @@
         </div>
 
         <div class="card border border-dark pt-2 ms-3 me-3" style="width: 30rem;">
-            <img src="images/annonce/materiel.png" class="card-img-top" alt="...">
+            <img src="images/annonce/materiel.jpg" class="card-img-top" title="Dad teaching his son carpentry created by pch.vector">
             <div class="card-body">
                 <h5 class="card-title text-center fs-3">Vente de matériaux</h5>
             </div>

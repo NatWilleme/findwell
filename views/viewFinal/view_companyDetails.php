@@ -27,10 +27,9 @@
         </div>
         
         <?php if($messageBtn != "") {?>
-        <span class="col-12 col-lg-3"></span>    
-        <button onclick="location.href='index.php?viewToDisplay=displayCompanyDetails&favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-5 col-lg-2" type="button" ><?php echo $messageBtn; ?></button>
-        <?php } else { ?>
-        <span class="col-12 col-lg-5"></span>
+            <div class="d-flex justify-content-center">
+                <button onclick="location.href='index.php?viewToDisplay=displayCompanyDetails&favorite=<?php echo $company->id; ?>'" class="btn btn-danger col-10 col-lg-2 mt-3" type="button" ><?php echo $messageBtn; ?></button>
+            </div>
         <?php } ?>
     </div>
     <div class="container-fluid">
@@ -125,7 +124,7 @@
                 $cpt = 0;
                 foreach ($comments as $comment) {
             ?>
-            <div class="row border border-dark mb-2 pt-2">
+            <div class="row border border-dark mb-2 pt-2" style="overflow-wrap: break-word;">
                 <div class="col-12">
                     <p>
                         <img src="<?php if($users[$cpt]->image == "") echo "images/default-profil.jpg"; else echo $users[$cpt]->image; ?>" class="rounded-circle" style="height:40px;width:40px" alt="">

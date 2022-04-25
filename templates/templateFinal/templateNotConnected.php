@@ -81,7 +81,7 @@
       <!-- Logo -->
 
       <!-- PC -->
-      <div class="col-2">
+      <div class="col-1">
         <a class="navbar-brand mt-2 mt-lg-0 d-none d-md-block" href="index.php">
           <img src="images/logo1.png" height="80" loading="lazy" class="animate__animated  animate__flip ms-3" />
         </a>

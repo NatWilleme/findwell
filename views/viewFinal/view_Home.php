@@ -6,7 +6,7 @@ ob_start();
 <div class="container-fluid ps-0 pe-0">
 
 
-    <div style="background-color: #4e5158;">
+    <div>
         <div id="carouselHome" class="carousel slide d-none d-lg-block col-10 offset-1" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">
@@ -78,7 +78,7 @@ ob_start();
                             <div class="text">Trouvez l'entreprise qui vous correspond pour votre projet de A à Z.</div>
                         </div>
                     </a>
-                    <p class="fw-bold fst-italic fs-3 text-center text-white">Gros travaux</p>
+                    <p class="fw-bold fst-italic fs-3 text-center">Gros travaux</p>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@ ob_start();
                             <div class="text">Effectuez vos petits travaux d'un simple clic.</div>
                         </div>
                     </a>
-                    <p class="fw-bold fst-italic fs-3 text-center text-white">Petits travaux</p>
+                    <p class="fw-bold fst-italic fs-3 text-center">Petits travaux</p>
                 </div>
             </div>
 
@@ -106,7 +106,7 @@ ob_start();
                             <div class="text">Accédez aux entreprises disponible 24h/24h.</div>
                         </div>
                     </a>
-                    <p class="fw-bold fst-italic fs-3 text-center text-white">Dépannage d'urgence</p>
+                    <p class="fw-bold fst-italic fs-3 text-center">Dépannage d'urgence</p>
                 </div>
             </div>
 
@@ -118,7 +118,7 @@ ob_start();
                             <div class="text">Accédez à nos annonces.</div>
                         </div>
                     </a>
-                    <p class="fw-bold fst-italic fs-3 text-center text-white">Annonces</p>
+                    <p class="fw-bold fst-italic fs-3 text-center">Annonces</p>
                 </div>
             </div>
 
