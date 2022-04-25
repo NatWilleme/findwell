@@ -1,5 +1,6 @@
 <?php
 $title = "Accueil";
+$scripts = "<script src=\"https://vjs.zencdn.net/7.18.1/video.min.js\"></script>";
 ob_start();
 ?>
 
@@ -132,19 +133,23 @@ ob_start();
     </div>
 
     <div class="row g-0 col-12 mt-5 d-flex justify-content-center">
-        <div class="col-8  col-md-3 my-auto">
+        <div class="col-8 col-md-3 my-auto fadeInLeft">
             <img src="/images/icons/worker.jpg" title="Painter man vector created by iconicbestiary" class="col-12">
         </div>
-        <div class="col-10 col-lg-6 offset-lg-1">
-            <video controls class="col-12 border border-5 border-dark">
-                <source src="images/findwell.mp4" type="video/mp4">
+        <div class="col-10 col-lg-6 offset-lg-1 fadeInUp4">
+            <video id="my-video" class="video-js vjs-big-play-centered col-12 border border-5 border-dark" height="500" controls preload="auto" poster="images/preview.png" data-setup="{}">
+                <source src="images/findwell.mp4" type="video/mp4" />
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                </p>
             </video>
         </div>
     </div>
 
     <div class="row mt-5 mb-5 m-0">
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 offset-lg-1">
-            <div class="d-flex mb-5">
+            <div class="d-flex mb-5 fadeInUp1">
                 <div class="flex-shrink-0">
                     <img src="images/HomePage/rapide.png" width="100px" alt="...">
                 </div>
@@ -154,7 +159,7 @@ ob_start();
                 </div>
             </div>
 
-            <div class="d-flex mb-5">
+            <div class="d-flex mb-5 fadeInUp2">
                 <div class="flex-shrink-0">
                     <img src="images/HomePage/assistance.png" width="100px" alt="...">
                 </div>
@@ -164,7 +169,7 @@ ob_start();
                 </div>
             </div>
 
-            <div class="d-flex">
+            <div class="d-flex fadeInUp3">
                 <div class="flex-shrink-0">
                     <img src="images/HomePage/satisfaction.png" width="100px">
                 </div>
@@ -175,7 +180,7 @@ ob_start();
                 </div>
             </div>
         </div>
-        <div class="col-10 col-lg-5 offset-1 my-auto">
+        <div class="col-10 col-lg-5 offset-1 my-auto fadeInRight">
             <img src="/images/icons/worker2.jpg" title="Engineering worker vector created by pch.vector" class="col-12">
         </div>
 
@@ -187,7 +192,7 @@ ob_start();
             <h1 class="col-12 col-lg-10 offset-lg-1" style="word-spacing: -2px; font-size: 2em;"><i>Peu importe votre recherche dans le domaine de la construction ou de la rénovation, Findwell vous accompagne dans vos projets</i></h1>
         </div>
 
-        <div class="card col-10 col-lg-4 pulseOnHover">
+        <div class="card col-10 col-lg-4 backInLeft">
             <img src="images/HomePage/satisfaction2.png" class="card-img-top">
             <div class="card-body pt-0">
                 <p class="card-text">
@@ -196,7 +201,7 @@ ob_start();
                 </p>
             </div>
         </div>
-        <div class="card col-10 col-lg-4 pulseOnHover">
+        <div class="card col-10 col-lg-4 backInRight">
             <img src="images/HomePage/assistance2.png" class="card-img-top">
             <div class="card-body pt-0">
                 <p class="card-text">
@@ -213,7 +218,7 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-if (isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification);
-else displayTemplateNotConnected($title, $content);
+if (isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) displayTemplateConnected($title, $content, $notification, $scripts);
+else displayTemplateNotConnected($title, $content, $scripts);
 
 ?>

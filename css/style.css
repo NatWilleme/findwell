@@ -256,3 +256,34 @@ body{
     animation: pulse 1s;
     animation-iteration-count: initial;
 }
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .fadeInUp-scroll {
+    animation: fadeInUp 1.5s 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fadeInRight-scroll {
+    animation: fadeInRight 1.5s 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fadeInLeft-scroll {
+    animation: fadeInLeft 1.5s 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .backInLeft-scroll {
+    animation: backInLeft 1s 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .backInRight-scroll {
+    animation: backInRight 1s 1;
+  }
+}

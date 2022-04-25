@@ -19,7 +19,7 @@
             <img class="mb-3" src="images/icons/contactUs.png" width="350" alt="">
             <form name="formContact" action="index.php?viewToDisplay=displayContact" method="post">
                 <div class="mb-3">
-                    <label for="mail" class="form-label fw-bold">Adresse mail</label>
+                    <label for="mail" class="form-label fw-bold">Votre adresse mail</label>
                     <input type="mail" class="form-control" id="mail" name="mail" placeholder="ex: jeandubois@gmail.com" <?php if(isset($_SESSION['user'])){ ?> value="<?php echo $_SESSION['user']->mail; ?>" <?php } ?> required>
                 </div>
                 <div class="mb-3">

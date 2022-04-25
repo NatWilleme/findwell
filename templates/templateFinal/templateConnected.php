@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
   <title><?php echo $title; ?></title>
   <style>
     body {
@@ -41,61 +42,6 @@
 </head>
 
 <body>
-
-  <!-- Navbar -->
-  <!-- <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark" style="background-color: #FFD338">
-    <div class="container-fluid"> -->
-
-  <!-- Logo -->
-  <!-- <a class="navbar-brand mt-2 mt-lg-0 d-none d-lg-block" href="index.php" >
-          <img
-            src="images/logo1.png"
-            height="80"
-            loading="lazy"
-            class="animate__animated  animate__flip ms-3"
-          />
-        </a>
-      
-      <a class="btn btn-secondary d-lg-none col-sm-2" href="index.php"><i class="bi bi-house-fill"></i></a>
-      <div class="col-4 d-lg-none"></div>
-      <div class="p-1 me-2 bg-light rounded rounded-pill shadow-sm col-lg-3 col-5">
-        <form action="index.php?viewToDisplay=displaySearch" method="POST">
-          <div class="input-group">
-            <input style="font-style: italic;" type="search" id="searchInput" aria-describedby="button-addon1" name="company" class="form-control border-0 rounded rounded-pill bg-light" placeholder="Quelle entreprise recherchez-vous ?">
-            <input type="text" class="d-none" name="location">
-            <div class="input-group-append">
-              <button id="button-addon1" type="submit" class="btn btn-link text-primary animate__animated animate__rubberBand"><i class="bi bi-search"></i></button>
-            </div>
-          </div>
-        </form>
-      </div>
-
-        <div class="dropdown pe-3">
-        <button class="btn dropdown-toggle position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          <?php if ($_SESSION['user']->type == "admin" && $notification != 0) { ?>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            <?php echo $notification; ?>
-            <span class="visually-hidden">Entreprise à confirmer</span>
-          </span>
-          <?php } ?>
-          <img class="rounded" src="<?php if ($_SESSION['user']->image != "") echo $_SESSION['user']->image;
-                                    else echo "images/upload/photos_profils/default-profil.jpg" ?>" alt="profil" style="width: 50px;">
-        </button>
-        <ul class="dropdown-menu shadow" style="transform: translate3d(-60px, 0px, 0px);" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="index.php?viewToDisplay=displayEditProfil">Mes informations  <i class="bi bi-info-circle-fill text-secondary"></i></a></li>
-          <li><a class="dropdown-item" href="index.php?viewToDisplay=displayFavorite">Mes favoris  <i class="bi bi-star-fill text-warning"></i></a></li>
-          <?php if ($_SESSION['user']->type == "admin") { ?>
-            <li><a class="dropdown-item" href="index.php?viewToDisplay=displayAdminPanel">Gestion du site  <?php if ($notification != 0) { ?><span class="badge bg-primary"><?php echo $notification; ?></span><?php } else { ?><i class="bi bi-gear-fill"></i><?php } ?></a></li>
-          <?php } ?>
-          <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item">Mes occasions</a></li>
-          <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item">Mes services</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="index.php?disconnect=true">Se déconnecter  <i class="bi bi-box-arrow-right"></i></a></li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
-  <!-- Navbar -->
 
   <!-- First Navbar -->
   <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark firstNavbar">
@@ -238,6 +184,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="js/location.js"></script>
+  <script src="js/observerApi.js"></script>
   <?php if (isset($scripts) && $scripts != '') echo $scripts; ?>
 
 </body>
