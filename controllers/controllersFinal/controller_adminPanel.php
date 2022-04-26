@@ -9,19 +9,19 @@ function addAd()
     $path = $_FILES['imagePC']['name'];
     //get the extension of file
     $ext = pathinfo($path, PATHINFO_EXTENSION);
-    $files = scandir('images/upload/advertising/pc/');
-    $cptImage = count($files) - 1;
-    $to = 'images/upload/advertising/pc/ad_' . $cptImage . '.' . $ext;
-    move_uploaded_file($from, $to);
+    $imageName = 'pcAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
+    $to = 'images/upload/advertising/pc/' . $imageName;
+    
+    $result = move_uploaded_file($from, $to);
+    
     $newAd->__set('imagePC', $to);
 
     $from = $_FILES['imageMobile']['tmp_name'];
     $path = $_FILES['imageMobile']['name'];
     //get the extension of file
     $ext = pathinfo($path, PATHINFO_EXTENSION);
-    $files = scandir('images/upload/advertising/mobile/');
-    $cptImage = count($files) - 1;
-    $to = 'images/upload/advertising/mobile/ad_' . $cptImage . '.' . $ext;
+    $imageName = 'mobileAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
+    $to = '/images/upload/advertising/mobile/' . $imageName;
     move_uploaded_file($from, $to);
     $newAd->__set('imageMobile', $to);
 
@@ -42,8 +42,8 @@ function editAd()
         //get the extension of file
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $files = scandir('images/upload/advertising/pc/');
-        $cptImage = count($files) - 1;
-        $to = 'images/upload/advertising/pc/adPC_' . $cptImage . '.' . $ext;
+        $imageName = 'pcAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
+        $to = 'images/upload/advertising/pc/' . $imageName;
         move_uploaded_file($from, $to);
         $newAd->__set('imagePC', $to);
     } else {
@@ -55,8 +55,8 @@ function editAd()
         //get the extension of file
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $files = scandir('images/upload/advertising/mobile/');
-        $cptImage = count($files) - 1;
-        $to = 'images/upload/advertising/mobile/adMobile_' . $cptImage . '.' . $ext;
+        $imageName = 'mobileAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
+        $to = 'images/upload/advertising/pc/' . $imageName;
         move_uploaded_file($from, $to);
         $newAd->__set('imageMobile', $to);
     } else {

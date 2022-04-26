@@ -292,7 +292,6 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Mail</th>
                 <th scope="col">Téléphone</th>
@@ -303,7 +302,6 @@
             <?php
             foreach ($companiesToBeConfirmed as $company) { ?>
             <tr>
-            <th scope="row"><?php echo $company->id; ?></th>
             <td><?php echo $company->name; ?></td>
             <td><?php echo $company->mail; ?></td>
             <td><?php echo $company->phone; ?></td>
