@@ -21,9 +21,8 @@ function updateAndGetUserInformation()
         $path = $_FILES['image']['name'];
         //get the extension of file
         $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $files = scandir('images/upload/photos_profils/');
-        $cptImage = count($files)-1;
-        $to = 'images/upload/photos_profils/profil'.$cptImage.'.'.$ext;
+        $imageName = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+        $to = 'images/upload/photos_profils/' . $imageName;
         move_uploaded_file($from,$to);
         $userToEdit->__set('image',$to);
     } else {
@@ -79,9 +78,8 @@ function updateCompanyInformation()
         $path = $_FILES['image']['name'];
         //get the extension of file
         $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $files = scandir('images/upload/photos_profils/');
-        $cptImage = count($files)-1;
-        $to = 'images/upload/photos_profils/profil'.$cptImage.'.'.$ext;
+        $imageName = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+        $to = 'images/upload/photos_profils/' . $imageName;
         move_uploaded_file($from,$to);
         $companyToEdit->__set('image',$to);
     } else {
