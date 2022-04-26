@@ -33,7 +33,7 @@
         <?php } ?>
     </div>
     <div class="container-fluid">
-        <div class="row d-flex justify-content-around mb-4 mt-4 col-12">
+        <div class="row d-flex justify-content-around mb-4 mt-4 col-12 mx-auto">
 
             <img id="imgCompany" class="col-12 col-lg-4" style="height: 100%;" src="<?php echo $company->image; ?>">
             <div class="col-11 col-xl-6 border border-dark mt-3 mt-lg-0">
@@ -64,7 +64,7 @@
         </div>
 
         <?php if(isset($_COOKIE["userConnected"]) && isset($_SESSION['user'])) { ?>
-        <div class="row d-flex justify-content-around mb-4">
+        <div class="row d-flex justify-content-around mb-4  mx-auto">
             <div class="col-12 col-lg-5 p-0 mt-3">
                 <h4><i>Qu'avez-vous pensé de <?php echo $company->name; ?> ?</i></h4>
                 <form id="commentForm" action="index.php?viewToDisplay=displayCompanyDetails&newComment=<?php echo $company->id; ?>" method="post" enctype='multipart/form-data'>
@@ -90,12 +90,12 @@
             <div class="col-12 col-lg-5"></div>
         </div>
         <?php } else {?>
-        <div class="row d-flex justify-content-around mt-4">
+        <div class="row d-flex justify-content-around mt-4  mx-auto">
             <h2 class="col-12 col-lg-5 mb-4 ps-0">Connectez-vous pour laisser un avis !</h2>
             <span class="col-12 col-lg-5 mb-4"></span>
         </div>
         <?php } ?>
-        <div class="row d-flex justify-content-around mb-4 p-0">
+        <div class="row d-flex justify-content-around mb-4 p-0  mx-auto">
             <span class="col-12 col-lg-5">
             <?php 
                 if ($rating['rate'] == 0) {
@@ -117,7 +117,7 @@
         
 
 
-        <div class="row d-flex justify-content-around mb-4 p-0">
+        <div class="row d-flex justify-content-around mb-4 p-0  mx-auto">
             <div class="col-12 col-lg-8">
             <h2 class="mb-4"> Avis (<?php echo count($comments); ?>)</h2>
             <?php 

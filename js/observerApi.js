@@ -1,6 +1,5 @@
 // Create the observer
 const observer = new IntersectionObserver((entries) => {
-  console.log(entries);
   // Loop over the entries
   entries.forEach((entry) => {
     // If the element is visible

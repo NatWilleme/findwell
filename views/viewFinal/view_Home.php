@@ -8,16 +8,16 @@ ob_start();
 
 
     <div>
-        <div id="carouselHome" class="carousel slide d-none d-lg-block col-10 offset-1" data-bs-ride="carousel">
+        <div id="carouselHomePC" class="carousel slide d-none d-lg-block col-10 offset-1" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">
-                    <img src="images/HomePage/carousel1.png" class="d-block w-100" alt="...">
+                    <img src="images/HomePage/carousel1.png?ver=1.2" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="images/HomePage/carousel2.png" class="d-block w-100" alt="...">
+                    <img src="images/HomePage/carousel2.png?ver=1.2" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="images/HomePage/carousel3.png" class="d-block w-100" alt="...">
+                    <img src="images/HomePage/carousel3.png?ver=1.2" class="d-block w-100" alt="...">
                 </div>
                 <?php foreach ($ads as $ad) { ?>
                     <div class="carousel-item" data-bs-interval="4000">
@@ -27,17 +27,17 @@ ob_start();
                     </div>
                 <?php } ?>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePC" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselHomePC" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
 
-        <div id="carouselHome" class="carousel slide d-lg-none d-sm-block" data-bs-ride="carousel">
+        <div id="carouselHomeMobile" class="carousel slide d-lg-none d-sm-block" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">
                     <img src="images/HomePage/carousel1Mobile.png" class="d-block w-100" alt="...">
@@ -56,11 +56,11 @@ ob_start();
                     </div>
                 <?php } ?>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomeMobile" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselHomeMobile" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
