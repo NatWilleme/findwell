@@ -19,6 +19,9 @@ ob_start();
                 <div class="carousel-item" data-bs-interval="4000">
                     <img src="images/HomePage/carousel3.png?ver=1.2" class="d-block w-100" alt="...">
                 </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="images/HomePage/carousel4.png?ver=1.2" class="d-block w-100" alt="...">
+                </div>
                 <?php foreach ($ads as $ad) { ?>
                     <div class="carousel-item" data-bs-interval="4000">
                         <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $ad->id_comp; ?>">
@@ -40,13 +43,16 @@ ob_start();
         <div id="carouselHomeMobile" class="carousel slide d-lg-none d-sm-block" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">
-                    <img src="images/HomePage/carousel1Mobile.png" class="d-block w-100" alt="...">
+                    <img src="images/HomePage/carousel1Mobile.png?ver=1.2" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="images/HomePage/carousel2Mobile.png" class="d-block w-100" alt="...">
+                    <img src="images/HomePage/carousel2Mobile.png?ver=1.2" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="images/HomePage/carousel3Mobile.png" class="d-block w-100" alt="...">
+                    <img src="images/HomePage/carousel3Mobile.png?ver=1.2" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="images/HomePage/carousel4Mobile.png?ver=1.2" class="d-block w-100" alt="...">
                 </div>
                 <?php foreach ($ads as $ad) { ?>
                     <div class="carousel-item" data-bs-interval="4000">
