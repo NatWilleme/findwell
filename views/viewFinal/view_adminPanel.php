@@ -1,6 +1,6 @@
 <?php
     $title = "Gestion du site";
-    $scripts = "<script src=\"js/checkEntries/checkEntries_inscription.js\"></script><script src=\"js/checkedDomaine.js\"></script>";
+    $scripts = "<script src=\"js/checkEntries/checkEntries_inscription.js\"></script><script src=\"js/checkedDomaine.js\"></script><script src=\"js/myCropper.js\"></script>";
     ob_start();	
 ?>
 
@@ -814,18 +814,30 @@
                 <div class="form-group">
                     <label for="image">Publicité PC</label><br>
                     <?php if(isset($adToEdit)) { ?>
-                        <img src="<?php echo $adToEdit->imagePC; ?>" class="mb-3" width="300" alt="">
-                    <?php } ?>
+                        <!-- <img src="<?php //echo $adToEdit->imagePC; ?>" class="mb-3" width="300" alt=""> -->
+                        <div class="mb-3" style="width: 300px;">
+                            <img class="d-block w-100" src="<?php echo $adToEdit->imagePC; ?>" alt="">
+                        </div>
+                    <?php } else {?>
+                        <div class="mb-3" style="width: 300px;" id="previewPC"></div>
+                    <?php }?>
                     <input type="file" class="form-control" id="imagePC" name="imagePC" accept=".jpg, .png">
+                    <input type="text" class="d-none" id="imagePCBase64" name="imagePCBase64">
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label for="image">Publicité Mobile</label><br>
                     <?php if(isset($adToEdit)) { ?>
-                        <img src="<?php echo $adToEdit->imageMobile; ?>" class="mb-3" width="300" alt="">
-                    <?php } ?>
+                        <div class="mb-3" style="width: 300px;">
+                            <img class="d-block w-100" src="<?php echo $adToEdit->imageMobile; ?>" alt="">
+                        </div>
+                        
+                    <?php } else {?>
+                        <div class="mb-3" style="width: 300px;" id="previewMobile"></div>
+                    <?php }?>
                     <input type="file" class="form-control" id="imageMobile" name="imageMobile" accept=".jpg, .png">
+                    <input type="text" class="d-none" id="imagePCMobile64" name="imagePCMobile64">
                 </div>
             </div>
         </div>

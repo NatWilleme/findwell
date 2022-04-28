@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="css/style.css?1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
+  <link  href="/node_modules/cropperjs/dist/cropper.css" rel="stylesheet">
+
   <title><?php echo $title; ?></title>
   <style>
     body {
@@ -185,6 +187,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="js/location.js"></script>
   <script src="js/observerApi.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/cropperjs"></script>
+
   <?php if (isset($scripts) && $scripts != '') echo $scripts; ?>
 
 </body>

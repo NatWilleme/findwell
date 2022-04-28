@@ -452,6 +452,9 @@ try {
         $alert = $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = $companyDomaines = null;
         if(isset($_POST['action'])){
             if($_POST['action'] == "addAd"){
+                //TODO finalize crop image
+                $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $_POST['imagePCBase64']));
+                file_put_contents("images/upload/advertising/test.png", $data);
                 addAd();
             } else if($_POST['action'] == "editAd"){
                 editAd();
@@ -710,6 +713,3 @@ function isConnected() {
         return true;
     else return false;
 }
-
-
-?>

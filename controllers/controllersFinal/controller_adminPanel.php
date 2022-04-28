@@ -21,7 +21,7 @@ function addAd()
     //get the extension of file
     $ext = pathinfo($path, PATHINFO_EXTENSION);
     $imageName = 'mobileAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
-    $to = '/images/upload/advertising/mobile/' . $imageName;
+    $to = 'images/upload/advertising/mobile/' . $imageName;
     move_uploaded_file($from, $to);
     $newAd->__set('imageMobile', $to);
 
@@ -41,7 +41,6 @@ function editAd()
         $path = $_FILES['imagePC']['name'];
         //get the extension of file
         $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $files = scandir('images/upload/advertising/pc/');
         $imageName = 'pcAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
         $to = 'images/upload/advertising/pc/' . $imageName;
         move_uploaded_file($from, $to);
