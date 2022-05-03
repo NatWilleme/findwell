@@ -814,13 +814,11 @@
                 <div class="form-group">
                     <label for="image">Publicité PC</label><br>
                     <?php if(isset($adToEdit)) { ?>
-                        <!-- <img src="<?php //echo $adToEdit->imagePC; ?>" class="mb-3" width="300" alt=""> -->
                         <div class="mb-3" style="width: 300px;">
                             <img class="d-block w-100" src="<?php echo $adToEdit->imagePC; ?>" alt="">
                         </div>
-                    <?php } else {?>
-                        <div class="mb-3" style="width: 300px;" id="previewPC"></div>
                     <?php }?>
+                        <div class="mb-3" style="width: 300px;" id="previewPC"></div>
                     <input type="file" class="form-control" id="imagePC" name="imagePC" accept=".jpg, .png">
                     <input type="text" class="d-none" id="imagePCBase64" name="imagePCBase64">
                 </div>
@@ -833,10 +831,10 @@
                             <img class="d-block w-100" src="<?php echo $adToEdit->imageMobile; ?>" alt="">
                         </div>
                         
-                    <?php } else {?>
+                    <?php } ?>
                         <div class="mb-3" style="width: 300px;" id="previewMobile"></div>
-                    <?php }?>
-                    <input type="file" class="form-control" id="imageMobile" name="imageMobile" accept=".jpg, .png">
+
+                    <input type="file" class="form-control" id="imageMobile" name="imageMobile" <?php if(isset($adToEdit)) echo "value=\"$adToEdit->imageMobile\""; ?> accept=".jpg, .png">
                     <input type="text" class="d-none" id="imageMobileBase64" name="imageMobileBase64">
                 </div>
             </div>

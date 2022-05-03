@@ -38,25 +38,75 @@ function imagePreview(fileInput, type) {
 
       if (type == "pc") {
         cropperPC = new Cropper(image, {
-          aspectRatio: 16 / 9
+          aspectRatio: 16 / 9,
         });
       } else {
         cropperMobile = new Cropper(image, {
-          aspectRatio: 9 / 16
+          aspectRatio: 9 / 16,
         });
       }
     }, 100);
   }
 }
 
-document.addEventListener('click', function(clickEvent) {
-    if (clickEvent.target.id == 'submit') {
-        if(cropperPC != null && cropperMobile != null) {
-            document.getElementById("imagePCBase64").value = cropperPC.getCroppedCanvas().toDataURL();
-            document.getElementById("imageMobileBase64").value = cropperMobile.getCroppedCanvas().toDataURL();
-            document.forms["adForm"].submit();
-        } else {
-            alert("Vous devez sélectionner une image pour PC et Mobile");
-        }
+document.addEventListener("click", function (clickEvent) {
+  if (clickEvent.target.id == "submit") {
+    if (cropperPC != null && cropperMobile != null) {
+      fileName = document.getElementById("imagePC").value;
+      extension = fileName.split(".").pop();
+      if (extension == "jpg" || extension == "jpeg") {
+        document.getElementById("imagePCBase64").value = cropperPC
+          .getCroppedCanvas()
+          .toDataURL("image/jpeg");
+        console.log(document.getElementById("imagePCBase64").value);
+      }
+      else if (extension == "png")
+        document.getElementById("imagePCBase64").value = cropperPC
+          .getCroppedCanvas()
+          .toDataURL("image/png");
+
+      fileName = document.getElementById("imageMobile").value;
+      extension = fileName.split(".").pop();
+      if (extension == "jpg" || extension == "jpeg")
+        document.getElementById("imageMobileBase64").value = cropperMobile
+          .getCroppedCanvas()
+          .toDataURL();
+      else if (extension == "png")
+        document.getElementById("imageMobileBase64").value = cropperMobile
+          .getCroppedCanvas()
+          .toDataURL("image/png");
+      document.forms["adForm"].submit();
+    } else if (
+      document.getElementById("imageOldPC") != null &&
+      document.getElementById("imageOldMobile") != null
+    ) {
+      if (cropperPC != null) {
+        fileName = document.getElementById("imagePC").value;
+        extension = fileName.split(".").pop();
+        if (extension == "jpg" || extension == "jpeg")
+          document.getElementById("imagePCBase64").value = cropperPC
+            .getCroppedCanvas()
+            .toDataURL("image/jpeg");
+        else if (extension == "png")
+          document.getElementById("imagePCBase64").value = cropperPC
+            .getCroppedCanvas()
+            .toDataURL("image/png");
+      }
+      if (cropperMobile != null) {
+        fileName = document.getElementById("imageMobile").value;
+        extension = fileName.split(".").pop();
+        if (extension == "jpg" || extension == "jpeg")
+          document.getElementById("imageMobileBase64").value = cropperMobile
+            .getCroppedCanvas()
+            .toDataURL();
+        else if (extension == "png")
+          document.getElementById("imageMobileBase64").value = cropperMobile
+            .getCroppedCanvas()
+            .toDataURL("image/png");
+      }
+      document.forms["adForm"].submit();
+    } else {
+      alert("Vous devez sélectionner une image pour PC et Mobile");
     }
+  }
 });

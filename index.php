@@ -451,9 +451,7 @@ try {
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAdminPanel'){
         $alert = $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = $companyDomaines = null;
         if(isset($_POST['action'])){
-            if($_POST['action'] == "addAd"){
-                //TODO finalize crop image
-                
+            if($_POST['action'] == "addAd"){               
                 addAd();
             } else if($_POST['action'] == "editAd"){
                 editAd();
