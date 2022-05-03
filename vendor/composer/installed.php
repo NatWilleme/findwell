@@ -1,33 +1,32 @@
-<?php return array (
-  'root' => 
-  array (
-    'pretty_version' => 'dev-main',
-    'version' => 'dev-main',
-    'aliases' => 
-    array (
+<?php return array(
+    'root' => array(
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => 'c9248abc5d1af1a0b821b73226dc4d121f8f794c',
+        'name' => '__root__',
+        'dev' => true,
     ),
-    'reference' => '4f9f493ee8932cd689d186a7f863fe6e169e0b91',
-    'name' => '__root__',
-  ),
-  'versions' => 
-  array (
-    '__root__' => 
-    array (
-      'pretty_version' => 'dev-main',
-      'version' => 'dev-main',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4f9f493ee8932cd689d186a7f863fe6e169e0b91',
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => 'c9248abc5d1af1a0b821b73226dc4d121f8f794c',
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.6.0',
+            'version' => '6.6.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'reference' => 'e43bac82edc26ca04b36143a48bde1c051cfd5b1',
+            'dev_requirement' => false,
+        ),
     ),
-    'phpmailer/phpmailer' => 
-    array (
-      'pretty_version' => 'v6.5.0',
-      'version' => '6.5.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'a5b5c43e50b7fba655f793ad27303cd74c57363c',
-    ),
-  ),
 );
