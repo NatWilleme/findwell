@@ -1,6 +1,6 @@
 <?php
     $title = "Gestion du site";
-    $scripts = "<script src=\"js/checkEntries/checkEntries_inscription.js\"></script><script src=\"js/checkedDomaine.js\"></script>";
+    $scripts = "<script src=\"js/checkEntries/checkEntries_inscription.js\"></script><script src=\"js/checkedDomaine.js\"></script><script src=\"js/myCropper.js\"></script>";
     ob_start();	
 ?>
 
@@ -783,7 +783,7 @@
     if(isset($action)){ 
     ?>
 
-    <form class="mt-3" action="index.php?viewToDisplay=displayAdminPanel&view=ads" method="post" enctype='multipart/form-data'>
+    <form name="adForm" class="mt-3" action="index.php?viewToDisplay=displayAdminPanel&view=ads" method="post" enctype='multipart/form-data'>
         <div class="row gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <h6 class="mb-2 text-primary"><?php if(isset($adToEdit)) echo 'Modification de la publicité'; else echo 'Nouvelle publicité';?></h6>
@@ -814,18 +814,28 @@
                 <div class="form-group">
                     <label for="image">Publicité PC</label><br>
                     <?php if(isset($adToEdit)) { ?>
-                        <img src="<?php echo $adToEdit->imagePC; ?>" class="mb-3" width="300" alt="">
-                    <?php } ?>
+                        <div class="mb-3" style="width: 300px;">
+                            <img class="d-block w-100" src="<?php echo $adToEdit->imagePC; ?>" alt="">
+                        </div>
+                    <?php }?>
+                        <div class="mb-3" style="width: 300px;" id="previewPC"></div>
                     <input type="file" class="form-control" id="imagePC" name="imagePC" accept=".jpg, .png">
+                    <input type="text" class="d-none" id="imagePCBase64" name="imagePCBase64">
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label for="image">Publicité Mobile</label><br>
                     <?php if(isset($adToEdit)) { ?>
-                        <img src="<?php echo $adToEdit->imageMobile; ?>" class="mb-3" width="300" alt="">
+                        <div class="mb-3" style="width: 300px;">
+                            <img class="d-block w-100" src="<?php echo $adToEdit->imageMobile; ?>" alt="">
+                        </div>
+                        
                     <?php } ?>
-                    <input type="file" class="form-control" id="imageMobile" name="imageMobile" accept=".jpg, .png">
+                        <div class="mb-3" style="width: 300px;" id="previewMobile"></div>
+
+                    <input type="file" class="form-control" id="imageMobile" name="imageMobile" <?php if(isset($adToEdit)) echo "value=\"$adToEdit->imageMobile\""; ?> accept=".jpg, .png">
+                    <input type="text" class="d-none" id="imageMobileBase64" name="imageMobileBase64">
                 </div>
             </div>
         </div>
@@ -836,7 +846,7 @@
                 <input style="display: none;" type="text" name="imageOldPC" id="imageOldPC" value="<?php echo $adToEdit->imagePC;?>">
                 <input style="display: none;" type="text" name="imageOldMobile" id="imageOldMobile" value="<?php echo $adToEdit->imageMobile;?>">
             <?php } ?>
-            <button class="btn btn-primary mt-4 col-2" id="submit" type="submit"><?php if(isset($adToEdit)) echo 'Modifier'; else echo 'Ajouter';?></button>
+            <a class="btn btn-primary mt-4 col-2" id="submit"><?php if(isset($adToEdit)) echo 'Modifier'; else echo 'Ajouter';?></a>
         </div>
     </form>
 

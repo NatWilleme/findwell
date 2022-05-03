@@ -4,25 +4,17 @@ function addAd()
 {
     $newAd = new Ad();
     $newAd->__set('id_comp', $_POST['company']);
-
-    $from = $_FILES['imagePC']['tmp_name'];
-    $path = $_FILES['imagePC']['name'];
-    //get the extension of file
-    $ext = pathinfo($path, PATHINFO_EXTENSION);
-    $imageName = 'pcAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
+    $imageName = 'pc_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.png';
     $to = 'images/upload/advertising/pc/' . $imageName;
-    
-    $result = move_uploaded_file($from, $to);
-    
+    $imageCroppedPC = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $_POST['imagePCBase64']));
+    echo "<script>console.log('" . $imageCroppedPC . "');</script>";
+    file_put_contents($to, $imageCroppedPC);
     $newAd->__set('imagePC', $to);
 
-    $from = $_FILES['imageMobile']['tmp_name'];
-    $path = $_FILES['imageMobile']['name'];
-    //get the extension of file
-    $ext = pathinfo($path, PATHINFO_EXTENSION);
-    $imageName = 'mobileAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
-    $to = '/images/upload/advertising/mobile/' . $imageName;
-    move_uploaded_file($from, $to);
+    $imageName = 'mobile_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.png';
+    $to = 'images/upload/advertising/mobile/' . $imageName; 
+    $imageCroppedMobile = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $_POST['imageMobileBase64']));
+    file_put_contents($to, $imageCroppedMobile);
     $newAd->__set('imageMobile', $to);
 
     $newAd->__set('display', $_POST['display']);
@@ -36,28 +28,39 @@ function editAd()
     $newAd->__set('id', $_POST['idToEdit']);
     $newAd->__set('id_comp', $_POST['company']);
     $newAd->__set('display', $_POST['display']);
-    if (!empty($_FILES['imagePC']['name'])) {
-        $from = $_FILES['imagePC']['tmp_name'];
-        $path = $_FILES['imagePC']['name'];
-        //get the extension of file
-        $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $files = scandir('images/upload/advertising/pc/');
-        $imageName = 'pcAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
+    // if (!empty($_FILES['imagePC']['name'])) {
+    //     $from = $_FILES['imagePC']['tmp_name'];
+    //     $path = $_FILES['imagePC']['name'];
+    //     //get the extension of file
+    //     $ext = pathinfo($path, PATHINFO_EXTENSION);
+    //     $imageName = 'pcAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
+    //     $to = 'images/upload/advertising/pc/' . $imageName;
+    //     move_uploaded_file($from, $to);
+    //     $newAd->__set('imagePC', $to);
+    if(!empty($_POST['imagePCBase64'])){
+        $imageName = 'pc_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.png';
         $to = 'images/upload/advertising/pc/' . $imageName;
-        move_uploaded_file($from, $to);
+        $imageCroppedPC = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $_POST['imagePCBase64']));
+        file_put_contents($to, $imageCroppedPC);
         $newAd->__set('imagePC', $to);
     } else {
         $newAd->__set('imagePC', $_POST['imageOldPC']);
     }
-    if (!empty($_FILES['imageMobile']['name'])) {
-        $from = $_FILES['imageMobile']['tmp_name'];
-        $path = $_FILES['imageMobile']['name'];
-        //get the extension of file
-        $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $files = scandir('images/upload/advertising/mobile/');
-        $imageName = 'mobileAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
-        $to = 'images/upload/advertising/pc/' . $imageName;
-        move_uploaded_file($from, $to);
+    // if (!empty($_FILES['imageMobile']['name'])) {
+    //     $from = $_FILES['imageMobile']['tmp_name'];
+    //     $path = $_FILES['imageMobile']['name'];
+    //     //get the extension of file
+    //     $ext = pathinfo($path, PATHINFO_EXTENSION);
+    //     $files = scandir('images/upload/advertising/mobile/');
+    //     $imageName = 'mobileAd_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $ext;
+    //     $to = 'images/upload/advertising/pc/' . $imageName;
+    //     move_uploaded_file($from, $to);
+    //     $newAd->__set('imageMobile', $to);
+    if(!empty($_POST['imageMobileBase64'])){
+        $imageName = 'mobile_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.png';
+        $to = 'images/upload/advertising/mobile/' . $imageName; 
+        $imageCroppedMobile = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $_POST['imageMobileBase64']));
+        file_put_contents($to, $imageCroppedMobile);
         $newAd->__set('imageMobile', $to);
     } else {
         $newAd->__set('imageMobile', $_POST['imageOldMobile']);
