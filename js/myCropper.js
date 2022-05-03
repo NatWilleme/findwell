@@ -51,12 +51,12 @@ function imagePreview(fileInput, type) {
 
 document.addEventListener('click', function(clickEvent) {
     if (clickEvent.target.id == 'submit') {
-        if(cropperPC != null) {
+        if(cropperPC != null && cropperMobile != null) {
             document.getElementById("imagePCBase64").value = cropperPC.getCroppedCanvas().toDataURL();
-            console.log(cropperPC.getCroppedCanvas().toDataURL());
-        }
-        if(cropperMobile != null) {
-            document.getElementById("imagePCBase64").value = cropperMobile.getCroppedCanvas().toDataURL();
+            document.getElementById("imageMobileBase64").value = cropperMobile.getCroppedCanvas().toDataURL();
+            document.forms["adForm"].submit();
+        } else {
+            alert("Vous devez sélectionner une image pour PC et Mobile");
         }
     }
 });

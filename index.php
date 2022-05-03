@@ -453,8 +453,7 @@ try {
         if(isset($_POST['action'])){
             if($_POST['action'] == "addAd"){
                 //TODO finalize crop image
-                $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $_POST['imagePCBase64']));
-                file_put_contents("images/upload/advertising/test.png", $data);
+                
                 addAd();
             } else if($_POST['action'] == "editAd"){
                 editAd();

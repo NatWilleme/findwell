@@ -783,7 +783,7 @@
     if(isset($action)){ 
     ?>
 
-    <form class="mt-3" action="index.php?viewToDisplay=displayAdminPanel&view=ads" method="post" enctype='multipart/form-data'>
+    <form name="adForm" class="mt-3" action="index.php?viewToDisplay=displayAdminPanel&view=ads" method="post" enctype='multipart/form-data'>
         <div class="row gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <h6 class="mb-2 text-primary"><?php if(isset($adToEdit)) echo 'Modification de la publicité'; else echo 'Nouvelle publicité';?></h6>
@@ -837,7 +837,7 @@
                         <div class="mb-3" style="width: 300px;" id="previewMobile"></div>
                     <?php }?>
                     <input type="file" class="form-control" id="imageMobile" name="imageMobile" accept=".jpg, .png">
-                    <input type="text" class="d-none" id="imagePCMobile64" name="imagePCMobile64">
+                    <input type="text" class="d-none" id="imageMobileBase64" name="imageMobileBase64">
                 </div>
             </div>
         </div>
@@ -848,7 +848,7 @@
                 <input style="display: none;" type="text" name="imageOldPC" id="imageOldPC" value="<?php echo $adToEdit->imagePC;?>">
                 <input style="display: none;" type="text" name="imageOldMobile" id="imageOldMobile" value="<?php echo $adToEdit->imageMobile;?>">
             <?php } ?>
-            <button class="btn btn-primary mt-4 col-2" id="submit" type="submit"><?php if(isset($adToEdit)) echo 'Modifier'; else echo 'Ajouter';?></button>
+            <a class="btn btn-primary mt-4 col-2" id="submit"><?php if(isset($adToEdit)) echo 'Modifier'; else echo 'Ajouter';?></a>
         </div>
     </form>
 
