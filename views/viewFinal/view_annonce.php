@@ -2,7 +2,7 @@
     $title = "Annonces";
     $scripts = "<script>const change = src => {
         document.getElementById('main').src = src
-    }</script>";
+    }</script><script src='js/checkEntries/checkEntries_inscription.js'></script>";
     ob_start();	
 ?>
 
@@ -101,6 +101,7 @@
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
     <?php if(isset($_SESSION['user']) && $serviceToDisplay->idUser == $_SESSION['user']->id){ ?>
         <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&edit=<?php echo $serviceToDisplay->idService; ?>" class="btn btn-primary col-10 offset-1 col-lg-3">Editer le service</a>
+        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&delete=<?php echo $serviceToDisplay->idService; ?>" class="btn btn-danger col-10 offset-1 col-lg-3 mt-3">Supprimer le service</a>        
     <?php } ?>
     <div class="d-flex row justify-content-around mt-4">
         <div class="col-12 col-lg-5">
@@ -120,8 +121,8 @@
         </div>
         <div class="col-lg-5 col-12">
             <h1><b><?php echo $serviceToDisplay->title; ?></b></h1> 
-            <h6>Publié il y a <?php echo $serviceToDisplay->date; ?> jours dans <?php echo $serviceToDisplay->region; ?></h6>
-            <h4><b>Détails</b></h4>
+            <h6>Publié  <?php if($serviceToDisplay->date == 0) echo "aujourd'hui"; else echo "il y a $serviceToDisplay->date jours"; ?> à <?php echo $serviceToDisplay->region; ?></h6>
+            <h4><b>Détails :</b></h4>
             <p><?php echo $serviceToDisplay->description; ?></p>
             <h4><b>Information sur le travailleur :</b></h4>
             <div>
@@ -173,7 +174,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="region">Region</label>
-                                    <input type="text" class="form-control" name="region" id="region" placeholder="Region où se trouve l'objet" required>
+                                    <input type="text" class="form-control" name="region" id="region" placeholder="Region où vous opérez le service" required>
                                     <p id="errorRegion"></p>
                                 </div>
                             </div>
@@ -202,6 +203,7 @@
                             <input type="checkbox" class="form-check-input" name="checkService[]" id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>">
                         </div>
                         <?php } ?>
+                        <p id="errorDomaine"></p>
                         <button type="submit" class="btn btn-primary">Ajouter le service</button>
                     </div>
                 </div>
@@ -276,6 +278,7 @@
                             <input type="checkbox" class="form-check-input" name="checkService[]" id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>" <?php if(in_array($category->id, $serviceToEdit->idCategories)) echo "checked"; ?>>
                         </div>
                         <?php } ?>
+                        <p id="errorDomaine"></p>
                         <button type="submit" class="btn btn-primary">Modifier le service</button>
                     </div>
                 </div>
@@ -375,7 +378,7 @@
             <h1><b><?php echo $occasionToDisplay->title; ?></b></h1>
             <h4><?php echo $occasionToDisplay->price; ?> €</h4>
             <h6>Publié <?php if($occasionToDisplay->date == 0) echo "aujourd'hui"; else if($occasionToDisplay->date == 1) echo "il y a ".$occasionToDisplay->date." jour"; else echo "il y a ".$occasionToDisplay->date." jours" ?> à <?php echo $occasionToDisplay->region; ?></h6>
-            <h4><b>Détails</b></h4>
+            <h4><b>Détails :</b></h4>
             <p><?php echo $occasionToDisplay->description; ?></p>
             <h4><b>Information sur le vendeur :</b></h4>
             <div>

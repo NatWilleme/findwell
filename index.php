@@ -163,7 +163,7 @@ try {
                     displayAnnonce(notification: $notification, servicesOfUser: $servicesOfUser);
                 } else if(isset($_GET['edit'])){
                     $serviceToEdit = getServiceByID($_GET['edit']);
-                    if($serviceToEdit->idUser == $_SESSION['user']->id){
+                    if(isset($_SESSION['user']) && $serviceToEdit->idUser == $_SESSION['user']->id){
                         $editPermission = true;
                     } else {
                         $editPermission = false;
@@ -171,6 +171,15 @@ try {
                     
                     $categoriesService = getCategoriesToDisplay("Service");
                     displayAnnonce(notification: $notification, serviceToEdit: $serviceToEdit, editPermission: $editPermission, categoriesService: $categoriesService);
+                } else if(isset($_GET['delete'])){
+                    $serviceToEdit = getServiceByID($_GET['delete']);
+                    if(isset($_SESSION['user']) && $serviceToEdit->idUser == $_SESSION['user']->id){
+                        ServicesManager::deleteService($_GET['delete']);
+                    }
+                    
+                    $categoriesService = getCategoriesToDisplay("Service");
+                    displayAnnonce(notification: $notification, categoriesService: $categoriesService);
+                    
                 } else {
                     $categoriesServiceToDisplay = getCategoriesOfService();
                     displayAnnonce(notification: $notification, categoriesServiceToDisplay: $categoriesServiceToDisplay);
@@ -271,7 +280,7 @@ try {
                     displayAnnonce(notification: $notification, occasionToEdit: $occasionToEdit, editPermission: $editPermission);
                 } else if(isset($_GET['delete'])){
                     $occasionToDelete = getOccasionByID($_GET['delete']);
-                    if($occasionToDelete->idUser == $_SESSION['user']->id){
+                    if(isset($_SESSION['user']) && $occasionToDelete != null && $occasionToDelete->idUser == $_SESSION['user']->id){
                         $editPermission = true;
                         OccasionsManager::deleteOccasion($occasionToDelete->idOccasion);
                     } else {

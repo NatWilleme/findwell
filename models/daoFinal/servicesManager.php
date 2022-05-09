@@ -3,8 +3,8 @@
     abstract class ServicesManager extends DBManager{
 
         static public function addService(Service $newService){
-            $sql = "INSERT INTO services (title_serv, description_serv, date_serv, region_serv, image_serv, id_user)
-                    VALUES (:title_serv, :description_serv, :date_serv, :region_serv, :image_serv, :id_user)";
+            $sql = "INSERT INTO services (title_serv, description_serv, date_serv, region_serv, image_serv, id_user, phone_serv, mail_serv)
+                    VALUES (:title_serv, :description_serv, :date_serv, :region_serv, :image_serv, :id_user, :phone_serv, :mail_serv)";
             try{
                 $pdo_connexion = parent::connexionDB();
                 $pdo_statement = $pdo_connexion->prepare($sql);
@@ -14,7 +14,9 @@
                     ':date_serv' => date_format(date_create(), 'Y/m/d'), 
                     ':region_serv' => $newService->region,
                     ':image_serv' => serialize($newService->imageService), 
-                    ':id_user' => $newService->idUser
+                    ':id_user' => $newService->idUser,
+                    ':phone_serv' => $newService->phone,
+                    ':mail_serv' => $newService->mail
                 ));
                 $lastId = $pdo_connexion->lastInsertId();
             } catch (Exception $e) {
@@ -28,7 +30,7 @@
 
         static public function editService(Service $serviceToEdit){
             $sql = "UPDATE services SET title_serv = :title_serv, description_serv = :description_serv, date_serv = :date_serv, 
-                    region_serv = :region_serv, image_serv = :image_serv, id_user = :id_user WHERE id_serv=:id_serv";
+                    region_serv = :region_serv, image_serv = :image_serv, id_user = :id_user, phone_serv = :phone_serv, mail_serv = :mail_serv WHERE id_serv=:id_serv";
             try{
                 $pdo_connexion = parent::connexionDB();
                 $pdo_statement = $pdo_connexion->prepare($sql);
@@ -39,7 +41,9 @@
                     ':date_serv' => date_format(date_create(), 'Y/m/d'), 
                     ':region_serv' => $serviceToEdit->region,
                     ':image_serv' => serialize($serviceToEdit->imageService), 
-                    ':id_user' => $serviceToEdit->idUser
+                    ':id_user' => $serviceToEdit->idUser,
+                    ':phone_serv' => $serviceToEdit->phone,
+                    ':mail_serv' => $serviceToEdit->mail
                 ));
             } catch (Exception $e) {
                 die($e->getMessage());
@@ -118,10 +122,10 @@
                         "region" => $elem["region_serv"],  
                         "idUser" => $elem["id_user"],  
                         "username" => $elem["username_user"],  
-                        "mail" => $elem["mail_user"], 
+                        "mail" => $elem["mail_serv"], 
                         "imageService" => $elem["image_serv"],
                         "imageUser" => $elem["image_user"],
-                        "phone" => $elem["phone_user"],
+                        "phone" => $elem["phone_serv"],
                         "type" => $elem["type_user"]
                     );
                     $service = new Service();
@@ -155,7 +159,9 @@
                         "idUser" => $elem["id_user"], 
                         "imageUser" => $elem["image_user"],  
                         "username" => $elem["username_user"],  
-                        "imageService" => $elem["image_serv"]
+                        "imageService" => $elem["image_serv"],
+                        "mail" => $elem["mail_serv"],
+                        "phone" => $elem["phone_serv"]
                     );
                     $service = new Service();
                     $service->hydrate($values);
@@ -186,7 +192,9 @@
                         "date" => $elem["date_serv"],
                         "region" => $elem["region_serv"],  
                         "idUser" => $elem["id_user"], 
-                        "imageService" => $elem["image_serv"]
+                        "imageService" => $elem["image_serv"],
+                        "mail" => $elem["mail_serv"],
+                        "phone" => $elem["phone_serv"]
                     );
                     $service = new Service();
                     $service->hydrate($values);
@@ -217,10 +225,10 @@
                         "region" => $elem["region_serv"],  
                         "idUser" => $elem["id_user"],  
                         "username" => $elem["username_user"],  
-                        "mail" => $elem["mail_user"], 
+                        "mail" => $elem["mail_serv"], 
                         "imageService" => $elem["image_serv"],
                         "imageUser" => $elem["image_user"],
-                        "phone" => $elem["phone_user"],
+                        "phone" => $elem["phone_serv"],
                         "type" => $elem["type_user"]
                     );
                     $service = new Service();
@@ -238,6 +246,19 @@
             return $service;
         }
 
+        static public function deleteService(int $id){
+            $sql = "DELETE FROM services WHERE id_serv = :id_serv";
+            try{
+                $pdo_connexion = parent::connexionDB();
+                $pdo_statement = $pdo_connexion->prepare($sql);
+                $pdo_statement->execute(array(':id_serv' => $id));
+            } catch (Exception $e) {
+                die($e->getMessage());
+            } finally{
+                $pdo_statement->closeCursor();
+                $pdo_statement = null;
+            }
+        }
     }
 
 ?>

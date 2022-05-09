@@ -119,6 +119,38 @@ if (document.getElementById("formDomaine") != null) {
     })
 }
 
+if (document.getElementById("formAddService") != null) {
+    document.getElementById("formAddService").addEventListener("submit", function (e) {
+        var number = 0;
+        var markedCheckboxService = document.getElementsByName('checkService[]');  
+        for (var checkbox of markedCheckboxService) {  
+            if (checkbox.checked)  
+                number++;
+        }
+        if(number == 0){
+            e.preventDefault();
+            document.getElementById('errorDomaine').innerHTML = "Veuillez cocher au moins 1 domaine";
+            document.getElementById('errorDomaine').style.color = "red";
+        }
+    })
+}
+
+if (document.getElementById("formEditService") != null) {
+    document.getElementById("formEditService").addEventListener("submit", function (e) {
+        var number = 0;
+        var markedCheckboxService = document.getElementsByName('checkService[]');  
+        for (var checkbox of markedCheckboxService) {  
+            if (checkbox.checked)  
+                number++;
+        }
+        if(number == 0){
+            e.preventDefault();
+            document.getElementById('errorDomaine').innerHTML = "Veuillez cocher au moins 1 domaine";
+            document.getElementById('errorDomaine').style.color = "red";
+        }
+    })
+}
+
 
 if (document.getElementById("formCompanyFromAdmin") != null ) {
     document.getElementById("formCompanyFromAdmin").addEventListener("submit", function (e) {
