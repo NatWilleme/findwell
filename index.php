@@ -66,6 +66,9 @@ try {
                     $servicesToDisplay = getServicesForCategories($_GET['category']);
                     foreach ($servicesToDisplay as $service) {
                         $service->imageService = unserialize($service->imageService);
+                        $datetime1 = new DateTime(date("Y/m/d"));
+                        $datetime2 = new DateTime($service->date);
+                        $service->date = $datetime1->diff($datetime2)->format('%d');
                     }
                     displayAnnonce(notification: $notification, servicesToDisplay: $servicesToDisplay);
                 } else if(isset($_GET['service'])){

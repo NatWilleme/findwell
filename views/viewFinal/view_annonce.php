@@ -31,28 +31,20 @@
         </div>
 <?php } else if(!is_null($servicesToDisplay)){ ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
-    <div class="col-10 offset-1 mt-4 table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Titre</th>
-                <th scope="col">Description</th>
-                <th scope="col">Auteur</th>
-                <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($servicesToDisplay as $service) { ?>
-                <tr>
-                    <td><img src="<?php if(!is_null($service->imageService[0])) echo $service->imageService[0]; else echo "/images/annonce/blank_image.jpg"; ?>" style="max-width: 200px; max-height: 200px;" alt=""></th>
-                    <td><?php echo $service->title; ?></td>
-                    <td><?php echo $service->description; ?></td>
-                    <td>
-                        <img src="<?php echo $service->imageUser; ?>" class="rounded-circle" alt="profil" style="width: 60px;" id="profil">
-                        <label for="profil" class="ms-3"><b><?php echo $service->username; ?></b></label>
-                    </td>    
-                    <td>
+    <div class="row g-0 d-flex my-4 justify-content-around">
+    <?php foreach ($servicesToDisplay as $service) { ?>
+        
+        <div class="card mb-3 col-md-5 col-12 border border-dark text-dark bg-light">
+            <div class="row g-0 h-100">
+                <div class="col-md-4">
+                    <img style="object-fit: cover;" src="<?php if(!is_null($service->imageService[0])) echo $service->imageService[0]; else echo "images/annonce/blank_image.jpg"; ?>" class="rounded-start img-fluid h-100">
+                </div>
+                <div class="col-md-8">
+
+                    <div class="card-header"><?php echo $service->title; ?></div>
+                    <div class="card-body">
+                        <p class="card-text"><?php if(strlen($service->description) > 70) echo substr($service->description,0,70).'...'; else echo $service->description; ?></p>
+                        <p class="card-text"><small class="text-muted">Publié <?php if($service->date == 0) echo "aujourd'hui"; else echo "il y a $service->date jours"; ?></small></p>
                         <form action="index.php" method="get">
                             <input type="text" name="viewToDisplay" value="displayAnnonce" class="d-none">
                             <input type="text" name="subcategory" value="service" class="d-none">
@@ -60,11 +52,11 @@
                             <input type="text" name="service" value="<?php echo $service->idService; ?>" class="d-none" >
                             <button class="btn btn-primary">Accéder</button>
                         </form>
-                    </td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
     </div>
 <?php } else if(!is_null($servicesOfUser)){ ?>
     <div class="col-10 offset-1 mt-4 table-responsive">
@@ -80,7 +72,7 @@
             <tbody>
                 <?php foreach ($servicesOfUser as $service) { ?>
                 <tr>
-                    <td><img src="<?php if(!is_null($service->imageService[0])) echo $service->imageService[0]; else echo "/images/annonce/blank_image.jpg"; ?>" style="max-width: 200px; max-height: 200px;" alt=""></th>
+                    <td><img src="<?php if(!is_null($service->imageService[0])) echo $service->imageService[0]; else echo "images/annonce/blank_image.jpg"; ?>" style="max-width: 200px; max-height: 200px;" alt=""></th>
                     <td><?php echo $service->title; ?></td>
                     <td><?php echo $service->description; ?></td>  
                     <td>
