@@ -411,7 +411,11 @@ try {
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayCompaniesList'){
         $subcategory = $_GET['subcategory'];
         $_SESSION['subcategory'] = $subcategory;
-        displayCompaniesAccordingTo($_SESSION['category'], $subcategory, $notification);
+        if(isset($_SESSION['category'])){
+            displayCompaniesAccordingTo($_SESSION['category'], $subcategory, $notification);
+        } else {
+            displayCompaniesAccordingTo($_GET['category'],$subcategory, $notification);
+        }
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayCompanyDetails' && !isset($_GET['favorite'])){
         prepareDisplayCompanyDetails($_GET['idCompany'], $notification);
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayEditProfil'){

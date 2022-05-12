@@ -53,6 +53,11 @@ function displayTemplateConnected($title, $content, $notification, $scripts = ''
 }
 
 function displayTemplateNotConnected($title, $content, $scripts = ''){
+    if(!isset($_SESSION['categoriesTemplate'])){
+        $_SESSION['categoriesTemplate']['Gros Travaux'] = getCategoriesToDisplay("Gros Travaux");
+        $_SESSION['categoriesTemplate']['Petits Travaux'] = getCategoriesToDisplay("Petits Travaux");
+        $_SESSION['categoriesTemplate']['Depannage'] = getCategoriesToDisplay("Dépannage d'urgence");
+    }
     require_once('templates/templateFinal/templateNotConnected.php');
 }
 

@@ -1,3 +1,8 @@
+:root{
+  --main-bg-yellow: #FFD338;
+}
+
+
 a {
   color: rgb(0, 0, 0);
   text-decoration: none;
@@ -286,4 +291,35 @@ body{
   .backInRight-scroll {
     animation: backInRight 1s 1;
   }
+}
+
+.categoryBtn{
+  color: white;
+  border-radius: 15px;
+}
+
+.categoryBtn:hover{
+    background-color: white;
+    color: #2e323c;  
+    transition: 0.3s;
+}
+
+.dropdown-item-color{
+  background-color: #2e323c;
+  color: white;  
+}
+
+.dropdown-menu{
+  background-color: #2e323c;
+}
+
+a.show{
+  background-color: white;
+  color: #2e323c;  
+  transition: 0.3s;
+}
+
+.show a:hover{
+  background-color: var(--main-bg-yellow);
+  color: #2e323c;  
 }

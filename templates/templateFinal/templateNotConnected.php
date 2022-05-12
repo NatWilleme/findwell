@@ -50,28 +50,26 @@
   <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark firstNavbar">
     <div class="container-fluid d-flex justify-content-around justify-content-lg-end">
 
-      <div>
-
-        <!-- Se connecter -->
-        <div class="hover-underline-animation mx-3">
-          <a class="text-white" href="index.php?viewToDisplay=displayConnexion">
-            <i class="bi bi-lock-fill pe-1" style="font-size: 1.5rem;"></i>
-            Se connecter
-          </a>
-        </div>
-        <!-- END Se connecter -->
-
-        <!-- S'inscrire -->
-        <div class="hover-underline-animation mx-3">
-          <a class="text-white" href="index.php?viewToDisplay=displayRegister">
-            <i class="bi bi-person-plus-fill pe-1" style="font-size: 1.5rem;"></i>
-            S'inscrire
-          </a>
-        </div>
-
-        <!-- END S'inscrire -->
-
+      <!-- Se connecter -->
+      <div class="hover-underline-animation mx-3">
+        <a class="text-white" href="index.php?viewToDisplay=displayConnexion">
+          <i class="bi bi-lock-fill pe-1" style="font-size: 1.5rem;"></i>
+          Se connecter
+        </a>
       </div>
+      <!-- END Se connecter -->
+
+      <!-- S'inscrire -->
+      <div class="hover-underline-animation mx-3">
+        <a class="text-white" href="index.php?viewToDisplay=displayRegister">
+          <i class="bi bi-person-plus-fill pe-1" style="font-size: 1.5rem;"></i>
+          S'inscrire
+        </a>
+      </div>
+
+      <!-- END S'inscrire -->
+
+    </div>
 
     </div>
   </nav>
@@ -115,16 +113,16 @@
       <div class="row mt-3 mt-lg-0 d-flex justify-content-center col-12 col-md-4">
         <div class="col-5 text-center pulseOnHover my-auto">
           <a href="index.php?searchAll=true">
-              <img src="/images/icons/book.png" width="40px">
+            <img src="/images/icons/book.png" width="40px">
             <div>
-              <span class="nav-link active text-dark" aria-current="page" >Toutes les entreprises</span>
+              <span class="nav-link active text-dark" aria-current="page">Toutes les entreprises</span>
             </div>
           </a>
         </div>
         <div class="col-1 myBorderColor"></div>
         <div class="col-5 text-center pulseOnHover my-auto">
           <a href="index.php?viewToDisplay=displayContact">
-              <img src="/images/icons/contact2.png" width="40px">
+            <img src="/images/icons/contact2.png" width="40px">
             <div>
               <span class="nav-link text-dark">Nous contacter</span>
             </div>
@@ -135,7 +133,73 @@
 
     </div>
   </nav>
-  <!-- Second Navbar -->
+  <!-- END Second Navbar -->
+
+  <!-- Third Navbar -->
+  <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark firstNavbar ">
+    <div class="container-fluid d-flex justify-content-lg-around">
+      <div class="col-12 col-lg-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="grosTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Gros travaux
+              </a>
+              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="grosTravauxDropdownLink">
+                <?php foreach ($_SESSION['categoriesTemplate']['Gros Travaux'] as $category) { ?>
+                  <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+                <?php } ?>
+              </ul>
+            </li>
+          </ul>
+      </div>
+
+      <div class="col-12 col-lg-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="petitsTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Petits travaux
+              </a>
+              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="petitsTravauxDropdownLink">
+                <?php foreach ($_SESSION['categoriesTemplate']['Petits Travaux'] as $category) { ?>
+                  <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Petits Travaux&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+                <?php } ?>
+              </ul>
+            </li>
+          </ul>
+      </div>
+
+      <div class="col-12 col-lg-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="categoryBtn nav-link dropdown-toggle text-center" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>" id="depannageTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dépannage d'urgence
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="depannageTravauxDropdownLink">
+                <?php foreach ($_SESSION['categoriesTemplate']['Depannage'] as $category) { ?>
+                  <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+                <?php } ?>
+              </ul>
+            </li>
+          </ul>
+      </div>
+
+      <div class="col-12 col-lg-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="annoncesTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Annonces
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="annoncesTravauxDropdownLink">
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=service">Entraide collaborative</a></li>
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion">Vente d'outils d'occasion</a></li>
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel">Vente de matériaux</a></li>
+              </ul>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END Third Navbar -->
 
   <div>
     <!-- CONTENU -->

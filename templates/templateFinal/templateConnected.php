@@ -63,17 +63,17 @@
                                       else echo "images/upload/photos_profils/default-profil.jpg" ?>" alt="profil" style="width: 50px;">
           </button>
           <ul class="dropdown-menu shadow" style="transform: translate3d(-60px, 0px, 0px);" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="index.php?viewToDisplay=displayEditProfil">Mes informations <i class="bi bi-info-circle-fill text-secondary"></i></a></li>
-            <li><a class="dropdown-item" href="index.php?viewToDisplay=displayFavorite">Mes favoris <i class="bi bi-star-fill text-warning"></i></a></li>
+            <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayEditProfil">Mes informations <i class="bi bi-info-circle-fill text-secondary"></i></a></li>
+            <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayFavorite">Mes favoris <i class="bi bi-star-fill text-warning"></i></a></li>
             <?php if ($_SESSION['user']->type == "admin") { ?>
-              <li><a class="dropdown-item" href="index.php?viewToDisplay=displayAdminPanel">Gestion du site <?php if ($notification != 0) { ?><span class="badge bg-primary"><?php echo $notification; ?></span><?php } else { ?><i class="bi bi-gear-fill"></i><?php } ?></a></li>
+              <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAdminPanel">Gestion du site <?php if ($notification != 0) { ?><span class="badge bg-primary"><?php echo $notification; ?></span><?php } else { ?><i class="bi bi-gear-fill"></i><?php } ?></a></li>
             <?php } ?>
-            <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item">Mes occasions</a></li>
-            <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item">Mes services</a></li>
+            <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item dropdown-item-color">Mes occasions</a></li>
+            <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item dropdown-item-color">Mes services</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="index.php?disconnect=true">Se déconnecter <i class="bi bi-box-arrow-right"></i></a></li>
+            <li><a class="dropdown-item dropdown-item-color" href="index.php?disconnect=true">Se déconnecter <i class="bi bi-box-arrow-right"></i></a></li>
           </ul>
         </div>
 
@@ -143,7 +143,71 @@
   </nav>
   <!-- Second Navbar -->
 
+  <!-- Third Navbar -->
+  <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark firstNavbar ">
+    <div class="container-fluid d-flex justify-content-lg-around">
+      <div class="col-12 col-lg-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="grosTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Gros travaux
+              </a>
+              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="grosTravauxDropdownLink">
+                <?php foreach ($_SESSION['categoriesTemplate']['Gros Travaux'] as $category) { ?>
+                  <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+                <?php } ?>
+              </ul>
+            </li>
+          </ul>
+      </div>
 
+      <div class="col-12 col-lg-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="petitsTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Petits travaux
+              </a>
+              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="petitsTravauxDropdownLink">
+                <?php foreach ($_SESSION['categoriesTemplate']['Petits Travaux'] as $category) { ?>
+                  <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Petits Travaux&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+                <?php } ?>
+              </ul>
+            </li>
+          </ul>
+      </div>
+
+      <div class="col-12 col-lg-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="categoryBtn nav-link dropdown-toggle text-center" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>" id="depannageTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dépannage d'urgence
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="depannageTravauxDropdownLink">
+                <?php foreach ($_SESSION['categoriesTemplate']['Depannage'] as $category) { ?>
+                  <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+                <?php } ?>
+              </ul>
+            </li>
+          </ul>
+      </div>
+
+      <div class="col-12 col-lg-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="annoncesTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Annonces
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="annoncesTravauxDropdownLink">
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=service">Entraide collaborative</a></li>
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion">Vente d'outils d'occasion</a></li>
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel">Vente de matériaux</a></li>
+              </ul>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END Third Navbar -->
 
 
   <!-- CONTENU -->
