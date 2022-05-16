@@ -14,6 +14,42 @@
 
     gtag('config', 'G-TW2FJRC3N5');
   </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-TW2FJRC3N5');
+  </script>
+  <script>
+    !function(f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function() {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4722317321206344');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+  </script>
+  <noscript>
+    <img height="1" width="1" src="https://www.facebook.com/tr?id=4722317321206344&ev=PageView&noscript=1" />
+  </noscript>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Findwell est une plateforme communautaire permettant de trouver facilement une entreprise pour vos projets de rénovation ou de construction.">
@@ -26,7 +62,7 @@
   <link rel="stylesheet" href="css/style.css?1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
-  <link  href="/node_modules/cropperjs/dist/cropper.css" rel="stylesheet">
+  <link href="/node_modules/cropperjs/dist/cropper.css" rel="stylesheet">
 
   <title><?php echo $title; ?></title>
   <style>
@@ -147,63 +183,63 @@
   <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark firstNavbar ">
     <div class="container-fluid d-flex justify-content-lg-around">
       <div class="col-12 col-lg-auto">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="grosTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Gros travaux
-              </a>
-              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="grosTravauxDropdownLink">
-                <?php foreach ($_SESSION['categoriesTemplate']['Gros Travaux'] as $category) { ?>
-                  <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
-                <?php } ?>
-              </ul>
-            </li>
-          </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="grosTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Gros travaux
+            </a>
+            <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="grosTravauxDropdownLink">
+              <?php foreach ($_SESSION['categoriesTemplate']['Gros Travaux'] as $category) { ?>
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+              <?php } ?>
+            </ul>
+          </li>
+        </ul>
       </div>
 
       <div class="col-12 col-lg-auto">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="petitsTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Petits travaux
-              </a>
-              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="petitsTravauxDropdownLink">
-                <?php foreach ($_SESSION['categoriesTemplate']['Petits Travaux'] as $category) { ?>
-                  <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Petits Travaux&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
-                <?php } ?>
-              </ul>
-            </li>
-          </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="petitsTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Petits travaux
+            </a>
+            <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="petitsTravauxDropdownLink">
+              <?php foreach ($_SESSION['categoriesTemplate']['Petits Travaux'] as $category) { ?>
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Petits Travaux&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+              <?php } ?>
+            </ul>
+          </li>
+        </ul>
       </div>
 
       <div class="col-12 col-lg-auto">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="categoryBtn nav-link dropdown-toggle text-center" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>" id="depannageTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dépannage d'urgence
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="depannageTravauxDropdownLink">
-                <?php foreach ($_SESSION['categoriesTemplate']['Depannage'] as $category) { ?>
-                  <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
-                <?php } ?>
-              </ul>
-            </li>
-          </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="categoryBtn nav-link dropdown-toggle text-center" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>" id="depannageTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dépannage d'urgence
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="depannageTravauxDropdownLink">
+              <?php foreach ($_SESSION['categoriesTemplate']['Depannage'] as $category) { ?>
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+              <?php } ?>
+            </ul>
+          </li>
+        </ul>
       </div>
 
       <div class="col-12 col-lg-auto">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="annoncesTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Annonces
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="annoncesTravauxDropdownLink">
-                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=service">Entraide collaborative</a></li>
-                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion">Vente d'outils d'occasion</a></li>
-                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel">Vente de matériaux</a></li>
-              </ul>
-            </li>
-          </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="annoncesTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Annonces
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="annoncesTravauxDropdownLink">
+              <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=service">Entraide collaborative</a></li>
+              <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion">Vente d'outils d'occasion</a></li>
+              <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel">Vente de matériaux</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
