@@ -21,27 +21,30 @@ function getMessageBtnToDisplay($idCompany)
 
 function addComment($idCompany, $idUser)
 {
-    $newComment = new Comment();
-    $newComment->__set('comment',$_POST['newComment']);
-    if(isset($_FILES['img']) && $_FILES['img']['name'] != ""){
-        $from = $_FILES['img']['tmp_name'];
-        $path = $_FILES['img']['name'];
-        //get the extension of file
-        $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $files = scandir('images/upload/comments/');
-        $cptImage = count($files)-1;
-        $to = 'images/upload/comments/comment'.$cptImage.'.'.$ext;
-        move_uploaded_file($from,$to);
-        $newComment->__set('image',$to);
-    } else {
-        $newComment->__set('image',"");
+    if(isset($_POST['newComment'])){
+        $newComment = new Comment();
+        $newComment->__set('comment',$_POST['newComment']);
+        if(isset($_FILES['img']) && $_FILES['img']['name'] != ""){
+            $from = $_FILES['img']['tmp_name'];
+            $path = $_FILES['img']['name'];
+            //get the extension of file
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            $files = scandir('images/upload/comments/');
+            $cptImage = count($files)-1;
+            $to = 'images/upload/comments/comment'.$cptImage.'.'.$ext;
+            move_uploaded_file($from,$to);
+            $newComment->__set('image',$to);
+        } else {
+            $newComment->__set('image',"");
+        }
+        $newComment->__set('rating',$_POST['rating']);
+        $newComment->__set('date',date("Y-m-d H:i:s"));
+        $newComment->__set('id_comp',$idCompany);
+        $newComment->__set('id_user',$idUser);
+        commentsManager::addComment($newComment);
+        unset($newComment);
     }
-    $newComment->__set('rating',$_POST['rating']);
-    $newComment->__set('date',date("Y-m-d"));
-    $newComment->__set('id_comp',$idCompany);
-    $newComment->__set('id_user',$idUser);
-    commentsManager::addComment($newComment);
-    unset($newComment);
+    
 }
 
 function getSuccessAlert()

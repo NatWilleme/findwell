@@ -128,7 +128,7 @@
                 <div class="col-12">
                     <p>
                         <img src="<?php if($users[$cpt]->image == "") echo "images/default-profil.jpg"; else echo $users[$cpt]->image; ?>" class="rounded-circle" style="height:40px;width:40px" alt="">
-                        <span class="ms-2 fw-bold"><?php echo $users[$cpt]->username ?></span><br>
+                        <span class="ms-2 fw-bold"><?php echo $users[$cpt]->username; ?></span><br>
                         <?php 
                             for ($i=0; $i < 5; $i++) { 
                                 if($i < $comment->rating){
@@ -140,7 +140,7 @@
                         <?php echo $comment->comment; ?>
                         <?php if ($comment->image != "") {
                             ?>
-                        <br><img class="col-12 col-lg-4" src="<?php echo $comment->image; $cpt++; ?>" style="max-height:500px; max-width: 100%; height:auto; width:auto;" alt="">
+                        <br><img class="col-12 col-lg-4" src="<?php echo $comment->image; ?>" style="max-height:500px; max-width: 100%; height:auto; width:auto;" alt="">
                         <?php } ?>
                     </p>
                 </div>
