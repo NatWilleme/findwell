@@ -54,6 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Findwell est une plateforme communautaire permettant de trouver facilement une entreprise pour vos projets de rénovation ou de construction.">
   <meta name="application-name" content="Findwell">
+  <meta name="facebook-domain-verification" content="47115hi1onuwmaaqzq9k9cr2hopniq" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
