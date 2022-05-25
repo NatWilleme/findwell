@@ -20,18 +20,18 @@ require_once('models/daoFinal/servicesManager.php');
 require_once('models/daoFinal/occasionsManager.php');
 require_once('models/daoFinal/materialsManager.php');
 
-require_once('controllers/controllersFinal/controller_adminPanel.php');
-require_once('controllers/controllersFinal/controller_categoriesList.php');
-require_once('controllers/controllersFinal/controller_companiesList.php');
-require_once('controllers/controllersFinal/controller_companyDetails.php');
-require_once('controllers/controllersFinal/controller_editProfil.php');
-require_once('controllers/controllersFinal/controller_favorites.php');
-require_once('controllers/controllersFinal/controller_home.php');
-require_once('controllers/controllersFinal/controller_login.php');
-require_once('controllers/controllersFinal/controller_search.php');
-require_once('controllers/controllersFinal/controller_display.php');
-require_once('controllers/controllersFinal/controller_contact.php');
-require_once('controllers/controllersFinal/controller_annonce.php');
+require_once('controllers/controller_adminPanel.php');
+require_once('controllers/controller_categoriesList.php');
+require_once('controllers/controller_companiesList.php');
+require_once('controllers/controller_companyDetails.php');
+require_once('controllers/controller_editProfil.php');
+require_once('controllers/controller_favorites.php');
+require_once('controllers/controller_home.php');
+require_once('controllers/controller_login.php');
+require_once('controllers/controller_search.php');
+require_once('controllers/controller_display.php');
+require_once('controllers/controller_contact.php');
+require_once('controllers/controller_annonce.php');
 
 
 try {
@@ -297,7 +297,7 @@ try {
                     }
                     displayAnnonce(notification: $notification, occasions: $occasions);
                 }
-            } else {
+            } else if($_GET['subcategory'] == "materiel") {
                 if(isset($_GET['addMateriel'])){
                     $company = getOneCompanyByMail($_SESSION['user']->mail);
                     if($company->deleted == 0){
@@ -319,8 +319,11 @@ try {
                     $categoriesMaterialsToDisplay = getMaterielCategories();
                     displayAnnonce(notification: $notification, categoriesMaterialsToDisplay: $categoriesMaterialsToDisplay);
                 }
-            }
-            
+            } else if($_GET['subcategory'] == "mission") {
+                if(isset($_GET['action']) && $_GET['action'] == "add"){
+                    
+                } 
+            }            
         } else {
             displayAnnonce($notification);
         }
@@ -377,6 +380,16 @@ try {
             displayContact($notification, $alert);
         } else {
             displayContact($notification);
+        }
+        
+    } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayContactBug'){
+        if(isset($_POST['sendContactBugMail'])){
+            sendContactBugMail();
+            $alert['color'] = "success";
+            $alert['message'] = "Votre message a bien été envoyé à notre service client.";
+            displayContactBug($notification, $alert);
+        } else {
+            displayContactBug($notification);
         }
         
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAboutUs'){
@@ -569,7 +582,7 @@ try {
                         }
                     }
                     CompaniesManager::switchConfirmCompany($company->id);
-                    CompaniesManager::switchCompanyPaid($company->id);
+                    // CompaniesManager::switchCompanyPaid($company->id);
                     sendConfirmationMailToCompanyRegisteredByAdmin($newUser ->mail, $newUser->password);
                     $companies = getAllActiveCompanyWithRatingAndCommentCount();
                     $alert['color'] = "success";

@@ -533,6 +533,80 @@
         </div>        
     </form>
 
+    <?php } else if(!is_null($addMission)){ //Ajout d'une occasion ?>
+
+    <form id="formAddMission" class="mb-3 mt-3" action="index.php?viewToDisplay=displayAnnonce&subcategory=mission&action=add" method="post" enctype='multipart/form-data'>
+        <h3 class="text-center mb-3 fw-bold">Informations sur la mission</h3>
+
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="title">Titre</label>
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Titre de votre annonce" required>
+                                    <p id="errorTitle"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="price">Prix</label>
+                                    <input type="text" class="form-control" name="price" id="price" placeholder="Prix de votre annonce" required>
+                                    <p id="errorPrice"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Description de votre annonce" required></textarea>
+                                    <p id="errorDescription"></p>
+                                </div>
+                            </div>  
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="image">Photo(s) de votre mission</label>
+                                    <input type="file" class="form-control" name="image[]" id="image" accept=".png, .jpg, .jpeg" multiple="multiple" required>
+                                    <p id="errorImage"></p>
+                                </div>
+                            </div>                          
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="region">Region</label>
+                                    <input type="text" class="form-control" name="region" id="region" placeholder="Region où se trouve l'objet" required>
+                                    <p id="errorRegion"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="mail">Adresse mail</label>
+                                    <input type="mail" class="form-control" name="mail" id="mail" placeholder="Adresse mail de contact" required>
+                                    <p id="errorMail"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="phone">Telephone</label>
+                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Numéro de contact" required>
+                                    <p id="errorPhone"></p>
+                                </div>
+                            </div>                            
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter la mission</button>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </form>
+
 <?php } else if(!is_null($categoriesMaterialsToDisplay)){  //Affichage des catégories de matériel ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
     <div class="row d-flex justify-content-around mb-4 mt-4 m-0">
@@ -605,7 +679,7 @@
         <?php }
     } ?>
     <div class="row d-flex justify-content-around mb-4 mt-5 m-0">
-        <div class="card border border-dark pt-2 ms-3 me-3" style="width: 30rem;">
+        <div class="card border border-dark pt-2 col-lg-2 col-10" >
             <img src="images/annonce/service.jpg" class="card-img-top" title="Community vector created by pch.vector">
             <div class="card-body">
                 <h5 class="card-title text-center fs-3">Entraide collaborative</h5>
@@ -617,7 +691,7 @@
             </form>
         </div>
         
-        <div class="card border border-dark pt-2 ms-3 me-3" style="width: 30rem;">
+        <div class="card border border-dark pt-2 col-lg-2 col-10" >
             <img src="images/annonce/outils.jpg" class="card-img-top" title="Hardware store vector created by pch.vector">
             <div class="card-body">
                 <h5 class="card-title text-center fs-3">Vente d'outils d'occasion</h5>
@@ -629,7 +703,7 @@
             </form>
         </div>
 
-        <div class="card border border-dark pt-2 ms-3 me-3" style="width: 30rem;">
+        <div class="card border border-dark pt-2 col-lg-2 col-10" >
             <img src="images/annonce/materiel.jpg" class="card-img-top" title="Dad teaching his son carpentry created by pch.vector">
             <div class="card-body">
                 <h5 class="card-title text-center fs-3">Vente de matériaux</h5>
@@ -637,6 +711,18 @@
             <form id="formAccess" action="index.php" method="get">
                 <input type="text" name="viewToDisplay" value="displayAnnonce" class="d-none">
                 <input type="text" name="subcategory" value="materiel" class="d-none">
+                <button class="btn btn-primary mb-2 col-12">Accéder</button>
+            </form>
+        </div>
+
+        <div class="card border border-dark pt-2 col-lg-2 col-10" >
+            <img src="images/annonce/mission.jpg" class="card-img-top" title="Offre de mission">
+            <div class="card-body">
+                <h5 class="card-title text-center fs-3">Offre de mission</h5>
+            </div>
+            <form id="formAccess" action="index.php" method="get">
+                <input type="text" name="viewToDisplay" value="displayAnnonce" class="d-none">
+                <input type="text" name="subcategory" value="mission" class="d-none">
                 <button class="btn btn-primary mb-2 col-12">Accéder</button>
             </form>
         </div>

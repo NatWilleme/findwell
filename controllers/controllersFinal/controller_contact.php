@@ -9,4 +9,14 @@ function sendContactMail()
     require "models/sendEmail.php";
 }
 
+function sendContactBugMail()
+{
+    $mailTo = "nathanwilleme@gmail.com";
+    $object = "BUG FINDWELL";
+    $content = "Vous avez un nouveau message de : ". $_POST['mail']. "<br><i>";
+    $content .= $_POST['message']. "</i>";
+    require "models/sendEmail.php";
+}
+
+
 ?>

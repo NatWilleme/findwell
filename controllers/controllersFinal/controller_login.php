@@ -22,10 +22,15 @@ function registerNewCompany($newUser, $newCompany){
     $user = UsersManager::checkIfExist($newUser->mail);
     if($user['count'] == 0){
         $operationSuccess1 = UsersManager::addUserWithFullInformation($newUser);
-        $operationSuccess2 = companiesManager::addCompany($newCompany);
-        if($operationSuccess1 && $operationSuccess2){
-            $alert['color'] = "success";
-            $alert['message'] = "Vérifier vos mails afin de finaliser votre inscription.";
+        if($operationSuccess1){
+            $operationSuccess2 = companiesManager::addCompany($newCompany);
+            if($operationSuccess2){
+                $alert['color'] = "success";
+                $alert['message'] = "Vérifier vos mails afin de finaliser votre inscription.";
+            } else{
+                $alert['color'] = "danger";
+                $alert['message'] = "Votre insription a échoué.";
+            }
         } else{
             $alert['color'] = "danger";
             $alert['message'] = "Votre insription a échoué.";

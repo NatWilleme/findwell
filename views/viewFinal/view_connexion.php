@@ -33,6 +33,7 @@
                 <p id="errorPwd"></p>
             </div>
             <div class="mb-2"><a href="index.php?viewToDisplay=displayConnexion&pwdforget=1">Mot de passe oublié ?</a></div>
+            <div class="mb-2"><a href="index.php?viewToDisplay=displayContactBug">Un problème pour se connecter ou un bug à signaler?</a></div>
 
             <button class="w-100 btn btn-lg btn-primary" name="submitConnexion" type="submit">Se connecter</button>
         </form>
