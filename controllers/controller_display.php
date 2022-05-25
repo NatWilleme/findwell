@@ -69,10 +69,6 @@ function displayContact($notification, $alert = ''){
     require_once('views/view_contact.php');
 }
 
-function displayContactBug($notification, $alert = ''){
-    require_once('views/view_contactBug.php');
-}
-
 function displayAboutUs($notification){
     require_once('views/view_aboutUs.php');
 }
