@@ -184,14 +184,14 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Description de l'entreprise..." required><?php echo $company->description; ?></textarea>
+                                    <textarea class="form-control" name="description" id="description" cols="30" rows="10" maxlength="999" placeholder="Description de l'entreprise..." required><?php echo $company->description; ?></textarea>
                                     <p id="errorDescription"></p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="hours">Heures d'ouverture</label>
-                                    <textarea class="form-control" name="hours" id="hours" cols="30" rows="10" placeholder="Heures d'ouverture de l'entreprise..." required><?php echo $company->hours; ?></textarea>
+                                    <textarea class="form-control" name="hours" id="hours" cols="30" rows="10" maxlength="999" placeholder="Heures d'ouverture de l'entreprise..." required><?php echo $company->hours; ?></textarea>
                                     <p id="errorHours"></p>
                                 </div>
                             </div>

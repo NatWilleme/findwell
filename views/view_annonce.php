@@ -232,7 +232,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="image">Photo(s) de votre service</label>
-                                    <input type="file" class="form-control" name="image[]" id="image" accept=".png, .jpg, .jpeg" multiple="multiple" value="<?php echo $serviceToEdit->imageService; ?>" required>
+                                    <input type="file" class="form-control" name="image[]" id="image" accept=".png, .jpg, .jpeg" multiple="multiple" value="<?php echo $serviceToEdit->imageService; ?>">
                                     <p id="errorImage"></p>
                                 </div>
                             </div>                          
@@ -288,6 +288,7 @@
             <thead>
                 <tr>
                     <th scope="col">Image</th>
+                    <th scope="col">Titre</th>
                     <th scope="col">Description</th>
                     <th scope="col">Prix</th>
                     <th scope="col"></th>
@@ -298,6 +299,7 @@
                 <tr>
                     <td><img src="<?php echo $occasion->imageOccasion[0]; ?>" style="max-width: 200px; max-height: 200px;" alt=""></td>
                     <td><?php echo $occasion->title; ?></td>
+                    <td><?php echo $occasion->description; ?></td>
                     <td><b><?php echo $occasion->price; ?> €</b></td>
                     <td>
                         <form action="index.php" method="get">
@@ -321,6 +323,7 @@
             <thead>
                 <tr>
                     <th scope="col">Image</th>
+                    <th scope="col">Titre</th>
                     <th scope="col">Description</th>
                     <th scope="col">Prix</th>
                     <th scope="col"></th>
@@ -331,6 +334,7 @@
                 <tr>
                     <td><img src="<?php echo $occasion->imageOccasion[0]; ?>" style="max-width: 200px; max-height: 200px;" alt=""></td>
                     <td><?php echo $occasion->title; ?></td>
+                    <td><?php echo $occasion->description; ?></td>
                     <td><b><?php echo $occasion->price; ?> €</b></td>
                     <td>
                         <form action="index.php" method="get">
@@ -383,6 +387,83 @@
             <label for="phone"><b>Mail:</b> </label>
             <p id="phone" class="d-inline"><?php echo $occasionToDisplay->mail; ?></p>
         </div>
+    </div>
+
+<?php } else if(!is_null($missionToDisplay)){ ?>
+    <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
+    <?php if(isset($_SESSION['user']) && $missionToDisplay->idUser == $_SESSION['user']->id){ ?>
+        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&displayEdit=<?php echo $missionToDisplay->id; ?>" class="btn btn-primary col-10 offset-1 col-lg-3">Editer la mission</a>
+        <a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&delete=<?php echo $missionToDisplay->id; ?>" class="btn btn-danger col-10 offset-2 col-lg-3">Supprimer la mission</a>
+    <?php } ?>
+    <div class="d-flex row justify-content-around mt-4">
+        <div class="col-12 col-lg-5">
+            <!-- Gallerie photo -->
+            <!-- Photo principale -->
+            <div class="main_view text-center">
+                <img class="img-fluid" src="<?php echo $missionToDisplay->images[0]; ?>" id="main" alt="IMAGE" >
+            </div>
+    
+            <!-- Photo en miniature en dessous -->
+            <div class="side_view">
+                <?php foreach ($missionToDisplay->images as $image) { ?>
+                    <img src="<?php echo $image; ?>" onclick="change(this.src)">
+                <?php } ?>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5">
+            <h6>Publié <?php if($missionToDisplay->date == 0) echo "aujourd'hui"; else if($missionToDisplay->date == 1) echo "il y a ".$missionToDisplay->date." jour"; else echo "il y a ".$missionToDisplay->date." jours" ?> à <?php echo $missionToDisplay->region; ?></h6>
+            <h1><b><?php echo $missionToDisplay->title; ?></b></h1>
+            <h4><?php echo $missionToDisplay->price; ?> €</h4>
+            
+            <h4><b>Détails :</b></h4>
+            <p><?php echo $missionToDisplay->description; ?></p>
+            <h4><b>Type de batiment :</b></h4>
+            <p><?php echo $missionToDisplay->buildingType; ?></p>
+            <h4><b>Accessibilité :</b></h4>
+            <p><?php echo $missionToDisplay->accessibility; ?></p>
+            <h4><b>Information sur l'entreprise :</b></h4>
+            <div>
+                <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $missionToDisplay->idCompany; ?>">
+                    <img src="<?php echo $missionToDisplay->imageUser; ?>" class="rounded-circle" alt="profil" style="width: 60px;" id="profil">
+                    <label for="profil" class="ms-3" style="cursor: pointer;"><b><?php echo $missionToDisplay->username; ?></b></label>
+                </a>
+            </div>
+            <label for="phone"><b>Téléphone:</b> </label>
+            <p id="phone" class="d-inline"><?php echo $missionToDisplay->phone; ?></p>
+            <br>
+            <label for="phone"><b>Mail:</b> </label>
+            <p id="phone" class="d-inline"><?php echo $missionToDisplay->mailMission; ?></p>
+        </div>
+    </div>
+<?php } else if(!is_null($missionsOfUser)){ //Occasions d'un utilisateur spécifique ?>
+    <div class="col-10 offset-1 mt-4 table-responsive">
+        <?php if(isConnected()){ ?>
+        <a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&action=displayAdd" class="btn btn-primary col-2">Ajouter une mission</a>
+        <?php } ?>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($missionsOfUser as $mission) { ?>
+                <tr>
+                    <td><img src="<?php echo $mission->images[0]; ?>" style="max-width: 200px; max-height: 200px;" alt=""></td>
+                    <td><?php echo $mission->title; ?></td>
+                    <td><?php echo $mission->description; ?></td>
+                    <td><b><?php echo $mission->price; ?> €</b></td>
+                    <td>
+                        <a class="btn btn-primary" href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&idMission=<?php echo $mission->id; ?>">Accéder</a>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
     </div>
 <?php } else if(!is_null($addOccasion)){ //Ajout d'une occasion ?>
 
@@ -495,7 +576,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="image">Photo(s) de votre annonce</label>
-                                    <input type="file" class="form-control" name="image[]" id="image" accept=".png, .jpg, .jpeg" multiple="multiple" required>
+                                    <input type="file" class="form-control" name="image[]" id="image" accept=".png, .jpg, .jpeg" multiple="multiple">
                                     <p id="errorImage"></p>
                                 </div>
                             </div>                          
@@ -546,14 +627,14 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="title">Titre</label>
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="Titre de votre annonce" required>
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Titre de la mission" required>
                                     <p id="errorTitle"></p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="price">Prix</label>
-                                    <input type="text" class="form-control" name="price" id="price" placeholder="Prix de votre annonce" required>
+                                    <input type="text" class="form-control" name="price" id="price" placeholder="Récompense de la mission" required>
                                     <p id="errorPrice"></p>
                                 </div>
                             </div>
@@ -562,13 +643,13 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Description de votre annonce" required></textarea>
+                                    <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Description détaillée de la mission. N'hésitez pas à mentionner le plus d'informations possibles, que ce soit le nombre de m² à couvrir, une liste des tâches à faire, etc." required></textarea>
                                     <p id="errorDescription"></p>
                                 </div>
                             </div>  
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="image">Photo(s) de votre mission</label>
+                                    <label for="image">Photos liées à la mission (photo du lieu, plan, devis, etc)</label>
                                     <input type="file" class="form-control" name="image[]" id="image" accept=".png, .jpg, .jpeg" multiple="multiple" required>
                                     <p id="errorImage"></p>
                                 </div>
@@ -577,13 +658,28 @@
                         <div class="row gutters">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="region">Region</label>
-                                    <input type="text" class="form-control" name="region" id="region" placeholder="Region où se trouve l'objet" required>
+                                    <label for="region">Région</label>
+                                    <input type="text" class="form-control" name="region" id="region" placeholder="Région où la mission doit être effectuée" required>
+                                    <p id="errorRegion"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="region">Type de batiment</label>
+                                    <input type="text" class="form-control" name="buildingType" id="buildingType" placeholder="Maison, appartement ou autre" required>
                                     <p id="errorRegion"></p>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="accessibility">Accessibilité</label>
+                                    <textarea class="form-control" name="accessibility" id="accessibility" cols="30" rows="10" placeholder="Détails sur l'accessibilité du lieu pendant les travaux. (Passage sur le côté, présence d'une garage, passage par la maison, etc.)"></textarea>
+                                </div>
+                            </div>                           
+                        </div>
                         <div class="row gutters">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
@@ -607,6 +703,94 @@
         </div>        
     </form>
 
+<?php } else if(!is_null($missionToEdit) && $editPermission){ //Modification d'une mission ?>
+
+    <form id="formEditMission" class="mb-3 mt-3" action="index.php?viewToDisplay=displayAnnonce&subcategory=mission&action=edit&idMission=<?php echo $missionToEdit->id; ?>" method="post" enctype='multipart/form-data'>
+        <h3 class="text-center mb-3 fw-bold">Informations sur la mission</h3>
+
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="title">Titre</label>
+                                    <input type="text" class="form-control" id="title" name="title" value="<?php echo $missionToEdit->title; ?>" placeholder="Titre de la mission" required>
+                                    <p id="errorTitle"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="price">Prix</label>
+                                    <input type="text" class="form-control" name="price" id="price" value="<?php echo $missionToEdit->price; ?>" placeholder="Récompense de la mission" required>
+                                    <p id="errorPrice"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Description détaillée de la mission. N'hésitez pas à mentionner le plus d'informations possibles, que ce soit le nombre de m² à couvrir, une liste des tâches à faire, etc." required><?php echo $missionToEdit->description; ?></textarea>
+                                    <p id="errorDescription"></p>
+                                </div>
+                            </div>  
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="image">Photos liées à la mission (photo du lieu, plan, devis, etc)</label>
+                                    <input type="file" class="form-control" name="image[]" id="image" accept=".png, .jpg, .jpeg" multiple="multiple">
+                                    <p id="errorImage"></p>
+                                </div>
+                            </div>                          
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="region">Région</label>
+                                    <input type="text" class="form-control" name="region" id="region" value="<?php echo $missionToEdit->region; ?>" placeholder="Région où la mission doit être effectuée" required>
+                                    <p id="errorRegion"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="region">Type de batiment</label>
+                                    <input type="text" class="form-control" name="buildingType" id="buildingType" value="<?php echo $missionToEdit->buildingType; ?>" placeholder="Maison, appartement ou autre" required>
+                                    <p id="errorRegion"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="accessibility">Accessibilité</label>
+                                    <textarea class="form-control" name="accessibility" id="accessibility" cols="30" rows="10"  placeholder="Détails sur l'accessibilité du lieu pendant les travaux. (Passage sur le côté, présence d'une garage, passage par la maison, etc.)"><?php echo $missionToEdit->accessibility; ?></textarea>
+                                </div>
+                            </div>                           
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="mail">Adresse mail</label>
+                                    <input type="mail" class="form-control" name="mailMission" id="mailMission" value="<?php echo $missionToEdit->mailMission; ?>" placeholder="Adresse mail de contact" required>
+                                    <p id="errorMail"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="phone">Telephone</label>
+                                    <input type="text" class="form-control" name="phone" id="phone" value="<?php echo $missionToEdit->phone; ?>" placeholder="Numéro de contact" required>
+                                    <p id="errorPhone"></p>
+                                </div>
+                            </div>                            
+                        </div>
+                        <button type="submit" class="btn btn-primary">Modifier la mission</button>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </form>
 <?php } else if(!is_null($categoriesMaterialsToDisplay)){  //Affichage des catégories de matériel ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
     <div class="row d-flex justify-content-around mb-4 mt-4 m-0">
@@ -655,6 +839,36 @@
                 </p>
             </div>
             <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $company->id; ?>" class="btn btn-primary mb-2">Accéder</a>
+        </div>          
+        <?php }} ?>
+    </div>
+    </div>
+<?php } else if(!is_null($missionsToDisplay)){  //Affichage des missions ?>
+    <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
+    <?php if(isset($_SESSION['user']) && $_SESSION['user']->type == "company"){?>
+        <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&action=displayAdd" class="btn btn-primary col-10 offset-1 col-lg-3">Ajouter une mission</a>
+    <?php } ?>
+    <div class="row d-flex justify-content-around mb-4 mt-4 m-0">
+    <?php
+        $cpt = 0;
+        if(sizeof($missionsToDisplay) == 0){
+            echo "<h3>Il n'y a pas encore de missions disponibles!</h3>";
+        } else {
+        foreach ($missionsToDisplay as $mission) {
+    ?>
+            
+        <div class="card border border-dark pt-2 ms-3 me-3" style="width: 18rem;">
+            <img src="<?php echo $mission->images[0]; ?>" style="max-height:200px; max-width:280px; height:auto; width:auto;" class="card-img-top" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><b><?php echo $mission->title; ?></b></h5>
+                <p class="card-text">
+                    <b>Région: </b><?php echo $mission->region; ?>
+                </p>
+                <p class="card-text">
+                    <b>Description: <br></b><?php if(strlen($mission->description) > 100) echo substr($mission->description,0,100).'...'; else echo $mission->description ; ?>
+                </p>
+            </div>
+            <a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&idMission=<?php echo $mission->id; ?>" class="btn btn-primary mb-2">Consulter</a>
         </div>          
         <?php }} ?>
     </div>

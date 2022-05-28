@@ -97,7 +97,7 @@
               </span>
             <?php } ?>
             <img class="rounded" src="<?php if ($_SESSION['user']->image != "") echo $_SESSION['user']->image;
-                                      else echo "images/upload/photos_profils/default-profil.jpg" ?>" alt="profil" style="width: 50px;">
+                                            else echo "images/upload/photos_profils/default-profil.jpg" ?>" alt="profil" style="width: 50px;">
           </button>
           <ul class="dropdown-menu shadow" style="transform: translate3d(-60px, 0px, 0px);" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayEditProfil">Mes informations <i class="bi bi-info-circle-fill text-secondary"></i></a></li>
@@ -107,6 +107,7 @@
             <?php } ?>
             <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item dropdown-item-color">Mes occasions</a></li>
             <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item dropdown-item-color">Mes services</a></li>
+            <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item dropdown-item-color">Mes offres de mission</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -238,6 +239,7 @@
               <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=service">Entraide collaborative</a></li>
               <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion">Vente d'outils d'occasion</a></li>
               <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel">Vente de matériaux</a></li>
+              <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=mission">Offre de mission</a></li>
             </ul>
           </li>
         </ul>

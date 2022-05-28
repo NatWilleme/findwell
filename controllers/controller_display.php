@@ -23,7 +23,8 @@ function displayCompaniesList($companies, $notification, $sort) {
 function displayAnnonce($notification, $categoriesServiceToDisplay = null, $occasions = null, $occasionToDisplay = null, $servicesToDisplay = null,
                         $serviceToDisplay = null, $categoriesMaterialsToDisplay = null, $addOccasion = null,
                         $addService = null, $categoriesService = null, $servicesOfUser = null, $occasionsOfUser = null, $serviceToEdit = null, $editPermission = null,
-                        $occasionToEdit = null, $companiesMaterialToDisplay = null, $addMission = null)
+                        $occasionToEdit = null, $companiesMaterialToDisplay = null, $addMission = null, $missionsToDisplay = null, $missionToDisplay = null, $missionToEdit = null,
+                        $missionsOfUser = null)
 {
     require_once('views/view_annonce.php');
 }
@@ -67,6 +68,10 @@ function displayPayment($notification){
 
 function displayContact($notification, $alert = ''){
     require_once('views/view_contact.php');
+}
+
+function displayContactBug($notification, $alert = ''){
+    require_once('views/view_contactBug.php');
 }
 
 function displayAboutUs($notification){

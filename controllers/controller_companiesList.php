@@ -64,5 +64,10 @@ function getOneCompanyByMail($mail)
     return CompaniesManager::getOneCompanyByMail($mail);
 }
 
+function getIdCompanyFromMail($mail)
+{
+    return CompaniesManager::getIdCompanyFromMail($mail);
+}
+
 
 ?>

@@ -170,6 +170,23 @@ abstract class CompaniesManager extends DBManager{
         return $company;
     }
 
+    static public function getIdCompanyFromMail($mail){
+        $sql = "SELECT id_comp FROM companies WHERE mail_comp=:mail_comp";
+        try {
+            $pdo_connexion = parent::connexionDB();
+            $pdo_statement = $pdo_connexion->prepare($sql);
+            $pdo_statement->execute(array(':mail_comp' => $mail));
+            $elem = $pdo_statement->fetch(PDO::FETCH_ASSOC);
+            $idCompany = $elem["id_comp"];
+        } catch (Exception $e) {
+            die($e->getMessage());
+        } finally{
+            $pdo_statement->closeCursor();
+            $pdo_statement = null;
+        }
+        return $idCompany;
+    }
+
     static public function getAllActiveCompanies(){
         $result = array();
         $sql = "SELECT * FROM companies WHERE certified_comp = 1 AND deleted_comp = 0";

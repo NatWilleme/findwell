@@ -81,4 +81,35 @@ function getMaterialsForCategories(string $category){
 function getAllMaterials(){
     return MaterialsManager::getAllMaterials();
 }
+
+function getAllMissions()
+{
+    return MissionsManager::getAllMissions();
+}
+
+function addMission(Mission $newMission)
+{
+    if(!is_null($newMission->title) && !is_null($newMission->description) && !is_null($newMission->price) && !is_null($newMission->region) && (!is_null($newMission->phone) || !is_null($newMission->mail))){
+        MissionsManager::addMission($newMission);
+    }
+}
+
+function getMissionByID(int $id){
+    return MissionsManager::getMissionByID($id);
+}
+
+function editMission(Mission $editedMission)
+{
+    MissionsManager::editMission($editedMission);
+}
+
+function deleteMission(int $id)
+{
+    MissionsManager::deleteMission($id);
+}
+
+function getAllMissionsOfUser(int $idUser)
+{
+    return MissionsManager::getAllMissionsOfUser($idUser);
+}
 ?>

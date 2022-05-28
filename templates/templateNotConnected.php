@@ -220,6 +220,7 @@
               <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=service">Entraide collaborative</a></li>
               <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion">Vente d'outils d'occasion</a></li>
               <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel">Vente de matériaux</a></li>
+              <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=mission">Offre de mission</a></li>
             </ul>
           </li>
         </ul>
