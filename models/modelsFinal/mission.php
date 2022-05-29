@@ -17,6 +17,8 @@ class Mission{
     private $imageUser;
     private $buildingType;
     private $accessibility;
+    private $accepted;
+    private $acceptPending;
 
     // Magic method get
     public function __get($value){   

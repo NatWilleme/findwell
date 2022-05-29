@@ -90,9 +90,9 @@
 
         <div class="dropdown pe-3">
           <button class="btn dropdown-toggle position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <?php if ($_SESSION['user']->type == "admin" && $notification != 0) { ?>
+            <?php if ($_SESSION['user']->type == "admin" && $notification['total'] != 0) { ?>
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                <?php echo $notification; ?>
+                <?php echo $notification['total']; ?>
                 <span class="visually-hidden">Entreprise à confirmer</span>
               </span>
             <?php } ?>
@@ -103,11 +103,13 @@
             <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayEditProfil">Mes informations <i class="bi bi-info-circle-fill text-secondary"></i></a></li>
             <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayFavorite">Mes favoris <i class="bi bi-star-fill text-warning"></i></a></li>
             <?php if ($_SESSION['user']->type == "admin") { ?>
-              <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAdminPanel">Gestion du site <?php if ($notification != 0) { ?><span class="badge bg-primary"><?php echo $notification; ?></span><?php } else { ?><i class="bi bi-gear-fill"></i><?php } ?></a></li>
+              <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAdminPanel">Gestion du site <?php if ($notification['total'] != 0) { ?><span class="badge bg-primary"><?php echo $notification['total']; ?></span><?php } else { ?><i class="bi bi-gear-fill"></i><?php } ?></a></li>
             <?php } ?>
             <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item dropdown-item-color">Mes occasions</a></li>
             <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=service&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item dropdown-item-color">Mes services</a></li>
-            <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item dropdown-item-color">Mes offres de mission</a></li>
+            <?php if($_SESSION['user']->type != "user"){ ?>
+              <li><a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&idUser=<?php echo $_SESSION['user']->id; ?>" class="dropdown-item dropdown-item-color">Mes offres de mission</a></li>
+            <?php } ?>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -239,7 +241,9 @@
               <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=service">Entraide collaborative</a></li>
               <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=occasion">Vente d'outils d'occasion</a></li>
               <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=materiel">Vente de matériaux</a></li>
-              <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=mission">Offre de mission</a></li>
+              <?php if($_SESSION['user']->type != "user"){ ?>
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=mission">Offre de mission</a></li>
+              <?php } ?>
             </ul>
           </li>
         </ul>

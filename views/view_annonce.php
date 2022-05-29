@@ -391,7 +391,7 @@
 
 <?php } else if(!is_null($missionToDisplay)){ ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
-    <?php if(isset($_SESSION['user']) && $missionToDisplay->idUser == $_SESSION['user']->id){ ?>
+    <?php if(isset($_SESSION['user']) && ($missionToDisplay->idUser == $_SESSION['user']->id || $_SESSION['user']->type == "admin")){ ?>
         <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&displayEdit=<?php echo $missionToDisplay->id; ?>" class="btn btn-primary col-10 offset-1 col-lg-3">Editer la mission</a>
         <a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&delete=<?php echo $missionToDisplay->id; ?>" class="btn btn-danger col-10 offset-2 col-lg-3">Supprimer la mission</a>
     <?php } ?>
@@ -411,28 +411,32 @@
             </div>
         </div>
         <div class="col-12 col-lg-5">
-            <h6>Publié <?php if($missionToDisplay->date == 0) echo "aujourd'hui"; else if($missionToDisplay->date == 1) echo "il y a ".$missionToDisplay->date." jour"; else echo "il y a ".$missionToDisplay->date." jours" ?> à <?php echo $missionToDisplay->region; ?></h6>
+            <h6>Publié <?php if($missionToDisplay->date == 0) echo "aujourd'hui"; else if($missionToDisplay->date == 1) echo "il y a ".$missionToDisplay->date." jour"; else echo "il y a ".$missionToDisplay->date." jours" ?></h6>
             <h1><b><?php echo $missionToDisplay->title; ?></b></h1>
-            <h4><?php echo $missionToDisplay->price; ?> €</h4>
+            <h4><b>Région :</b> <?php echo $missionToDisplay->region; ?></h4>
+            <h4><b>Offre :</b> <?php echo $missionToDisplay->price; ?> €</h4>
             
             <h4><b>Détails :</b></h4>
             <p><?php echo $missionToDisplay->description; ?></p>
-            <h4><b>Type de batiment :</b></h4>
-            <p><?php echo $missionToDisplay->buildingType; ?></p>
+            <h4><b>Type de batiment :</b> <?php echo $missionToDisplay->buildingType; ?></h4>
             <h4><b>Accessibilité :</b></h4>
             <p><?php echo $missionToDisplay->accessibility; ?></p>
-            <h4><b>Information sur l'entreprise :</b></h4>
-            <div>
-                <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $missionToDisplay->idCompany; ?>">
-                    <img src="<?php echo $missionToDisplay->imageUser; ?>" class="rounded-circle" alt="profil" style="width: 60px;" id="profil">
-                    <label for="profil" class="ms-3" style="cursor: pointer;"><b><?php echo $missionToDisplay->username; ?></b></label>
-                </a>
-            </div>
-            <label for="phone"><b>Téléphone:</b> </label>
-            <p id="phone" class="d-inline"><?php echo $missionToDisplay->phone; ?></p>
-            <br>
-            <label for="phone"><b>Mail:</b> </label>
-            <p id="phone" class="d-inline"><?php echo $missionToDisplay->mailMission; ?></p>
+            <?php if($_SESSION['user']->type == "admin"){ ?>
+                <h4><b>Information sur l'entreprise :</b></h4>
+                <div>
+                    <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $missionToDisplay->idCompany; ?>">
+                        <img src="<?php echo $missionToDisplay->imageUser; ?>" class="rounded-circle" alt="profil" style="width: 60px;" id="profil">
+                        <label for="profil" class="ms-3" style="cursor: pointer;"><b><?php echo $missionToDisplay->username; ?></b></label>
+                    </a>
+                </div>
+                <label for="phone"><b>Téléphone:</b> </label>
+                <p id="phone" class="d-inline"><?php echo $missionToDisplay->phone; ?></p>
+                <br>
+                <label for="phone"><b>Mail:</b> </label>
+                <p id="phone" class="d-inline"><?php echo $missionToDisplay->mailMission; ?></p>
+            <?php } else { ?>
+                <h4><b>Si vous êtes intéressé, veuilliez nous contacter par mail : contact@findwell.be</b></h4>
+            <?php } ?>
         </div>
     </div>
 <?php } else if(!is_null($missionsOfUser)){ //Occasions d'un utilisateur spécifique ?>
@@ -928,18 +932,19 @@
                 <button class="btn btn-primary mb-2 col-12">Accéder</button>
             </form>
         </div>
-
-        <div class="card border border-dark pt-2 col-lg-2 col-10" >
-            <img src="images/annonce/mission.jpg" class="card-img-top" title="Offre de mission">
-            <div class="card-body">
-                <h5 class="card-title text-center fs-3">Offre de mission</h5>
+        <?php if(isset($_SESSION['user']) && $_SESSION['user']->type == "company"){ ?>
+            <div class="card border border-dark pt-2 col-lg-2 col-10" >
+                <img src="images/annonce/mission.jpg" class="card-img-top" title="Offre de mission">
+                <div class="card-body">
+                    <h5 class="card-title text-center fs-3">Offre de mission</h5>
+                </div>
+                <form id="formAccess" action="index.php" method="get">
+                    <input type="text" name="viewToDisplay" value="displayAnnonce" class="d-none">
+                    <input type="text" name="subcategory" value="mission" class="d-none">
+                    <button class="btn btn-primary mb-2 col-12">Accéder</button>
+                </form>
             </div>
-            <form id="formAccess" action="index.php" method="get">
-                <input type="text" name="viewToDisplay" value="displayAnnonce" class="d-none">
-                <input type="text" name="subcategory" value="mission" class="d-none">
-                <button class="btn btn-primary mb-2 col-12">Accéder</button>
-            </form>
-        </div>
+        <?php } ?>
     </div>
     <?php } ?>
 </div>

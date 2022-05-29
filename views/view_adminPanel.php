@@ -10,9 +10,11 @@
     <div class="row d-flex mt-5 align-items-center">
         <div class="col-12 col-lg-6">
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companies">Gérer les entreprises certifiées</a><br>
-            <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises en attente de certification <?php if($notification != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification; ?></span> <?php } ?></a><br>
+            <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises en attente de certification <?php if($notification['company'] != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification['company']; ?></span> <?php } ?></a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=ads">Gérer les publicités</a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=users">Gérer les utilisateurs</a><br>
+            <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=missionsInAcceptPending">Gérer les missions en attente d'approbation<?php if($notification['mission'] != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification['mission']; ?></span> <?php } ?></a><br>
+            <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=missions">Gérer les missions en cours</a><br>
             <a class="btn btn-warning p-3 col-12 fw-bold" target="_blank" rel="noopener noreferrer" href="https://analytics.google.com/analytics/web/#/p286595337/realtime/overview?params=_u..nav%3Dmaui">Accéder aux statistiques</a>
         </div>
         <div class="col-1"></div>
@@ -448,6 +450,67 @@
                 
             </div>
         </form>
+    <?php } ?>
+
+    <?php if(isset($missionsToBeAccepted) ){ ?>
+    <div class="table-responsive mb-5">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Entreprise</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Description</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Afficher</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($missionsToBeAccepted as $mission) { ?>
+            <tr>
+            <td><?php echo $mission->username; ?></td>
+            <td><?php echo $mission->title; ?></td>
+            <td><?php echo $mission->description; ?></td>
+            <td><?php echo $mission->price; ?></td>
+            <td>
+                <a class="btn btn-primary" href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&idMission=<?php echo $mission->id; ?>"><i class="bi bi-eye-fill"></i></a> 
+                <a class="btn btn-success" href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&idMission=<?php echo $mission->id; ?>&accept=true"><i class="bi bi-check-lg"></i></a> 
+            </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    </div>
+    <?php } ?>
+
+    <?php if(isset($missionsAccepted) ){ ?>
+    <div class="table-responsive mb-5">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Entreprise</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Description</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Afficher</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($missionsAccepted as $mission) { ?>
+            <tr>
+            <td><?php echo $mission->username; ?></td>
+            <td><?php echo $mission->title; ?></td>
+            <td><?php echo $mission->description; ?></td>
+            <td><?php echo $mission->price; ?></td>
+            <td>
+                <a class="btn btn-primary" href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&idMission=<?php echo $mission->id; ?>"><i class="bi bi-eye-fill"></i></a> 
+            </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    </div>
     <?php } ?>
 
     <?php if(isset($users)){ ?>

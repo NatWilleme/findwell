@@ -39,7 +39,9 @@ require_once('controllers/controller_annonce.php');
 try {
 
     openOrRefreshSession();
-    $notification = 0;
+    $notification['company'] = 0;
+    $notification['mission'] = 0;
+    $notification['total'] = 0;
     $alert = null;
     if(isset($_GET['disconnect'])){
         unset($_COOKIE['userConnected']);
@@ -48,10 +50,15 @@ try {
         homePage($notification);
     }
     if(isConnected()){
-        $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
+        $notification['company'] += sizeof(companiesManager::getAllCompaniesToBeConfirmed());
+        $notification['mission'] += sizeof(getAllMissionsInAcceptPending());
+        $notification['total'] += $notification['company'] + $notification['mission'];
+
     } else if(isset($_POST['submitConnexion'])){
         if(connectUser($_POST['mail'], $_POST['password'])){
-            $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
+            $notification['company'] += sizeof(companiesManager::getAllCompaniesToBeConfirmed());
+            $notification['mission'] += sizeof(getAllMissionsInAcceptPending());
+            $notification['total'] += $notification['company'] + $notification['mission'];
             homePage($notification);
         } else {
             $alert['color'] = "danger";
@@ -379,7 +386,7 @@ try {
 
                         $company = getOneCompanyByMail($_SESSION['user']->mail);
                         $oldMission = getMissionByID($_GET['idMission']);
-                        if($company->deleted == 0 && $_SESSION['user']->type == "company" && $_SESSION['user']->id == $oldMission->idUser){
+                        if($_SESSION['user']->type == "admin" || ($company->deleted == 0 && $_SESSION['user']->type == "company" && $_SESSION['user']->id == $oldMission->idUser)){
                             
                             $editedMission = new Mission();
                             $values = array(
@@ -423,33 +430,51 @@ try {
                         displayAnnonce(notification: $notification);
 
                     }   
-                } else if(isset($_GET['idUser']) && $_SESSION['user']->id == $_GET['idUser']){ 
+                } else if(isset($_GET['idUser']) && ($_SESSION['user']->type == "admin" || $_SESSION['user']->id == $_GET['idUser'])){ 
                     $missionsOfUser = getAllMissionsOfUser($_GET['idUser']);
                     displayAnnonce(notification: $notification, missionsOfUser: $missionsOfUser);
                 } else if(isset($_GET['idMission'])){
-                    $missionToDisplay = getMissionByID($_GET['idMission']);
-                    $datetime1 = new DateTime(date("Y/m/d"));
-                    $datetime2 = new DateTime($missionToDisplay->date);
-                    $missionToDisplay->date = $datetime1->diff($datetime2)->format('%d');
-                    $missionToDisplay->idCompany = getIdCompanyFromMail($missionToDisplay->mailCompany);
-                    displayAnnonce(notification: $notification, missionToDisplay: $missionToDisplay);
+                    if(isset($_GET['accept']) && $_GET['accept'] == "true" && $_SESSION['user']->type == "admin"){
+                        switchAcceptedMission($_GET['idMission']);
+                        header("location: index.php?viewToDisplay=displayAdminPanel&view=missionsInAcceptPending");
+                    } else {
+                        $missionToDisplay = getMissionByID($_GET['idMission']);
+                        if($missionToDisplay->acceptPending == 1){
+                            if($_SESSION['user']->type == "admin"){
+                                $datetime1 = new DateTime(date("Y/m/d"));
+                                $datetime2 = new DateTime($missionToDisplay->date);
+                                $missionToDisplay->date = $datetime1->diff($datetime2)->format('%d');
+                                $missionToDisplay->idCompany = getIdCompanyFromMail($missionToDisplay->mailCompany);
+                                displayAnnonce(notification: $notification, missionToDisplay: $missionToDisplay);
+                            } else {
+                                header("Location: index.php");
+                            }
+                        } else {
+                            $datetime1 = new DateTime(date("Y/m/d"));
+                            $datetime2 = new DateTime($missionToDisplay->date);
+                            $missionToDisplay->date = $datetime1->diff($datetime2)->format('%d');
+                            $missionToDisplay->idCompany = getIdCompanyFromMail($missionToDisplay->mailCompany);
+                            displayAnnonce(notification: $notification, missionToDisplay: $missionToDisplay);
+                        }
+                    }
+                    
                 } else if(isset($_GET['delete'])){
                     $missionToDelete = getMissionByID($_GET['delete']);
-                    if($_SESSION['user']->type == "company" && $_SESSION['user']->id == $missionToDelete->idUser){
+                    if($_SESSION['user']->type == "admin" || ($_SESSION['user']->type == "company" && $_SESSION['user']->id == $missionToDelete->idUser)){
                         deleteMission($_GET['delete']);   
                     }
                     header("location: index.php?viewToDisplay=displayAnnonce&subcategory=mission");
                 } else if(isset($_GET['displayEdit'])){
                     $missionToEdit = getMissionByID($_GET['displayEdit']);
-                    if($missionToEdit->idUser == $_SESSION['user']->id){
+                    if($missionToEdit->idUser == $_SESSION['user']->id || $_SESSION['user']->type == "admin"){
                         $editPermission = true;
                     } else {
                         $editPermission = false;
                     }
                     displayAnnonce(notification: $notification, missionToEdit: $missionToEdit, editPermission: $editPermission);
                     
-                } else{     //display all missions
-                    $missions = getAllMissions();
+                } else if(isConnected() && ($_SESSION['user']->type == "company" || $_SESSION['user']->type == "admin")){     //display all missions
+                    $missions = getAllMissionsAccepted();
                     displayAnnonce(notification: $notification, missionsToDisplay: $missions);
                 }
             }            
@@ -606,13 +631,15 @@ try {
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayPayment'){
         displayPayment($notification);
 
-    } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAdminPanel'){
-        $alert = $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = $companyDomaines = null;
+    } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAdminPanel' && isConnected() && $_SESSION['user']->type == "admin"){
+        // $alert = $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = $companyDomaines = null;
         if(isset($_POST['action'])){
             if($_POST['action'] == "addAd"){               
                 addAd();
+                header('Location: index.php?viewToDisplay=displayAdminPanel&view=ads');
             } else if($_POST['action'] == "editAd"){
                 editAd();
+                header('Location: index.php?viewToDisplay=displayAdminPanel&view=ads');
             } else if($_POST['action'] == "editUser"){
                 editUser();
             }
@@ -623,12 +650,14 @@ try {
                 if(isset($_GET['delete'])){
                     deleteCompany();
                     $companies = companiesManager::getAllActiveCompanies();
+                    displayAdminPanel(companies: $companies,notification: $notification);
                 } else if(isset($_GET['edit'])) {
                     $companyToEdit = getCompanyToEdit();
                     $companyDomaines = categoriesManager::getAllIdDomainesForCompany($companyToEdit->id);
                     $domainePage['categoriesGrosTravaux'] = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
                     $domainePage['categoriesPetitsTravaux'] = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
                     $domainePage['categoriesDepannage'] = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
+                    displayAdminPanel(companyToEdit: $companyToEdit, companyDomaines: $companyDomaines, domainePage: $domainePage,notification: $notification);
                 } else if(isset($_POST['submitEditCompany'])){
                     editCompany();
                     categoriesManager::delAllLinkCatComp($_POST['idCompany']);
@@ -648,11 +677,13 @@ try {
                         }
                     }
                     $companies = companiesManager::getAllActiveCompanies();
+                    displayAdminPanel(companies: $companies,notification: $notification);
                 } else if(isset($_GET['action']) && $_GET['action'] == "add"){
                     $addNewCompany = true;
                     $domainePage['categoriesGrosTravaux'] = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
                     $domainePage['categoriesPetitsTravaux'] = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
                     $domainePage['categoriesDepannage'] = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
+                    displayAdminPanel(addNewCompany: $addNewCompany, domainePage: $domainePage,notification: $notification);
                 } else if(isset($_POST['submitNewCompanyByAdmin'])){
                     $newUser = new User();
                     $newUser->__set("mail", $_POST['mail']);
@@ -716,15 +747,19 @@ try {
                     $companies = getAllActiveCompanyWithRatingAndCommentCount();
                     $alert['color'] = "success";
                     $alert['message'] = "L'entreprise $company->name a été ajoutée.";
+                    displayAdminPanel(companies: $companies, alert: $alert,notification: $notification);
                 } else {
                     $companies = getAllActiveCompanyWithRatingAndCommentCount();
+                    displayAdminPanel(companies: $companies,notification: $notification);
                 }   
             } else if($_GET['view'] == "users"){
 
                 if(isset($_GET['edit'])) {
                     $userToEdit = getUserToEdit();
+                    displayAdminPanel(userToEdit: $userToEdit,notification: $notification);
                 } else {
                     $users = getAllUsers();
+                    displayAdminPanel(users: $users,notification: $notification);
                 }
 
             } else if($_GET['view'] == "ads") {
@@ -733,7 +768,11 @@ try {
                     $action = true;
                     if(isset($_GET['edit'])){
                         $adToEdit = adsManager::getAd($_GET['edit']);
+                        displayAdminPanel(companies: $companies, action: $action, adToEdit: $adToEdit,notification: $notification);
+                    } else {
+                        displayAdminPanel(companies: $companies, action: $action,notification: $notification);
                     }
+                    
                 }
                 if(isset($_GET['delete'])){
                     adsManager::deleteAd($_GET['delete']);
@@ -742,27 +781,33 @@ try {
                 foreach ($ads as $ad) {
                     $ad->name_comp = companiesManager::getOneCompany($ad->id_comp)->name;
                 }
+                displayAdminPanel(ads: $ads,notification: $notification);
             } else if($_GET['view'] == "companiesNotCertified"){
                 if(isset($_GET['see'])) {
                     $companyToConfirm = getCompanyToConfirm();
+                    displayAdminPanel(companyToConfirm: $companyToConfirm,notification: $notification);
                 } else {
                     if(isset($_POST['accept'])) {
                         confirmCompany();
                         sendAcceptMail($_POST['accept']);
-                        $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
                     } else if(isset($_POST['delete'])) {
                         sendRejectMail($_POST['delete'], $_POST['messageRefus']);
                     }
+                    $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
                     $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
+                    displayAdminPanel(notification: $notification, companiesToBeConfirmed: $companiesToBeConfirmed);
                 }
                 
+            } else if($_GET['view'] == "missionsInAcceptPending"){
+                $missionsToBeAccepted = missionsManager::getAllMissionsInAcceptPending();
+                displayAdminPanel(missionsToBeAccepted: $missionsToBeAccepted,notification: $notification);
+            } else if($_GET['view'] == "missions"){
+                $missionsAccepted = missionsManager::getAllMissionsAccepted();
+                displayAdminPanel(missionsAccepted: $missionsAccepted,notification: $notification);
             }
+        } else {
+            displayAdminPanel(notification: $notification);
         }
-
-        if(isset($_SESSION['user']) && $_SESSION['user']->type == "admin")
-            displayAdminPanel($alert, $companies, $companyToEdit, $companyToConfirm, $companiesToBeConfirmed, $ads, $adToEdit, $action, $users, $userToEdit, $addNewCompany, $domainePage, $notification, $companyDomaines);
-        else
-            homePage($notification);
 
 
 

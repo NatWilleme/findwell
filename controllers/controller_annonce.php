@@ -112,4 +112,9 @@ function getAllMissionsOfUser(int $idUser)
 {
     return MissionsManager::getAllMissionsOfUser($idUser);
 }
+
+function getAllMissionsAccepted()
+{
+    return MissionsManager::getAllMissionsAccepted();
+}
 ?>

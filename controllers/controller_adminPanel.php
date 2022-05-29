@@ -7,7 +7,6 @@ function addAd()
     $imageName = 'pc_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.png';
     $to = 'images/upload/advertising/pc/' . $imageName;
     $imageCroppedPC = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $_POST['imagePCBase64']));
-    echo "<script>console.log('" . $imageCroppedPC . "');</script>";
     file_put_contents($to, $imageCroppedPC);
     $newAd->__set('imagePC', $to);
 
@@ -237,3 +236,15 @@ function sendRejectMail($idCompany, $rejectMessage)
     $object = "Votre entreprise n'a pas pu être ajouter à Findwell";
     require_once('models/sendEmail.php');
 }
+
+function switchAcceptedMission(int $idMission)
+{
+    MissionsManager::switchAcceptedMission($idMission);
+}
+
+function getAllMissionsInAcceptPending()
+{
+    return MissionsManager::getAllMissionsInAcceptPending();
+}
+
+?>

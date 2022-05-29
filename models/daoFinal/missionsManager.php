@@ -80,10 +80,91 @@
                         'mail' => $elem['mail_mis'],
                         'phone' => $elem['phone_mis'],
                         'images' => unserialize($elem['image_mis']),
-                        // 'images' => $elem['image_mis'],
                         'imageUser' => $elem['image_user'],
                         'accessibility' => $elem['accessibility_mis'],
-                        'buildingType' => $elem['buildingType_mis']
+                        'buildingType' => $elem['buildingType_mis'],
+                        'accepted' => $elem['accepted_mis'],
+                        'acceptPending' => $elem['acceptPending_mis']
+                    );
+                    $mission = new Mission();
+                    $mission->hydrate($values);
+                    array_push($result,$mission);
+                }
+            } catch (Exception $e) {
+                die($e->getMessage());
+            } finally{
+                $pdo_statement->closeCursor();
+                $pdo_statement = null;
+            }
+            return $result;
+        }
+
+        static public function getAllMissionsInAcceptPending(){
+            $result = array();
+            $sql = "SELECT * FROM mission INNER JOIN users ON users.id_user = mission.id_user WHERE acceptPending_mis = 1";
+            try{
+                $pdo_connexion = parent::connexionDB();
+                $pdo_statement = $pdo_connexion->prepare($sql);
+                $pdo_statement->execute();
+                $resultQuery = $pdo_statement->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($resultQuery as $elem){
+                    $values=array(
+                        'id' => $elem['id_mis'],
+                        'title' => $elem['title_mis'],
+                        'description' => $elem['description_mis'],
+                        'date' => $elem['date_mis'],
+                        'price' => $elem['price_mis'],
+                        'region' => $elem['region_mis'],
+                        'idUser' => $elem['id_user'],
+                        'username' => $elem['username_user'],
+                        'mail' => $elem['mail_mis'],
+                        'phone' => $elem['phone_mis'],
+                        'images' => unserialize($elem['image_mis']),
+                        'imageUser' => $elem['image_user'],
+                        'accessibility' => $elem['accessibility_mis'],
+                        'buildingType' => $elem['buildingType_mis'],
+                        'accepted' => $elem['accepted_mis'],
+                        'acceptPending' => $elem['acceptPending_mis']
+                    );
+                    $mission = new Mission();
+                    $mission->hydrate($values);
+                    array_push($result,$mission);
+                }
+            } catch (Exception $e) {
+                die($e->getMessage());
+            } finally{
+                $pdo_statement->closeCursor();
+                $pdo_statement = null;
+            }
+            return $result;
+        }
+
+        static public function getAllMissionsAccepted(){
+            $result = array();
+            $sql = "SELECT * FROM mission INNER JOIN users ON users.id_user = mission.id_user WHERE accepted_mis = 1";
+            try{
+                $pdo_connexion = parent::connexionDB();
+                $pdo_statement = $pdo_connexion->prepare($sql);
+                $pdo_statement->execute();
+                $resultQuery = $pdo_statement->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($resultQuery as $elem){
+                    $values=array(
+                        'id' => $elem['id_mis'],
+                        'title' => $elem['title_mis'],
+                        'description' => $elem['description_mis'],
+                        'date' => $elem['date_mis'],
+                        'price' => $elem['price_mis'],
+                        'region' => $elem['region_mis'],
+                        'idUser' => $elem['id_user'],
+                        'username' => $elem['username_user'],
+                        'mail' => $elem['mail_mis'],
+                        'phone' => $elem['phone_mis'],
+                        'images' => unserialize($elem['image_mis']),
+                        'imageUser' => $elem['image_user'],
+                        'accessibility' => $elem['accessibility_mis'],
+                        'buildingType' => $elem['buildingType_mis'],
+                        'accepted' => $elem['accepted_mis'],
+                        'acceptPending' => $elem['acceptPending_mis']
                     );
                     $mission = new Mission();
                     $mission->hydrate($values);
@@ -120,6 +201,8 @@
                         'images' => unserialize($elem['image_mis']),
                         'accessibility' => $elem['accessibility_mis'],
                         'buildingType' => $elem['buildingType_mis'],
+                        'accepted' => $elem['accepted_mis'],
+                        'acceptPending' => $elem['acceptPending_mis']
                     );
                     $mission = new Mission();
                     $mission->hydrate($values);
@@ -158,6 +241,8 @@
                         'imageUser' => $elem['image_user'],
                         'accessibility' => $elem['accessibility_mis'],
                         'buildingType' => $elem['buildingType_mis'],
+                        'accepted' => $elem['accepted_mis'],
+                        'acceptPending' => $elem['acceptPending_mis']
                     );
                     $mission = new Mission();
                     $mission->hydrate($values);
@@ -175,6 +260,20 @@
 
         static public function deleteMission(int $id){
             $sql = "DELETE FROM mission WHERE id_mis = :id_mis";
+            try{
+                $pdo_connexion = parent::connexionDB();
+                $pdo_statement = $pdo_connexion->prepare($sql);
+                $pdo_statement->execute(array(':id_mis' => $id));
+            } catch (Exception $e) {
+                die($e->getMessage());
+            } finally{
+                $pdo_statement->closeCursor();
+                $pdo_statement = null;
+            }
+        }
+
+        static public function switchAcceptedMission(int $id){
+            $sql = "UPDATE mission SET accepted_mis = NOT accepted_mis, acceptPending_mis = 0 WHERE id_mis = :id_mis";
             try{
                 $pdo_connexion = parent::connexionDB();
                 $pdo_statement = $pdo_connexion->prepare($sql);
