@@ -61,6 +61,7 @@
                                 <div class="form-group">
                                     <label for="phone">Téléphone</label>
                                     <input type="text" class="form-control" name="phone" id="phone" placeholder="Entrez le numéro de téléphone de l'entreprise" required>
+                                    <p class="fst-italic text-secondary">Ne mettez aucun caractères spéciaux (+ , . , / , etc)</p>
                                     <p id="errorPhone"></p>
                                 </div>
                             </div>

@@ -696,14 +696,20 @@ try {
                     $newUser->__set('state', $_POST['state']);
                     $newUser->__set('zip', $_POST['zip']);
 
-                    $from = $_FILES['image']['tmp_name'];
-                    $path = $_FILES['image']['name'];
-                    //get the extension of file
-                    $ext = pathinfo($path, PATHINFO_EXTENSION);
-                    $imageName = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-                    $to = 'images/upload/photos_profils/' . $imageName;
-                    move_uploaded_file($from,$to);
-                    $newUser->__set('image',$to);
+                    $image = "images/upload/photos_profils/company_default.jpg";
+                    if($_FILES['image']['size'] > 0){
+                        $from = $_FILES['image']['tmp_name'];
+                        $path = $_FILES['image']['name'];
+                        //get the extension of file
+                        $ext = pathinfo($path, PATHINFO_EXTENSION);
+                        $imageName = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+                        $image = 'images/upload/photos_profils/' . $imageName;
+                        move_uploaded_file($from,$to);
+                        $newUser->__set('image',$to);
+                    } else {
+                        $newUser->__set('image', $image);
+                    }
+                    
 
                     $newUser->__set('type', "company");
                     $newUser->__set('code', uniqid());
@@ -720,7 +726,7 @@ try {
                     $newCompany->__set('web', $_POST['web']);
                     $newCompany->__set('state', $_POST['state']);
                     $newCompany->__set('phone', $_POST['phone']);
-                    $newCompany->__set('image',$to);
+                    $newCompany->__set('image',$image);
                     $newCompany->__set('tva', $_POST['tva']);
                     usersManager::addUserWithFullInformation($newUser);
                     companiesManager::addCompany($newCompany);
@@ -793,7 +799,6 @@ try {
                     } else if(isset($_POST['delete'])) {
                         sendRejectMail($_POST['delete'], $_POST['messageRefus']);
                     }
-                    $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
                     $companiesToBeConfirmed = companiesManager::getAllCompaniesToBeConfirmed();
                     displayAdminPanel(notification: $notification, companiesToBeConfirmed: $companiesToBeConfirmed);
                 }

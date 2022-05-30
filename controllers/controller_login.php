@@ -108,6 +108,8 @@ function saveNewCompanySession()
         $to = 'images/upload/photos_profils/' . $imageName;
         move_uploaded_file($from,$to);
         $_SESSION['newCompany']->__set('image',$to);
+    } else {
+        $_SESSION['newCompany']->__set('image', "images/upload/photos_profils/company_default.jpg");
     }
     $_SESSION['newCompany']->__set('state', $_POST['state']);
     $_SESSION['newCompany']->__set('tva', $_POST['tva']);

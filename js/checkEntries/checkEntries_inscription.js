@@ -37,7 +37,7 @@ if (document.getElementById("formCompany") != null ) {
 
         if(document.getElementById("phone").value == "" || !regexPhone.test(document.getElementById("phone").value)) {
             e.preventDefault();
-            document.getElementById('errorPhone').innerHTML = "Veuillez entrer un numéro de téléphone valide";
+            document.getElementById('errorPhone').innerHTML = "Veuillez entrer un numéro de téléphone valide (sans caractères spéciaux)";
             document.getElementById('errorPhone').style.color = "red";
         }
 
