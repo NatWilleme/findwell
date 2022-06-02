@@ -704,12 +704,10 @@ try {
                         $ext = pathinfo($path, PATHINFO_EXTENSION);
                         $imageName = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
                         $image = 'images/upload/photos_profils/' . $imageName;
-                        move_uploaded_file($from,$to);
-                        $newUser->__set('image',$to);
-                    } else {
-                        $newUser->__set('image', $image);
+                        move_uploaded_file($from,$image);
+                        
                     }
-                    
+                    $newUser->__set('image',$image);
 
                     $newUser->__set('type', "company");
                     $newUser->__set('code', uniqid());
