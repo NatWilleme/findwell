@@ -8,8 +8,7 @@ function cmpDistance($object1, $object2) {
     return $object1->distance > $object2->distance ? 1 : 0;
 }
 
-function displayCompaniesAccordingTo($category, $subcategory){
-    $notification = sizeof(companiesManager::getAllCompaniesToBeConfirmed());
+function displayCompaniesAccordingTo($category, $subcategory, $notification){
     $companies = CompaniesManager::getAllCompaniesAccordingTo($category, $subcategory);
     if(!isset($_POST['location']) || $_POST['location'] == ""){
         $userAddress = null;
