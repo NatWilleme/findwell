@@ -18,7 +18,7 @@
     <?php } ?>
     <?php if(sizeof($companies) > 0 && $companies[0]->distance != null) { ?>
     <div class="col-12 col-lg-2 offset-lg-10 mb-3">
-        <form action="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $_GET['subcategory'] ?>" method="post">
+        <form action="index.php?viewToDisplay=displayCompaniesList&category=<?php echo $_GET['category']; ?>&subcategory=<?php echo $_GET['subcategory'] ?>" method="post">
             <label for="sort">Trier par: </label>
             <select class="form-select" name="sort" id="sort" onchange="this.form.submit()">
                 <option value="note" <?php if($sort == "note") echo "selected"; ?>>Note</option>
@@ -28,7 +28,7 @@
     </div>
     <?php } ?>
     <div class="col-12 col-lg-2 offset-lg-10 mb-3">
-        <form action="index.php?viewToDisplay=displayCompaniesList&subcategory=<?php echo $_GET['subcategory'] ?>" method="post">
+        <form action="index.php?viewToDisplay=displayCompaniesList&category=<?php echo $_GET['category']; ?>&subcategory=<?php echo $_GET['subcategory'] ?>" method="post">
             <label for="city">Région: </label>
             <div class="input-group">
                 <input type="text" name="city" class="form-control" role="group" aria-describedby="btnGroupAddon">

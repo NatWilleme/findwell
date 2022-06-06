@@ -15,7 +15,7 @@ function getMessageBtnToDisplay($idCompany)
     }
 
     if($flag == 0) $messageBtn = "<i class=\"bi bi-suit-heart\"></i> Ajouter aux favoris";
-    else $messageBtn = "<i class=\"bi bi-suit-heart-fill\"></i>Retirer des favoris";
+    else $messageBtn = "<i class=\"bi bi-suit-heart-fill\"></i> Retirer des favoris";
     return $messageBtn;
 }
 
