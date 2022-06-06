@@ -6,6 +6,10 @@ $("#imageMobile").change(function () {
   imagePreview(this, "mobile");
 });
 
+$("#imagePopup").change(function () {
+  imagePreview(this, "popup");
+});
+
 var cropperPC;
 var cropperMobile;
 
@@ -19,12 +23,20 @@ function imagePreview(fileInput, type) {
             event.target.result +
             '" width="300" height="auto"/>'
         );
-      } else {
+      } else if (type == "mobile"){
         $("#previewMobile").html(
           '<img id="pubMobileImage" src="' +
             event.target.result +
             '" width="300" height="auto"/>'
         );
+      } else if (type == "popup"){
+        $("#previewPopup").html(
+          '<img src="' +
+            event.target.result +
+            '" width="300" height="auto"/>'
+        );
+        var oldImagePopup = document.getElementById("oldImagePopup");
+        oldImagePopup.parentNode.removeChild(oldImagePopup);
       }
     };
     fileReader.readAsDataURL(fileInput.files[0]);

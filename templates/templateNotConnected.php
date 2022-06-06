@@ -15,7 +15,7 @@
     gtag('config', 'G-TW2FJRC3N5');
   </script>
   <script>
-    !function(f, b, e, v, n, t, s) {
+    ! function(f, b, e, v, n, t, s) {
       if (f.fbq) return;
       n = f.fbq = function() {
         n.callMethod ?
@@ -40,16 +40,17 @@
   <noscript>
     <img height="1" width="1" src="https://www.facebook.com/tr?id=4722317321206344&ev=PageView&noscript=1" />
   </noscript>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Findwell est une plateforme communautaire permettant de trouver facilement une entreprise pour vos projets de rénovation ou de construction.">
   <meta name="application-name" content="Findwell">
   <meta name="facebook-domain-verification" content="47115hi1onuwmaaqzq9k9cr2hopniq" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="css/style.css?1">
   <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
@@ -72,6 +73,8 @@
 </head>
 
 <body>
+
+  
 
   <!-- First Navbar -->
   <nav class="navbar navbar-expand-lg border-bottom border-2 border-dark firstNavbar">
@@ -232,6 +235,30 @@
     <!-- CONTENU -->
     <?php echo $content; ?>
   </div>
+
+  <!-- Toast -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <?php $i=0; foreach ($_SESSION['toastMessages'] as $toastMessage) { ?>
+      <div id="toast<?php echo $i; ?>" class="toast fade hide" role="alert"  aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="100%" height="100%" fill="#007aff"></rect>
+        </svg>
+
+        <strong class="me-auto"><?php echo $toastMessage->title; ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <?php echo $toastMessage->message; ?>
+        <?php if($toastMessage->image != null) {?>
+          <img src="<?php echo $toastMessage->image; ?>" class="img-fluid" alt="Responsive image">
+        <?php } ?>
+      </div>
+    </div>
+    <?php $i++; } ?>
+  </div>
+  <!-- END Toast -->
+  
   <!-- FOOTER -->
   <footer class="footer text-center" id="footer" style="background-color: #FFD338;">
 
@@ -267,10 +294,13 @@
 
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   <script src="js/location.js"></script>
   <script src="js/observerApi.js"></script>
   <script src="https://unpkg.com/cropperjs"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="js/sendToastMessage.js"></script>
+
   <?php if (isset($scripts) && $scripts != '') echo $scripts; ?>
 </body>
 

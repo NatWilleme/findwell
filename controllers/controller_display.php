@@ -10,7 +10,7 @@ function displayRegister($alert = '', $choice = '', $companyForm = '', $domaineP
 
 function displayAdminPanel($alert = null, $companies = null, $companyToEdit = null, $companyToConfirm = null, $companiesToBeConfirmed = null, $ads = null, 
                            $adToEdit = null, $action = null, $users = null, $userToEdit = null, $addNewCompany = null, $domainePage = null, $notification = null, 
-                           $companyDomaines = null, $missionsToBeAccepted = null, $missionsAccepted = null) {
+                           $companyDomaines = null, $missionsToBeAccepted = null, $missionsAccepted = null, $popups = null, $displayAddPopup = null, $popupToEdit = null) {
     require_once('views/view_adminPanel.php');
 }
 

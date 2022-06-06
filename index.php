@@ -10,6 +10,7 @@ require_once('models/modelsFinal/service.php');
 require_once('models/modelsFinal/occasion.php');
 require_once('models/modelsFinal/material.php');
 require_once('models/modelsFinal/mission.php');
+require_once('models/modelsFinal/toastMessage.php');
 
 require_once('models/daoFinal/DBManager.php');
 require_once('models/daoFinal/adsManager.php');
@@ -21,6 +22,7 @@ require_once('models/daoFinal/servicesManager.php');
 require_once('models/daoFinal/occasionsManager.php');
 require_once('models/daoFinal/materialsManager.php');
 require_once('models/daoFinal/missionsManager.php');
+require_once('models/daoFinal/toastMessageManager.php');
 
 require_once('controllers/controller_adminPanel.php');
 require_once('controllers/controller_categoriesList.php');
@@ -42,6 +44,7 @@ try {
     $notification['company'] = 0;
     $notification['mission'] = 0;
     $notification['total'] = 0;
+    $_SESSION['toastMessages'] = ToastMessageManager::getAllActiveToastMessages();
     $alert = null;
     if(isset($_GET['disconnect'])){
         unset($_COOKIE['userConnected']);
@@ -632,7 +635,6 @@ try {
         displayPayment($notification);
 
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayAdminPanel' && isConnected() && $_SESSION['user']->type == "admin"){
-        // $alert = $companies = $companyToEdit = $companyToConfirm = $companiesToBeConfirmed = $ads = $adToEdit = $action = $users = $userToEdit = $domainePage = $addNewCompany = $companyDomaines = null;
         if(isset($_POST['action'])){
             if($_POST['action'] == "addAd"){               
                 addAd();
@@ -786,6 +788,58 @@ try {
                     $ad->name_comp = companiesManager::getOneCompany($ad->id_comp)->name;
                 }
                 displayAdminPanel(ads: $ads,notification: $notification);
+
+            } else if($_GET['view'] == "popup") {
+                if(isset($_GET['action']) ){
+                    if($_GET['action'] == "add"){
+                        $newPopup = new ToastMessage();
+                        $newPopup->__set('title', $_POST['title']);
+                        $newPopup->__set('message', $_POST['message']);            
+                        $newPopup->__set('active', $_POST['active']);
+                        $newPopup->__set('image',NULL);
+                        if($_FILES['image']['size'] > 0){
+                            $from = $_FILES['image']['tmp_name'];
+                            $path = $_FILES['image']['name'];
+                            //get the extension of file
+                            $ext = pathinfo($path, PATHINFO_EXTENSION);
+                            $imageName = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+                            $image = 'images/upload/pop-ups/' . $imageName;
+                            move_uploaded_file($from,$image);
+                            $newPopup->__set('image',$image);
+                        }
+                        ToastMessageManager::addToastMessage($newPopup);
+                    } else if($_GET['action'] == "edit"){
+                        $popupToEdit = ToastMessageManager::getToastMessageById($_POST['id']);
+                        $popupToEdit->__set('title', $_POST['title']);
+                        $popupToEdit->__set('message', $_POST['message']);            
+                        $popupToEdit->__set('active', $_POST['active']);
+                        if($_FILES['image']['size'] > 0){
+                            $from = $_FILES['image']['tmp_name'];
+                            $path = $_FILES['image']['name'];
+                            //get the extension of file
+                            $ext = pathinfo($path, PATHINFO_EXTENSION);
+                            $imageName = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+                            $image = 'images/upload/pop-ups/' . $imageName;
+                            move_uploaded_file($from,$image);
+                            $popupToEdit->__set('image',$image);
+                        }
+                        ToastMessageManager::updateToastMessage($popupToEdit);
+                    }
+                    
+                }
+                if(isset($_GET['action']) && $_GET['action'] == "displayAdd"){
+                    displayAdminPanel(displayAddPopup: true,notification: $notification);
+                }
+                if(isset($_GET['displayEdit'])){
+                    $popupToEdit = ToastMessageManager::getToastMessageById($_GET['displayEdit']);
+                    displayAdminPanel(popupToEdit: $popupToEdit,notification: $notification);
+                }
+                if(isset($_GET['delete'])){
+                    ToastMessageManager::deleteToastMessage($_GET['delete']);
+                }
+                $popups = ToastMessageManager::getAllToastMessages();
+                displayAdminPanel(popups: $popups,notification: $notification);
+
             } else if($_GET['view'] == "companiesNotCertified"){
                 if(isset($_GET['see'])) {
                     $companyToConfirm = getCompanyToConfirm();

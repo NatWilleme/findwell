@@ -12,6 +12,7 @@
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companies">Gérer les entreprises certifiées</a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=companiesNotCertified">Gérer les entreprises en attente de certification <?php if($notification['company'] != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification['company']; ?></span> <?php } ?></a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=ads">Gérer les publicités</a><br>
+            <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=popup">Gérer les pop-ups</a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=users">Gérer les utilisateurs</a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=missionsInAcceptPending">Gérer les missions en attente d'approbation<?php if($notification['mission'] != 0) { ?> <span class="badge bg-danger ms-1"><?php echo $notification['mission']; ?></span> <?php } ?></a><br>
             <a class="btn btn-warning p-3 mb-5 col-12 fw-bold" href="index.php?viewToDisplay=displayAdminPanel&view=missions">Gérer les missions en cours</a><br>
@@ -27,7 +28,8 @@
     <a class="btn btn-secondary col-12 col-lg-2 mt-3 mb-3" href="index.php?viewToDisplay=displayAdminPanel<?php if($_GET['view'] == "companies" && isset($_GET['edit'])) echo "&view=companies"; 
         else if($_GET['view'] == "ads" && (isset($_GET['edit']) || isset($_GET['action']) )) echo '&view=ads'; 
         else if($_GET['view'] == "users" && isset($_GET['edit'])) echo '&view=users';
-        else if($_GET['view'] == "companiesNotCertified" && isset($companyToConfirm)) echo '&view=companiesNotCertified'; ?>
+        else if($_GET['view'] == "companiesNotCertified" && isset($companyToConfirm)) echo '&view=companiesNotCertified';
+        else if($_GET['view'] == "popup" && (isset($_GET['action']) || isset($_GET['displayEdit']))) echo '&view=popup'; ?>
     ">Retour</a>
     <?php } ?>
 
@@ -840,6 +842,94 @@
         </tbody>
     </table>
     </div>
+    <?php } ?>
+
+    <?php if(isset($popups)){ ?>
+    <a class="btn btn-primary" href="index.php?viewToDisplay=displayAdminPanel&view=popup&action=displayAdd">Ajouter un nouveau pop-up</a>
+    <div class="table-responsive mb-5">        
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Message</th>
+                <th scope="col">Image</th>
+                <th scope="col">Active</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($popups as $popup) { ?>
+            <tr>
+            <th scope="row"><?php echo $popup->id; ?></th>
+            <td><?php echo $popup->title; ?></td>
+            <td><?php echo $popup->message; ?></td>
+            <td><img src="<?php echo $popup->image; ?>" width="300" alt=""></td>
+            <td><?php if($popup->active == 1) echo "Oui"; else echo "Non"; ?></td>
+            <td>
+                <a class="btn btn-danger" href="index.php?viewToDisplay=displayAdminPanel&view=popup&delete=<?php echo $popup->id; ?>"><i class="bi bi-trash-fill"></i></a> 
+                <a class="btn btn-warning" href="index.php?viewToDisplay=displayAdminPanel&view=popup&displayEdit=<?php echo $popup->id; ?>"><i class="bi bi-pencil-fill"></i></a>
+            </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    </div>
+    <?php } ?>
+    <?php if(isset($displayAddPopup) || isset($popupToEdit)){ ?>
+    <form action="index.php?viewToDisplay=displayAdminPanel&view=popup&action=<?php if(isset($displayAddPopup)) echo "add"; else echo "edit"; ?>" method="post" enctype="multipart/form-data">
+        <div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h6 class="mt-3 mb-2 text-primary">
+                    <?php if(isset($popupToEdit)) echo "Modifier le pop-up"; else echo "Ajouter un nouveau pop-up"; ?>
+                </h6>
+            </div>
+            <div class="row mt-4">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="title">Titre</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Titre du pop-up" 
+                            <?php if(isset($popupToEdit)) echo "value=\"".$popupToEdit->title."\""; ?>
+                        >
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" maxlength="499" rows="5" name="message" placeholder="Message du pop-up"><?php if(isset($popupToEdit)) echo $popupToEdit->message; ?></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control" id="imagePopup" name="image" placeholder="Image du pop-up" accept=".jpg, .png">
+                        <div class="mt-2" style="width: 300px;" id="previewPopup"></div>
+                        <?php if(isset($popupToEdit) && $popupToEdit->image != null){?>
+                            <img id="oldImagePopup" class="mt-2" src="<?php echo $popupToEdit->image; ?>" width="300" alt="">
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <label for="active">Afficher ?</label>
+                    <div id ="active" class="form-control">
+                        <input type="radio" name="active" id="yes" value="1" <?php if((isset($popupToEdit) && $popupToEdit->active == 1) || !isset($popupToEdit)) echo "checked"; ?>>
+                        <label for="yes">Oui</label><br>
+                        <input type="radio" name="active" id="no" value="0" <?php if((isset($popupToEdit) && $popupToEdit->active == 0)) echo "checked"; ?>>
+                        <label for="no">Non</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if(isset($popupToEdit)){ ?>
+            <input class="d-none" type="text" value="<?php echo $popupToEdit->id; ?>" name="id">
+        <?php } ?>
+        <button type="submit" class="btn btn-primary mt-5">
+            <?php if(isset($popupToEdit)) echo "Modifier"; else echo "Ajouter"; ?>    
+        </button>
+    </form>
     <?php } ?>
 
     <?php
