@@ -793,7 +793,6 @@ try {
                 if(isset($_GET['action']) ){
                     if($_GET['action'] == "add"){
                         $newPopup = new ToastMessage();
-                        $newPopup->__set('title', $_POST['title']);
                         $newPopup->__set('message', $_POST['message']);            
                         $newPopup->__set('active', $_POST['active']);
                         $newPopup->__set('image',NULL);
@@ -810,7 +809,6 @@ try {
                         ToastMessageManager::addToastMessage($newPopup);
                     } else if($_GET['action'] == "edit"){
                         $popupToEdit = ToastMessageManager::getToastMessageById($_POST['id']);
-                        $popupToEdit->__set('title', $_POST['title']);
                         $popupToEdit->__set('message', $_POST['message']);            
                         $popupToEdit->__set('active', $_POST['active']);
                         if($_FILES['image']['size'] > 0){

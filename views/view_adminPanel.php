@@ -851,7 +851,6 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Titre</th>
                 <th scope="col">Message</th>
                 <th scope="col">Image</th>
                 <th scope="col">Active</th>
@@ -863,7 +862,6 @@
             foreach ($popups as $popup) { ?>
             <tr>
             <th scope="row"><?php echo $popup->id; ?></th>
-            <td><?php echo $popup->title; ?></td>
             <td><?php echo $popup->message; ?></td>
             <td><img src="<?php echo $popup->image; ?>" width="300" alt=""></td>
             <td><?php if($popup->active == 1) echo "Oui"; else echo "Non"; ?></td>
@@ -888,16 +886,17 @@
             <div class="row mt-4">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
-                        <label for="title">Titre</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Titre du pop-up" 
-                            <?php if(isset($popupToEdit)) echo "value=\"".$popupToEdit->title."\""; ?>
-                        >
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" maxlength="499" rows="5" name="message" placeholder="Message du pop-up"><?php if(isset($popupToEdit)) echo $popupToEdit->message; ?></textarea>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea class="form-control" id="message" maxlength="499" rows="5" name="message" placeholder="Message du pop-up"><?php if(isset($popupToEdit)) echo $popupToEdit->message; ?></textarea>
+                    <label for="active">Afficher ?</label>
+                    <div id ="active" class="form-control">
+                        <input type="radio" name="active" id="yes" value="1" <?php if((isset($popupToEdit) && $popupToEdit->active == 1) || !isset($popupToEdit)) echo "checked"; ?>>
+                        <label for="yes">Oui</label><br>
+                        <input type="radio" name="active" id="no" value="0" <?php if((isset($popupToEdit) && $popupToEdit->active == 0)) echo "checked"; ?>>
+                        <label for="no">Non</label>
                     </div>
                 </div>
             </div>
@@ -912,15 +911,7 @@
                         <?php } ?>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <label for="active">Afficher ?</label>
-                    <div id ="active" class="form-control">
-                        <input type="radio" name="active" id="yes" value="1" <?php if((isset($popupToEdit) && $popupToEdit->active == 1) || !isset($popupToEdit)) echo "checked"; ?>>
-                        <label for="yes">Oui</label><br>
-                        <input type="radio" name="active" id="no" value="0" <?php if((isset($popupToEdit) && $popupToEdit->active == 0)) echo "checked"; ?>>
-                        <label for="no">Non</label>
-                    </div>
-                </div>
+                
             </div>
         </div>
         <?php if(isset($popupToEdit)){ ?>

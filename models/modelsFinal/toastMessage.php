@@ -2,7 +2,6 @@
 
 class ToastMessage{
     private $id;
-    private $title;
     private $message;
     private $image;
     private $active;

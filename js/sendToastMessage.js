@@ -26,22 +26,25 @@ function setupInterval(callback, interval, name) {
   localStorage.setItem(key, now);
 }
 
-
 const toastElList = document.querySelectorAll('.toast')
-const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl))
+
 if(localStorage.getItem('idToast') == null) {
     localStorage.setItem('idToast', 0)
-    toastList[0].show();
+    new bootstrap.Toast(document.getElementById('toast' + localStorage.getItem('idToast'))).show()
 }
-if(toastList.length > 0) {
+if(toastElList.length > 0) {
   setupInterval(function () {
-    console.log(localStorage.getItem('idToast'));
-      toastList[localStorage.getItem('idToast')].show();
-      if(localStorage.getItem('idToast') >= toastList.length - 1) {
+    // console.log(localStorage.getItem('idToast'));
+    try {
+      new bootstrap.Toast(document.getElementById('toast' + localStorage.getItem('idToast'))).show()
+    } catch (error) {
+      localStorage.setItem('idToast', '0');
+    }
+      if(localStorage.getItem('idToast') >= toastElList.length - 1) {
           localStorage.setItem('idToast', '0');
       } else {
           var indice = Number.parseInt(localStorage.getItem('idToast')) + 1;
           localStorage.setItem('idToast', indice.toString());
       }   
-  }, 60000*3, 'toast')
+  }, 60000*1, 'toast')
 }

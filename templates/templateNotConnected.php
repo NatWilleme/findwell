@@ -236,28 +236,53 @@
     <?php echo $content; ?>
   </div>
 
-  <!-- Toast -->
-  <div class="position-fixed bottom-0 end-0 p-3 col-lg-2 col-6">
+  <!-- Toast left -->
+  <div class="position-fixed bottom-0 start-0 p-3 col-lg-2 col-6">
     <?php $i=0; foreach ($_SESSION['toastMessages'] as $toastMessage) { ?>
-      <div id="toast<?php echo $i; ?>" class="toast fade hide mb-2" role="alert"  aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <svg class="bd-placeholder-img rounded me-2" width="20" height="20" aria-hidden="true" focusable="false">
-          <rect width="100%" height="100%" fill="#007aff"></rect>
-        </svg>
-
-        <strong class="me-auto"><?php echo $toastMessage->title; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        <?php echo $toastMessage->message; ?>
-        <?php if($toastMessage->image != null) {?>
-          <img src="<?php echo $toastMessage->image; ?>" class="img-fluid" alt="Responsive image">
-        <?php } ?>
+    <?php if($i%2 == 0){ ?>
+    <div id="toast<?php echo $i; ?>" class="toast toastleft fade hide mb-2 align-items-center" role="alert" data-bs-delay="15000" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body mx-3">
+          <div class="row">
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="row">
+            <?php echo $toastMessage->message; ?>
+            <?php if($toastMessage->image != null) {?>
+              <img src="<?php echo $toastMessage->image; ?>" class="img-fluid" alt="Responsive image">
+            <?php } ?>
+          </div>
+        </div>
       </div>
     </div>
+    <?php } ?>
     <?php $i++; } ?>
   </div>
-  <!-- END Toast -->
+  <!-- END Toast left -->
+
+  <!-- Toast right -->
+  <div class="position-fixed bottom-0 end-0 p-3 col-lg-2 col-6">
+    <?php $i=0; foreach ($_SESSION['toastMessages'] as $toastMessage) { ?>
+      <?php if($i%2 == 1){ ?>
+      <div id="toast<?php echo $i; ?>" class="toast toastright fade hide mb-2 align-items-center" role="alert" data-bs-delay="15000" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body mx-3">
+            <div class="row">
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="row">
+              <?php echo $toastMessage->message; ?>
+              <?php if($toastMessage->image != null) {?>
+                <img src="<?php echo $toastMessage->image; ?>" class="img-fluid" alt="Responsive image">
+              <?php } ?>
+            </div>
+          </div>
+      </div>
+    </div>
+    <?php } ?>
+    <?php $i++; } ?>
+  </div>
+  <!-- END Toast right -->
   
   <!-- FOOTER -->
   <footer class="footer text-center" id="footer" style="background-color: #FFD338;">

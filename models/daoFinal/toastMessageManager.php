@@ -3,12 +3,11 @@
 abstract class ToastMessageManager extends DBManager{
     
     static public function addToastMessage(ToastMessage $toastMessage){
-        $sql = "INSERT INTO toastmessage (title_tm, message_tm, image_tm, active_tm) VALUES (:title, :message, :image, :active)";
+        $sql = "INSERT INTO toastmessage (message_tm, image_tm, active_tm) VALUES (:message, :image, :active)";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $pdo_statement->execute(array(
-                ':title' => $toastMessage->__get('title'),
                 ':message' => $toastMessage->__get('message'),
                 ':image' => $toastMessage->__get('image'),
                 ':active' => $toastMessage->__get('active')
@@ -22,12 +21,11 @@ abstract class ToastMessageManager extends DBManager{
     }
 
     static public function updateToastMessage(ToastMessage $toastMessage){
-        $sql = "UPDATE toastmessage SET title_tm=:title, message_tm=:message, image_tm=:image, active_tm=:active WHERE id_tm=:id";
+        $sql = "UPDATE toastmessage SET message_tm=:message, image_tm=:image, active_tm=:active WHERE id_tm=:id";
         try {
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
             $pdo_statement->execute(array(
-                ':title' => $toastMessage->__get('title'),
                 ':message' => $toastMessage->__get('message'),
                 ':image' => $toastMessage->__get('image'),
                 ':active' => $toastMessage->__get('active'),
@@ -68,7 +66,6 @@ abstract class ToastMessageManager extends DBManager{
             foreach ($result as $row){
                 $values=array(
                     "id" => $row["id_tm"],  
-                    "title" => $row["title_tm"],  
                     "message" => $row["message_tm"],
                     "image" => $row["image_tm"],
                     "active" => $row["active_tm"]
@@ -98,8 +95,7 @@ abstract class ToastMessageManager extends DBManager{
             
             foreach ($result as $row){
                 $values=array(
-                    "id" => $row["id_tm"],  
-                    "title" => $row["title_tm"],  
+                    "id" => $row["id_tm"], 
                     "message" => $row["message_tm"],
                     "image" => $row["image_tm"],
                     "active" => $row["active_tm"]
@@ -126,8 +122,7 @@ abstract class ToastMessageManager extends DBManager{
             $pdo_statement->execute(array(':id_tm' => $id));
             $result = $pdo_statement->fetch(PDO::FETCH_ASSOC);
             $values=array(
-                "id" => $result["id_tm"],  
-                "title" => $result["title_tm"],  
+                "id" => $result["id_tm"],
                 "message" => $result["message_tm"],
                 "image" => $result["image_tm"],
                 "active" => $result["active_tm"]
