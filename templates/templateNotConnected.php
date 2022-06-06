@@ -237,11 +237,11 @@
   </div>
 
   <!-- Toast -->
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="position-fixed bottom-0 end-0 p-3 col-lg-2 col-6">
     <?php $i=0; foreach ($_SESSION['toastMessages'] as $toastMessage) { ?>
-      <div id="toast<?php echo $i; ?>" class="toast fade hide" role="alert"  aria-live="assertive" aria-atomic="true">
+      <div id="toast<?php echo $i; ?>" class="toast fade hide mb-2" role="alert"  aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
-        <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <svg class="bd-placeholder-img rounded me-2" width="20" height="20" aria-hidden="true" focusable="false">
           <rect width="100%" height="100%" fill="#007aff"></rect>
         </svg>
 
