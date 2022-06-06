@@ -31,6 +31,7 @@ const toastElList = document.querySelectorAll('.toast')
 const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl))
 if(localStorage.getItem('idToast') == null) {
     localStorage.setItem('idToast', 0)
+    toastList[0].show();
 }
 if(toastList.length > 0) {
   setupInterval(function () {
