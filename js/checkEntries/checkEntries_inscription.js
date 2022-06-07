@@ -97,17 +97,12 @@ if (document.getElementById("formDomaine") != null) {
     document.getElementById("formDomaine").addEventListener("submit", function (e) {
         var number = 0;
         var markedCheckboxGros = document.getElementsByName('checkGros[]');
-        var markedCheckboxPetits = document.getElementsByName('checkPetits[]');  
-        var markedCheckboxDepannage = document.getElementsByName('checkDepannage[]');  
+        var markedCheckboxPetits = document.getElementsByName('checkPetits[]');
         for (var checkbox of markedCheckboxGros) {  
             if (checkbox.checked)  
                 number++;
         }
         for (var checkbox of markedCheckboxPetits) {  
-            if (checkbox.checked)  
-                number++;
-        }
-        for (var checkbox of markedCheckboxDepannage) {  
             if (checkbox.checked)  
                 number++;
         }

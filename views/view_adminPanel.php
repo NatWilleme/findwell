@@ -261,15 +261,6 @@
                                                         </div>
                                                         <?php } ?>
                                                     </div>
-                                                    <div id="listDepannage" style="display: none;"  class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
-                                                        <h5 class="text-primary">Dépannage d'urgence</h5>
-                                                    <?php foreach ($domainePage['categoriesDepannage'] as $category) { ?>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label" for="<?php echo $category->id; ?>"><?php echo $category->name; ?></label>
-                                                            <input type="checkbox" class="form-check-input" name="checkDepannage[]"  id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>">
-                                                        </div>
-                                                        <?php } ?>
-                                                    </div>
                                                     <div class="col-2"></div>
                                                 </div>
                                         </div>
@@ -702,15 +693,6 @@
                                             <div class="form-check">
                                                 <label class="form-check-label" for="<?php echo $category->id; ?>"><?php echo $category->name; ?></label>
                                                 <input type="checkbox" class="form-check-input" name="checkPetits[]"  id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>" <?php if(in_array($category->id,$companyDomaines)) echo "checked"; ?>>
-                                            </div>
-                                            <?php } ?>
-                                        </div>
-                                        <div id="listDepannage" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
-                                            <h5 class="text-primary">Dépannage d'urgence</h5>
-                                        <?php foreach ($domainePage['categoriesDepannage'] as $category) { ?>
-                                            <div class="form-check">
-                                                <label class="form-check-label" for="<?php echo $category->id; ?>"><?php echo $category->name; ?></label>
-                                                <input type="checkbox" class="form-check-input" name="checkDepannage[]"  id="<?php echo $category->id; ?>" value="<?php echo $category->id; ?>" <?php if(in_array($category->id,$companyDomaines)) echo "checked"; ?>>
                                             </div>
                                             <?php } ?>
                                         </div>

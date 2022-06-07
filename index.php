@@ -658,7 +658,6 @@ try {
                     $companyDomaines = categoriesManager::getAllIdDomainesForCompany($companyToEdit->id);
                     $domainePage['categoriesGrosTravaux'] = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
                     $domainePage['categoriesPetitsTravaux'] = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
-                    $domainePage['categoriesDepannage'] = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
                     displayAdminPanel(companyToEdit: $companyToEdit, companyDomaines: $companyDomaines, domainePage: $domainePage,notification: $notification);
                 } else if(isset($_POST['submitEditCompany'])){
                     editCompany();
@@ -684,7 +683,6 @@ try {
                     $addNewCompany = true;
                     $domainePage['categoriesGrosTravaux'] = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
                     $domainePage['categoriesPetitsTravaux'] = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
-                    $domainePage['categoriesDepannage'] = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
                     displayAdminPanel(addNewCompany: $addNewCompany, domainePage: $domainePage,notification: $notification);
                 } else if(isset($_POST['submitNewCompanyByAdmin'])){
                     $newUser = new User();
@@ -899,7 +897,6 @@ try {
         $domainePage['value'] = true;
         $domainePage['categoriesGrosTravaux'] = categoriesManager::getAllSubcategoriesFor('Gros Travaux');
         $domainePage['categoriesPetitsTravaux'] = categoriesManager::getAllSubcategoriesFor('Petits Travaux');
-        $domainePage['categoriesDepannage'] = categoriesManager::getAllSubcategoriesFor('Dépannage d\'urgence');
         displayRegister('', '', '', $domainePage);
     } else if(isset($_POST['submitDomaine'])){  
         registerNewCompany($_SESSION['newUser'], $_SESSION['newCompany']);

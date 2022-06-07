@@ -107,9 +107,9 @@ ob_start();
             <div class="col-8 col-lg-2 col-md-3 mb-3">
                 <div class="containerPerso tuile">
                     <a href="index.php?viewToDisplay=displayAnnonce&subcategory=service">
-                        <img src="images/HomePage/card4.png" alt="Avatar" class="border border-dark rounded border-2 image">
+                        <img src="images/HomePage/card3.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
                         <div class="overlay">
-                            <div class="text">Accédez à nos annonces.</div>
+                            <div class="text">Accédez à nos bricoleurs.</div>
                         </div>
                     </a>
                     <p class="fw-bold fst-italic fs-3 text-center">Bricoleurs</p>

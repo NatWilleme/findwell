@@ -13,11 +13,3 @@ document.getElementById('checkPetitstravaux').addEventListener('change', functio
         document.getElementById('listPetitsTravaux').style.display = "none";
     }
 })
-
-document.getElementById('checkDepannage').addEventListener('change', function () {
-    if(this.checked) {
-        document.getElementById('listDepannage').style.display = "block";
-    } else {
-        document.getElementById('listDepannage').style.display = "none";
-    }
-})
