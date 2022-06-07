@@ -104,28 +104,15 @@ ob_start();
             </div>
 
 
-
             <div class="col-8 col-lg-2 col-md-3 mb-3">
                 <div class="containerPerso tuile">
-                    <a href="index.php?viewToDisplay=displayCategoriesList&category=Dépannage d'urgence">
-                        <img src="images/HomePage/card3.jpg" alt="Avatar" class="border border-dark rounded border-2 image">
-                        <div class="overlay">
-                            <div class="text">Accédez aux entreprises disponible 24h/24h.</div>
-                        </div>
-                    </a>
-                    <p class="fw-bold fst-italic fs-3 text-center">Dépannage d'urgence</p>
-                </div>
-            </div>
-
-            <div class="col-8 col-lg-2 col-md-3 mb-3">
-                <div class="containerPerso tuile">
-                    <a href="index.php?viewToDisplay=displayAnnonce">
+                    <a href="index.php?viewToDisplay=displayAnnonce&subcategory=service">
                         <img src="images/HomePage/card4.png" alt="Avatar" class="border border-dark rounded border-2 image">
                         <div class="overlay">
                             <div class="text">Accédez à nos annonces.</div>
                         </div>
                     </a>
-                    <p class="fw-bold fst-italic fs-3 text-center">Annonces</p>
+                    <p class="fw-bold fst-italic fs-3 text-center">Bricoleurs</p>
                 </div>
             </div>
 

@@ -201,12 +201,12 @@
       <div class="col-12 col-lg-auto">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="categoryBtn nav-link dropdown-toggle text-center" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>" id="depannageTravauxDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dépannage d'urgence
+            <a class="categoryBtn nav-link dropdown-toggle text-center" href="#" id="bricoleursDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Bricoleurs
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="depannageTravauxDropdownLink">
-              <?php foreach ($_SESSION['categoriesTemplate']['Depannage'] as $category) { ?>
-                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayCompaniesList&category=Dépannage d'urgence&subcategory=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
+            <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="bricoleursTravauxDropdownLink">
+              <?php foreach ($_SESSION['categoriesTemplate']['Service'] as $category) { ?>
+                <li><a class="dropdown-item dropdown-item-color" href="index.php?viewToDisplay=displayAnnonce&subcategory=service&category=<?php echo $category->name; ?>"><?php echo $category->name; ?></a></li>
               <?php } ?>
             </ul>
           </li>
