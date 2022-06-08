@@ -117,4 +117,32 @@ function getAllMissionsAccepted()
 {
     return MissionsManager::getAllMissionsAccepted();
 }
+
+function getAllImmobilier()
+{
+    return ImmobilierManager::getAllImmobilier();
+}
+
+function getImmobilierByID(int $id)
+{
+    return ImmobilierManager::getImmobilierByID($id);
+}
+
+function addImmobilier(Immobilier $newImmobilier)
+{
+    if(!is_null($newImmobilier->title) && !is_null($newImmobilier->description) && !is_null($newImmobilier->price) && !is_null($newImmobilier->region) && (!is_null($newImmobilier->phone) || !is_null($newImmobilier->mail))){
+        ImmobilierManager::addImmobilier($newImmobilier);
+    }
+}
+
+function editImmobilier(Immobilier $editedImmobilier)
+{
+    ImmobilierManager::updateImmobilier($editedImmobilier);
+}
+
+function deleteImmobilier(int $id)
+{
+    ImmobilierManager::deleteImmobilier($id);
+}
+
 ?>

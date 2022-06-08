@@ -15,16 +15,8 @@
                         "idOccasion" => $elem["id_occ"],  
                         "title" => $elem["title_occ"],  
                         "description" => $elem["description_occ"],  
-                        "date" => $elem["date_occ"],
-                        "region" => $elem["region_occ"],  
                         "price" => $elem["price_occ"],  
-                        "idUser" => $elem["id_user"],  
-                        "username" => $elem["username_user"],  
-                        "mail" => $elem["mail_user"], 
-                        "imageOccasion" => $elem["image_occ"],
-                        "imageUser" => $elem["image_user"],
-                        "phone" => $elem["phone_user"],
-                        "type" => $elem["type_user"]
+                        "imageOccasion" => $elem["image_occ"]
                     );
                     $occasion = new Occasion();
                     $occasion->hydrate($values);
