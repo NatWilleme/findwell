@@ -256,7 +256,7 @@
   <?php echo $content; ?>
 
   <!-- Toast left -->
-  <div class="position-fixed bottom-0 start-0 p-3 col-lg-2 col-6">
+  <div class="position-fixed bottom-0 start-0 p-3 col-lg-2 col-6" style="z-index: 100;">
     <?php $i=0; foreach ($_SESSION['toastMessages'] as $toastMessage) { ?>
     <?php if($i%2 == 0){ ?>
     <div id="toast<?php echo $i; ?>" class="toast fade hide mb-2 align-items-center" role="alert" data-bs-delay="15000" aria-live="assertive" aria-atomic="true">
@@ -265,10 +265,10 @@
           <div class="row">
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <div class="row">
+          <div>
             <?php echo $toastMessage->message; ?>
             <?php if($toastMessage->image != null) {?>
-              <img src="<?php echo $toastMessage->image; ?>" class="img-fluid" alt="Responsive image">
+              <img src="<?php echo $toastMessage->image; ?>" class="img-fluid">
             <?php } ?>
           </div>
         </div>
@@ -280,19 +280,19 @@
   <!-- END Toast left -->
 
   <!-- Toast right -->
-  <div class="position-fixed bottom-0 end-0 p-3 col-lg-2 col-6">
+  <div class="position-fixed bottom-0 end-0 p-3 col-lg-2 col-6" style="z-index: 100;">
     <?php $i=0; foreach ($_SESSION['toastMessages'] as $toastMessage) { ?>
       <?php if($i%2 == 1){ ?>
-      <div id="toast<?php echo $i; ?>" class="toast fade hide mb-2 align-items-center" role="alert" data-bs-delay="15000" aria-live="assertive" aria-atomic="true">
+      <div id="toast<?php echo $i; ?>" class="toast fade hide mb-2 align-items-center"  role="alert" data-bs-delay="15000" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
           <div class="toast-body mx-3">
             <div class="row">
               <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <div class="row">
+            <div>
               <?php echo $toastMessage->message; ?>
               <?php if($toastMessage->image != null) {?>
-                <img src="<?php echo $toastMessage->image; ?>" class="img-fluid" alt="Responsive image">
+                <img src="<?php echo $toastMessage->image; ?>" class="img-fluid">
               <?php } ?>
             </div>
           </div>

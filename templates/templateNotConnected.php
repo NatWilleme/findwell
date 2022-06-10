@@ -246,10 +246,10 @@
           <div class="row">
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <div class="row">
+          <div>
             <?php echo $toastMessage->message; ?>
             <?php if($toastMessage->image != null) {?>
-              <img src="<?php echo $toastMessage->image; ?>" class="img-fluid" alt="Responsive image">
+              <img src="<?php echo $toastMessage->image; ?>" class="img-fluid">
             <?php } ?>
           </div>
         </div>
@@ -270,10 +270,10 @@
             <div class="row">
               <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <div class="row">
+            <div>
               <?php echo $toastMessage->message; ?>
               <?php if($toastMessage->image != null) {?>
-                <img src="<?php echo $toastMessage->image; ?>" class="img-fluid" alt="Responsive image">
+                <img src="<?php echo $toastMessage->image; ?>" class="img-fluid">
               <?php } ?>
             </div>
           </div>
