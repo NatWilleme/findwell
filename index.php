@@ -342,7 +342,7 @@ try {
                 }
             } else if($_GET['subcategory'] == "mission") {
                 if(isset($_GET['action']) && isConnected()){
-                    if ($_GET['action'] == "displayAdd" &&  $_SESSION['user']->type == "company") {  //display form to add new mission
+                    if ($_GET['action'] == "displayAdd" &&  $_SESSION['user']->type != "user") {  //display form to add new mission
                         displayAnnonce(notification:$notification, addMission: true);
                     } else if($_GET['action'] == "add"){    //add mission
                         $company = getOneCompanyByMail($_SESSION['user']->mail);

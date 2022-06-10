@@ -448,7 +448,7 @@
             <thead>
                 <tr>
                     <th scope="col">Image</th>
-                    <th scope="col">title</th>
+                    <th scope="col">Titre</th>
                     <th scope="col">Description</th>
                     <th scope="col">Prix</th>
                     <th scope="col"></th>
@@ -619,7 +619,12 @@
     </form>
 
     <?php } else if(!is_null($addMission)){ //Ajout d'une occasion ?>
-
+    <div class="col-12 col-lg-10 offset-lg-1 border border-dark mb-lg-4 p-2 mt-3">
+        <h5 class="fst-italic text-secondary">
+            Une offre de mission vous permet de proposer à d'autres entreprises d'effectuer un travail pour vous.<br>
+            Détaillez simplement les différentes informations concernant la mission et attendez patiemment qu'une entreprise réagisse à votre offre !
+        </h5>
+    </div>
     <form id="formAddMission" class="mb-3 mt-3" action="index.php?viewToDisplay=displayAnnonce&subcategory=mission&action=add" method="post" enctype='multipart/form-data'>
         <h3 class="text-center mb-3 fw-bold">Informations sur la mission</h3>
 
@@ -849,7 +854,7 @@
     </div>
 <?php } else if(!is_null($missionsToDisplay)){  //Affichage des missions ?>
     <a style="color: grey; text-decoration: none; font-size: large;" href="javascript:history.go(-1)"><i class="bi bi-arrow-return-left"></i> Retour en arrière</a>
-    <?php if(isset($_SESSION['user']) && $_SESSION['user']->type == "company"){?>
+    <?php if(isset($_SESSION['user']) && $_SESSION['user']->type != "user"){?>
         <br><a href="index.php?viewToDisplay=displayAnnonce&subcategory=mission&action=displayAdd" class="btn btn-primary col-10 offset-1 col-lg-3">Ajouter une mission</a>
     <?php } ?>
     <div class="row d-flex justify-content-around mb-4 mt-4 m-0">
