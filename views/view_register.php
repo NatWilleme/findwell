@@ -27,7 +27,7 @@
             <h1 class="h3 mb-3 fw-normal">S'inscrire en tant que :</h1>
 
             <div class="form-floating">
-                <input class="btn btn-lg btn-primary" type="submit"  name="type" value="Utilisateur">
+                <input class="btn btn-lg btn-primary" type="submit"  name="type" value="Utilisateur ou bricoleur">
                 <input class="btn btn-lg btn-primary" type="submit" name="type" value="Entreprise">
             </div>
             <div class="form-floating mb-4">
