@@ -381,7 +381,28 @@ abstract class CompaniesManager extends DBManager{
 
     static public function searchCompany($keyword){
         $result = array();
-        $sql = "SELECT * FROM companies WHERE companies.name_comp LIKE '%$keyword%' AND certified_comp = 1 AND deleted_comp = 0 AND hasPaid_comp = 1";
+        $sql = 
+            "SELECT 
+                companies.id_comp, 
+                name_comp, 
+                description_comp, 
+                hours_comp, city_comp, 
+                street_comp, 
+                number_comp, 
+                postalcode_comp, 
+                phone_comp, 
+                image_comp, 
+                web_comp, 
+                mail_comp, 
+                deleted_comp, 
+                tva_comp, 
+                acceptPending_comp, 
+                hasPaid_comp 
+            FROM companies
+            INNER JOIN appartient ON appartient.id_comp
+            INNER JOIN categories ON categories.id_cat
+            WHERE companies.name_comp LIKE '%$keyword%' OR (categories.name_cat LIKE '%$keyword%' AND categories.id_cat = appartient.id_cat AND appartient.id_comp = companies.id_comp)
+            GROUP BY companies.id_comp";
         try{
             $pdo_connexion = parent::connexionDB();
             $pdo_statement = $pdo_connexion->prepare($sql);
