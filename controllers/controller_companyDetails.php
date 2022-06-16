@@ -47,6 +47,11 @@ function addComment($idCompany, $idUser)
     
 }
 
+function deleteComment($idComment)
+{
+    commentsManager::deleteComment($idComment);
+}
+
 function getSuccessAlert()
 {
     $alert['color'] = "success";

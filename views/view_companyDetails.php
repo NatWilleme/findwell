@@ -125,7 +125,7 @@
                 foreach ($comments as $comment) {
             ?>
             <div class="row border border-dark mb-2 pt-2" style="overflow-wrap: break-word;">
-                <div class="col-12">
+                <div class="col-10">
                     <p>
                         <img src="<?php if($users[$cpt]->image == "") echo "images/default-profil.jpg"; else echo $users[$cpt]->image; ?>" class="rounded-circle" style="height:40px;width:40px" alt="">
                         <span class="ms-2 fw-bold"><?php echo $users[$cpt]->username; ?></span><br>
@@ -144,6 +144,11 @@
                         <?php } ?>
                     </p>
                 </div>
+                <?php if(isset($_SESSION['user']) && $_SESSION['user']->type == "admin"){?>
+                <div class="col-2">
+                    <a class="btn btn-danger col-12" href="index.php?viewToDisplay=displayCompanyDetails&commentToDelete=<?php echo $comment->id; ?>&idCompany=<?php echo $company->id; ?>"><i class="bi bi-trash-fill"></i></a>
+                </div>
+                <?php } ?>
             </div>
             <?php
                $cpt++; }

@@ -578,6 +578,11 @@ try {
             prepareDisplayCompanyDetails($_GET['newComment'], $notification, $alert);
         }
         
+    } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayCompanyDetails' && isset($_GET['commentToDelete'])){
+        if(isset($_SESSION['user']) && $_SESSION['user']->type == "admin"){
+            deleteComment($_GET['commentToDelete']);
+        }
+        prepareDisplayCompanyDetails($_GET['idCompany'], $notification);
     } else if(isset($_GET['viewToDisplay']) && $_GET['viewToDisplay'] == 'displayCompaniesList'){
         $subcategory = $_GET['subcategory'];
         $_SESSION['subcategory'] = $subcategory;
