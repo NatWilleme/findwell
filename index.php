@@ -884,7 +884,7 @@ try {
     // Page 2 Choix du type d'utilisateur
     } else if(isset($_POST['type'])){
         $_SESSION['newUser']->__set('code', uniqid());
-        if($_POST['type'] == 'Utilisateur'){
+        if($_POST['type'] == 'Utilisateur ou bricoleur'){
             $_SESSION['newUser']->__set('type', 'user');
             $alert = registerNewUser($_SESSION['newUser']);
             $_SESSION['newUser'] = usersManager::getUser($_SESSION['newUser']->mail);
