@@ -56,9 +56,12 @@
   <meta name="application-name" content="Findwell">
   <meta name="facebook-domain-verification" content="47115hi1onuwmaaqzq9k9cr2hopniq" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Sora&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/style.css?1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -68,7 +71,7 @@
   <title><?php echo $title; ?></title>
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Sora', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;

@@ -1,6 +1,6 @@
 <?php
 
-function displayHome($ads, $notification) {
+function displayHome($ads, $notification, $lastAddedCompanies) {
     require_once('views/view_Home.php');
 }
 

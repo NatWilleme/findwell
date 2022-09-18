@@ -125,11 +125,58 @@ ob_start();
         <img class="p-0" src="images/HomePage/bannerMobile.png" alt="">
     </div>
 
+    <!-- most searched category carousel -->
+    <div class="container my-5">
+        <h3 class="text-center">Services les plus rechechés</h3>
+        <div class="row mostSearched mt-4">
+            <a href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=Carreleur" class="col-4 col-md-2">
+                <img src="images/HomePage/mostSearched/carreleur.jpg" class="w-100 rounded" alt="">
+                <h6 class="mt-2 fw-bold">Carreleur</h6>
+            </a>
+            <a href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=Chauffagiste" class="col-4 col-md-2">
+                <img src="images/HomePage/mostSearched/chauffagiste.jpg" class="w-100 rounded" alt="">
+                <h6 class="mt-2 fw-bold">Chauffagiste</h6>
+            </a>
+            <a href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=Jardinier" class="col-4 col-md-2">
+                <img src="images/HomePage/mostSearched/jardinier.jpg" class="w-100 rounded" alt="">
+                <h6 class="mt-2 fw-bold">Jardinier</h6>
+            </a>
+            <a href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=Menuisier" class="col-4 col-md-2">
+                <img src="images/HomePage/mostSearched/menuisier.jpg" class="w-100 rounded" alt="">
+                <h6 class="mt-2 fw-bold">Menuisier</h6>
+            </a>
+            <a href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=Plafonneur" class="col-4 col-md-2">
+                <img src="images/HomePage/mostSearched/plafonneur.jpg" class="w-100 rounded" alt="">
+                <h6 class="mt-2 fw-bold">Plafonneur</h6>
+            </a>
+            <a href="index.php?viewToDisplay=displayCompaniesList&category=Gros Travaux&subcategory=Plombier" class="col-4 col-md-2">
+                <img src="images/HomePage/mostSearched/plombier.jpg" class="w-100 rounded" alt="">
+                <h6 class="mt-2 fw-bold">Plombier</h6>
+            </a>
+        </div>
+    </div>
+
+    <!-- last added companies -->
+    <div class="container my-5">
+        <h3 class="text-center">Les dernières entreprises qui nous font confiance</h3>
+        <div class="row mostSearched mt-4">
+            <?php foreach ($lastAddedCompanies as $company) { ?>
+                <a href="index.php?viewToDisplay=displayCompanyDetails&idCompany=<?php echo $company->id; ?>" class="col-4 col-md-2">
+                <img src="<?php echo $company->image; ?>" class="w-100 h-100 rounded img-responsive" alt="<?php echo $company->name; ?>" style="object-fit: cover;">
+                <h6 class="mt-2 fw-bold"><?php echo $company->name; ?></h6>
+            </a>
+            <?php } ?>
+            
+        </div>
+    </div>
+
+
     <div class="row g-0 col-12 mt-5 d-flex justify-content-center">
         <div class="col-8 col-md-3 my-auto fadeInLeft">
             <img src="images/icons/worker.jpg" title="Painter man vector created by iconicbestiary" class="col-12">
         </div>
         <div class="col-10 col-lg-6 offset-lg-1 fadeInUp4">
+            <h3>Pour les utilisateurs Findwell: </h3>
             <video id="my-video" class="video-js vjs-big-play-centered col-12 border border-5 border-dark" height="500" controls preload="auto" poster="images/preview.png" data-setup="{}">
                 <source src="images/findwell.mp4" type="video/mp4" />
                 <p class="vjs-no-js">
@@ -137,8 +184,17 @@ ob_start();
                     web browser that
                 </p>
             </video>
+            <h3 class="mt-4">Pour les entrepreneurs Findwell: </h3>
+            <video id="my-video" class="video-js vjs-big-play-centered col-12 border border-5 border-dark mt-3" height="500" controls preload="auto" poster="images/preview.png" data-setup="{}">
+                <source src="images/findwell2.mp4" type="video/mp4" />
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                </p>
+            </video>
         </div>
     </div>
+    
 
     <div class="row mt-5 mb-5 m-0">
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 offset-lg-1">
